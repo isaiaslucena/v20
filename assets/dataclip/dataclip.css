@@ -1,0 +1,174 @@
+		.jqstooltip {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			visibility: hidden;
+			background: rgb(0, 0, 0) transparent;
+			background-color: rgba(0,0,0,0.6);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+			color: white;font: 10px arial, san serif;
+			text-align: left;
+			white-space: nowrap;
+			padding: 5px;
+			border: 1px solid white;
+			z-index: 10000;
+		}
+		.jqsfield {
+			color: white;
+			font: 10px arial, san serif;
+			text-align: left;
+		}
+
+		.tooltipvideo {
+			position: absolute;
+			width: 300px;
+			height: 200px;
+			max-width: 300px;
+			max-height: 200px;
+			display: none;
+			color: #FFFFFF;
+			background-color: #555;
+			vertical-align: center;
+			text-align: center;
+			padding: 5px;
+			border-radius: 6px;
+			z-index: 2;
+		}
+		.tooltipvideo::after {
+			content: "";
+			position: absolute;
+			top: 20%;
+			right: 100%;
+			margin-top: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent #555 transparent transparent;
+		}
+
+		.tooltipaudio {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			max-width: 100px;
+			max-height: 100px;
+			display: none;
+			color: #FFFFFF;
+			background-color: #555;
+			vertical-align: center;
+			text-align: center;
+			padding: 5px;
+			border-radius: 6px;
+			z-index: 2;
+		}
+		.tooltipaudio::after {
+			content: "";
+			position: absolute;
+			top: 40%;
+			right: 100%;
+			margin-top: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent #555 transparent transparent;
+		}
+
+		.tooltipprint {
+			position: absolute;
+			width: 200px;
+			height: 300px;
+			max-width: 200px;
+			max-height: 300px;
+			display: none;
+			color: #FFFFFF;
+			background-color: #555;
+			vertical-align: center;
+			text-align: center;
+			padding: 5px;
+			border-radius: 6px;
+			z-index: 2;
+		}
+		.tooltipprint::after {
+			content: "";
+			position: absolute;
+			top: 10%;
+			right: 100%;
+			margin-top: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent #555 transparent transparent;
+		}
+
+		.tooltiponline {
+			position: absolute;
+			width: 200px;
+			height: 300px;
+			max-width: 200px;
+			max-height: 300px;
+			overflow-y: auto;
+			display: none;
+			color: #FFFFFF;
+			background-color: #555;
+			vertical-align: center;
+			text-align: center;
+			padding: 5px;
+			border-radius: 6px;
+			z-index: 2;
+		}
+		.tooltiponline::after {
+			content: "";
+			position: absolute;
+			top: 10%;
+			right: 100%;
+			margin-top: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent #555 transparent transparent;
+		}
+
+		.modal-lg-snews {
+			width: 95%;
+		}
+
+		.listg-subkey {
+			width: 400px;
+			max-height: 500px;
+			overflow-y: auto;
+			display: none;
+		}
+
+		.btn-subjects {
+			text-decoration: bold;
+		}
+
+		.actual_range {
+			display: inline-block;
+		}
+
+		.mapael .map {
+			margin: auto;
+			position: relative;
+			top: 50%;
+			left: 12%;
+		}
+
+		.mapael .mapTooltip {
+			position: absolute;
+			background-color: #fff;
+			moz-opacity: 0.70;
+			opacity: 0.70;
+			filter: alpha(opacity=70);
+			border-radius: 10px;
+			padding: 10px;
+			z-index: 1000;
+			max-width: 200px;
+			display: none;
+			color: #343434;
+		}
+
+		video::-internal-media-controls-download-button { display:none; }
+		video::-webkit-media-controls-enclosure { overflow:hidden; }
+		video::-webkit-media-controls-panel { width: calc(100% + 30px); }
+
+		audio::-internal-media-controls-download-button { display:none; }
+		audio::-webkit-media-controls-enclosure { overflow:hidden; }
+		audio::-webkit-media-controls-panel { width: calc(100% + 30px); }
