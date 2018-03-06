@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-02 16:13:22
+/* Smarty version 3.1.30, created on 2018-03-05 18:11:49
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a99a252856521_09427110',
+  'unifunc' => 'content_5a9db295a42577_51413776',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1520018000,
+      1 => 1520284302,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5a99a252856521_09427110 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9db295a42577_51413776 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10530261335a99a252848d36_89920511', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11703837905a9db295a36973_72259565', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_10530261335a99a252848d36_89920511 extends Smarty_Internal_Block
+class Block_11703837905a9db295a36973_72259565 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -212,7 +212,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 												<th class="text-center">Data</th>
 												<th class="text-center">Hora</th>
 												<th class="text-center">Tipo de Veículo</th>
-												<th class="text-center">Veiculo</th>
+												<th class="text-center">Veículo</th>
 												<th class="text-center">Editoria</th>
 												<th class="text-center">Palavra-Chave</th>
 												<th class="text-center">Título</th>
@@ -225,10 +225,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<tr>
 												<th class="text-center">Data</th>
 												<th class="text-center">Hora</th>
-												<th class="text-center">Tipo de Veículo</th>
-												<th class="text-center">Veiculo</th>
-												<th class="text-center">Editoria</th>
-												<th class="text-center">Palavra-Chave</th>
+												<th class="text-center"></th>
+												<th class="text-center"></th>
+												<th class="text-center"></th>
+												<th class="text-center"></th>
 												<th class="text-center">Título</th>
 												<th class="text-center">Valor</th>
 												<th class="text-center">Audiência</th>

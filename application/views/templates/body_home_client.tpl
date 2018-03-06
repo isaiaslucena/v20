@@ -260,7 +260,7 @@
 												<th class="text-center">Data</th>
 												<th class="text-center">Hora</th>
 												<th class="text-center">Tipo de Veículo</th>
-												<th class="text-center">Veiculo</th>
+												<th class="text-center">Veículo</th>
 												<th class="text-center">Editoria</th>
 												<th class="text-center">Palavra-Chave</th>
 												<th class="text-center">Título</th>
@@ -273,10 +273,10 @@
 											<tr>
 												<th class="text-center">Data</th>
 												<th class="text-center">Hora</th>
-												<th class="text-center">Tipo de Veículo</th>
-												<th class="text-center">Veiculo</th>
-												<th class="text-center">Editoria</th>
-												<th class="text-center">Palavra-Chave</th>
+												<th class="text-center"></th>
+												<th class="text-center"></th>
+												<th class="text-center"></th>
+												<th class="text-center"></th>
 												<th class="text-center">Título</th>
 												<th class="text-center">Valor</th>
 												<th class="text-center">Audiência</th>

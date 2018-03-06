@@ -11,7 +11,9 @@
 <script type="text/javascript" charset="utf-8">
 	var tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
-	subjecctid, subjectcount, keywordcount, subkeywordsarr = [];
+	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
+
+	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [];
 
 	var d = new Date();
 	var day = d.getDate();
@@ -22,6 +24,7 @@
 	var todaydate = year+'-'+month+'-'+day;
 	var todaydate_br = day+'/'+month+'/'+year;
 	var cdatebtn = $('#dpbtn').ladda();
+
 	var tablenews = $('#tablenews').DataTable({
 		"autoWidth": false,
 		"order": [
@@ -41,8 +44,67 @@
 		],
 		"processing": true,
 		"rowId": "id",
-		"language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"}
+		"language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"},
+		"initComplete": function(settings) {
+			this.api().columns([2,3,4,5]).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_'+coln+'" class="filter selectpicker" data-size="10" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					console.log(val);
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+			$('.filter.selectpicker').selectpicker('render');
+		},
+		"drawCallback": function(settings) {
+			carr = [];
+			this.api().columns([2,3,4,5]).data().each(function(val, index) {
+				if (carr.indexOf(val) == -1) {
+					carr.push(val);
+					ihtml = '<option val="'+val+'">'+val+'</option>'
+					$(ihtml).appendTo('#selpckr_' + (index + 2));
+				}
+			})
+
+
+			// api.column(2, {page:'current'}).data().each(function(tvcurrent, i) {
+			// 	if (tvarr.indexOf(tvcurrent) == -1) {
+			// 		tvarr.push(tvcurrent);
+			// 		ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
+			// 		$(ihtml).appendTo('#sel_tveiculo');
+			// 	}
+			// })
+
+			// api.column(3, {page:'current'}).data().each(function (vcurrent, i) {
+			// 	if (varr.indexOf(vcurrent) == -1) {
+			// 		varr.push(vcurrent);
+			// 		ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
+			// 		$(ihtml).appendTo('#sel_veiculo');
+			// 	}
+			// })
+
+			// api.column(4, {page:'current'}).data().each(function (ecurrent, i) {
+			// 	if (earr.indexOf(ecurrent) == -1) {
+			// 		earr.push(ecurrent);
+			// 		ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
+			// 		$(ihtml).appendTo('#sel_editoria');
+			// 	}
+			// })
+
+			// api.column(5, {page:'current'}).data().each(function (pccurrent, i) {
+			// 	if (pcarr.indexOf(pccurrent) == -1) {
+			// 		pcarr.push(pccurrent);
+			// 		ihtml = '<option val="'+pccurrent+'">'+pccurrent+'</option>'
+			// 		$(ihtml).appendTo('#sel_pchave');
+			// 	}
+			// })
+			$('.filter.selectpicker').selectpicker('refresh');
+		}
 	});
+
 
 	$('body audio').bind('contextmenu', function() { return false; });
 	$('body video').bind('contextmenu', function() { return false; });
@@ -50,6 +112,7 @@
 
 	$('#selclient').change(function(event) {
 		subkeywordsarr = [];
+		tvarr = [], varr = [], earr = [], pcarr = [];
 		swal({
 			title: "Carregando...",
 			imageUrl: "/assets/imgs/loading.gif",
@@ -237,7 +300,7 @@
 		});
 	});
 
-	$('#showsinglenews').on('hidden.bs.modal', function(event) {
+	$('#showsinglenews').on('show.bs.modal', function(event) {
 		$('#wrapper').css('overflow-y', 'hidden');
 	});
 
@@ -248,8 +311,14 @@
 		$('#modalwsinglenews').css('display', 'block');
 
 		$('#modaltsinglenews').text(null);
-		$('video')[0].stop();
-		$('audio')[0].stop();
+		if (mediatype == 'video' || mediatype == 'audio') {
+			var mmediadel = $('#mmediael');
+			if (mmediadel[0].paused) {
+				// mmediadel[0].play();
+			} else {
+				mmediadel[0].pause();
+			}
+		}
 	});
 
 	$('#tablenews').on('click', 'tbody > tr', function (event) {
@@ -259,8 +328,6 @@
 
 		$('#showsinglenews').modal('show');
 		get_single_news(trcid+'/'+trkid, function(tndata) {
-			var mediatype;
-
 			snewsid = tndata[0].Id;
 			snewsdate = tndata[0].Data;
 			snewstime = tndata[0].Hora;
@@ -285,12 +352,12 @@
 			if (rgxvideo.test(snewsimg)) {
 				mediatype = 'video';
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
-				$('#mediactnv').html('<a class="thumbnail"><video class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video></a>');
+				$('#mediactnv').html('<a class="thumbnail"><video id="mmediael" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video></a>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgxaudio.test(snewsimg)) {
 				mediatype = 'audio';
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
-				$('#mediactnv').html('<a class="thumbnail"><audio class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio></a>');
+				$('#mediactnv').html('<a class="thumbnail"><audio id="mmediael" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio></a>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgximage.test(snewsimg)) {
 				mediatype = 'image';
@@ -390,14 +457,14 @@
 		size: {
 			height: 300
 		},
-    data: {
-        x: 'Data',
-        columns: [
-            ['Data', todaydate],
-            ['QNoticias', 0],
-            ['EdValor', 0],
-            ['EdAudiencia', 0]
-        ],
+		data: {
+				x: 'Data',
+				columns: [
+						['Data', todaydate],
+						['QNoticias', 0],
+						['EdValor', 0],
+						['EdAudiencia', 0]
+				],
 				axes: {
 					'QNoticias': 'y2',
 				},
@@ -406,23 +473,23 @@
 					'EdValor': 'spline',
 					'EdAudiencia': 'spline'
 				},
-			  names: {
-			    'QNoticias': 'Notícias',
-			    'EdValor': 'Valor',
-			    'EdAudiencia': 'Audiência'
-			  }
-    },
-    axis: {
-        x: {
-            type: 'timeseries',
-            tick: {
-                format: '%Y-%m-%d'
-            }
-        },
+				names: {
+					'QNoticias': 'Notícias',
+					'EdValor': 'Valor',
+					'EdAudiencia': 'Audiência'
+				}
+		},
+		axis: {
+				x: {
+						type: 'timeseries',
+						tick: {
+								format: '%Y-%m-%d'
+						}
+				},
 				y2: {
 					show: true,
 				}
-    }
+		}
 	});
 
 	function setcolors() {
