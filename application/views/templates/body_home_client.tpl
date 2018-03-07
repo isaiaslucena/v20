@@ -300,6 +300,7 @@
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediactni" class="col-lg-4"></div>
 							<div class="col-lg-8">
+								<p id="datemediactni" class="text-muted pull-right"></p>
 								<h3 id="mediactnti"></h3>
 								<p id="modal-texti" class="text-justify"></p>
 							</div>
@@ -308,6 +309,11 @@
 						<div id="modalcsinglenewsv" style="display: none">
 							<div class="row">
 								<div id="mediactnv" class="col-lg-12"></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<p id="datemediactnv" class="text-muted pull-right"></p>
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-12 center-block">

@@ -25,16 +25,24 @@ class Home_client extends CI_Controller {
 		return $array;
 	}
 
+	function linebreak_to_br($array) {
+		array_walk_recursive($array, function(&$item, $key) {
+			$pattern = "/\r\n/";
+			$replacement = '<br>';
+			$item = preg_replace($pattern, $replacement, $item);
+		});
+		return $array;
+	}
+
 	public function index($idclient = null) {
 		if (is_null($idclient)) {
-			$data['title'] = 'DataClip - Business Inteligence';
-			$data['clients'] = $this->home_client_model->get_clients();
-			$this->smarty->view('foot_home_client.tpl', $data);
+			$data['client_selected'] = 'false';
 		} else {
-			$data['title'] = 'DataClip - Business Inteligence';
-			$data['client_info'] = $this->home_client_model->get_client_info($idclient);
-			$this->smarty->view('foot_home_client.tpl', $data);
+			$data['client_selected'] = 'true';
 		}
+		$data['title'] = 'DataClip - Business Inteligence';
+		$data['clients'] = $this->home_client_model->get_clients();
+		$this->smarty->view('foot_home_client.tpl', $data);
 	}
 
 	public function client_info($id) {
@@ -278,6 +286,7 @@ class Home_client extends CI_Controller {
 		$data = $this->htmlchars_decoder($data);
 		$data = $this->tags_stripper($data);
 		$data = $this->utf8_encoder($data);
+		$data = $this->linebreak_to_br($data);
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);

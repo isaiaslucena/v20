@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-05 18:11:49
+/* Smarty version 3.1.30, created on 2018-03-07 15:26:28
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9db295a42577_51413776',
+  'unifunc' => 'content_5aa02ed4df0ae0_45681876',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1520284302,
+      1 => 1520447183,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5a9db295a42577_51413776 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa02ed4df0ae0_45681876 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11703837905a9db295a36973_72259565', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19577975745aa02ed4de5a41_44519627', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_11703837905a9db295a36973_72259565 extends Smarty_Internal_Block
+class Block_19577975745aa02ed4de5a41_44519627 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -252,6 +252,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediactni" class="col-lg-4"></div>
 							<div class="col-lg-8">
+								<p id="datemediactni" class="text-muted pull-right"></p>
 								<h3 id="mediactnti"></h3>
 								<p id="modal-texti" class="text-justify"></p>
 							</div>
@@ -260,6 +261,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<div id="modalcsinglenewsv" style="display: none">
 							<div class="row">
 								<div id="mediactnv" class="col-lg-12"></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<p id="datemediactnv" class="text-muted pull-right"></p>
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-12 center-block">
