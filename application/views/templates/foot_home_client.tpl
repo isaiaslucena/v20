@@ -12,7 +12,6 @@
 	var tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
-
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [];
 
 	var d = new Date();
@@ -49,62 +48,50 @@
 			this.api().columns([2,3,4,5]).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_'+coln+'" class="filter selectpicker" data-size="10" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"></select>')
+				var select = $('<select id="selpckr_'+coln+'" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					console.log(val);
 					column.search( val ? '^'+val+'$' : '', true, false).draw();
 				});
 			});
 			$('.filter.selectpicker').selectpicker('render');
 		},
 		"drawCallback": function(settings) {
-			carr = [];
-			this.api().columns([2,3,4,5]).data().each(function(val, index) {
-				if (carr.indexOf(val) == -1) {
-					carr.push(val);
-					ihtml = '<option val="'+val+'">'+val+'</option>'
-					$(ihtml).appendTo('#selpckr_' + (index + 2));
+			this.api().column(2, {page:'current'}).data().each(function(tvcurrent, i) {
+				if (tvarr.indexOf(tvcurrent) == -1) {
+					tvarr.push(tvcurrent);
+					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_2');
 				}
 			})
 
+			this.api().column(3, {page:'current'}).data().each(function (vcurrent, i) {
+				if (varr.indexOf(vcurrent) == -1) {
+					varr.push(vcurrent);
+					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_3');
+				}
+			})
 
-			// api.column(2, {page:'current'}).data().each(function(tvcurrent, i) {
-			// 	if (tvarr.indexOf(tvcurrent) == -1) {
-			// 		tvarr.push(tvcurrent);
-			// 		ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
-			// 		$(ihtml).appendTo('#sel_tveiculo');
-			// 	}
-			// })
+			this.api().column(4, {page:'current'}).data().each(function (ecurrent, i) {
+				if (earr.indexOf(ecurrent) == -1) {
+					earr.push(ecurrent);
+					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_4');
+				}
+			})
 
-			// api.column(3, {page:'current'}).data().each(function (vcurrent, i) {
-			// 	if (varr.indexOf(vcurrent) == -1) {
-			// 		varr.push(vcurrent);
-			// 		ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
-			// 		$(ihtml).appendTo('#sel_veiculo');
-			// 	}
-			// })
-
-			// api.column(4, {page:'current'}).data().each(function (ecurrent, i) {
-			// 	if (earr.indexOf(ecurrent) == -1) {
-			// 		earr.push(ecurrent);
-			// 		ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
-			// 		$(ihtml).appendTo('#sel_editoria');
-			// 	}
-			// })
-
-			// api.column(5, {page:'current'}).data().each(function (pccurrent, i) {
-			// 	if (pcarr.indexOf(pccurrent) == -1) {
-			// 		pcarr.push(pccurrent);
-			// 		ihtml = '<option val="'+pccurrent+'">'+pccurrent+'</option>'
-			// 		$(ihtml).appendTo('#sel_pchave');
-			// 	}
-			// })
+			this.api().column(5, {page:'current'}).data().each(function (pccurrent, i) {
+				if (pcarr.indexOf(pccurrent) == -1) {
+					pcarr.push(pccurrent);
+					ihtml = '<option val="'+pccurrent+'">'+pccurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_5');
+				}
+			})
 			$('.filter.selectpicker').selectpicker('refresh');
 		}
 	});
-
 
 	$('body audio').bind('contextmenu', function() { return false; });
 	$('body video').bind('contextmenu', function() { return false; });

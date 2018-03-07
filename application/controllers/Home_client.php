@@ -26,10 +26,15 @@ class Home_client extends CI_Controller {
 	}
 
 	public function index($idclient = null) {
-		// $this->load->model('home_client_model');
-		$data['title'] = 'DataClip - Business Inteligence';
-		$data['clients'] = $this->home_client_model->get_clients();
-		$this->smarty->view('foot_home_client.tpl', $data);
+		if (is_null($idclient)) {
+			$data['title'] = 'DataClip - Business Inteligence';
+			$data['clients'] = $this->home_client_model->get_clients();
+			$this->smarty->view('foot_home_client.tpl', $data);
+		} else {
+			$data['title'] = 'DataClip - Business Inteligence';
+			$data['client_info'] = $this->home_client_model->get_client_info($idclient);
+			$this->smarty->view('foot_home_client.tpl', $data);
+		}
 	}
 
 	public function client_info($id) {
