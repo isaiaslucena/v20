@@ -197,10 +197,14 @@ class Home_client_model extends CI_Model {
 	}
 
 	public function get_single_news($newsid, $keywordid) {
-		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria, nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL, pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar
+		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria,
+								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
+								ass.Id as IdAssunto, ass.Nome as Assunto,
+								pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar
 								FROM Noticias nt
 								JOIN NoticiaPalavraChave npc ON npc.idNoticia = nt.Id
 								JOIN PalavraChave pc ON pc.Id = npc.idPalavraChave
+								JOIN Assunto ass ON ass.Id = pc.idAssunto
 								JOIN Veiculo ve ON nt.idVeiculo = ve.Id
 								JOIN Editorias ed ON nt.idEditoria = ed.Id
 								LEFT JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia

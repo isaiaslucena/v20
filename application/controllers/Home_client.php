@@ -37,6 +37,7 @@ class Home_client extends CI_Controller {
 	public function index($idclient = null) {
 		if (is_null($idclient)) {
 			$data['client_selected'] = 'false';
+			$data['client_sel_id'] = 0;
 		} else {
 			$data['client_selected'] = 'true';
 			$data['client_sel_id'] = $idclient;
