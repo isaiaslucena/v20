@@ -2,7 +2,7 @@
 {block name=body}
 	<!-- Header -->
 	<div id="header" style="height: 10%;" class="text-center">
-		<img id="bannerheader" crossOrigin="anonymous" src="assets/banner/dataclip_logo.jpg" alt="Logo" style="height: 100%">
+		<img id="bannerheader" crossOrigin="anonymous" src="/assets/banner/dataclip_logo.jpg" alt="Logo" style="height: 100%">
 	</div>
 
 	<!-- Main Wrapper -->

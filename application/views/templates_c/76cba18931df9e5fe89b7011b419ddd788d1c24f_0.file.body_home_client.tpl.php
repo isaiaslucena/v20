@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-07 15:26:28
+/* Smarty version 3.1.30, created on 2018-03-07 16:01:06
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa02ed4df0ae0_45681876',
+  'unifunc' => 'content_5aa036f2995ba2_84753045',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1520447183,
+      1 => 1520449262,
       2 => 'file',
     ),
   ),
@@ -21,25 +21,25 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aa02ed4df0ae0_45681876 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa036f2995ba2_84753045 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19577975745aa02ed4de5a41_44519627', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19742459375aa036f2988e98_38315227', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_19577975745aa02ed4de5a41_44519627 extends Smarty_Internal_Block
+class Block_19742459375aa036f2988e98_38315227 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 	<!-- Header -->
 	<div id="header" style="height: 10%;" class="text-center">
-		<img id="bannerheader" crossOrigin="anonymous" src="assets/banner/dataclip_logo.jpg" alt="Logo" style="height: 100%">
+		<img id="bannerheader" crossOrigin="anonymous" src="/assets/banner/dataclip_logo.jpg" alt="Logo" style="height: 100%">
 	</div>
 
 	<!-- Main Wrapper -->

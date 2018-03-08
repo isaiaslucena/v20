@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-02 15:13:42
+/* Smarty version 3.1.30, created on 2018-03-07 16:01:55
   from "/app/application/views/templates/head.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a999456438da5_65864554',
+  'unifunc' => 'content_5aa03723350c63_41832728',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9fa740764ad3014055f0469798871ffc26655bac' => 
     array (
       0 => '/app/application/views/templates/head.tpl',
-      1 => 1520014416,
+      1 => 1520449312,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:layout.tpl' => 1,
   ),
 ),false)) {
-function content_5a999456438da5_65864554 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa03723350c63_41832728 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12339015065a999456430dc2_33801732', 'head');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14265108745aa03723349e44_65924549', 'head');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'head'} */
-class Block_12339015065a999456430dc2_33801732 extends Smarty_Internal_Block
+class Block_14265108745aa03723349e44_65924549 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -67,7 +67,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
  src="http://webapplayers.com/homer_admin-v2.0/light-shadow/vendor/sparkline/index.js"><?php echo '</script'; ?>
 >
 	<?php echo '<script'; ?>
- src="assets/color-thief/color-thief.min.js"><?php echo '</script'; ?>
+ src="/assets/color-thief/color-thief.min.js"><?php echo '</script'; ?>
 >
 	<?php echo '<script'; ?>
  src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"><?php echo '</script'; ?>
@@ -134,12 +134,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 
 	<!-- App styles -->
-	<link rel="stylesheet" href="assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
-	<link rel="stylesheet" href="assets/pe-icon-7-stroke/css/helper.css">
+	<link rel="stylesheet" href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+	<link rel="stylesheet" href="/assets/pe-icon-7-stroke/css/helper.css">
 	<link rel="stylesheet" href="http://webapplayers.com/homer_admin-v2.0/light-shadow/styles/style.css">
 
 	<!-- Custom styles -->
-	<link rel="stylesheet" href="assets/dataclip/dataclip.css">
+	<link rel="stylesheet" href="/assets/dataclip/dataclip.css">
 <?php
 }
 }

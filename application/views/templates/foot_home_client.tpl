@@ -10,10 +10,10 @@
 
 <script type="text/javascript" charset="utf-8">
 	var clientsel = '{$client_selected}';
+	var clientselid = {$client_sel_id};
 	var clientselb = (clientsel == 'true');
 
 	{literal}
-	console.log(clientselb);
 	var tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
@@ -117,108 +117,12 @@
 		console.log('Client ID: '+cid);
 		console.log('Client Name: '+cname);
 
+		get_client_info(cid, false);
 		count_vtype(cid, todaydate, todaydate);
 		count_rating(cid, todaydate, todaydate);
 		count_states(cid, todaydate, todaydate);
 		count_client(cid, todaydate, todaydate);
-
 		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00-03:00'));
-
-		$.get('/home_client/client_info/'+cid,
-		function(data, textStatus, xhr) {
-			cbanner = data.banner;
-
-			ltvid = data.last_tvn[0].Id;
-			ltvtitulo = data.last_tvn[0].Titulo
-			ltvnoticia = data.last_tvn[0].Noticia
-			ltvveiculo = data.last_tvn[0].Veiculo;
-			ltveditoria = data.last_tvn[0].Editoria;
-			ltvdata = data.last_tvn[0].Data;
-			ltvhora = data.last_tvn[0].Hora;
-			ltvvideo = data.last_tvn[0].Video
-
-			lradioid = data.last_radion[0].Id;
-			lradiotitulo = data.last_radion[0].Titulo
-			lradionoticia = data.last_radion[0].Noticia
-			lradioveiculo = data.last_radion[0].Veiculo;
-			lradioeditoria = data.last_radion[0].Editoria;
-			lradiodata = data.last_radion[0].Data;
-			lradiohora = data.last_radion[0].Hora;
-			lradioaudio = data.last_radion[0].Audio
-
-			lprintid = data.last_printn[0].Id;
-			lprinttitulo = data.last_printn[0].Titulo
-			lprintnoticia = data.last_printn[0].Noticia
-			lprintveiculo = data.last_printn[0].Veiculo;
-			lprinteditoria = data.last_printn[0].Editoria;
-			lprintdata = data.last_printn[0].Data;
-			lprinthora = data.last_printn[0].Hora;
-			lprintimagem = data.last_printn[0].Imagem;
-
-			lonlineid = data.last_onlinen[0].Id;
-			lonlinetitulo = data.last_onlinen[0].Titulo
-			lonlinenoticia = data.last_onlinen[0].Noticia
-			lonlineveiculo = data.last_onlinen[0].Veiculo;
-			lonlineeditoria = data.last_onlinen[0].Editoria;
-			lonlinedata = data.last_onlinen[0].Data;
-			lonlinehora = data.last_onlinen[0].Hora;
-			lonlineimagem = data.last_onlinen[0].Imagem;
-
-			$('#bannerheader').attr('src', cbanner);
-
-			// if (ltvveiculo == null) {
-			// 	$('#last_tvn h3').text('Nenhum');
-			// 	$('#last_tvn span').text('Nenhum');
-			// 	$('#last_tvn small').text(null);
-			// } else {
-			// 	$('#last_tvn h3').attr('data-newsid', ltvid);
-			// 	$('#last_tvn h3').text(ltvveiculo);
-			// 	$('#last_tvn span').text(ltveditoria);
-			// 	$('#last_tvn small').text(ltvdata+' '+ltvhora);
-			// 	$('#last_tvn small').append('<br><br>'+ltvtitulo);
-			// 	$('#videotv').attr('src', 'http://www.multclipp.com.br/arquivos/noticias/'+ltvdata.replace(/-/g,'\/')+'/'+ltvid+'/'+ltvvideo);
-			// }
-
-			// if (lradioveiculo == null) {
-			// 	$('#last_radion h3').text('Nenhum');
-			// 	$('#last_radion span').text('Nenhum');
-			// 	$('#last_radion small').text(null);
-			// } else {
-			// 	$('#last_radion h3').attr('data-newsid', lradioid);
-			// 	$('#last_radion h3').text(lradioveiculo);
-			// 	$('#last_radion span').text(lradioeditoria);
-			// 	$('#last_radion small').text(lradiodata+' '+lradiohora);
-			// 	$('#last_radion small').append('<br><br>'+lradiotitulo);
-			// 	$('#audioradio').attr('src', 'http://www.multclipp.com.br/arquivos/noticias/'+lradiodata.replace(/-/g,'\/')+'/'+lradioid+'/'+lradioaudio);
-			// }
-
-			// if (lprintveiculo == null) {
-			// 	$('#last_printn h3').text('Nenhum');
-			// 	$('#last_printn span').text('Nenhum');
-			// 	$('#last_printn small').text(null);
-			// } else {
-			// 	$('#last_printn h3').attr('data-newsid', lprintid);
-			// 	$('#last_printn h3').text(lprintveiculo);
-			// 	$('#last_printn span').text(lprinteditoria);
-			// 	$('#last_printn small').text(lprintdata+' '+lprinthora);
-			// 	$('#last_printn small').append('<br><br>'+lprinttitulo);
-			// 	$('#imageprint').attr('src', 'http://www.multclipp.com.br/arquivos/noticias/'+lprintdata.replace(/-/g,'\/')+'/'+lprintid+'/'+lprintimagem);
-			// }
-
-			// if (lonlineveiculo == null) {
-			// 	$('#last_onlinen h3').text('Nenhum');
-			// 	$('#last_onlinen span').text('Nenhum');
-			// 	$('#last_onlinen small').text(null);
-			// } else {
-			// 	$('#last_onlinen h3').attr('data-newsid', lonlineid);
-			// 	$('#last_onlinen h3').text(lonlineveiculo);
-			// 	$('#last_onlinen span').text(lonlineeditoria);
-			// 	$('#last_onlinen small').text(lonlinedata+' '+lonlinehora);
-			// 	$('#last_onlinen small').append('<br><br>'+lonlinetitulo);
-			// 	$('#imageonline').attr('src', 'http://www.multclipp.com.br/arquivos/noticias/'+lonlinedata.replace(/-/g,'\/')+'/'+lonlineid+'/'+lonlineimagem);
-			// }
-		});
-
 		get_subject_keywords(cid, todaydate, todaydate, true);
 	});
 
@@ -534,6 +438,42 @@
 				}
 		}
 	});
+
+	if (clientselb) {
+		subkeywordsarr = [];
+		tvarr = [], varr = [], earr = [], pcarr = [];
+		swal({
+			title: "Carregando...",
+			imageUrl: "/assets/imgs/loading.gif",
+			showCancelButton: false,
+			showConfirmButton: false
+		});
+
+		get_client_info(clientselid, true);
+		count_vtype(clientselid, todaydate, todaydate);
+		count_rating(clientselid, todaydate, todaydate);
+		count_states(clientselid, todaydate, todaydate);
+		count_client(clientselid, todaydate, todaydate);
+		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00-03:00'));
+		get_subject_keywords(clientselid, todaydate, todaydate, true);
+	}
+
+	function get_client_info(clientid, setselpicker) {
+		$.get('/home_client/client_info/'+clientid,
+		function(data, textStatus, xhr) {
+			cid = data.id;
+			cname = data.name;
+			cbanner = data.banner;
+
+			if (setselpicker) {
+				$('#selclient').selectpicker('val', cname);
+			}
+
+			$('#bannerheader').attr('src', cbanner);
+
+
+		});
+	}
 
 	function setcolors() {
 		sourceImage = $('#bannerheader');

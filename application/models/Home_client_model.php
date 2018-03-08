@@ -10,84 +10,87 @@ class Home_client_model extends CI_Model {
 
 	public function get_client_info($idclient) {
 		// $this->db->cache_on();
-		$querybanner = "SELECT banner FROM Empresa WHERE Id = $idclient ORDER BY Nome ASC";
+		$querybanner = "SELECT id,nome,banner FROM Empresa WHERE Id = $idclient ORDER BY Nome ASC";
+		$data['id'] = $this->db->query($querybanner)->row('id');
+		$data['name'] = $this->db->query($querybanner)->row('nome');
 		$data['banner'] = "http://www.multclipp.com.br/arquivos/empresa/".$idclient."/banner/".rawurlencode($this->db->query($querybanner)->row('banner'));
-		$querytv =	"SELECT TOP 1
-								nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem as Video,
-								nt.idVeiculo,ve.Nome as Veiculo,
-								nt.idEditoria,ed.Nome as Editoria,
-								ent.IdEmpresa, em.Nome as Empresa,
-								nt.Data,nt.Hora
-								FROM Noticias nt
-								JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
-								JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
-								JOIN Empresa em ON ent.IdEmpresa = em.Id
-								JOIN Veiculo ve ON nt.idVeiculo = ve.Id
-								JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-								JOIN Editorias ed ON nt.idEditoria = ed.Id
-								WHERE
-								ent.Liberada = 1 AND
-								ent.IdEmpresa = $idclient AND
-								tve.Id = 8
-								ORDER BY nt.Id DESC";
-		$data['last_tvn'] = $this->db->query($querytv)->result_array();
-		$queryradio =	"SELECT TOP 1
-									nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem as Audio,
-									nt.idVeiculo,ve.Nome as Veiculo,
-									nt.idEditoria,ed.Nome as Editoria,
-									ent.IdEmpresa, em.Nome as Empresa,
-									nt.Data,nt.Hora
-									FROM Noticias nt
-									JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
-									JOIN EmpresaNoticia ent ON nt.Id=ent.idNoticia
-									JOIN Empresa em ON ent.IdEmpresa=em.Id
-									JOIN Veiculo ve ON nt.idVeiculo=ve.Id
-									JOIN TipoVeiculo tve ON ve.idTipoVeiculo=tve.Id
-									JOIN Editorias ed ON nt.idEditoria=ed.Id
-									WHERE
-									ent.Liberada = 1 AND
-									ent.IdEmpresa = $idclient AND
-									tve.Id = 9
-									ORDER BY nt.Id DESC";
-		$data['last_radion'] = $this->db->query($queryradio)->result_array();
-		$queryprint =	"SELECT TOP 1
-									nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem,
-									nt.idVeiculo,ve.Nome as Veiculo,
-									nt.idEditoria,ed.Nome as Editoria,
-									ent.IdEmpresa, em.Nome as Empresa,
-									nt.Data,nt.Hora
-									FROM Noticias nt
-									JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
-									JOIN EmpresaNoticia ent ON nt.Id=ent.idNoticia
-									JOIN Empresa em ON ent.IdEmpresa=em.Id
-									JOIN Veiculo ve ON nt.idVeiculo=ve.Id
-									JOIN TipoVeiculo tve ON ve.idTipoVeiculo=tve.Id
-									JOIN Editorias ed ON nt.idEditoria=ed.Id
-									WHERE
-									ent.Liberada = 1 AND
-									ent.IdEmpresa = $idclient AND
-									tve.Id IN (3,10,12,14,18)
-									ORDER BY nt.Id DESC";
-		$data['last_printn'] = $this->db->query($queryprint)->result_array();
-		$queryonline =	"SELECT TOP 1
-										nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem,
-										nt.idVeiculo,ve.Nome as Veiculo,
-										nt.idEditoria,ed.Nome as Editoria,
-										ent.IdEmpresa, em.Nome as Empresa,
-										nt.Data,nt.Hora
-										FROM Noticias nt
-										JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
-										JOIN EmpresaNoticia ent ON nt.Id=ent.idNoticia
-										JOIN Empresa em ON ent.IdEmpresa=em.Id
-										JOIN Veiculo ve ON nt.idVeiculo=ve.Id
-										JOIN TipoVeiculo tve ON ve.idTipoVeiculo=tve.Id
-										JOIN Editorias ed ON nt.idEditoria=ed.Id
-										WHERE
-										ent.Liberada = 1 AND
-										ent.IdEmpresa = $idclient AND
-										tve.Id IN (2,13)
-										ORDER BY nt.Id DESC";
-		$data['last_onlinen'] = $this->db->query($queryonline)->result_array();
+
+		// $querytv =	"SELECT TOP 1
+		// 						nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem as Video,
+		// 						nt.idVeiculo,ve.Nome as Veiculo,
+		// 						nt.idEditoria,ed.Nome as Editoria,
+		// 						ent.IdEmpresa, em.Nome as Empresa,
+		// 						nt.Data,nt.Hora
+		// 						FROM Noticias nt
+		// 						JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+		// 						JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+		// 						JOIN Empresa em ON ent.IdEmpresa = em.Id
+		// 						JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+		// 						JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+		// 						JOIN Editorias ed ON nt.idEditoria = ed.Id
+		// 						WHERE
+		// 						ent.Liberada = 1 AND
+		// 						ent.IdEmpresa = $idclient AND
+		// 						tve.Id = 8
+		// 						ORDER BY nt.Id DESC";
+		// $data['last_tvn'] = $this->db->query($querytv)->result_array();
+		// $queryradio =	"SELECT TOP 1
+		// 							nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem as Audio,
+		// 							nt.idVeiculo,ve.Nome as Veiculo,
+		// 							nt.idEditoria,ed.Nome as Editoria,
+		// 							ent.IdEmpresa, em.Nome as Empresa,
+		// 							nt.Data,nt.Hora
+		// 							FROM Noticias nt
+		// 							JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+		// 							JOIN EmpresaNoticia ent ON nt.Id=ent.idNoticia
+		// 							JOIN Empresa em ON ent.IdEmpresa=em.Id
+		// 							JOIN Veiculo ve ON nt.idVeiculo=ve.Id
+		// 							JOIN TipoVeiculo tve ON ve.idTipoVeiculo=tve.Id
+		// 							JOIN Editorias ed ON nt.idEditoria=ed.Id
+		// 							WHERE
+		// 							ent.Liberada = 1 AND
+		// 							ent.IdEmpresa = $idclient AND
+		// 							tve.Id = 9
+		// 							ORDER BY nt.Id DESC";
+		// $data['last_radion'] = $this->db->query($queryradio)->result_array();
+		// $queryprint =	"SELECT TOP 1
+		// 							nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem,
+		// 							nt.idVeiculo,ve.Nome as Veiculo,
+		// 							nt.idEditoria,ed.Nome as Editoria,
+		// 							ent.IdEmpresa, em.Nome as Empresa,
+		// 							nt.Data,nt.Hora
+		// 							FROM Noticias nt
+		// 							JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+		// 							JOIN EmpresaNoticia ent ON nt.Id=ent.idNoticia
+		// 							JOIN Empresa em ON ent.IdEmpresa=em.Id
+		// 							JOIN Veiculo ve ON nt.idVeiculo=ve.Id
+		// 							JOIN TipoVeiculo tve ON ve.idTipoVeiculo=tve.Id
+		// 							JOIN Editorias ed ON nt.idEditoria=ed.Id
+		// 							WHERE
+		// 							ent.Liberada = 1 AND
+		// 							ent.IdEmpresa = $idclient AND
+		// 							tve.Id IN (3,10,12,14,18)
+		// 							ORDER BY nt.Id DESC";
+		// $data['last_printn'] = $this->db->query($queryprint)->result_array();
+		// $queryonline =	"SELECT TOP 1
+		// 								nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem,
+		// 								nt.idVeiculo,ve.Nome as Veiculo,
+		// 								nt.idEditoria,ed.Nome as Editoria,
+		// 								ent.IdEmpresa, em.Nome as Empresa,
+		// 								nt.Data,nt.Hora
+		// 								FROM Noticias nt
+		// 								JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+		// 								JOIN EmpresaNoticia ent ON nt.Id=ent.idNoticia
+		// 								JOIN Empresa em ON ent.IdEmpresa=em.Id
+		// 								JOIN Veiculo ve ON nt.idVeiculo=ve.Id
+		// 								JOIN TipoVeiculo tve ON ve.idTipoVeiculo=tve.Id
+		// 								JOIN Editorias ed ON nt.idEditoria=ed.Id
+		// 								WHERE
+		// 								ent.Liberada = 1 AND
+		// 								ent.IdEmpresa = $idclient AND
+		// 								tve.Id IN (2,13)
+		// 								ORDER BY nt.Id DESC";
+		// $data['last_onlinen'] = $this->db->query($queryonline)->result_array();
 		return $data;
 	}
 
