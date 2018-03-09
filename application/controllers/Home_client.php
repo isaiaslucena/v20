@@ -250,8 +250,8 @@ class Home_client extends CI_Controller {
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
-	public function single_news($idnews, $keywordid) {
-		$data = $this->home_client_model->get_single_news($idnews, $keywordid);
+	public function single_news_keyword($idnews, $keywordid) {
+		$data = $this->home_client_model->get_single_news_keyword($idnews, $keywordid);
 		$data = $this->htmlchars_decoder($data);
 		$data = $this->tags_stripper($data);
 		$data = $this->utf8_encoder($data);
@@ -260,6 +260,44 @@ class Home_client extends CI_Controller {
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
+
+	public function single_news($idnews) {
+		$datan = $this->home_client_model->get_single_news($idnews);
+		$datan = $this->htmlchars_decoder($datan);
+		$datan = $this->tags_stripper($datan);
+		$datan = $this->utf8_encoder($datan);
+		$datan = $this->linebreak_to_br($datan);
+
+		// var_dump($data);
+
+		$data = $datan[0];
+		$data['PChaves'] = array();
+		$newkeywordid = 0;
+		$ncount = -1;
+		foreach ($datan as $n) {
+			$keywordid = $n['IdPChave'];
+			$keywordnm = $n['PChave'];
+			$keywordgf = $n['Grifar'];
+
+			$keywordarr = array(
+				'IdPChave' => $keywordid,
+				'PChave' => $keywordnm,
+				'Grifar' => $keywordgf
+			);
+
+			if ($newkeywordid != $keywordid) {
+				$ncount++;
+				array_push($data['PChaves'], $keywordarr);
+			} else {
+				array_push($data['PChaves'], $keywordarr);
+			}
+			$newkeywordid = $keywordid;
+		}
+
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($data, JSON_PRETTY_PRINT);
+	}
+
 
 	public function keyword_news($keywordid, $startdate = null, $enddate = null) {
 		$data['data'] = $this->home_client_model->get_client_keyword_news($keywordid, $startdate, $enddate);

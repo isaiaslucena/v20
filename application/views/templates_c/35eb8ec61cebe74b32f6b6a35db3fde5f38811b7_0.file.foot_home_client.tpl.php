@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-08 19:15:04
+/* Smarty version 3.1.30, created on 2018-03-09 15:55:06
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa1b5e819e0c1_36150548',
+  'unifunc' => 'content_5aa2d88a1d2bd8_30196698',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1520547300,
+      1 => 1520620858,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5aa1b5e819e0c1_36150548 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa2d88a1d2bd8_30196698 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2011957825aa1b5e8173a77_53155447', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_7602360055aa2d88a1ac8c1_73981426', 'foot');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_2011957825aa1b5e8173a77_53155447 extends Smarty_Internal_Block
+class Block_7602360055aa2d88a1ac8c1_73981426 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -186,7 +186,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			showConfirmButton: false
 		});
 
-		cid = $(this).children(":selected").attr("id");
+		cid = $(this).children(':selected').attr('id');
 		cname = event.target.value;
 		console.log('Client ID: '+cid);
 		console.log('Client Name: '+cname);
@@ -243,7 +243,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		$('#modalcsinglenewsv').css('display', 'none');
 		$('#modalwsinglenews').css('display', 'block');
 
-		$('#modaltsinglenews').text(null);
 		if (mediatype == 'video' || mediatype == 'audio') {
 			var mmediadel = $('#mmediael');
 			if (mmediadel[0].paused) {
@@ -260,10 +259,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		var trkid = $(trc).attr('data-keywordid');
 
 		$('#showsinglenews').modal('show');
-		get_single_news(trcid, trkid, function(tndata) {
-			snewsid = tndata[0].Id;
-			snewsdate = tndata[0].Data;
-			snewstime = tndata[0].Hora;
+		get_single_news(trcid, function(tndata) {
+			snewsid = tndata.Id;
+			snewsdate = tndata.Data;
+			snewstime = tndata.Hora;
 
 			sdata = snewsdate.trim();
 			shora = snewstime.trim();
@@ -285,32 +284,31 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			sminutes = ('0'+sminutes).slice(-2);
 			snewsfdatetime = sday+'/'+smonth+'/'+syear+' '+shour+':'+sminutes;
 
-			snewstitle = tndata[0].Titulo;
-			snewssubtitle = tndata[0].Subtitulo;
-			snewscontent = tndata[0].Noticia;
-			snewsauthor = tndata[0].Autor;
-			snewsurl = tndata[0].URL;
-			snewsvid = tndata[0].idVeiculo;
-			snewsve = tndata[0].Veiculo;
-			snewseid = tndata[0].idEditoria;
-			snewsed = tndata[0].Editoria;
-			snewsgrf = tndata[0].Grifar.trim();
-			snewsgrf = snewsgrf.split(';');
+			snewstitle = tndata.Titulo;
+			snewssubtitle = tndata.Subtitulo;
+			snewscontent = tndata.Noticia;
+			snewsauthor = tndata.Autor;
+			snewsurl = tndata.URL;
+			snewsvid = tndata.idVeiculo;
+			snewsve = tndata.Veiculo;
+			snewseid = tndata.idEditoria;
+			snewsed = tndata.Editoria;
 
-			snewsimg = tndata[0].Imagem;
-			snewsidpchave = tndata[0].IdPChave;
-			snewspchave = tndata[0].PChave;
-			snewsidass = tndata[0].IdAssunto;
-			snewsass = tndata[0].Assunto;
-			snewsmot = tndata[0].Motivacao;
+			snewsimg = tndata.Imagem;
+			snewsidpchave = tndata.IdPChave;
+			var snewspchave = '';
+			$.each(tndata.PChaves, function(index, val) {
+				snewspchave += val.PChave+' | ';
+			});
+			snewsidass = tndata.IdAssunto;
+			snewsass = tndata.Assunto;
+			snewsmot = tndata.Motivacao;
 			var snewsmotstr;
-			snewsava = tndata[0].Avaliacao;
+			snewsava = tndata.Avaliacao;
 			var snewsavastr;
 
-			console.log('Grifar');
-			console.log(snewsgrf);
-			console.log('Motivação: '+snewsmot);
-			console.log('Avaliação: '+snewsava);
+			snewsaud = parseInt(tndata.Audiencia);
+			snewseqv = tndata.Equivalencia;
 
 			switch(snewsmot) {
 				case '0':
@@ -337,12 +335,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					snewsavastr = '<span class="text-success">Positivo</span>';
 			}
 
-			$('#modaltsinglenews').html(snewsve+' - <small>'+snewsed+'</small>');
 			$('#modaltitleve').html('<strong>Veículo:</strong> '+snewsve);
 			$('#modaltitleed').html('<strong>Editoria:</strong> '+snewsed);
 			$('#modaltitlevm').html('<strong>Motivação:</strong> '+snewsmotstr);
 			$('#modaltitleva').html('<strong>Avaliação:</strong> '+snewsavastr);
-			$('#modaltitlevs').html('<strong>Assunto:</strong> '+snewsass);
+			$('#modaltitlevq').html('<strong>Audiência:</strong> '+snewsaud.toFixed(2));
+			$('#modaltitlevv').html('<strong>Equivalência:</strong> '+snewseqv.replace('.',','));
 			$('#modaltitlevk').html('<strong>Palavra-chave:</strong> '+snewspchave);
 
 			multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
@@ -368,11 +366,15 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'"></a>');
 
-				$.each(snewsgrf, function(index, val) {
-					if (val.length > 0) {
-						rgxkw = new RegExp('\\b'+val+'\\b', 'ig');
-						snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+val+'</strong>');
-					}
+				$.each(tndata.PChaves, function(index, val) {
+					snewsgrf = val.Grifar.trim();
+					snewsgrf = snewsgrf.split(';');
+					$.each(snewsgrf, function(index, gval) {
+						if (gval.length > 0) {
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
+							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
+						}
+					});
 				});
 				$('#modal-texti').html(snewscontent);
 			} else if (rgximageaws.test(snewsurl)) {
@@ -381,11 +383,15 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+snewsurl+'"></a>');
 
-				$.each(snewsgrf, function(index, val) {
-					if (val.length > 0) {
-						rgxkw = new RegExp('\\b'+val+'\\b', 'ig');
-						snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+val+'</strong>');
-					}
+				$.each(tndata.PChaves, function(index, val) {
+					snewsgrf = val.Grifar.trim();
+					snewsgrf = snewsgrf.split(';');
+					$.each(snewsgrf, function(index, gval) {
+						if (gval.length > 0) {
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
+							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
+						}
+					});
 				});
 				$('#modal-texti').html(snewscontent);
 			} else {
@@ -394,11 +400,15 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="/assets/imgs/noimage.png"></a>');
 
-				$.each(snewsgrf, function(index, val) {
-					if (val.length > 0) {
-						rgxkw = new RegExp('\\b'+val+'\\b', 'ig');
-						snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+val+'</strong>');
-					}
+				$.each(tndata.PChaves, function(index, val) {
+					snewsgrf = val.Grifar.trim();
+					snewsgrf = snewsgrf.split(';');
+					$.each(snewsgrf, function(index, gval) {
+						if (gval.length > 0) {
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
+							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
+						}
+					});
 				});
 				$('#modal-texti').html(snewscontent);
 			}
@@ -421,6 +431,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 			if (opttype == 'keyword') {
 				keywid = $(this).attr('id');
+				console.log(this);
 				if($(this).is(':selected')) {
 					if(subkeywordsarr.indexOf(keywid) == -1) {
 						subkeywordsarr.push(keywid);
@@ -886,8 +897,14 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		drows.remove().draw();
 	};
 
-	function get_single_news(newsid, newskwid, callback) {
-		$.get('/home_client/single_news/'+newsid+'/'+newskwid, function(data) {
+	function get_single_news_keyword(newsid, newskwid, kcallback) {
+		$.get('/home_client/single_news_keyword/'+newsid+'/'+newskwid, function(data) {
+			kcallback(data);
+		});
+	};
+
+	function get_single_news(newsid, callback) {
+		$.get('/home_client/single_news/'+newsid, function(data) {
 			callback(data);
 		});
 	};

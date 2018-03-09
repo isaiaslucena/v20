@@ -196,7 +196,7 @@ class Home_client_model extends CI_Model {
 		return $this->db->query($sqlquery)->result_array();
 	}
 
-	public function get_single_news($newsid, $keywordid) {
+	public function get_single_news_keyword($newsid, $keywordid) {
 		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria,
 								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
@@ -211,6 +211,28 @@ class Home_client_model extends CI_Model {
 								JOIN Editorias ed ON nt.idEditoria = ed.Id
 								LEFT JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
 								WHERE nt.Id = $newsid AND pc.Id = $keywordid";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function get_single_news($newsid) {
+		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria,
+								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
+								ass.Id as IdAssunto, ass.Nome as Assunto,
+								pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar,
+								ent.Motivacao, ent.Avaliacao,
+								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as Audiencia,
+								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as Equivalencia
+								FROM Noticias nt
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								JOIN NoticiaPalavraChave npc ON npc.idNoticia = nt.Id
+								JOIN PalavraChave pc ON pc.Id = npc.idPalavraChave
+								JOIN Assunto ass ON ass.Id = pc.idAssunto
+								JOIN EmpresaNoticia ent ON  ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+								JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+								JOIN Editorias ed ON nt.idEditoria = ed.Id
+								JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+								LEFT JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+								WHERE nt.Id = $newsid";
 		return $this->db->query($sqlquery)->result_array();
 	}
 

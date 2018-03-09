@@ -291,25 +291,27 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
-						{* <div class="col-lg-12"> *}
-							<div class="row">
-								<div class="col-lg-4 text-left">
-									<h5 id="modaltitleve" class="text-primary"></h5>
-									<h5 id="modaltitleed" class="text-primary"></h5>
-								</div>
-								<div class="col-lg-4 text-center">
-									<h5 id="modaltitlevm" class="text-primary"></h5>
-									<h5 id="modaltitleva" class="text-primary"></h5>
-								</div>
-								<div class="col-lg-4 text-right">
-									<h5 id="modaltitlevs" class="text-primary"></h5>
-									<h5 id="modaltitlevk" class="text-primary"></h5>
-								</div>
+						<div class="row">
+							<div class="col-lg-3 text-left">
+								<h5 id="modaltitleve" class="text-primary"></h5>
+								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
-						{* </div> *}
-						{* <h2 id="modaltsinglenews" class="modal-title"></h2> *}
+							<div class="col-lg-3 text-center">
+								<h5 id="modaltitlevm" class="text-primary"></h5>
+								<h5 id="modaltitleva" class="text-primary"></h5>
+							</div>
+							<div class="col-lg-3 text-center">
+								<h5 id="modaltitlevq" class="text-primary"></h5>
+								<h5 id="modaltitlevv" class="text-primary"></h5>
+							</div>
+							<div class="col-lg-3 text-right">
+								<a id="btnmail" class="btn btn-xs btn-block btn-primary">Enviar por e-mail</a>
+								<a id="btnurl" class="btn btn-xs btn-block btn-primary" target="_blank">Abrir página</a>
+							</div>
+						</div>
 					</div>
 					<div class="modal-body">
+						<p id="modaltitlevk" class="text-primary pull-right"></p>
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediactni" class="col-lg-4"></div>
 							<div class="col-lg-8">

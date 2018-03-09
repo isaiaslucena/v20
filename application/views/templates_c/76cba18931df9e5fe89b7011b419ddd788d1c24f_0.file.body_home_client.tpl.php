@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-08 19:15:04
+/* Smarty version 3.1.30, created on 2018-03-09 15:56:39
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa1b5e81e2a98_60131566',
+  'unifunc' => 'content_5aa2d8e7ddf979_95068180',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1520547292,
+      1 => 1520621798,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aa1b5e81e2a98_60131566 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa2d8e7ddf979_95068180 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13689922015aa1b5e81d3362_98902546', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19784597355aa2d8e7dd2294_09886849', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_13689922015aa1b5e81d3362_98902546 extends Smarty_Internal_Block
+class Block_19784597355aa2d8e7dd2294_09886849 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -243,25 +243,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
-						
-							<div class="row">
-								<div class="col-lg-4 text-left">
-									<h5 id="modaltitleve" class="text-primary"></h5>
-									<h5 id="modaltitleed" class="text-primary"></h5>
-								</div>
-								<div class="col-lg-4 text-center">
-									<h5 id="modaltitlevm" class="text-primary"></h5>
-									<h5 id="modaltitleva" class="text-primary"></h5>
-								</div>
-								<div class="col-lg-4 text-right">
-									<h5 id="modaltitlevs" class="text-primary"></h5>
-									<h5 id="modaltitlevk" class="text-primary"></h5>
-								</div>
+						<div class="row">
+							<div class="col-lg-3 text-left">
+								<h5 id="modaltitleve" class="text-primary"></h5>
+								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
-						
-						
+							<div class="col-lg-3 text-center">
+								<h5 id="modaltitlevm" class="text-primary"></h5>
+								<h5 id="modaltitleva" class="text-primary"></h5>
+							</div>
+							<div class="col-lg-3 text-center">
+								<h5 id="modaltitlevq" class="text-primary"></h5>
+								<h5 id="modaltitlevv" class="text-primary"></h5>
+							</div>
+							<div class="col-lg-3 text-right">
+								<a id="btnmail" class="btn btn-xs btn-block btn-primary">Enviar por e-mail</a>
+								<a id="btnurl" class="btn btn-xs btn-block btn-primary" target="_blank">Abrir página</a>
+							</div>
+						</div>
 					</div>
 					<div class="modal-body">
+						<p id="modaltitlevk" class="text-primary pull-right"></p>
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediactni" class="col-lg-4"></div>
 							<div class="col-lg-8">
