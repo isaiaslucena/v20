@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-08 15:26:49
+/* Smarty version 3.1.30, created on 2018-03-08 19:15:04
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa180693cce90_61451020',
+  'unifunc' => 'content_5aa1b5e819e0c1_36150548',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1520532472,
+      1 => 1520547300,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5aa180693cce90_61451020 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa1b5e819e0c1_36150548 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4185921065aa180693aa218_95501514', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2011957825aa1b5e8173a77_53155447', 'foot');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_4185921065aa180693aa218_95501514 extends Smarty_Internal_Block
+class Block_2011957825aa1b5e8173a77_53155447 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -78,11 +78,11 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		"columnDefs": [
 			{"searchable": false, "width": "5%", "targets": 0},
 			{"searchable": false, "width": "5%", "targets": 1},
-			{"searchable": false, "width": "15%", "targets": 2},
+			{"searchable": true, "width": "15%", "targets": 2},
 			{"searchable": true, "width": "5%", "targets": 3},
-			{"searchable": false, "width": "5%", "targets": 4},
+			{"searchable": true, "width": "5%", "targets": 4},
 			{"searchable": true, "width": "15%", "targets": 5},
-			{"searchable": true, "width": "40%", "targets": 6},
+			{"searchable": false, "width": "40%", "targets": 6},
 			{"searchable": false, "width": "10%", "targets": 7},
 			{"searchable": false, "width": "10%", "targets": 8}
 		],
@@ -90,20 +90,53 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		"rowId": "id",
 		"language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"},
 		"initComplete": function(settings) {
-			this.api().columns([2,3,4,5]).every(function(coln) {
+			this.api().columns(2).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_'+coln+'" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_2" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
 					column.search( val ? '^'+val+'$' : '', true, false).draw();
 				});
 			});
-			$('.filter.selectpicker').selectpicker('render');
+
+			this.api().columns(3).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_3" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+
+			this.api().columns(4).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_4" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+
+			this.api().columns(5).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_5" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+			$('.filter.selectpicker').selectpicker('refresh');
 		},
 		"drawCallback": function(settings) {
-			this.api().column(2, {page:'current'}).data().each(function(tvcurrent, i) {
+			this.api().column(2).data().each(function(tvcurrent, i) {
 				if (tvarr.indexOf(tvcurrent) == -1) {
 					tvarr.push(tvcurrent);
 					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
@@ -111,7 +144,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				}
 			})
 
-			this.api().column(3, {page:'current'}).data().each(function (vcurrent, i) {
+			this.api().column(3).data().each(function (vcurrent, i) {
 				if (varr.indexOf(vcurrent) == -1) {
 					varr.push(vcurrent);
 					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
@@ -119,7 +152,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				}
 			})
 
-			this.api().column(4, {page:'current'}).data().each(function (ecurrent, i) {
+			this.api().column(4).data().each(function (ecurrent, i) {
 				if (earr.indexOf(ecurrent) == -1) {
 					earr.push(ecurrent);
 					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
@@ -127,7 +160,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				}
 			})
 
-			this.api().column(5, {page:'current'}).data().each(function (pccurrent, i) {
+			this.api().column(5).data().each(function (pccurrent, i) {
 				if (pcarr.indexOf(pccurrent) == -1) {
 					pcarr.push(pccurrent);
 					ihtml = '<option val="'+pccurrent+'">'+pccurrent+'</option>'
@@ -262,12 +295,55 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			snewseid = tndata[0].idEditoria;
 			snewsed = tndata[0].Editoria;
 			snewsgrf = tndata[0].Grifar.trim();
+			snewsgrf = snewsgrf.split(';');
+
 			snewsimg = tndata[0].Imagem;
+			snewsidpchave = tndata[0].IdPChave;
+			snewspchave = tndata[0].PChave;
+			snewsidass = tndata[0].IdAssunto;
+			snewsass = tndata[0].Assunto;
+			snewsmot = tndata[0].Motivacao;
+			var snewsmotstr;
+			snewsava = tndata[0].Avaliacao;
+			var snewsavastr;
+
 			console.log('Grifar');
-			console.log(snewsgrf.length);
 			console.log(snewsgrf);
+			console.log('Motivação: '+snewsmot);
+			console.log('Avaliação: '+snewsava);
+
+			switch(snewsmot) {
+				case '0':
+					snewsmotstr = '<span class="text-warning">Espontânea</span>';
+					break;
+				case '1':
+					snewsmotstr = '<span class="text-warning">Espontânea</span>';
+					break;
+				default:
+					snewsmotstr = 'Não Definido';
+			}
+
+			switch(snewsava) {
+				case '0':
+					snewsavastr = '<span class="text-warning">Neutro</span>';
+					break;
+				case '1':
+					snewsavastr = '<span class="text-danger">Negativo</span>';
+					break;
+				case '2':
+					snewsavastr = '<span class="text-warning">Neutro</span>';
+					break;
+				case '3':
+					snewsavastr = '<span class="text-success">Positivo</span>';
+			}
 
 			$('#modaltsinglenews').html(snewsve+' - <small>'+snewsed+'</small>');
+			$('#modaltitleve').html('<strong>Veículo:</strong> '+snewsve);
+			$('#modaltitleed').html('<strong>Editoria:</strong> '+snewsed);
+			$('#modaltitlevm').html('<strong>Motivação:</strong> '+snewsmotstr);
+			$('#modaltitleva').html('<strong>Avaliação:</strong> '+snewsavastr);
+			$('#modaltitlevs').html('<strong>Assunto:</strong> '+snewsass);
+			$('#modaltitlevk').html('<strong>Palavra-chave:</strong> '+snewspchave);
 
 			multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
 			rgxvideo = new RegExp('(.mp4)', 'ig');
@@ -292,10 +368,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'"></a>');
 
-				if (snewsgrf.length > 0) {
-					rgxkw = new RegExp('\\b'+snewsgrf+'\\b', 'ig');
-					snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+snewsgrf+'</strong>');
-				}
+				$.each(snewsgrf, function(index, val) {
+					if (val.length > 0) {
+						rgxkw = new RegExp('\\b'+val+'\\b', 'ig');
+						snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+val+'</strong>');
+					}
+				});
 				$('#modal-texti').html(snewscontent);
 			} else if (rgximageaws.test(snewsurl)) {
 				mediatype = 'image';
@@ -303,18 +381,26 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+snewsurl+'"></a>');
 
-				rgxkw = new RegExp('\\b'+snewsgrf+'\\b', 'ig');
-				fullnewtext = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+snewsgrf+'</strong>');
-				$('#modal-texti').html(fullnewtext);
+				$.each(snewsgrf, function(index, val) {
+					if (val.length > 0) {
+						rgxkw = new RegExp('\\b'+val+'\\b', 'ig');
+						snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+val+'</strong>');
+					}
+				});
+				$('#modal-texti').html(snewscontent);
 			} else {
 				mediatype = 'image';
 				$('#mediactnti').html('<a href="'+snewsurl+'" target="_blank">'+snewstitle+'</a><br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="/assets/imgs/noimage.png"></a>');
 
-				rgxkw = new RegExp('\\b'+snewsgrf+'\\b', 'ig');
-				fullnewtext = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+snewsgrf+'</strong>');
-				$('#modal-texti').html(fullnewtext);
+				$.each(snewsgrf, function(index, val) {
+					if (val.length > 0) {
+						rgxkw = new RegExp('\\b'+val+'\\b', 'ig');
+						snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+val+'</strong>');
+					}
+				});
+				$('#modal-texti').html(snewscontent);
 			}
 
 			$('#modalwsinglenews').fadeOut('fast', function() {
@@ -363,8 +449,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			name: 'brasil',
 			defaultArea: {
 				attrs: {
-					stroke: "#fff",
-					"stroke-width": 1
+					stroke: "##FFFFFF",
+					"stroke-width": 2
 				},
 					attrsHover: {
 					"stroke-width": 2
@@ -384,7 +470,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			],
 			type: 'bar',
 			names: {
-				'0': 'Não definido',
+				'0': 'Neutro',
 				'1': 'Negativo',
 				'2': 'Neutro',
 				'3': 'Positivo'
@@ -571,34 +657,35 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 									label: "Nenhum"
 								},
 								{
-									max: 100,
+									min: 1,
+									max: 10,
 									attrs: {
 										fill: "#66D1E7"
 									},
-									label: "Menos que 100"
+									label: "Menos que 10"
 								},
 								{
-									min: 100,
-									max: 300,
+									min: 11,
+									max: 20,
 									attrs: {
 										fill: "#4DBCD3"
 									},
-									label: "Entre 100 e 200"
+									label: "Entre 11 e 20"
 								},
 								{
-									min: 300,
-									max: 500,
+									min: 21,
+									max: 30,
 									attrs: {
 										fill: "#3291AA"
 									},
-									label: "Entre 300 e 400"
+									label: "Entre 21 e 30"
 								},
 								{
-									min: 500,
+									min: 31,
 									attrs: {
 										fill: "#1A727D"
 									},
-									label: "Mais de 500"
+									label: "Acima de 31"
 								}
 							]
 						}

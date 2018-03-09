@@ -200,8 +200,10 @@ class Home_client_model extends CI_Model {
 		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria,
 								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
-								pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar
+								pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar,
+								ent.Motivacao, ent.Avaliacao
 								FROM Noticias nt
+								JOIN EmpresaNoticia ent ON  ent.idNoticia = nt.Id
 								JOIN NoticiaPalavraChave npc ON npc.idNoticia = nt.Id
 								JOIN PalavraChave pc ON pc.Id = npc.idPalavraChave
 								JOIN Assunto ass ON ass.Id = pc.idAssunto
