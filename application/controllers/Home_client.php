@@ -298,7 +298,6 @@ class Home_client extends CI_Controller {
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
-
 	public function keyword_news($keywordid, $startdate = null, $enddate = null) {
 		$data['data'] = $this->home_client_model->get_client_keyword_news($keywordid, $startdate, $enddate);
 		$data['data'] = $this->htmlchars_decoder($data['data']);

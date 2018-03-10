@@ -46,6 +46,7 @@
 			{"searchable": false, "width": "10%", "targets": 7},
 			{"searchable": false, "width": "10%", "targets": 8}
 		],
+		"responsive": true,
 		"processing": true,
 		"rowId": "id",
 		"language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"},
@@ -53,7 +54,7 @@
 			this.api().columns(2).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_2" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_2" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -64,7 +65,7 @@
 			this.api().columns(3).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_3" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_3" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -75,7 +76,7 @@
 			this.api().columns(4).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_4" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_4" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -86,7 +87,7 @@
 			this.api().columns(5).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_5" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_5" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -253,22 +254,32 @@
 			snewsve = tndata.Veiculo;
 			snewseid = tndata.idEditoria;
 			snewsed = tndata.Editoria;
-
 			snewsimg = tndata.Imagem;
-			snewsidpchave = tndata.IdPChave;
+
+			console.log(tndata.PChaves);
 			var snewspchave = '';
+			arrcount = tndata.PChaves.length;
+			pcount = 1;
 			$.each(tndata.PChaves, function(index, val) {
-				snewspchave += val.PChave+' | ';
+				if (pcount == arrcount){
+					snewspchave += val.PChave;
+				} else {
+					snewspchave += val.PChave+' | ';
+				}
+				pcount += 1;
 			});
+
 			snewsidass = tndata.IdAssunto;
 			snewsass = tndata.Assunto;
+
 			snewsmot = tndata.Motivacao;
 			var snewsmotstr;
 			snewsava = tndata.Avaliacao;
 			var snewsavastr;
 
-			snewsaud = parseInt(tndata.Audiencia);
-			snewseqv = tndata.Equivalencia;
+			snewseqv = Number(tndata.Equivalencia).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+			snewseqv = 'R$ '+snewseqv;
+			snewsaud = Number(tndata.Audiencia).toLocaleString("pt-BR");
 
 			switch(snewsmot) {
 				case '0':
@@ -299,9 +310,10 @@
 			$('#modaltitleed').html('<strong>Editoria:</strong> '+snewsed);
 			$('#modaltitlevm').html('<strong>Motivação:</strong> '+snewsmotstr);
 			$('#modaltitleva').html('<strong>Avaliação:</strong> '+snewsavastr);
-			$('#modaltitlevq').html('<strong>Audiência:</strong> '+snewsaud.toFixed(2));
-			$('#modaltitlevv').html('<strong>Equivalência:</strong> '+snewseqv.replace('.',','));
+			$('#modaltitlevq').html('<strong>Audiência:</strong> '+snewsaud);
+			$('#modaltitlevv').html('<strong>Equivalência:</strong> '+snewseqv);
 			$('#modaltitlevk').html('<strong>Palavra-chave:</strong> '+snewspchave);
+			$('#btnurl').attr('href', snewsurl);
 
 			multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
 			rgxvideo = new RegExp('(.mp4)', 'ig');
@@ -322,7 +334,7 @@
 				$('#modal-textv').html(snewscontent);
 			} else if (rgximage.test(snewsimg)) {
 				mediatype = 'image';
-				$('#mediactnti').html('<a href="'+snewsurl+'" target="_blank">'+snewstitle+'</a><br><small>'+snewssubtitle+'</small>');
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'"></a>');
 
@@ -331,6 +343,7 @@
 					snewsgrf = snewsgrf.split(';');
 					$.each(snewsgrf, function(index, gval) {
 						if (gval.length > 0) {
+							console.log('Grifar: '+gval);
 							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
 							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
 						}
@@ -339,7 +352,7 @@
 				$('#modal-texti').html(snewscontent);
 			} else if (rgximageaws.test(snewsurl)) {
 				mediatype = 'image';
-				$('#mediactnti').html('<a href="'+snewsurl+'" target="_blank">'+snewstitle+'</a><br><small>'+snewssubtitle+'</small>');
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+snewsurl+'"></a>');
 
@@ -348,7 +361,7 @@
 					snewsgrf = snewsgrf.split(';');
 					$.each(snewsgrf, function(index, gval) {
 						if (gval.length > 0) {
-							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'g');
 							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
 						}
 					});
@@ -356,7 +369,7 @@
 				$('#modal-texti').html(snewscontent);
 			} else {
 				mediatype = 'image';
-				$('#mediactnti').html('<a href="'+snewsurl+'" target="_blank">'+snewstitle+'</a><br><small>'+snewssubtitle+'</small>');
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="/assets/imgs/noimage.png"></a>');
 
@@ -391,7 +404,7 @@
 
 			if (opttype == 'keyword') {
 				keywid = $(this).attr('id');
-				console.log(this);
+				// console.log(this);
 				if($(this).is(':selected')) {
 					if(subkeywordsarr.indexOf(keywid) == -1) {
 						subkeywordsarr.push(keywid);
@@ -828,7 +841,14 @@
 				vtitle = val.Titulo;
 				if (vtitle.length > 50) {
 					vtitle = vtitle.slice(0, 47) + '...';
+				} else if (vtitle.length <= 1) {
+					vtitle = 'Sem Título';
 				}
+
+				vedvalor = Number(val.EdValor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+				vedvalor = 'R$ '+vedvalor;
+
+				vaudiencia = Number(val.EdAudiencia).toLocaleString("pt-BR", {minimumFractionDigits: 0});
 
 				var rowNode = tablenews.row.add(
 					[
@@ -839,8 +859,8 @@
 						val.Editoria,
 						val.PalavraChave,
 						vtitle,
-						val.EdValor,
-						val.EdAudiencia
+						vedvalor,
+						vaudiencia
 					]
 				).draw(false).node();
 				$(rowNode).attr('id', val.Id);
@@ -854,6 +874,14 @@
 
 	function remove_keyword_news(keywordid) {
 		drows = tablenews.rows('tr[data-keywordid='+keywordid+']');
+		$('#selpckr_2').html('<option val=""></option>');
+		tvarr = [];
+		$('#selpckr_3').html('<option val=""></option>');
+		varr = [];
+		$('#selpckr_4').html('<option val=""></option>');
+		earr = [];
+		$('#selpckr_5').html('<option val=""></option>');
+		pcarr = [];
 		drows.remove().draw();
 	};
 

@@ -248,7 +248,7 @@ class Home_client_model extends CI_Model {
 								nt.idVeiculo, ve.Nome as Veiculo,
 								nt.idEditoria, ed.Nome as Editoria,
 								ntp.idPalavraChave, plc.Nome as PalavraChave,
-								CONCAT('R$ ', CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END) as EdValor,
+								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
 								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia
 								FROM Noticias nt
 								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia

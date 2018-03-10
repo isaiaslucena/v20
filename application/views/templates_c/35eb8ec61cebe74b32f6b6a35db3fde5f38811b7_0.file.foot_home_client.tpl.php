@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-09 15:55:06
+/* Smarty version 3.1.30, created on 2018-03-09 23:40:42
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa2d88a1d2bd8_30196698',
+  'unifunc' => 'content_5aa345aacde8b2_96315803',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1520620858,
+      1 => 1520649631,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5aa2d88a1d2bd8_30196698 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa345aacde8b2_96315803 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_7602360055aa2d88a1ac8c1_73981426', 'foot');
-$_smarty_tpl->inheritance->endChild();
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11201920415aa345aacacfa1_97902591', 'foot');
+?>
+
+<?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_7602360055aa2d88a1ac8c1_73981426 extends Smarty_Internal_Block
+class Block_11201920415aa345aacacfa1_97902591 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -86,6 +88,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			{"searchable": false, "width": "10%", "targets": 7},
 			{"searchable": false, "width": "10%", "targets": 8}
 		],
+		"responsive": true,
 		"processing": true,
 		"rowId": "id",
 		"language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"},
@@ -93,7 +96,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			this.api().columns(2).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_2" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_2" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -104,7 +107,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			this.api().columns(3).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_3" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_3" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -115,7 +118,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			this.api().columns(4).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_4" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_4" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -126,7 +129,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			this.api().columns(5).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_5" class="filter selectpicker" data-windowPadding="1" data-size="4" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_5" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -293,22 +296,32 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			snewsve = tndata.Veiculo;
 			snewseid = tndata.idEditoria;
 			snewsed = tndata.Editoria;
-
 			snewsimg = tndata.Imagem;
-			snewsidpchave = tndata.IdPChave;
+
+			console.log(tndata.PChaves);
 			var snewspchave = '';
+			arrcount = tndata.PChaves.length;
+			pcount = 1;
 			$.each(tndata.PChaves, function(index, val) {
-				snewspchave += val.PChave+' | ';
+				if (pcount == arrcount){
+					snewspchave += val.PChave;
+				} else {
+					snewspchave += val.PChave+' | ';
+				}
+				pcount += 1;
 			});
+
 			snewsidass = tndata.IdAssunto;
 			snewsass = tndata.Assunto;
+
 			snewsmot = tndata.Motivacao;
 			var snewsmotstr;
 			snewsava = tndata.Avaliacao;
 			var snewsavastr;
 
-			snewsaud = parseInt(tndata.Audiencia);
-			snewseqv = tndata.Equivalencia;
+			snewseqv = Number(tndata.Equivalencia).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+			snewseqv = 'R$ '+snewseqv;
+			snewsaud = Number(tndata.Audiencia).toLocaleString("pt-BR");
 
 			switch(snewsmot) {
 				case '0':
@@ -339,9 +352,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			$('#modaltitleed').html('<strong>Editoria:</strong> '+snewsed);
 			$('#modaltitlevm').html('<strong>Motivação:</strong> '+snewsmotstr);
 			$('#modaltitleva').html('<strong>Avaliação:</strong> '+snewsavastr);
-			$('#modaltitlevq').html('<strong>Audiência:</strong> '+snewsaud.toFixed(2));
-			$('#modaltitlevv').html('<strong>Equivalência:</strong> '+snewseqv.replace('.',','));
+			$('#modaltitlevq').html('<strong>Audiência:</strong> '+snewsaud);
+			$('#modaltitlevv').html('<strong>Equivalência:</strong> '+snewseqv);
 			$('#modaltitlevk').html('<strong>Palavra-chave:</strong> '+snewspchave);
+			$('#btnurl').attr('href', snewsurl);
 
 			multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
 			rgxvideo = new RegExp('(.mp4)', 'ig');
@@ -362,7 +376,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#modal-textv').html(snewscontent);
 			} else if (rgximage.test(snewsimg)) {
 				mediatype = 'image';
-				$('#mediactnti').html('<a href="'+snewsurl+'" target="_blank">'+snewstitle+'</a><br><small>'+snewssubtitle+'</small>');
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'"></a>');
 
@@ -371,6 +385,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					snewsgrf = snewsgrf.split(';');
 					$.each(snewsgrf, function(index, gval) {
 						if (gval.length > 0) {
+							console.log('Grifar: '+gval);
 							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
 							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
 						}
@@ -379,7 +394,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#modal-texti').html(snewscontent);
 			} else if (rgximageaws.test(snewsurl)) {
 				mediatype = 'image';
-				$('#mediactnti').html('<a href="'+snewsurl+'" target="_blank">'+snewstitle+'</a><br><small>'+snewssubtitle+'</small>');
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+snewsurl+'"></a>');
 
@@ -388,7 +403,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					snewsgrf = snewsgrf.split(';');
 					$.each(snewsgrf, function(index, gval) {
 						if (gval.length > 0) {
-							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'g');
 							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
 						}
 					});
@@ -396,7 +411,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#modal-texti').html(snewscontent);
 			} else {
 				mediatype = 'image';
-				$('#mediactnti').html('<a href="'+snewsurl+'" target="_blank">'+snewstitle+'</a><br><small>'+snewssubtitle+'</small>');
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="/assets/imgs/noimage.png"></a>');
 
@@ -431,7 +446,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 			if (opttype == 'keyword') {
 				keywid = $(this).attr('id');
-				console.log(this);
+				// console.log(this);
 				if($(this).is(':selected')) {
 					if(subkeywordsarr.indexOf(keywid) == -1) {
 						subkeywordsarr.push(keywid);
@@ -868,7 +883,14 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				vtitle = val.Titulo;
 				if (vtitle.length > 50) {
 					vtitle = vtitle.slice(0, 47) + '...';
+				} else if (vtitle.length <= 1) {
+					vtitle = 'Sem Título';
 				}
+
+				vedvalor = Number(val.EdValor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+				vedvalor = 'R$ '+vedvalor;
+
+				vaudiencia = Number(val.EdAudiencia).toLocaleString("pt-BR", {minimumFractionDigits: 0});
 
 				var rowNode = tablenews.row.add(
 					[
@@ -879,8 +901,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						val.Editoria,
 						val.PalavraChave,
 						vtitle,
-						val.EdValor,
-						val.EdAudiencia
+						vedvalor,
+						vaudiencia
 					]
 				).draw(false).node();
 				$(rowNode).attr('id', val.Id);
@@ -894,6 +916,14 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 	function remove_keyword_news(keywordid) {
 		drows = tablenews.rows('tr[data-keywordid='+keywordid+']');
+		$('#selpckr_2').html('<option val=""></option>');
+		tvarr = [];
+		$('#selpckr_3').html('<option val=""></option>');
+		varr = [];
+		$('#selpckr_4').html('<option val=""></option>');
+		earr = [];
+		$('#selpckr_5').html('<option val=""></option>');
+		pcarr = [];
 		drows.remove().draw();
 	};
 
