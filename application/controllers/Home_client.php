@@ -261,8 +261,8 @@ class Home_client extends CI_Controller {
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
-	public function single_news($idnews) {
-		$datan = $this->home_client_model->get_single_news($idnews);
+	public function single_news($idnews, $idclient) {
+		$datan = $this->home_client_model->get_single_news($idnews, $idclient);
 		$datan = $this->htmlchars_decoder($datan);
 		$datan = $this->tags_stripper($datan);
 		$datan = $this->utf8_encoder($datan);
@@ -298,8 +298,8 @@ class Home_client extends CI_Controller {
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
-	public function keyword_news($keywordid, $startdate = null, $enddate = null) {
-		$data['data'] = $this->home_client_model->get_client_keyword_news($keywordid, $startdate, $enddate);
+	public function keyword_news($keywordid, $clientid, $startdate = null, $enddate = null) {
+		$data['data'] = $this->home_client_model->get_client_keyword_news($keywordid, $clientid, $startdate, $enddate);
 		$data['data'] = $this->htmlchars_decoder($data['data']);
 		// $data = $this->tags_stripper($data);
 		$data['data'] = $this->utf8_encoder($data['data']);

@@ -214,7 +214,7 @@ class Home_client_model extends CI_Model {
 		return $this->db->query($sqlquery)->result_array();
 	}
 
-	public function get_single_news($newsid) {
+	public function get_single_news($newsid, $idclient) {
 		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria,
 								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
@@ -232,11 +232,11 @@ class Home_client_model extends CI_Model {
 								JOIN Editorias ed ON nt.idEditoria = ed.Id
 								JOIN Releva re ON ve.TiragemSemana = re.aud_ts
 								LEFT JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
-								WHERE nt.Id = $newsid";
+								WHERE nt.Id = $newsid AND ent.IdEmpresa = $idclient";
 		return $this->db->query($sqlquery)->result_array();
 	}
 
-	public function get_client_keyword_news($keywordid, $startdate = null, $enddate = null) {
+	public function get_client_keyword_news($keywordid, $clientid, $startdate = null, $enddate = null) {
 		if (is_null($startdate)) {
 			$startdate = date('Y-m-d');
 			$enddate = date('Y-m-d');
@@ -261,7 +261,7 @@ class Home_client_model extends CI_Model {
 								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
 								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
 								WHERE
-								ntp.idPalavraChave = $keywordid AND
+								ntp.idPalavraChave = $keywordid AND ent.IdEmpresa = $clientid AND
 								nt.Data >= '$startdate' AND nt.Data <= '$enddate'
 								ORDER BY nt.Data DESC";
 		return $this->db->query($sqlquery)->result_array();
