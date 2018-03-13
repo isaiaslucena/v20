@@ -522,14 +522,14 @@ class Home_client_model extends CI_Model {
 			$enddate = date('Y-m-d');
 		}
 
-		$sqlquery =	"SELECT est.Id, est.nome as Estado, COUNT(nt.Id) as QNoticias
+		$sqlquery =	"SELECT est.Id, est.uf, est.nome as Estado, COUNT(nt.Id) as QNoticias
 								FROM Noticias nt
 								JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id
 								JOIN Veiculo ve ON ve.id = nt.idVeiculo
 								JOIN dados_estados est ON est.id = ve.idEstado
 								WHERE ent.IdEmpresa = $idclient AND
 								nt.Data >= '$startdate' AND nt.Data <= '$enddate'
-								GROUP BY est.id, est.nome
+								GROUP BY est.id, est.uf, est.nome
 								ORDER BY est.nome ASC";
 		return $this->db->query($sqlquery)->result_array();
 	}

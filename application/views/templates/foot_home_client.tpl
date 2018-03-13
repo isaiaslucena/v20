@@ -47,6 +47,7 @@
 			{'searchable': false, 'width': '10%', 'targets': 8}
 		],
 		'responsive': true,
+		'scrollX': false,
 		'processing': true,
 		'rowId': 'id',
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
@@ -317,7 +318,6 @@
 			$('#modaltitleva').html('<strong>Avaliação:</strong> '+snewsavastr);
 			$('#modaltitlevq').html('<strong>Audiência:</strong> '+snewsaud);
 			$('#modaltitlevv').html('<strong>Equivalência:</strong> '+snewseqv);
-			$('#modaltitlevk').html('<strong>Palavra-chave:</strong> '+snewspchave);
 			$('#btnurl').attr('href', snewsurl);
 
 			multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
@@ -327,18 +327,21 @@
 			rgximageaws = new RegExp('s3.amazonaws.com', 'ig');
 			if (rgxvideo.test(snewsimg)) {
 				mediatype = 'video';
+				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime)
 				$('#mediactnv').html('<a class="thumbnail"><video id="mmediael" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video></a>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgxaudio.test(snewsimg)) {
 				mediatype = 'audio';
+				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime);
 				$('#mediactnv').html('<a class="thumbnail"><audio id="mmediael" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio></a>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgximage.test(snewsimg)) {
 				mediatype = 'image';
+				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'"></a>');
@@ -357,6 +360,7 @@
 				$('#modal-texti').html(snewscontent);
 			} else if (rgximageaws.test(snewsurl)) {
 				mediatype = 'image';
+				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+snewsurl+'"></a>');
@@ -374,6 +378,7 @@
 				$('#modal-texti').html(snewscontent);
 			} else {
 				mediatype = 'image';
+				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
 				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="/assets/imgs/noimage.png"></a>');
@@ -622,8 +627,17 @@
 		mapareas = {};
 		$.get('/home_client/count_states_news/'+clientid+'/'+startdate+'/'+enddate,
 			function(esdata) {
+				console.log(esdata);
 				esdata.map(function(obj, index){
 					mapareas[obj.Id] = {
+						text: {
+							content: obj.uf,
+							attrs: {
+								'position': 'right',
+								'font-size': 30,
+								'fill': '#202020'
+							}
+						},
 						value: obj.QNoticias,
 						tooltip: {content: '<span style="font-weight:bold;">'+obj.Estado+'</span><br />Matérias: '+obj.QNoticias}
 					}
@@ -634,13 +648,14 @@
 						name: 'brasil',
 						defaultArea: {
 							attrs: {
-								stroke: "#FFFFFF",
-								"stroke-width": 2
+								fill: '#CFCFCF',
+								stroke: '#FFFFFF',
+								'stroke-width': 2
 							},
 								attrsHover: {
-								fill: "#CA2A00",
-								animDuration: 100,
-								"stroke-width": 2
+								fill: '#DA7910',
+								animDuration: 50,
+								'stroke-width': 2
 							}
 						}
 					},
@@ -860,6 +875,8 @@
 					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'+val.Titulo+'">'+vtitle+'</a>'
 				} else if (vtitle.length <= 1) {
 					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">Sem Título</a>';
+				} else {
+					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';
 				}
 
 

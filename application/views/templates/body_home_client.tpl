@@ -182,7 +182,7 @@
 		</div>
 
 		<div class="modal fade" id="showsinglenews" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg" style="margin-top: 15px">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<div id="modaltitlerow" class="row">
@@ -205,13 +205,13 @@
 						</div>
 					</div>
 					<div class="modal-body">
-						<p id="modaltitlevk" class="text-primary pull-right"></p>
 						<div id="modalcsinglenewsi" class="row" style="display: none">
+							<p id="modaltitlevki" class="text-primary pull-right"></p>
 							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4"></div>
 							<div class="col-lg-8">
 								<p id="datemediactni" class="text-muted pull-right"></p>
 								<h3 id="mediactnti"></h3>
-								<p id="modal-texti" class="text-justify"></p>
+								<p id="modal-texti" class="text-justify" style="max-height: 280px; overflow-y: auto"></p>
 							</div>
 						</div>
 
@@ -226,6 +226,7 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12 center-block">
+									<p id="modaltitlevkv" class="text-primary pull-right"></p>
 									<h3 id="mediactntv"></h3>
 									<p id="modal-textv" class="text-justify"></p>
 								</div>
