@@ -143,7 +143,7 @@ class Home_client_model extends CI_Model {
 								pc.Id AS IdPChave, pc.Nome AS PChave, pc.TermoBusca, pc.Grifar, p.PQNoticias
 								FROM Assunto ast
 								JOIN PalavraChave pc ON ast.Id = pc.idAssunto
-								JOIN
+								LEFT JOIN
 									(SELECT ast.Id, COUNT(nt.Id) as AQNoticias
 									FROM Noticias nt
 									JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
@@ -153,7 +153,7 @@ class Home_client_model extends CI_Model {
 									pc.Ativo = 1 AND
 									nt.Data >= '$startdate' AND nt.Data <= '$enddate'
 									GROUP BY ast.Id) s ON s.Id = ast.Id
-								JOIN
+								LEFT JOIN
 									(SELECT pc.Id, COUNT(nt.Id) as PQNoticias
 									FROM Noticias nt
 									JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia

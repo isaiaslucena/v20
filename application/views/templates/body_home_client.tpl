@@ -186,7 +186,7 @@
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<div id="modaltitlerow" class="row">
-							<div class="col-lg-3 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
@@ -198,7 +198,7 @@
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>
-							<div id="modaltitlebtn" class="col-lg-3">
+							<div id="modaltitlebtn" class="col-lg-2">
 								<a id="btnmail" class="btn btn-xs btn-block btn-primary">Enviar por e-mail</a>
 								<a id="btnurl" class="btn btn-xs btn-block btn-primary" target="_blank">Abrir página</a>
 							</div>
@@ -217,16 +217,12 @@
 
 						<div id="modalcsinglenewsv" style="display: none">
 							<div class="row">
-								<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12"></div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12 col-md-12 col-lg-12">
-									<p id="datemediactnv" class="text-muted pull-right"></p>
-								</div>
+									<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12"></div>
 							</div>
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12 center-block">
-									<p id="modaltitlevkv" class="text-primary pull-right"></p>
+									<p id="datemediactnv" class="text-muted"></p>
+									<p id="modaltitlevkv" class="text-primary"></p>
 									<h3 id="mediactntv"></h3>
 									<p id="modal-textv" class="text-justify"></p>
 								</div>

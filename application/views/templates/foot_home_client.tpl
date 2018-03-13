@@ -14,7 +14,7 @@
 	var clientselb = (clientsel == 'true');
 
 	{literal}
-	var tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
+	var cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [];
@@ -186,6 +186,12 @@
 
 		cdatebtn.ladda('start');
 
+		if (clientselid == 0) {
+			cliid = cid;
+		} else {
+			cliid = clientselid;
+		}
+
 		fdpstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 		fdpenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
@@ -194,7 +200,7 @@
 		count_states(cid, fdpstartdate, fdpenddate);
 		count_client(cid, fdpstartdate, fdpenddate);
 		get_subject_keywords(cid, fdpstartdate, fdpenddate, true);
-		add_keyword_news(subkeywordsarr[0], clientselid, fdpstartdate, fdpenddate, true);
+		add_keyword_news(subkeywordsarr[0], cliid, fdpstartdate, fdpenddate, true);
 	});
 
 	$('#showsinglenews').on('show.bs.modal', function(event) {
@@ -218,9 +224,12 @@
 		}
 	});
 
-	// $('#tablenews').on('click', 'tbody > tr', function (event) {
-	$(document).on('click', '.tooltipa', function(event) {
+	$('#tablenews').on('click', 'tbody > tr', function (event) {
 		// var trc = tablenews.row(this).node();
+		$(this).toggleClass('selected');
+	});
+
+	$(document).on('click', '.tooltipa', function(event) {
 		var trc = $(this);
 		var trnid = $(trc).attr('data-newsid');
 		var trkid = $(trc).attr('data-keywordid');
@@ -330,28 +339,28 @@
 				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime)
-				$('#mediactnv').html('<a class="thumbnail"><video id="mmediael" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video></a>');
+				$('#mediactnv').html('<video id="mmediael" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgxaudio.test(snewsimg)) {
 				mediatype = 'audio';
 				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime);
-				$('#mediactnv').html('<a class="thumbnail"><audio id="mmediael" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio></a>');
+				$('#mediactnv').html('<audio id="mmediael" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgximage.test(snewsimg)) {
 				mediatype = 'image';
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'"></a>');
+				$('#mediactni').html('<img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">');
 
 				$.each(tndata.PChaves, function(index, val) {
 					snewsgrf = val.Grifar.trim();
 					snewsgrf = snewsgrf.split(';');
 					$.each(snewsgrf, function(index, gval) {
 						if (gval.length > 0) {
-							console.log('Grifar: '+gval);
+							// console.log('Grifar: '+gval);
 							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
 							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
 						}
@@ -413,13 +422,19 @@
 			fopstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 			fopenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
+			if (clientselid == 0) {
+				cliid = cid;
+			} else {
+				cliid = clientselid;
+			}
+
 			if (opttype == 'keyword') {
 				keywid = $(this).attr('id');
 				// console.log(this);
 				if($(this).is(':selected')) {
 					if(subkeywordsarr.indexOf(keywid) == -1) {
 						subkeywordsarr.push(keywid);
-						add_keyword_news(keywid, clientselid, fopstartdate, fopenddate);
+						add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
 					}
 				} else {
 					subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
@@ -627,7 +642,7 @@
 		mapareas = {};
 		$.get('/home_client/count_states_news/'+clientid+'/'+startdate+'/'+enddate,
 			function(esdata) {
-				console.log(esdata);
+				// console.log(esdata);
 				esdata.map(function(obj, index){
 					mapareas[obj.Id] = {
 						text: {
@@ -756,6 +771,7 @@
 		$.get('/home_client/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
 			function(cdata, textStatus, xhr) {
 				subjectskeywords = cdata;
+				// console.log(subjectskeywords.length);
 
 				if (updatesubjects) {
 					$('#sublist .selectpicker').selectpicker('destroy');
@@ -784,6 +800,9 @@
 						keywordtb = kval.TermoBusca;
 						keywordgf = kval.Grifar;
 						keywordcount = kval.QNoticias;
+						if (keywordcount == null) {
+							keywordcount = 0;
+						}
 
 						html += '<option id="'+keywordid+'" data-type="keyword" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
 					});
@@ -844,6 +863,8 @@
 	function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false) {
 		$.get('/home_client/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
 		function(redata, textStatus, xhr) {
+			console.log(redata.length);
+
 			if (cleartable) {
 				tablenews.clear().draw();
 			}
@@ -879,7 +900,6 @@
 					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';
 				}
 
-
 				vedvalor = Number(val.EdValor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
 				vedvalor = 'R$ '+vedvalor;
 
@@ -898,7 +918,7 @@
 						vaudiencia
 					]
 				).draw(false).node();
-				// $(rowNode).attr('id', 'tr-'+val.Id);
+				$(rowNode).attr('id', 'tr_'+val.Id);
 				// $(rowNode).attr('data-clientid', clientid);
 				$(rowNode).attr('data-keywordid', keywordid);
 			});

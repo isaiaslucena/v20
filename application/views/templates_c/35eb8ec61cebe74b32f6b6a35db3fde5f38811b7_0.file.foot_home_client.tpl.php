@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-12 19:00:49
+/* Smarty version 3.1.30, created on 2018-03-13 15:30:50
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa6f891766743_67808826',
+  'unifunc' => 'content_5aa818da2b2db1_83080962',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1520892047,
+      1 => 1520965846,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5aa6f891766743_67808826 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa818da2b2db1_83080962 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9551697515aa6f8917442d0_63947281', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13882145045aa818da2880b7_33722978', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_9551697515aa6f8917442d0_63947281 extends Smarty_Internal_Block
+class Block_13882145045aa818da2880b7_33722978 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -56,7 +56,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	var clientselb = (clientsel == 'true');
 
 	
-	var tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
+	var cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [];
@@ -228,6 +228,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 		cdatebtn.ladda('start');
 
+		if (clientselid == 0) {
+			cliid = cid;
+		} else {
+			cliid = clientselid;
+		}
+
 		fdpstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 		fdpenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
@@ -236,7 +242,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		count_states(cid, fdpstartdate, fdpenddate);
 		count_client(cid, fdpstartdate, fdpenddate);
 		get_subject_keywords(cid, fdpstartdate, fdpenddate, true);
-		add_keyword_news(subkeywordsarr[0], clientselid, fdpstartdate, fdpenddate, true);
+		add_keyword_news(subkeywordsarr[0], cliid, fdpstartdate, fdpenddate, true);
 	});
 
 	$('#showsinglenews').on('show.bs.modal', function(event) {
@@ -260,9 +266,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		}
 	});
 
-	// $('#tablenews').on('click', 'tbody > tr', function (event) {
-	$(document).on('click', '.tooltipa', function(event) {
+	$('#tablenews').on('click', 'tbody > tr', function (event) {
 		// var trc = tablenews.row(this).node();
+		$(this).toggleClass('selected');
+	});
+
+	$(document).on('click', '.tooltipa', function(event) {
 		var trc = $(this);
 		var trnid = $(trc).attr('data-newsid');
 		var trkid = $(trc).attr('data-keywordid');
@@ -372,28 +381,28 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime)
-				$('#mediactnv').html('<a class="thumbnail"><video id="mmediael" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video></a>');
+				$('#mediactnv').html('<video id="mmediael" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgxaudio.test(snewsimg)) {
 				mediatype = 'audio';
 				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime);
-				$('#mediactnv').html('<a class="thumbnail"><audio id="mmediael" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio></a>');
+				$('#mediactnv').html('<audio id="mmediael" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgximage.test(snewsimg)) {
 				mediatype = 'image';
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'"></a>');
+				$('#mediactni').html('<img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">');
 
 				$.each(tndata.PChaves, function(index, val) {
 					snewsgrf = val.Grifar.trim();
 					snewsgrf = snewsgrf.split(';');
 					$.each(snewsgrf, function(index, gval) {
 						if (gval.length > 0) {
-							console.log('Grifar: '+gval);
+							// console.log('Grifar: '+gval);
 							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
 							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
 						}
@@ -455,13 +464,19 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			fopstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 			fopenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
+			if (clientselid == 0) {
+				cliid = cid;
+			} else {
+				cliid = clientselid;
+			}
+
 			if (opttype == 'keyword') {
 				keywid = $(this).attr('id');
 				// console.log(this);
 				if($(this).is(':selected')) {
 					if(subkeywordsarr.indexOf(keywid) == -1) {
 						subkeywordsarr.push(keywid);
-						add_keyword_news(keywid, clientselid, fopstartdate, fopenddate);
+						add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
 					}
 				} else {
 					subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
@@ -669,7 +684,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		mapareas = {};
 		$.get('/home_client/count_states_news/'+clientid+'/'+startdate+'/'+enddate,
 			function(esdata) {
-				console.log(esdata);
+				// console.log(esdata);
 				esdata.map(function(obj, index){
 					mapareas[obj.Id] = {
 						text: {
@@ -798,6 +813,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		$.get('/home_client/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
 			function(cdata, textStatus, xhr) {
 				subjectskeywords = cdata;
+				// console.log(subjectskeywords.length);
 
 				if (updatesubjects) {
 					$('#sublist .selectpicker').selectpicker('destroy');
@@ -826,6 +842,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						keywordtb = kval.TermoBusca;
 						keywordgf = kval.Grifar;
 						keywordcount = kval.QNoticias;
+						if (keywordcount == null) {
+							keywordcount = 0;
+						}
 
 						html += '<option id="'+keywordid+'" data-type="keyword" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
 					});
@@ -886,6 +905,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false) {
 		$.get('/home_client/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
 		function(redata, textStatus, xhr) {
+			console.log(redata.length);
+
 			if (cleartable) {
 				tablenews.clear().draw();
 			}
@@ -921,7 +942,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';
 				}
 
-
 				vedvalor = Number(val.EdValor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
 				vedvalor = 'R$ '+vedvalor;
 
@@ -940,7 +960,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						vaudiencia
 					]
 				).draw(false).node();
-				// $(rowNode).attr('id', 'tr-'+val.Id);
+				$(rowNode).attr('id', 'tr_'+val.Id);
 				// $(rowNode).attr('data-clientid', clientid);
 				$(rowNode).attr('data-keywordid', keywordid);
 			});

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-12 17:18:20
+/* Smarty version 3.1.30, created on 2018-03-13 10:38:05
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa6e08c21c467_37971282',
+  'unifunc' => 'content_5aa7d43d161b49_17375521',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1520885898,
+      1 => 1520948191,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aa6e08c21c467_37971282 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa7d43d161b49_17375521 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2474156435aa6e08c20d440_33120236', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5189976485aa7d43d154e75_02919376', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_2474156435aa6e08c20d440_33120236 extends Smarty_Internal_Block
+class Block_5189976485aa7d43d154e75_02919376 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -234,7 +234,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<div id="modaltitlerow" class="row">
-							<div class="col-lg-3 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
@@ -246,7 +246,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>
-							<div id="modaltitlebtn" class="col-lg-3">
+							<div id="modaltitlebtn" class="col-lg-2">
 								<a id="btnmail" class="btn btn-xs btn-block btn-primary">Enviar por e-mail</a>
 								<a id="btnurl" class="btn btn-xs btn-block btn-primary" target="_blank">Abrir página</a>
 							</div>
@@ -265,16 +265,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 						<div id="modalcsinglenewsv" style="display: none">
 							<div class="row">
-								<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12"></div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12 col-md-12 col-lg-12">
-									<p id="datemediactnv" class="text-muted pull-right"></p>
-								</div>
+									<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12"></div>
 							</div>
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12 center-block">
-									<p id="modaltitlevkv" class="text-primary pull-right"></p>
+									<p id="datemediactnv" class="text-muted"></p>
+									<p id="modaltitlevkv" class="text-primary"></p>
 									<h3 id="mediactntv"></h3>
 									<p id="modal-textv" class="text-justify"></p>
 								</div>
