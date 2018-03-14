@@ -243,4 +243,19 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="modal fade" id="advancedsearch" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg" style="margin-top: 15px">
+				<div class="modal-content">
+					<div class="modal-header text-center" style="padding: 15px">
+						
+					</div>
+					<div class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 {/block}

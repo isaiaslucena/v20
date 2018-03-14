@@ -563,6 +563,36 @@ class Home_client_model extends CI_Model {
 		return $this->db->query($sqlquery)->result_array();
 	}
 
+
+	public function get_news_export($idclient, $startdate, $enddate) {
+		if (is_null($startdate)) {
+			$startdate = date('Y-m-d');
+			$enddate = date('Y-m-d');
+		}
+
+		$sqlquery = 	"SELECT TOP(20)
+									nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,
+									tve.Nome as TipodeVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria, ass.Nome as Assunto, plc.Nome as PalavraChave,
+									ed.Formato, ve.TiragemSemana as Tier, nim.MarcarW, nim.MarcarH, nim.Imagem,
+									CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as Audiencia,
+									CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as Equivalencia
+									FROM Noticias nt
+									INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+									INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+									INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+									INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+									INNER JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+									WHERE
+									ntp.idPalavraChave IN (SELECT pc.Id FROM Assunto ast JOIN PalavraChave pc ON pc.idAssunto = ast.Id WHERE ast.IdEmpresa = $idclient) AND
+									nt.Data >= '$startdate' AND nt.Data <= '$enddate'
+									ORDER BY nt.Id ASC";
+		return $this->db->query($sqlquery)->result_array();
+	}
 }
 
 ?>

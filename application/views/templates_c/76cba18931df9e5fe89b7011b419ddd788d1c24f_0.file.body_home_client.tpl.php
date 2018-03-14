@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 10:38:05
+/* Smarty version 3.1.30, created on 2018-03-13 16:22:45
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa7d43d161b49_17375521',
+  'unifunc' => 'content_5aa825059dad32_94022206',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1520948191,
+      1 => 1520968911,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aa7d43d161b49_17375521 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa825059dad32_94022206 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5189976485aa7d43d154e75_02919376', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19243350105aa825059cb012_49315133', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_5189976485aa7d43d154e75_02919376 extends Smarty_Internal_Block
+class Block_19243350105aa825059cb012_49315133 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -284,6 +284,21 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<h3 id="waitmsg">Carregando...</h3>
 							</div>
 						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="advancedsearch" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg" style="margin-top: 15px">
+				<div class="modal-content">
+					<div class="modal-header text-center" style="padding: 15px">
+						
+					</div>
+					<div class="modal-body">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

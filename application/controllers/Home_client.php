@@ -339,5 +339,66 @@ class Home_client extends CI_Controller {
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
+
+	public function news_export($clientid, $startdate = null, $enddate = null) {
+		$datan = $this->home_client_model->get_news_export($clientid, $startdate, $enddate);
+		$datan = $this->htmlchars_decoder($datan);
+		$datan = $this->tags_stripper($datan);
+		$datan = $this->utf8_encoder($datan);
+
+		$dataarr = array();
+		$ncount = 0;
+		foreach ($datan as $data) {
+			// $ncount++;
+			$dataarr[$ncount]['imgurl'] = 'http://www.multclipp.com.br/arquivos/noticias/'.str_replace('-', '/', $data['Data']).'/'.$data['Id'].'/'.$data['Imagem'];
+			// var_dump($imgurl);
+			// echo "<br>";
+
+			$dataarr[$ncount]['imgsize'] = getimagesize($dataarr[$ncount]['imgurl']);
+			// var_dump($imgsize);
+			// echo "<br>";
+
+
+			switch ($data['Formato']) {
+				case 1:
+					$dataarr[$ncount]['LarguraCM'] = 29.7;
+					$dataarr[$ncount]['AlturaCM'] = 52;
+					break;
+				case 2:
+					$dataarr[$ncount]['LarguraCM'] = 20;
+					$dataarr[$ncount]['AlturaCM'] = 26.5;
+				case 3;
+					$dataarr[$ncount]['LarguraCM'] = 26;
+					$dataarr[$ncount]['AlturaCM'] = 29.7;
+					break;
+				default:
+					$dataarr[$ncount]['LarguraCM'] = 0;
+					$dataarr[$ncount]['AlturaCM'] = 0;
+					break;
+			}
+
+			$dataarr[$ncount]['AlturaCMImagem'] = ($dataarr[$ncount]['AlturaCM'] * $data['MarcarH']) / $dataarr[$ncount]['imgsize'][1];
+			$dataarr[$ncount]['LarguraCMImagem'] = ($dataarr[$ncount]['LarguraCM'] * $data['MarcarW']) / $dataarr[$ncount]['imgsize'][0];
+			if ($dataarr[$ncount]['LarguraCMImagem'] < 6.5) {
+				$dataarr[$ncount]['NrColunas'] = 1;
+			} else {
+				$dataarr[$ncount]['NrColunas'] = $dataarr[$ncount]['LarguraCMImagem'] / 5;
+			}
+			$dataarr[$ncount]['Centimetragem'] = number_format(($dataarr[$ncount]['NrColunas'] * $dataarr[$ncount]['AlturaCMImagem']), 2);
+			// var_dump($Centimetragem);
+			// echo "<br>";
+
+			// if ($ncount == 12) {
+			// 	exit();
+			// }
+
+			$ncount++;
+		}
+
+		print_r($dataarr);
+
+		// header('Content-Type: application/json, charset=utf-8');
+		// print json_encode($datan, JSON_PRETTY_PRINT);
+	}
 }
 ?>
