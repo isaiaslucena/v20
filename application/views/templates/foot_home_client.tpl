@@ -18,6 +18,7 @@
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [];
+	var trurlclicked = false;
 
 	var d = new Date();
 	var day = d.getDate();
@@ -209,13 +210,15 @@
 
 	$('#showsinglenews').on('hidden.bs.modal', function(event) {
 		$('#wrapper').css('overflow-y', 'auto');
+		$('#mediactni').css('display', 'none');
 		$('#modalcsinglenewsi').css('display', 'none');
 		$('#modalcsinglenewsv').css('display', 'none');
 		$('#modaltitlerow').css('display', 'none');
+		$('#mediaimgload').css('display', 'block');
 		$('#modalwsinglenews').css('display', 'block');
 
 		if (mediatype == 'video' || mediatype == 'audio') {
-			var mmediadel = $('#mmediael');
+			var mmediadel = $('#mediaelvideo');
 			if (mmediadel[0].paused) {
 				// mmediadel[0].play();
 			} else {
@@ -225,6 +228,7 @@
 	});
 
 	$('#tablenews').on('click', 'tbody > tr', function (event) {
+		trurlclicked = true;
 		// var trc = tablenews.row(this).node();
 		$(this).toggleClass('selected');
 	});
@@ -234,6 +238,8 @@
 		var trnid = $(trc).attr('data-newsid');
 		var trkid = $(trc).attr('data-keywordid');
 		var trcid = $(trc).attr('data-clientid');
+
+		trc.parent().parent().removeClass('selected');
 
 		$('#showsinglenews').modal('show');
 		get_single_news(trnid, trcid, function(tndata) {
@@ -259,7 +265,25 @@
 			shour = ('0'+shour).slice(-2);
 			sminutes = sdatetime.getMinutes();
 			sminutes = ('0'+sminutes).slice(-2);
-			snewsfdatetime = sday+'/'+smonth+'/'+syear+' '+shour+':'+sminutes;
+
+			dtnow = new Date();
+			dtnday = dtnow.getDate();
+			dtnday = ('0'+dtnday).slice(-2);
+			dtnmonth = (dtnow.getMonth() + 1);
+			dtnmonth = ('0'+dtnmonth).slice(-2);
+			dtnnmonharr = dtnow.toString().split(' ');
+			dtnnmonth = dtnnmonharr[1];
+			dtnyear = dtnow.getFullYear();
+			dtnhour = dtnow.getHours();
+			dtnhour = ('0'+dtnhour).slice(-2);
+			dtnminutes = dtnow.getMinutes();
+			dtnminutes = ('0'+dtnminutes).slice(-2);
+
+			if (sdatetime > dtnow) {
+				snewsfdatetime = dtnday+'/'+dtnmonth+'/'+dtnyear+' '+dtnhour+':'+dtnminutes;
+			} else {
+				snewsfdatetime = sday+'/'+smonth+'/'+syear+' '+shour+':'+sminutes;
+			}
 
 			snewstitle = tndata.Titulo;
 			snewssubtitle = tndata.Subtitulo;
@@ -339,28 +363,27 @@
 				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime)
-				$('#mediactnv').html('<video id="mmediael" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></video>');
+				$('#mediactnv').html('<video id="mediaelvideo" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls style="width: 70%"></video>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgxaudio.test(snewsimg)) {
 				mediatype = 'audio';
 				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime);
-				$('#mediactnv').html('<audio id="mmediael" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio>');
+				$('#mediactnv').html('<audio id="mediaelvideo" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgximage.test(snewsimg)) {
 				mediatype = 'image';
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<img class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">');
+				$('#mediactni').html('<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">');
 
 				$.each(tndata.PChaves, function(index, val) {
 					snewsgrf = val.Grifar.trim();
 					snewsgrf = snewsgrf.split(';');
 					$.each(snewsgrf, function(index, gval) {
 						if (gval.length > 0) {
-							// console.log('Grifar: '+gval);
 							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
 							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
 						}
@@ -372,7 +395,7 @@
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="'+snewsurl+'"></a>');
+				$('#mediactni').html('<img id="mediaelimg" class="img-responsive" src="'+snewsurl+'">');
 
 				$.each(tndata.PChaves, function(index, val) {
 					snewsgrf = val.Grifar.trim();
@@ -390,7 +413,7 @@
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<a class="thumbnail"><img class="img-responsive" src="/assets/imgs/noimage.png"></a>');
+				$('#mediactni').html('<img id="mediaelimg" class="img-responsive" src="/assets/imgs/noimage.png">');
 
 				$.each(tndata.PChaves, function(index, val) {
 					snewsgrf = val.Grifar.trim();
@@ -403,6 +426,20 @@
 					});
 				});
 				$('#modal-texti').html(snewscontent);
+			}
+
+			if (mediatype == 'image') {
+				$('#mediaelimg').on('load', function() {
+					$('#mediaimgload').fadeOut('fast', function() {
+						$('#mediactni').fadeIn('fast');
+					});
+				});
+			} else {
+				$('#mediaelvideo').on('loadeddata', function() {
+					$('#mediavideoload').fadeOut('fast', function() {
+						$('#mediactnv').fadeIn('fast');
+					});
+				});
 			}
 
 			$('#modalwsinglenews').fadeOut('fast', function() {
@@ -562,6 +599,10 @@
 		get_subject_keywords(clientselid, todaydate, todaydate, true);
 	}
 
+	$('#btnasearch').click(function(event) {
+		$('#advancedsearch').modal('show');
+	});
+
 	function get_client_info(clientid, setselpicker) {
 		$.get('/home_client/client_info/'+clientid,
 		function(data, textStatus, xhr) {
@@ -648,8 +689,7 @@
 						text: {
 							content: obj.uf,
 							attrs: {
-								'position': 'right',
-								'font-size': 30,
+								'font-size': 20,
 								'fill': '#202020'
 							}
 						},
@@ -863,7 +903,7 @@
 	function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false) {
 		$.get('/home_client/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
 		function(redata, textStatus, xhr) {
-			console.log(redata.length);
+			// console.log(redata.length);
 
 			if (cleartable) {
 				tablenews.clear().draw();
@@ -890,11 +930,32 @@
 				vminutes = vdatetime.getMinutes();
 				vminutes = ('0'+vminutes).slice(-2)
 
+				vdatetimenow = new Date();
+				vnday = vdatetimenow.getDate();
+				vnday = ('0'+vnday).slice(-2);
+				vnnmonth = (vdatetimenow.getMonth() + 1);
+				vnnmonth = ('0'+vnnmonth).slice(-2);
+				vnnmonharr = vdatetimenow.toString().split(' ');
+				vnnmonth = vnnmonharr[1];
+				vnyear = vdatetimenow.getFullYear();
+				vnhour = vdatetimenow.getHours();
+				vnhour = ('0'+vnhour).slice(-2);
+				vnminutes = vdatetimenow.getMinutes();
+				vnminutes = ('0'+vnminutes).slice(-2)
+
+				if (vdatetime > vdatetimenow) {
+					vdate = vnday+'/'+vnnmonth;
+					vtime = vnhour+':'+vnminutes;
+				} else {
+					vdate = vday+'/'+vnmonth;
+					vtime = vhour+':'+vminutes;
+				}
+
 				vtitle = val.Titulo;
 				if (vtitle.length > 50) {
 					vtitle = vtitle.slice(0, 47) + '...';
 					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'+val.Titulo+'">'+vtitle+'</a>'
-				} else if (vtitle.length <= 1) {
+				} else if (vtitle.length = 1) {
 					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">Sem Título</a>';
 				} else {
 					vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';
@@ -907,8 +968,8 @@
 
 				var rowNode = tablenews.row.add(
 					[
-						vday+'/'+vnmonth,
-						vhour+':'+vminutes,
+						vdate,
+						vtime,
 						val.TipoVeiculo,
 						val.Veiculo,
 						val.Editoria,

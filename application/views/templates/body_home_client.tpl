@@ -107,9 +107,9 @@
 					<div class="col-sm-6 col-md-6 col-lg-6 element">
 						<div class="hpanel">
 							<div id="div1btns" class="panel-body text-center">
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
+								<button id="btnasearch" class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
+								<button id="btnmyclipp" class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
+								<button id="btncharts" class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
 							</div>
 						</div>
 					</div>
@@ -117,10 +117,10 @@
 					<div class="col-sm-6 col-md-6 col-lg-6 element">
 						<div class="hpanel">
 							<div id="div2btns" class="panel-body text-center">
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
+								<button id="btnnpapper" class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
+								<button id="btnepdf" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
+								<button id="btneexcel" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
+								<button id="btnforward" class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
 							</div>
 						</div>
 					</div>
@@ -206,10 +206,14 @@
 					</div>
 					<div class="modal-body">
 						<div id="modalcsinglenewsi" class="row" style="display: none">
-							<p id="modaltitlevki" class="text-primary pull-right"></p>
-							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4"></div>
+							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 20%">
+								<img src="/assets/imgs/loading.gif" width="50"><br>
+							</div>
+							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; display: none">
+							</div>
 							<div class="col-lg-8">
-								<p id="datemediactni" class="text-muted pull-right"></p>
+								<p id="datemediactni" class="text-muted"></p>
+								<p id="modaltitlevki" class="text-primary"></p>
 								<h3 id="mediactnti"></h3>
 								<p id="modal-texti" class="text-justify" style="max-height: 280px; overflow-y: auto"></p>
 							</div>
@@ -217,7 +221,10 @@
 
 						<div id="modalcsinglenewsv" style="display: none">
 							<div class="row">
-									<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12"></div>
+								<div id="mediavideoload" class="col-sm-12 col-md-12 col-lg-12 center-block text-center">
+									<img src="/assets/imgs/loading.gif" width="50"><br>
+								</div>
+								<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12" style="display: none"></div>
 							</div>
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12 center-block">

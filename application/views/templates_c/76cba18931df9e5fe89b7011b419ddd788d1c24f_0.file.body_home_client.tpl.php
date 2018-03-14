@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-13 16:22:45
+/* Smarty version 3.1.30, created on 2018-03-14 15:58:04
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa825059dad32_94022206',
+  'unifunc' => 'content_5aa970bcf0a645_00605408',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1520968911,
+      1 => 1521053882,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aa825059dad32_94022206 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa970bcf0a645_00605408 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19243350105aa825059cb012_49315133', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19533978275aa970bcf00461_43964275', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_19243350105aa825059cb012_49315133 extends Smarty_Internal_Block
+class Block_19533978275aa970bcf00461_43964275 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -155,9 +155,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					<div class="col-sm-6 col-md-6 col-lg-6 element">
 						<div class="hpanel">
 							<div id="div1btns" class="panel-body text-center">
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
+								<button id="btnasearch" class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
+								<button id="btnmyclipp" class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
+								<button id="btncharts" class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
 							</div>
 						</div>
 					</div>
@@ -165,10 +165,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					<div class="col-sm-6 col-md-6 col-lg-6 element">
 						<div class="hpanel">
 							<div id="div2btns" class="panel-body text-center">
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
-								<button class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
+								<button id="btnnpapper" class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
+								<button id="btnepdf" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
+								<button id="btneexcel" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
+								<button id="btnforward" class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
 							</div>
 						</div>
 					</div>
@@ -254,10 +254,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					</div>
 					<div class="modal-body">
 						<div id="modalcsinglenewsi" class="row" style="display: none">
-							<p id="modaltitlevki" class="text-primary pull-right"></p>
-							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4"></div>
+							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 20%">
+								<img src="/assets/imgs/loading.gif" width="50"><br>
+							</div>
+							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; display: none">
+							</div>
 							<div class="col-lg-8">
-								<p id="datemediactni" class="text-muted pull-right"></p>
+								<p id="datemediactni" class="text-muted"></p>
+								<p id="modaltitlevki" class="text-primary"></p>
 								<h3 id="mediactnti"></h3>
 								<p id="modal-texti" class="text-justify" style="max-height: 280px; overflow-y: auto"></p>
 							</div>
@@ -265,7 +269,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 						<div id="modalcsinglenewsv" style="display: none">
 							<div class="row">
-									<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12"></div>
+								<div id="mediavideoload" class="col-sm-12 col-md-12 col-lg-12 center-block text-center">
+									<img src="/assets/imgs/loading.gif" width="50"><br>
+								</div>
+								<div id="mediactnv" class="col-sm-12 col-md-12 col-lg-12" style="display: none"></div>
 							</div>
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12 center-block">
