@@ -56,7 +56,7 @@
 			this.api().columns(2).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_2" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -67,7 +67,7 @@
 			this.api().columns(3).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_3" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -78,7 +78,7 @@
 			this.api().columns(4).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_4" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -89,7 +89,7 @@
 			this.api().columns(5).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_5" class="filter selectpicker" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" title="'+seltitle+'"><option val=""></option></select>')
+				var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -138,6 +138,26 @@
 	$('body audio').bind('contextmenu', function() { return false; });
 	$('body video').bind('contextmenu', function() { return false; });
 	$('body img').bind('contextmenu', function() { return false; });
+
+	$('#datepicker').datepicker({
+		format: "dd/mm/yyyy",
+		language: 'pt-BR',
+		todayBtn: true,
+		todayHighlight: true,
+		autoclose: true
+		}).on('change', function(){
+			$('#enddate').focus();
+	});
+
+	$('#starttime').clockpicker({
+		autoclose: true,
+	}).on('change', function(){
+			$('#endtime').focus();
+	});
+
+	$('#endtime').clockpicker({
+		autoclose: true
+	});
 
 	$('#selclient').change(function(event) {
 		subkeywordsarr = [];
@@ -204,12 +224,12 @@
 		add_keyword_news(subkeywordsarr[0], cliid, fdpstartdate, fdpenddate, true);
 	});
 
-	$('#showsinglenews').on('show.bs.modal', function(event) {
-		$('#wrapper').css('overflow-y', 'hidden');
+	$('.modal').on('show.bs.modal', function(event) {
+		$('html').css('overflow-y', 'hidden');
 	});
 
 	$('#showsinglenews').on('hidden.bs.modal', function(event) {
-		$('#wrapper').css('overflow-y', 'auto');
+		$('html').css('overflow-y', 'auto');
 		$('#mediactni').css('display', 'none');
 		$('#modalcsinglenewsi').css('display', 'none');
 		$('#modalcsinglenewsv').css('display', 'none');
@@ -363,7 +383,7 @@
 				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactnv').text(snewsfdatetime)
-				$('#mediactnv').html('<video id="mediaelvideo" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls style="width: 70%"></video>');
+				$('#mediactnv').html('<video id="mediaelvideo" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls style="width: 65%"></video>');
 				$('#modal-textv').html(snewscontent);
 			} else if (rgxaudio.test(snewsimg)) {
 				mediatype = 'audio';

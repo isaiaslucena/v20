@@ -255,9 +255,77 @@
 			<div class="modal-dialog modal-lg" style="margin-top: 15px">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
-						
+						<h3>Pesquisa avançada</h3>
 					</div>
 					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-5 col-md-5 col-lg-5">
+								<div class="form-group">
+									<label>Tipo de Veículo</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Veículo</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Editoria</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Assunto</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Palavra-chave</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-sm-7 col-md-7 col-lg-7">
+								<div class="form-group">
+									<label>Data</label>
+									<div class="input-daterange input-group" id="datepicker">
+										<input required type="text" class="input-sm form-control" id="startdate" name="startdate" placeholder="Início" autocomplete="off"/>
+										<span class="input-group-addon">Até</span>
+										<input required type="text" class="input-sm form-control" id="enddate" name="enddate" placeholder="Fim" autocomplete="off"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Hora</label>
+									<div class="input-daterange input-group">
+										<input required type="text" class="input-sm form-control clockpicker" id="starttime" name="starttime" placeholder="Início" value="00:00" autocomplete="off"/>
+										<span class="input-group-addon">Até</span>
+										<input required type="text" class="input-sm form-control clockpicker" id="endtime" name="endtime" placeholder="Fim" value="23:59" autocomplete="off"/>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

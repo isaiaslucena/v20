@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-14 15:58:04
+/* Smarty version 3.1.30, created on 2018-03-14 18:23:51
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa970bcf0a645_00605408',
+  'unifunc' => 'content_5aa992e7eca3d9_11457430',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1521053882,
+      1 => 1521062605,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aa970bcf0a645_00605408 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa992e7eca3d9_11457430 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19533978275aa970bcf00461_43964275', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5174273145aa992e7eb5ce3_66701217', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_19533978275aa970bcf00461_43964275 extends Smarty_Internal_Block
+class Block_5174273145aa992e7eb5ce3_66701217 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -303,9 +303,77 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			<div class="modal-dialog modal-lg" style="margin-top: 15px">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
-						
+						<h3>Pesquisa avançada</h3>
 					</div>
 					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-5 col-md-5 col-lg-5">
+								<div class="form-group">
+									<label>Tipo de Veículo</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Veículo</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Editoria</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Assunto</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Palavra-chave</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-sm-7 col-md-7 col-lg-7">
+								<div class="form-group">
+									<label>Data</label>
+									<div class="input-daterange input-group" id="datepicker">
+										<input required type="text" class="input-sm form-control" id="startdate" name="startdate" placeholder="Início" autocomplete="off"/>
+										<span class="input-group-addon">Até</span>
+										<input required type="text" class="input-sm form-control" id="enddate" name="enddate" placeholder="Fim" autocomplete="off"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Hora</label>
+									<div class="input-daterange input-group">
+										<input required type="text" class="input-sm form-control clockpicker" id="starttime" name="starttime" placeholder="Início" value="00:00" autocomplete="off"/>
+										<span class="input-group-addon">Até</span>
+										<input required type="text" class="input-sm form-control clockpicker" id="endtime" name="endtime" placeholder="Fim" value="23:59" autocomplete="off"/>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
