@@ -7,7 +7,7 @@
 
 	<!-- Main Wrapper -->
 	<div id="wrapper">
-		<div class="container-fluid content animate-panel" data-effect="zoomIn" data-child="element">
+		<div class="container-fluid content" data-effect="zoomIn" data-child="element">
 			{* Change client *}
 			<div id="changeclient" class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12 element">
@@ -186,7 +186,7 @@
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<div id="modaltitlerow" class="row">
-							<div class="col-lg-4 text-left">
+							<div class="col-lg-6 text-left">
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
@@ -198,16 +198,12 @@
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>
-							<div id="modaltitlebtn" class="col-lg-2">
-								<a id="btnmail" class="btn btn-xs btn-block btn-primary">Enviar por e-mail</a>
-								<a id="btnurl" class="btn btn-xs btn-block btn-primary" target="_blank">Abrir página</a>
-							</div>
 						</div>
 					</div>
 					<div class="modal-body">
 						<div id="modalcsinglenewsi" class="row" style="display: none">
-							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 20%">
-								<img src="/assets/imgs/loading.gif" width="50"><br>
+							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
+								<img src="/assets/imgs/loading.gif" width="40"><br>
 							</div>
 							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; display: none">
 							</div>
@@ -245,7 +241,10 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+						<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+						<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+						<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
 					</div>
 				</div>
 			</div>
