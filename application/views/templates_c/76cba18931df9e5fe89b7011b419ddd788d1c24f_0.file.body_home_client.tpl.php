@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-15 17:23:23
+/* Smarty version 3.1.30, created on 2018-03-16 15:39:15
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aaad63b0b90d1_16450463',
+  'unifunc' => 'content_5aac0f536c0cd2_44738684',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1521145369,
+      1 => 1521225552,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aaad63b0b90d1_16450463 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aac0f536c0cd2_44738684 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19812614645aaad63b0a68e0_38798819', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15980217295aac0f536aca18_67490625', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_19812614645aaad63b0a68e0_38798819 extends Smarty_Internal_Block
+class Block_15980217295aac0f536aca18_67490625 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -289,10 +289,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 					</div>
 					<div class="modal-footer">
-						<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
-						<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
-						<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
-						<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+						<div class="row">
+							<div class="col-sm-12 col-md-12 col-lg-12">
+								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+								<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

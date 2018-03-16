@@ -153,7 +153,7 @@
 
 		.mapael .mapTooltip {
 			position: absolute;
-			background-color: #fff;
+			background-color: #D1D1D1;
 			moz-opacity: 0.70;
 			opacity: 0.70;
 			filter: alpha(opacity=70);
@@ -187,10 +187,9 @@
 		.imggrad span {
 			position: absolute;
 			bottom: 0;
-			left: 25%;
+			left: 28%;
 			font-size: 16px;
 			font-weight: bold;
-			color: black;
 			text-align: center;
 		}
 		.imggrad span:hover {

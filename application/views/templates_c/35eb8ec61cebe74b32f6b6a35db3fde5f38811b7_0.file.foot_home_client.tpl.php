@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-15 18:00:30
+/* Smarty version 3.1.30, created on 2018-03-16 14:22:59
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aaadeee062437_41274685',
+  'unifunc' => 'content_5aabfd73f25194_47349371',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1521147626,
+      1 => 1521220954,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5aaadeee062437_41274685 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aabfd73f25194_47349371 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5521066425aaadeee032eb7_42308982', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8765944475aabfd73ef1091_23618218', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_5521066425aaadeee032eb7_42308982 extends Smarty_Internal_Block
+class Block_8765944475aabfd73ef1091_23618218 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -280,9 +280,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		$('#modalcsinglenewsi').css('display', 'none');
 		$('#modalcsinglenewsv').css('display', 'none');
 		$('#modaltitlerow').css('display', 'none');
-
-		$('#modal-texti').scrollTop(0);
-		$('#mediactni').scrollTop(0);
 
 		$('#mediactni').css('overflow-y', 'hidden');
 
@@ -542,6 +539,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					});
 				});
 				$('#modal-texti').html(snewscontent);
+
+				$('#btnurl').removeClass('disabled');
+				$('#btnurl').attr('disabled', false);
+				$('#btnurl').attr('href', snewsurl);
 			}
 
 			if (mediatype == 'image') {
@@ -574,6 +575,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	});
 
 	$('#btnselclo').click(function(event) {
+		$('#modal-texti').scrollTop(0);
+		$('#mediactni').scrollTop(0);
+
 		btnsctrid = $(this).attr('data-trid');
 
 		if ($('#'+btnsctrid).hasClass('selected') == false) {
@@ -581,6 +585,11 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		}
 
 		$('#showsinglenews').modal('hide');
+	});
+
+	document.getElementById('btnclose').addEventListener('click', function(){
+		document.getElementById('modal-texti').scrollTop = 0;
+		document.getElementById('mediactni').scrollTop = 0;
 	});
 
 	$(document).on('change', 'select', function(event) {
@@ -761,6 +770,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		var colorThief = new ColorThief();
 		dominantcolor = colorThief.getColor(sourceImage[0]);
 		palettcolor = colorThief.getPalette(sourceImage[0], 10);
+		$('meta[name=theme-color]').attr('content', 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')');
 		$('#header').css({
 			'background': 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')'
 		});
@@ -966,7 +976,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						subjecctid = subjectskeywords[0].IdAssunto;
 					}
 
-					html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" data-style="btn-default btn-sm" data-size="10" data-width="150px" data-live-search="true" data-selected-text-format="count > 3" title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
+					if (subjectcount != null) {
+						html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" data-style="btn-default btn-sm" data-size="10" data-width="150px" data-live-search="true" data-selected-text-format="count > 3" title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
+					}
 
 					$.each(skeywords, function(index, kval) {
 						keywordid = kval.IdPChave;
@@ -974,11 +986,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						keywordtb = kval.TermoBusca;
 						keywordgf = kval.Grifar;
 						keywordcount = kval.QNoticias;
-						if (keywordcount == null) {
-							keywordcount = 0;
+						if (keywordcount != null) {
+							html += '<option id="'+keywordid+'" data-type="keyword" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
+							// keywordcount = 0;
 						}
-
-						html += '<option id="'+keywordid+'" data-type="keyword" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
 					});
 
 					html += '</select>';

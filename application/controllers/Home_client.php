@@ -400,5 +400,30 @@ class Home_client extends CI_Controller {
 		// header('Content-Type: application/json, charset=utf-8');
 		// print json_encode($datan, JSON_PRETTY_PRINT);
 	}
+
+	public function send_mail() {
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"),true));
+			$mail_to = $postdata['mail_to'];
+			$mail_subject = $postdata['mail_subject'];
+			$mail_message = $postdata['mail_message'];
+
+			$this->email->from('noticias@multclipp.com.br', 'Noticais', 'noticias@multclipp.com.br');
+			$this->email->to($mail_to);
+			// $this->email->cc('another@another-example.com');
+			// $this->email->bcc('them@their-example.com');
+
+			$this->email->subject($mail_subject);
+			$this->email->message($mail_message);
+
+			if ( ! $this->email->send(FALSE)) {
+				var_dump('Error');
+			}
+		} else {
+			header('Content-Type: application/json');
+			$message = "Método não permitido!";
+			print json_encode($message, JSON_PRETTY_PRINT);
+		}
+	}
 }
 ?>

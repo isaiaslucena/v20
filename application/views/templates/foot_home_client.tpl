@@ -239,9 +239,6 @@
 		$('#modalcsinglenewsv').css('display', 'none');
 		$('#modaltitlerow').css('display', 'none');
 
-		$('#modal-texti').scrollTop(0);
-		$('#mediactni').scrollTop(0);
-
 		$('#mediactni').css('overflow-y', 'hidden');
 
 		if ($('#btnurl').hasClass('disabled') == false) {
@@ -500,6 +497,10 @@
 					});
 				});
 				$('#modal-texti').html(snewscontent);
+
+				$('#btnurl').removeClass('disabled');
+				$('#btnurl').attr('disabled', false);
+				$('#btnurl').attr('href', snewsurl);
 			}
 
 			if (mediatype == 'image') {
@@ -532,6 +533,9 @@
 	});
 
 	$('#btnselclo').click(function(event) {
+		$('#modal-texti').scrollTop(0);
+		$('#mediactni').scrollTop(0);
+
 		btnsctrid = $(this).attr('data-trid');
 
 		if ($('#'+btnsctrid).hasClass('selected') == false) {
@@ -539,6 +543,11 @@
 		}
 
 		$('#showsinglenews').modal('hide');
+	});
+
+	document.getElementById('btnclose').addEventListener('click', function(){
+		document.getElementById('modal-texti').scrollTop = 0;
+		document.getElementById('mediactni').scrollTop = 0;
 	});
 
 	$(document).on('change', 'select', function(event) {
@@ -719,6 +728,7 @@
 		var colorThief = new ColorThief();
 		dominantcolor = colorThief.getColor(sourceImage[0]);
 		palettcolor = colorThief.getPalette(sourceImage[0], 10);
+		$('meta[name=theme-color]').attr('content', 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')');
 		$('#header').css({
 			'background': 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')'
 		});
@@ -924,7 +934,9 @@
 						subjecctid = subjectskeywords[0].IdAssunto;
 					}
 
-					html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" data-style="btn-default btn-sm" data-size="10" data-width="150px" data-live-search="true" data-selected-text-format="count > 3" title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
+					if (subjectcount != null) {
+						html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" data-style="btn-default btn-sm" data-size="10" data-width="150px" data-live-search="true" data-selected-text-format="count > 3" title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
+					}
 
 					$.each(skeywords, function(index, kval) {
 						keywordid = kval.IdPChave;
@@ -932,11 +944,10 @@
 						keywordtb = kval.TermoBusca;
 						keywordgf = kval.Grifar;
 						keywordcount = kval.QNoticias;
-						if (keywordcount == null) {
-							keywordcount = 0;
+						if (keywordcount != null) {
+							html += '<option id="'+keywordid+'" data-type="keyword" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
+							// keywordcount = 0;
 						}
-
-						html += '<option id="'+keywordid+'" data-type="keyword" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
 					});
 
 					html += '</select>';
