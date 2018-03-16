@@ -186,15 +186,15 @@
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<div id="modaltitlerow" class="row">
-							<div class="col-lg-6 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-3 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitlevm" class="text-primary"></h5>
 								<h5 id="modaltitleva" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-3 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>
@@ -205,7 +205,7 @@
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
 							</div>
-							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; display: none">
+							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; overflow-x: hidden; display: none">
 							</div>
 							<div class="col-lg-8">
 								<p id="datemediactni" class="text-muted"></p>

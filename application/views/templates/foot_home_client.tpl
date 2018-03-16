@@ -233,11 +233,16 @@
 		$('html').css('overflow-y', 'auto');
 	});
 
-	$('#showsinglenews').on('hidden.bs.modal', function(event) {
+	$('#showsinglenews').on('hide.bs.modal', function(event) {
 		$('#mediactni').css('display', 'none');
 		$('#modalcsinglenewsi').css('display', 'none');
 		$('#modalcsinglenewsv').css('display', 'none');
 		$('#modaltitlerow').css('display', 'none');
+
+		$('#modal-texti').scrollTop(0);
+		$('#mediactni').scrollTop(0);
+
+		$('#mediactni').css('overflow-y', 'hidden');
 
 		if ($('#btnurl').hasClass('disabled') == false) {
 			$('#btnurl').addClass('disabled');
@@ -435,7 +440,10 @@
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">');
+				$('#mediactni').html(
+					'<div class="imggrad"><span>Exibir tudo</span></div>'+
+					'<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">'
+				);
 				$('#btnurl').removeClass('disabled');
 				$('#btnurl').attr('disabled', false);
 				$('#btnurl').attr('href', snewsurl);
@@ -456,7 +464,10 @@
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<img id="mediaelimg" class="img-responsive" src="'+snewsurl+'">');
+				$('#mediactni').html(
+					'<div class="imggrad"><span>Exibir tudo</span></div>'+
+					'<img id="mediaelimg" class="img-responsive" src="'+snewsurl+'">'
+				);
 
 				$.each(tndata.PChaves, function(index, val) {
 					snewsgrf = val.Grifar.trim();
@@ -474,7 +485,9 @@
 				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 				$('#datemediactni').text(snewsfdatetime);
-				$('#mediactni').html('<img id="mediaelimg" class="img-responsive" src="/assets/imgs/noimage.png">');
+				$('#mediactni').html(
+					'<img id="mediaelimg" class="img-responsive" src="/assets/imgs/noimage.png">'
+				);
 
 				$.each(tndata.PChaves, function(index, val) {
 					snewsgrf = val.Grifar.trim();
@@ -493,6 +506,10 @@
 				$('#mediaelimg').on('load', function() {
 					$('#mediaimgload').fadeOut('fast', function() {
 						$('#mediactni').fadeIn('fast');
+						$('#mediactni').click(function(event) {
+							$('.imggrad').css('display', 'none');
+							$(this).css('overflow-y', 'auto');
+						});
 					});
 				});
 			} else {

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-15 15:28:41
+/* Smarty version 3.1.30, created on 2018-03-15 17:23:23
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aaabb59eb6d22_98249599',
+  'unifunc' => 'content_5aaad63b0b90d1_16450463',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1521138269,
+      1 => 1521145369,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aaabb59eb6d22_98249599 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aaad63b0b90d1_16450463 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16870001535aaabb59ea3270_20507003', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19812614645aaad63b0a68e0_38798819', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_16870001535aaabb59ea3270_20507003 extends Smarty_Internal_Block
+class Block_19812614645aaad63b0a68e0_38798819 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -234,15 +234,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<div id="modaltitlerow" class="row">
-							<div class="col-lg-6 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-3 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitlevm" class="text-primary"></h5>
 								<h5 id="modaltitleva" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-3 text-left">
+							<div class="col-lg-4 text-left">
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>
@@ -253,7 +253,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
 							</div>
-							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; display: none">
+							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; overflow-x: hidden; display: none">
 							</div>
 							<div class="col-lg-8">
 								<p id="datemediactni" class="text-muted"></p>
