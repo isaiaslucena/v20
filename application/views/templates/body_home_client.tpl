@@ -141,7 +141,7 @@
 					<div id="newstable" class="hpanel">
 						<div class="panel-body">
 							<div id="divtablenews" class="table-responsive">
-								<table id="tablenews" cellpadding="0.5" cellspacing="1" class="table table-bordered table-striped">
+								<table id="tablenews" cellpadding="0.5" cellspacing="1" class="table table-bordered table-striped table-hover">
 									<thead>
 										<tr>
 											<th class="text-center">Data</th>
@@ -170,10 +170,6 @@
 										</tr>
 									</tfoot>
 								</table>
-							</div>
-
-							<div id="divsinglenews" style="display: none;">
-								
 							</div>
 						</div>
 					</div>
@@ -240,7 +236,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
+					<div id="modasnfooter" class="modal-footer">
 						<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
 						<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
 						<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
@@ -253,12 +249,32 @@
 		<div class="modal fade" id="advancedsearch" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg" style="margin-top: 15px">
 				<div class="modal-content">
+
 					<div class="modal-header text-center" style="padding: 15px">
 						<h3>Pesquisa avançada</h3>
 					</div>
+
 					<div class="modal-body">
 						<div class="row">
-							<div class="col-sm-5 col-md-5 col-lg-5">
+							<div class="col-sm-6 col-md-6 col-lg-6">
+								<div class="form-group">
+									<label>Assunto</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Palavra-chave</label>
+									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+										<option value="opcao1">opcao1</option>
+										<option value="opcao2">opcao2</option>
+										<option value="opcao3">opcao3</option>
+										<option value="opcao4">opcao4</option>
+									</select>
+								</div>
 								<div class="form-group">
 									<label>Tipo de Veículo</label>
 									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
@@ -286,27 +302,9 @@
 										<option value="opcao4">opcao4</option>
 									</select>
 								</div>
-								<div class="form-group">
-									<label>Assunto</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label>Palavra-chave</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
-									</select>
-								</div>
 							</div>
 
-							<div class="col-sm-7 col-md-7 col-lg-7">
+							<div class="col-sm-6 col-md-6 col-lg-6">
 								<div class="form-group">
 									<label>Data</label>
 									<div class="input-daterange input-group" id="datepicker">
@@ -315,6 +313,7 @@
 										<input required type="text" class="input-sm form-control" id="enddate" name="enddate" placeholder="Fim" autocomplete="off"/>
 									</div>
 								</div>
+
 								<div class="form-group">
 									<label>Hora</label>
 									<div class="input-daterange input-group">
@@ -323,11 +322,102 @@
 										<input required type="text" class="input-sm form-control clockpicker" id="endtime" name="endtime" placeholder="Fim" value="23:59" autocomplete="off"/>
 									</div>
 								</div>
+
+								<div class="row">
+									<div class="col-sm-4 col-md-4 col-lg-4">
+										<div class="form-group">
+											<label>Destaque</label>
+											<div>
+												<label style="font-weight: normal;">
+													<div class="iradio_square-blue" style="position: relative;">
+														<input type="radio" name="destaque" class="i-checks" style="position: absolute; opacity: 0;">
+														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													</div>
+												</label>
+												Sim
+											</div>
+											<div>
+												<label style="font-weight: normal;">
+													<div class="iradio_square-blue" style="position: relative;">
+														<input type="radio" name="destaque" class="i-checks" style="position: absolute; opacity: 0;">
+														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													</div>
+												</label>
+												Não
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-4 col-md-4 col-lg-4">
+										<div class="form-group">
+											<label>Motivação</label>
+											<div>
+												<label class="" style="font-weight: normal;">
+													<div class="icheckbox_square-blue" style="position: relative;">
+														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
+														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													</div>
+												</label>
+												Espontânea
+											</div>
+											<div>
+												<label class="" style="font-weight: normal;">
+													<div class="icheckbox_square-blue" style="position: relative;">
+														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
+														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													</div>
+												</label>
+												Provocada
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-4 col-md-4 col-lg-4">
+										<div class="form-group">
+											<label>Avaliação</label>
+											<div>
+												<label class="" style="font-weight: normal;">
+													<div class="icheckbox_square-blue" style="position: relative;">
+														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
+														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													</div>
+												</label>
+												Negativo
+											</div>
+											<div>
+												<label class="" style="font-weight: normal;">
+													<div class="icheckbox_square-blue" style="position: relative;">
+														<input type="checkbox" name="motivradio" class="i-checks" style="position: absolute; opacity: 0;">
+														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													</div>
+												</label>
+												Neutro
+											</div>
+											<div>
+												<label class="" style="font-weight: normal;">
+													<div class="icheckbox_square-blue" style="position: relative;">
+														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
+														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													</div>
+												</label>
+												Positivo
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label>Texto</label>
+									<input type="text" id="stext" name="stext" class="form-control input-sm" autocomplete="off">
+								</div>
+
 							</div>
 						</div>
 					</div>
+
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Pesquisar</button>
 					</div>
 				</div>
 			</div>

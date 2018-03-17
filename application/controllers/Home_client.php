@@ -416,8 +416,14 @@ class Home_client extends CI_Controller {
 			$this->email->subject($mail_subject);
 			$this->email->message($mail_message);
 
-			if ( ! $this->email->send(FALSE)) {
-				var_dump('Error');
+			if ($this->email->send(FALSE)) {
+				header('Content-Type: application/json');
+				$message = "Email enviado com sucesso!";
+				print json_encode($message, JSON_PRETTY_PRINT);
+			} else {
+				header('Content-Type: application/json');
+				$message = "Erro ao tentar enviar o email!";
+				print json_encode($message, JSON_PRETTY_PRINT);
 			}
 		} else {
 			header('Content-Type: application/json');
