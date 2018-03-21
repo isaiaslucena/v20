@@ -563,14 +563,13 @@ class Home_client_model extends CI_Model {
 		return $this->db->query($sqlquery)->result_array();
 	}
 
-
 	public function get_news_export($idclient, $startdate, $enddate) {
 		if (is_null($startdate)) {
 			$startdate = date('Y-m-d');
 			$enddate = date('Y-m-d');
 		}
 
-		$sqlquery = 	"SELECT TOP(20)
+		$sqlquery = 	"SELECT
 									nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,
 									tve.Nome as TipodeVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria, ass.Nome as Assunto, plc.Nome as PalavraChave,
 									ed.Formato, ve.TiragemSemana as Tier, nim.MarcarW, nim.MarcarH, nim.Imagem,
@@ -590,7 +589,7 @@ class Home_client_model extends CI_Model {
 									WHERE
 									ntp.idPalavraChave IN (SELECT pc.Id FROM Assunto ast JOIN PalavraChave pc ON pc.idAssunto = ast.Id WHERE ast.IdEmpresa = $idclient) AND
 									nt.Data >= '$startdate' AND nt.Data <= '$enddate'
-									ORDER BY nt.Id ASC";
+									ORDER BY nt.Id ASC LIMIT 20";
 		return $this->db->query($sqlquery)->result_array();
 	}
 }
