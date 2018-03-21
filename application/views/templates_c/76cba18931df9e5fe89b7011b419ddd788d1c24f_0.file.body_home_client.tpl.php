@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-16 18:58:18
+/* Smarty version 3.1.30, created on 2018-03-20 22:35:27
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aac3dfab53f71_93756323',
+  'unifunc' => 'content_5ab1b6dfac6e73_12417587',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1521237496,
+      1 => 1521577501,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aac3dfab53f71_93756323 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab1b6dfac6e73_12417587 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11068068755aac3dfab37685_50312177', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2666288715ab1b6dfaabd20_17141209', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_11068068755aac3dfab37685_50312177 extends Smarty_Internal_Block
+class Block_2666288715ab1b6dfaabd20_17141209 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -464,7 +464,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar </button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal">Pesquisar</button>
 					</div>
 				</div>
