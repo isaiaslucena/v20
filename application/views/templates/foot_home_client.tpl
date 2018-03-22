@@ -912,7 +912,7 @@
 	function get_subject_keywords(clientid, startdate, enddate, updatesubjects = false) {
 		$.get('/home_client/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
 			function(cdata, textStatus, xhr) {
-				console.log(cdata);
+				// console.log(cdata);
 				subjectskeywords = cdata;
 				// console.log(subjectskeywords.length);
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-21 13:52:56
+/* Smarty version 3.1.30, created on 2018-03-22 11:40:54
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab28de8c6d421_17291353',
+  'unifunc' => 'content_5ab3c0768f39b1_19222722',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1521651174,
+      1 => 1521729645,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ab28de8c6d421_17291353 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab3c0768f39b1_19222722 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1619847655ab28de8c3b3c5_18963861', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17093809825ab3c0768c40e1_62836504', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_1619847655ab28de8c3b3c5_18963861 extends Smarty_Internal_Block
+class Block_17093809825ab3c0768c40e1_62836504 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -954,7 +954,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	function get_subject_keywords(clientid, startdate, enddate, updatesubjects = false) {
 		$.get('/home_client/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
 			function(cdata, textStatus, xhr) {
-				console.log(cdata);
+				// console.log(cdata);
 				subjectskeywords = cdata;
 				// console.log(subjectskeywords.length);
 
