@@ -177,6 +177,18 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="pagewaitmodal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content" style="height: 200px">
+					<div class="hollow-dots-spinner center-block" style="vertical-align: middle;">
+						<div class="dot"></div>
+						<div class="dot"></div>
+						<div class="dot"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="modal fade" id="showsinglenews" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg" style="margin-top: 15px">
 				<div class="modal-content">

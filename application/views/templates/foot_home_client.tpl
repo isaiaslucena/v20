@@ -164,12 +164,18 @@
 		subkeywordsarr = [];
 		tvarr = [], varr = [], earr = [], pcarr = [];
 
-		swal({
-			title: "Carregando...",
-			imageUrl: "/assets/imgs/loading.gif",
-			showCancelButton: false,
-			showConfirmButton: false
+		$('#pagewaitmodal').modal({
+			show: true,
+			backdrop: 'static',
+			keyboard: false
 		});
+
+		// swal({
+		// 	title: "Carregando...",
+		// 	imageUrl: "/assets/imgs/loading.gif",
+		// 	showCancelButton: false,
+		// 	showConfirmButton: false
+		// });
 
 		cid = $(this).children(':selected').attr('id');
 		cname = event.target.value;
@@ -199,12 +205,18 @@
 	});
 
 	cdatebtn.click(function(event) {
-		swal({
-			title: "Carregando...",
-			imageUrl: "/assets/imgs/loading.gif",
-			showCancelButton: false,
-			showConfirmButton: false
+		$('#pagewaitmodal').modal({
+			show: true,
+			backdrop: 'static',
+			keyboard: false
 		});
+
+		// swal({
+		// 	title: "Carregando...",
+		// 	imageUrl: "/assets/imgs/loading.gif",
+		// 	showCancelButton: false,
+		// 	showConfirmButton: false
+		// });
 
 		cdatebtn.ladda('start');
 
@@ -680,12 +692,18 @@
 		$('#selclient').attr('disabled', true);
 		$('#selclient').addClass('disabled');
 
-		swal({
-			title: "Carregando...",
-			imageUrl: "/assets/imgs/loading.gif",
-			showCancelButton: false,
-			showConfirmButton: false
+		$('#pagewaitmodal').modal({
+			show: true,
+			backdrop: 'static',
+			keyboard: false
 		});
+
+		// swal({
+		// 	title: "Carregando...",
+		// 	imageUrl: "/assets/imgs/loading.gif",
+		// 	showCancelButton: false,
+		// 	showConfirmButton: false
+		// });
 
 		get_client_info(clientselid, true);
 		count_vtype(clientselid, todaydate, todaydate);
@@ -1089,7 +1107,8 @@
 			});
 
 			cdatebtn.ladda('stop');
-			swal.close();
+			$('#pagewaitmodal').modal('hide');
+			// swal.close();
 		});
 	};
 
