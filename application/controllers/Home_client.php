@@ -143,15 +143,22 @@ class Home_client extends CI_Controller {
 		print json_encode($datae, JSON_PRETTY_PRINT);
 	}
 
-	public function client_subjects($id) {
-		$data = $this->utf8_encoder($this->home_client_model->get_client_subjects($id));
+	public function client_subjects($clientid) {
+		$data = $this->utf8_encoder($this->home_client_model->get_client_subjects($clientid));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
-	public function subject_keywords($id) {
-		$data = $this->utf8_encoder($this->home_client_model->get_subject_keywords($id));
+	public function subject_keywords($subjectid) {
+		$data = $this->utf8_encoder($this->home_client_model->get_subject_keywords($subjectid));
+
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function get_tveiculos(){
+		$data = $this->utf8_encoder($this->home_client_model->get_tveiculos());
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);

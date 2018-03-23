@@ -164,18 +164,7 @@
 		subkeywordsarr = [];
 		tvarr = [], varr = [], earr = [], pcarr = [];
 
-		$('#pagewaitmodal').modal({
-			show: true,
-			backdrop: 'static',
-			keyboard: false
-		});
-
-		// swal({
-		// 	title: "Carregando...",
-		// 	imageUrl: "/assets/imgs/loading.gif",
-		// 	showCancelButton: false,
-		// 	showConfirmButton: false
-		// });
+		salertloading(isTouchDevice());
 
 		cid = $(this).children(':selected').attr('id');
 		cname = event.target.value;
@@ -205,18 +194,7 @@
 	});
 
 	cdatebtn.click(function(event) {
-		$('#pagewaitmodal').modal({
-			show: true,
-			backdrop: 'static',
-			keyboard: false
-		});
-
-		// swal({
-		// 	title: "Carregando...",
-		// 	imageUrl: "/assets/imgs/loading.gif",
-		// 	showCancelButton: false,
-		// 	showConfirmButton: false
-		// });
+		salertloading(isTouchDevice());
 
 		cdatebtn.ladda('start');
 
@@ -692,18 +670,7 @@
 		$('#selclient').attr('disabled', true);
 		$('#selclient').addClass('disabled');
 
-		$('#pagewaitmodal').modal({
-			show: true,
-			backdrop: 'static',
-			keyboard: false
-		});
-
-		// swal({
-		// 	title: "Carregando...",
-		// 	imageUrl: "/assets/imgs/loading.gif",
-		// 	showCancelButton: false,
-		// 	showConfirmButton: false
-		// });
+		salertloading(isTouchDevice());
 
 		get_client_info(clientselid, true);
 		count_vtype(clientselid, todaydate, todaydate);
@@ -712,15 +679,67 @@
 		count_client(clientselid, todaydate, todaydate);
 		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00-03:00'));
 		get_subject_keywords(clientselid, todaydate, todaydate, true);
+
+		get_subjects(clientselid, function(data){
+			data.map(function(val, index) {
+				html = '<option data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+				$('#adssubject').append(html);
+			});
+			$('#adssubject').selectpicker('refresh');
+		});
+		get_tveiculos(function(data) {
+			data.map(function(val, index) {
+				html = '<option data-tveiculoid="'+val.Id+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+				$('#adstveiculo').append(html);
+			});
+			$('#adstveiculo').selectpicker('refresh');
+		});
 	}
 
 	$('#btnasearch').click(function(event) {
 		$('#advancedsearch').modal('show');
 	});
 
-	function isTouchDevice(){
+	function salertloading(mobile) {
+		if (mobile) {
+			swalwidth = 150;
+		} else {
+			swalwidth = 300;
+		}
+
+		swal({
+			title: "Carregando...",
+			// type: "warning",
+			// imageUrl: "/assets/imgs/loading.gif",
+			width: swalwidth,
+			showCancelButton: false,
+			showConfirmButton: false,
+			onOpen: () => {
+				swal.showLoading()
+			}
+		});
+	};
+
+	function salertloadingdone(mobile) {
+		if (mobile) {
+			swalwidth = 150;
+		} else {
+			swalwidth = 300;
+		}
+
+		swal({
+			title: "",
+			type: "success",
+			width: swalwidth,
+			showCancelButton: false,
+			showConfirmButton: false,
+			timer: 1500
+		});
+	};
+
+	function isTouchDevice() {
 		return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
-	}
+	};
 
 	function get_client_info(clientid, setselpicker) {
 		$.get('/home_client/client_info/'+clientid,
@@ -739,7 +758,7 @@
 				// 'background-repeat': 'no-repeat'
 			// });
 		});
-	}
+	};
 
 	function setcolors(imgurl) {
 		sourceImage = $('#bannerheader');
@@ -954,7 +973,10 @@
 					}
 
 					if (subjectcount != null) {
-						html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" data-style="btn-default btn-sm" data-size="10" data-width="150px" data-live-search="true" data-selected-text-format="count > 3" title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
+						html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" '+
+										'data-style="btn-default btn-sm" data-size="10" data-width="150px" '+
+										'data-live-search="true" data-selected-text-format="count > 3" '+
+										'title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
 					}
 
 					$.each(skeywords, function(index, kval) {
@@ -1107,8 +1129,8 @@
 			});
 
 			cdatebtn.ladda('stop');
-			$('#pagewaitmodal').modal('hide');
-			// swal.close();
+
+			salertloadingdone(isTouchDevice());
 		});
 	};
 
@@ -1133,6 +1155,24 @@
 
 	function get_single_news(newsid, clientid, callback) {
 		$.get('/home_client/single_news/'+newsid+'/'+clientid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_subjects(clientid, callback) {
+		$.get('/home_client/client_subjects/'+clientid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_keywordsfromsubject(subjectid, callback) {
+		$.get('/home_client/subject_keywords/'+subjectid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_tveiculos(callback) {
+		$.get('/home_client/get_tveiculos', function(data) {
 			callback(data);
 		});
 	};

@@ -483,6 +483,11 @@ class Home_client_model extends CI_Model {
 		return $this->db->query($sqlquery)->row()->NoticiasAssuntos;
 	}
 
+	public function get_tveiculos() {
+		$sqlquery =	"SELECT Id, Nome FROM TipoVeiculo WHERE Id NOT IN (17,27,26,24,23) ORDER BY Nome ASC";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
 	public function count_vtype_news($idclient, $startdate = null, $enddate = null) {
 		if (is_null($startdate)) {
 			$startdate = date('Y-m-d');

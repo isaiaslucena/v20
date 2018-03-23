@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-22 17:57:29
+/* Smarty version 3.1.30, created on 2018-03-23 15:24:17
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab418b9e477d2_13076703',
+  'unifunc' => 'content_5ab54651ae4fa2_76843157',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1521752247,
+      1 => 1521829454,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ab418b9e477d2_13076703 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab54651ae4fa2_76843157 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_7679309415ab418b9e2bbe8_55971984', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6897355055ab54651ace7f1_29714585', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_7679309415ab418b9e2bbe8_55971984 extends Smarty_Internal_Block
+class Block_6897355055ab54651ace7f1_29714585 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -319,47 +319,39 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							<div class="col-sm-6 col-md-6 col-lg-6">
 								<div class="form-group">
 									<label>Assunto</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adssubject" class="selectpicker form-control"
+									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Palavra-chave</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adskeyword" class="selectpicker form-control disabled"
+									data-size="10" data-style="btn btn-sm btn-default"
+									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									title="Selecione o assunto" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Tipo de Veículo</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adstveiculo" class="selectpicker form-control"
+									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Veículo</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adsveiculo" class="selectpicker form-control disabled"
+									data-size="10" data-style="btn btn-sm btn-default"
+									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									title="Selecione o tipo de veículo" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Editoria</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adseditoria" class="selectpicker form-control disabled"
+									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-live-search="true" data-selected-text-format="count > 5" title="Selecione o veículo" multiple disabled>
 									</select>
 								</div>
 							</div>
@@ -467,10 +459,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								</div>
 
 								<div class="form-group">
+									<label>Estado</label>
+									<select id="adsstates" class="selectpicker form-control" data-size="5" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+									</select>
+								</div>
+
+								<div class="form-group">
 									<label>Texto</label>
 									<input type="text" id="stext" name="stext" class="form-control input-sm" autocomplete="off">
 								</div>
-
 							</div>
 						</div>
 					</div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-22 16:48:40
+/* Smarty version 3.1.30, created on 2018-03-23 15:24:17
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab40898c22637_74226387',
+  'unifunc' => 'content_5ab54651a98d74_68372984',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1521748115,
+      1 => 1521829301,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ab40898c22637_74226387 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab54651a98d74_68372984 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6149836685ab40898bea758_44477932', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10012209665ab54651a68fc0_76606578', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_6149836685ab40898bea758_44477932 extends Smarty_Internal_Block
+class Block_10012209665ab54651a68fc0_76606578 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -206,18 +206,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		subkeywordsarr = [];
 		tvarr = [], varr = [], earr = [], pcarr = [];
 
-		$('#pagewaitmodal').modal({
-			show: true,
-			backdrop: 'static',
-			keyboard: false
-		});
-
-		// swal({
-		// 	title: "Carregando...",
-		// 	imageUrl: "/assets/imgs/loading.gif",
-		// 	showCancelButton: false,
-		// 	showConfirmButton: false
-		// });
+		salertloading(isTouchDevice());
 
 		cid = $(this).children(':selected').attr('id');
 		cname = event.target.value;
@@ -247,18 +236,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	});
 
 	cdatebtn.click(function(event) {
-		$('#pagewaitmodal').modal({
-			show: true,
-			backdrop: 'static',
-			keyboard: false
-		});
-
-		// swal({
-		// 	title: "Carregando...",
-		// 	imageUrl: "/assets/imgs/loading.gif",
-		// 	showCancelButton: false,
-		// 	showConfirmButton: false
-		// });
+		salertloading(isTouchDevice());
 
 		cdatebtn.ladda('start');
 
@@ -734,18 +712,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		$('#selclient').attr('disabled', true);
 		$('#selclient').addClass('disabled');
 
-		$('#pagewaitmodal').modal({
-			show: true,
-			backdrop: 'static',
-			keyboard: false
-		});
-
-		// swal({
-		// 	title: "Carregando...",
-		// 	imageUrl: "/assets/imgs/loading.gif",
-		// 	showCancelButton: false,
-		// 	showConfirmButton: false
-		// });
+		salertloading(isTouchDevice());
 
 		get_client_info(clientselid, true);
 		count_vtype(clientselid, todaydate, todaydate);
@@ -754,15 +721,67 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		count_client(clientselid, todaydate, todaydate);
 		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00-03:00'));
 		get_subject_keywords(clientselid, todaydate, todaydate, true);
+
+		get_subjects(clientselid, function(data){
+			data.map(function(val, index) {
+				html = '<option data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+				$('#adssubject').append(html);
+			});
+			$('#adssubject').selectpicker('refresh');
+		});
+		get_tveiculos(function(data) {
+			data.map(function(val, index) {
+				html = '<option data-tveiculoid="'+val.Id+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+				$('#adstveiculo').append(html);
+			});
+			$('#adstveiculo').selectpicker('refresh');
+		});
 	}
 
 	$('#btnasearch').click(function(event) {
 		$('#advancedsearch').modal('show');
 	});
 
-	function isTouchDevice(){
+	function salertloading(mobile) {
+		if (mobile) {
+			swalwidth = 150;
+		} else {
+			swalwidth = 300;
+		}
+
+		swal({
+			title: "Carregando...",
+			// type: "warning",
+			// imageUrl: "/assets/imgs/loading.gif",
+			width: swalwidth,
+			showCancelButton: false,
+			showConfirmButton: false,
+			onOpen: () => {
+				swal.showLoading()
+			}
+		});
+	};
+
+	function salertloadingdone(mobile) {
+		if (mobile) {
+			swalwidth = 150;
+		} else {
+			swalwidth = 300;
+		}
+
+		swal({
+			title: "",
+			type: "success",
+			width: swalwidth,
+			showCancelButton: false,
+			showConfirmButton: false,
+			timer: 1500
+		});
+	};
+
+	function isTouchDevice() {
 		return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
-	}
+	};
 
 	function get_client_info(clientid, setselpicker) {
 		$.get('/home_client/client_info/'+clientid,
@@ -781,7 +800,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				// 'background-repeat': 'no-repeat'
 			// });
 		});
-	}
+	};
 
 	function setcolors(imgurl) {
 		sourceImage = $('#bannerheader');
@@ -996,7 +1015,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					}
 
 					if (subjectcount != null) {
-						html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" data-style="btn-default btn-sm" data-size="10" data-width="150px" data-live-search="true" data-selected-text-format="count > 3" title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
+						html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" '+
+										'data-style="btn-default btn-sm" data-size="10" data-width="150px" '+
+										'data-live-search="true" data-selected-text-format="count > 3" '+
+										'title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
 					}
 
 					$.each(skeywords, function(index, kval) {
@@ -1149,8 +1171,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			});
 
 			cdatebtn.ladda('stop');
-			$('#pagewaitmodal').modal('hide');
-			// swal.close();
+
+			salertloadingdone(isTouchDevice());
 		});
 	};
 
@@ -1175,6 +1197,24 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 	function get_single_news(newsid, clientid, callback) {
 		$.get('/home_client/single_news/'+newsid+'/'+clientid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_subjects(clientid, callback) {
+		$.get('/home_client/client_subjects/'+clientid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_keywordsfromsubject(subjectid, callback) {
+		$.get('/home_client/subject_keywords/'+subjectid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_tveiculos(callback) {
+		$.get('/home_client/get_tveiculos', function(data) {
 			callback(data);
 		});
 	};

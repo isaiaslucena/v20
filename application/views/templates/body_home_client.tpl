@@ -271,47 +271,39 @@
 							<div class="col-sm-6 col-md-6 col-lg-6">
 								<div class="form-group">
 									<label>Assunto</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adssubject" class="selectpicker form-control"
+									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Palavra-chave</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adskeyword" class="selectpicker form-control disabled"
+									data-size="10" data-style="btn btn-sm btn-default"
+									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									title="Selecione o assunto" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Tipo de Veículo</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adstveiculo" class="selectpicker form-control"
+									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Veículo</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adsveiculo" class="selectpicker form-control disabled"
+									data-size="10" data-style="btn btn-sm btn-default"
+									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									title="Selecione o tipo de veículo" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Editoria</label>
-									<select class="selectpicker form-control" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-										<option value="opcao1">opcao1</option>
-										<option value="opcao2">opcao2</option>
-										<option value="opcao3">opcao3</option>
-										<option value="opcao4">opcao4</option>
+									<select id="adseditoria" class="selectpicker form-control disabled"
+									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-live-search="true" data-selected-text-format="count > 5" title="Selecione o veículo" multiple disabled>
 									</select>
 								</div>
 							</div>
@@ -419,10 +411,15 @@
 								</div>
 
 								<div class="form-group">
+									<label>Estado</label>
+									<select id="adsstates" class="selectpicker form-control" data-size="5" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+									</select>
+								</div>
+
+								<div class="form-group">
 									<label>Texto</label>
 									<input type="text" id="stext" name="stext" class="form-control input-sm" autocomplete="off">
 								</div>
-
 							</div>
 						</div>
 					</div>
