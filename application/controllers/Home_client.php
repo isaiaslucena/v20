@@ -257,6 +257,13 @@ class Home_client extends CI_Controller {
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
+	public function get_states(){
+		$data = $this->utf8_encoder($this->home_client_model->get_states());
+
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($data, JSON_PRETTY_PRINT);
+	}
+
 	public function single_news_keyword($idnews, $keywordid) {
 		$data = $this->home_client_model->get_single_news_keyword($idnews, $keywordid);
 		$data = $this->htmlchars_decoder($data);

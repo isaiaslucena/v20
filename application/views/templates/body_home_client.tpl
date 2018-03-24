@@ -412,7 +412,7 @@
 
 								<div class="form-group">
 									<label>Estado</label>
-									<select id="adsstates" class="selectpicker form-control" data-size="5" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+									<select id="adsstates" class="selectpicker form-control" data-size="10" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
 									</select>
 								</div>
 

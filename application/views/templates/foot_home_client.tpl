@@ -552,21 +552,54 @@
 				cliid = clientselid;
 			}
 
-			if (opttype == 'keyword') {
-				keywid = $(this).attr('id');
-				// console.log(this);
-				if($(this).is(':selected')) {
-					if(subkeywordsarr.indexOf(keywid) == -1) {
-						subkeywordsarr.push(keywid);
-						add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+			switch(opttype) {
+				case 'keyword':
+					keywid = $(this).attr('id');
+					if($(this).is(':selected')) {
+						if(subkeywordsarr.indexOf(keywid) == -1) {
+							subkeywordsarr.push(keywid);
+							add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+						}
+					} else {
+						subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
+							remove_keyword_news(keywid);
+							return value != keywid;
+						});
 					}
-				} else {
-					subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
-						remove_keyword_news(keywid);
-						return value != keywid;
-					});
-				}
+					break;
+				case 'adstveiculo':
+				console.log
+					// if($(this).is(':selected')) {
+					// 	if(subkeywordsarr.indexOf(keywid) == -1) {
+					// 		subkeywordsarr.push(keywid);
+					// 		add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+					// 	}
+					// } else {
+					// 	subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
+					// 		remove_keyword_news(keywid);
+					// 		return value != keywid;
+					// 	});
+					// }
+					break;
+				default:
+					console.log('Option Invalid!');
 			}
+
+
+			// if (opttype == 'keyword') {
+			// 	keywid = $(this).attr('id');
+			// 	if($(this).is(':selected')) {
+			// 		if(subkeywordsarr.indexOf(keywid) == -1) {
+			// 			subkeywordsarr.push(keywid);
+			// 			add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+			// 		}
+			// 	} else {
+			// 		subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
+			// 			remove_keyword_news(keywid);
+			// 			return value != keywid;
+			// 		});
+			// 	}
+			// }
 		});
 	});
 
@@ -663,6 +696,22 @@
 		}
 	});
 
+	get_tveiculos(function(data) {
+		data.map(function(val, index) {
+			html = '<option data-type="adstveiculo" data-tveiculoid="'+val.Id+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+			$('#adstveiculo').append(html);
+		});
+		$('#adstveiculo').selectpicker('refresh');
+	});
+
+	get_states(function(data) {
+		data.map(function(val, index) {
+			html = '<option data-type="adsstates" data-stateid="'+val.id+'" value="'+val.uf+'" title="'+val.uf+'">'+val.nome+'</option>';
+			$('#adsstates').append(html);
+		});
+		$('#adsstates').selectpicker('refresh');
+	});
+
 	if (clientselb) {
 		subkeywordsarr = [];
 		tvarr = [], varr = [], earr = [], pcarr = [];
@@ -687,13 +736,6 @@
 			});
 			$('#adssubject').selectpicker('refresh');
 		});
-		get_tveiculos(function(data) {
-			data.map(function(val, index) {
-				html = '<option data-tveiculoid="'+val.Id+'" value="'+val.Nome+'">'+val.Nome+'</option>';
-				$('#adstveiculo').append(html);
-			});
-			$('#adstveiculo').selectpicker('refresh');
-		});
 	}
 
 	$('#btnasearch').click(function(event) {
@@ -709,8 +751,7 @@
 
 		swal({
 			title: "Carregando...",
-			// type: "warning",
-			// imageUrl: "/assets/imgs/loading.gif",
+			type: "info",
 			width: swalwidth,
 			showCancelButton: false,
 			showConfirmButton: false,
@@ -728,7 +769,7 @@
 		}
 
 		swal({
-			title: "",
+			title: "Pronto!",
 			type: "success",
 			width: swalwidth,
 			showCancelButton: false,
@@ -986,7 +1027,7 @@
 						keywordgf = kval.Grifar;
 						keywordcount = kval.QNoticias;
 						if (keywordcount != null) {
-							html += '<option id="'+keywordid+'" data-type="keyword" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
+							html += '<option data-type="keyword" data-keywordid="'+keywordid+'" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
 							// keywordcount = 0;
 						}
 					});
@@ -1173,6 +1214,12 @@
 
 	function get_tveiculos(callback) {
 		$.get('/home_client/get_tveiculos', function(data) {
+			callback(data);
+		});
+	};
+
+	function get_states(callback) {
+		$.get('/home_client/get_states', function(data) {
 			callback(data);
 		});
 	};

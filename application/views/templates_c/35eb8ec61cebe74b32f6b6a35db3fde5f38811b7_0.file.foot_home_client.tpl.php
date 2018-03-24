@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-23 15:24:17
+/* Smarty version 3.1.30, created on 2018-03-23 17:14:36
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab54651a98d74_68372984',
+  'unifunc' => 'content_5ab5602ce4d773_29682487',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1521829301,
+      1 => 1521836074,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ab54651a98d74_68372984 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab5602ce4d773_29682487 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10012209665ab54651a68fc0_76606578', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16585663025ab5602ce21369_06714780', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_10012209665ab54651a68fc0_76606578 extends Smarty_Internal_Block
+class Block_16585663025ab5602ce21369_06714780 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -594,21 +594,53 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				cliid = clientselid;
 			}
 
-			if (opttype == 'keyword') {
-				keywid = $(this).attr('id');
-				// console.log(this);
-				if($(this).is(':selected')) {
-					if(subkeywordsarr.indexOf(keywid) == -1) {
-						subkeywordsarr.push(keywid);
-						add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+			switch(opttype) {
+				case 'keyword':
+					keywid = $(this).attr('id');
+					if($(this).is(':selected')) {
+						if(subkeywordsarr.indexOf(keywid) == -1) {
+							subkeywordsarr.push(keywid);
+							add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+						}
+					} else {
+						subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
+							remove_keyword_news(keywid);
+							return value != keywid;
+						});
 					}
-				} else {
-					subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
-						remove_keyword_news(keywid);
-						return value != keywid;
-					});
-				}
+					break;
+				case 'adstveiculo':
+					if($(this).is(':selected')) {
+						if(subkeywordsarr.indexOf(keywid) == -1) {
+							subkeywordsarr.push(keywid);
+							add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+						}
+					} else {
+						subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
+							remove_keyword_news(keywid);
+							return value != keywid;
+						});
+					}
+					break;
+				default:
+					console.log('Option Invalid!');
 			}
+
+
+			// if (opttype == 'keyword') {
+			// 	keywid = $(this).attr('id');
+			// 	if($(this).is(':selected')) {
+			// 		if(subkeywordsarr.indexOf(keywid) == -1) {
+			// 			subkeywordsarr.push(keywid);
+			// 			add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+			// 		}
+			// 	} else {
+			// 		subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
+			// 			remove_keyword_news(keywid);
+			// 			return value != keywid;
+			// 		});
+			// 	}
+			// }
 		});
 	});
 
@@ -705,6 +737,22 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		}
 	});
 
+	get_tveiculos(function(data) {
+		data.map(function(val, index) {
+			html = '<option data-type="adstveiculo" data-tveiculoid="'+val.Id+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+			$('#adstveiculo').append(html);
+		});
+		$('#adstveiculo').selectpicker('refresh');
+	});
+
+	get_states(function(data) {
+		data.map(function(val, index) {
+			html = '<option data-type="adsstates" data-stateid="'+val.id+'" value="'+val.uf+'" title="'+val.uf+'">'+val.nome+'</option>';
+			$('#adsstates').append(html);
+		});
+		$('#adsstates').selectpicker('refresh');
+	});
+
 	if (clientselb) {
 		subkeywordsarr = [];
 		tvarr = [], varr = [], earr = [], pcarr = [];
@@ -729,13 +777,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			});
 			$('#adssubject').selectpicker('refresh');
 		});
-		get_tveiculos(function(data) {
-			data.map(function(val, index) {
-				html = '<option data-tveiculoid="'+val.Id+'" value="'+val.Nome+'">'+val.Nome+'</option>';
-				$('#adstveiculo').append(html);
-			});
-			$('#adstveiculo').selectpicker('refresh');
-		});
 	}
 
 	$('#btnasearch').click(function(event) {
@@ -751,8 +792,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 		swal({
 			title: "Carregando...",
-			// type: "warning",
-			// imageUrl: "/assets/imgs/loading.gif",
+			type: "info",
 			width: swalwidth,
 			showCancelButton: false,
 			showConfirmButton: false,
@@ -770,7 +810,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		}
 
 		swal({
-			title: "",
+			title: "Pronto!",
 			type: "success",
 			width: swalwidth,
 			showCancelButton: false,
@@ -1215,6 +1255,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 	function get_tveiculos(callback) {
 		$.get('/home_client/get_tveiculos', function(data) {
+			callback(data);
+		});
+	};
+
+	function get_states(callback) {
+		$.get('/home_client/get_states', function(data) {
 			callback(data);
 		});
 	};

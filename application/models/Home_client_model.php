@@ -499,7 +499,7 @@ class Home_client_model extends CI_Model {
 								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id
 								INNER JOIN Veiculo ve ON ve.Id = nt.idVeiculo
 								INNER JOIN TipoVeiculo tve ON tve.Id = ve.idTipoVeiculo
-								WHERE ent.IdEmpresa = $idclient AND
+								WHERE ent.IdEmpresa = $idclient AND tve.Id NOT IN (17,27,26,24,23) AND
 								nt.Data >= '$startdate' AND nt.Data <= '$enddate'
 								GROUP BY tve.Id, tve.Nome";
 		return $this->db->query($sqlquery)->result_array();
@@ -536,6 +536,11 @@ class Home_client_model extends CI_Model {
 								nt.Data >= '$startdate' AND nt.Data <= '$enddate'
 								GROUP BY est.id, est.uf, est.nome
 								ORDER BY est.nome ASC";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function get_states() {
+		$sqlquery =	"SELECT id, uf, nome FROM dados_estados";
 		return $this->db->query($sqlquery)->result_array();
 	}
 
