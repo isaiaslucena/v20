@@ -23,7 +23,6 @@
 				</div>
 			</div>
 
-
 			{* C3 Charts *}
 			<div class="row">
 				<div class="col-sm-4 col-md-4 col-lg-4 element">
@@ -104,12 +103,21 @@
 
 			{* Butons *}
 			<div class="row">
-					<div class="col-sm-6 col-md-6 col-lg-6 element">
+					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
-							<div id="div1btns" class="panel-body text-center">
-								<button id="btnasearch" class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
-								<button id="btnmyclipp" class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
-								<button id="btncharts" class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
+							<div class="panel-body text-center">
+								<div class=btn-group>
+									<button id="btnasearch" class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
+									<button id="btnmyclipp" class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
+									<button id="btncharts" class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
+								</div>
+
+								<div class=btn-group>
+									<button id="btnnpapper" class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
+									<button id="btnepdf" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
+									<button id="btneexcel" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
+									<button id="btnforward" class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -117,10 +125,7 @@
 					<div class="col-sm-6 col-md-6 col-lg-6 element">
 						<div class="hpanel">
 							<div id="div2btns" class="panel-body text-center">
-								<button id="btnnpapper" class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
-								<button id="btnepdf" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
-								<button id="btneexcel" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
-								<button id="btnforward" class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
+
 							</div>
 						</div>
 					</div>
