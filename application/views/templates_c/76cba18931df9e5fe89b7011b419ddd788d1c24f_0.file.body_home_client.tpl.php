@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-26 19:14:08
+/* Smarty version 3.1.30, created on 2018-03-27 13:59:18
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab970b020f2d6_32612476',
+  'unifunc' => 'content_5aba7866d04235_20892679',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522102432,
+      1 => 1522169891,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ab970b020f2d6_32612476 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aba7866d04235_20892679 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14409664265ab970b01f3780_61234516', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20940836805aba7866cea4e8_37117014', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_14409664265ab970b01f3780_61234516 extends Smarty_Internal_Block
+class Block_20940836805aba7866cea4e8_37117014 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -91,9 +91,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<h4>Quantidade por estado</h4>
 							</div>
 							<br>
-							<div id="brmap" class="mapcontainer center-block img-responsive">
+							<div id="brmap" class="mapcontainer">
 								<div class="map"></div>
-								<div class="areaLegend" style="display: none;"></div>
+								<div class="areaLegend" style="position: absolute; top: 55%"></div>
 							</div>
 						</div>
 					</div>
@@ -144,7 +144,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12">
 									<div class="center-block text-center">
-										<button id="dpbtn" class="ladda-button ladda-button-demo btn btn-success" data-style="zoom-in">Confirmar</button>
+										<button id="dpbtn" class="ladda-button btn btn-success" data-style="zoom-in">Confirmar</button>
 									</div>
 								</div>
 							</div>
@@ -305,11 +305,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		<div class="modal fade" id="advancedsearch" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg" style="margin-top: 15px">
 				<div class="modal-content">
-
 					<div class="modal-header text-center" style="padding: 15px">
 						<h3>Pesquisa avançada</h3>
 					</div>
-
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-sm-6 col-md-6 col-lg-6">
@@ -355,19 +353,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							<div class="col-sm-6 col-md-6 col-lg-6">
 								<div class="form-group">
 									<label>Data</label>
-									<div class="input-daterange input-group" id="datepicker">
-										<input required type="text" class="input-sm form-control" id="startdate" name="startdate" placeholder="Início" autocomplete="off"/>
+									<div class="input-daterange input-group" id="adsdatepicker">
+										<input required type="text" class="input-sm form-control" id="adsstartdate" name="adsstartdate" placeholder="Início" autocomplete="off"/>
 										<span class="input-group-addon">Até</span>
-										<input required type="text" class="input-sm form-control" id="enddate" name="enddate" placeholder="Fim" autocomplete="off"/>
+										<input required type="text" class="input-sm form-control" id="adsenddate" name="adsenddate" placeholder="Fim" autocomplete="off"/>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label>Hora</label>
 									<div class="input-daterange input-group">
-										<input required type="text" class="input-sm form-control clockpicker" id="starttime" name="starttime" placeholder="Início" value="00:00" autocomplete="off"/>
+										<input required type="text" class="input-sm form-control clockpicker" id="adsstarttime" name="adsstarttime" placeholder="Início" value="00:00" autocomplete="off"/>
 										<span class="input-group-addon">Até</span>
-										<input required type="text" class="input-sm form-control clockpicker" id="endtime" name="endtime" placeholder="Fim" value="23:59" autocomplete="off"/>
+										<input required type="text" class="input-sm form-control clockpicker" id="adsendtime" name="adsendtime" placeholder="Fim" value="23:59" autocomplete="off"/>
 									</div>
 								</div>
 
@@ -378,7 +376,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<div>
 												<label style="font-weight: normal;">
 													<div class="iradio_square-blue" style="position: relative;">
-														<input type="radio" name="destaque" class="i-checks" style="position: absolute; opacity: 0;">
+														<input type="radio" name="adsdestaque" class="i-checks" style="position: absolute; opacity: 0;">
 														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
 													</div>
 												</label>
@@ -387,7 +385,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<div>
 												<label style="font-weight: normal;">
 													<div class="iradio_square-blue" style="position: relative;">
-														<input type="radio" name="destaque" class="i-checks" style="position: absolute; opacity: 0;">
+														<input type="radio" name="adsdestaque" class="i-checks" style="position: absolute; opacity: 0;">
 														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
 													</div>
 												</label>
@@ -462,15 +460,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 								<div class="form-group">
 									<label>Texto</label>
-									<input type="text" id="stext" name="stext" class="form-control input-sm" autocomplete="off">
+									<input type="text" id="adstext" name="stext" class="form-control input-sm" autocomplete="off">
 								</div>
 							</div>
 						</div>
 					</div>
-
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar </button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Pesquisar</button>
+						<button id="adsbtn" type="button" class="ladda-button btn btn-primary" data-style="zoom-in">Pesquisar</button>
 					</div>
 				</div>
 			</div>

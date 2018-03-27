@@ -148,16 +148,19 @@
 			display: inline-block;
 		}
 
-		.mapael .map {
-			margin: auto;
+		.map{
 			position: relative;
-			top: 50%;
-			left: 12%;
+			margin: auto;
+			left: 15%;
 		}
 
-		.mapael .mapTooltip {
+		.map svg{
+			height: 300px;
+		}
+
+		.mapTooltip {
 			position: absolute;
-			background-color: #D1D1D1;
+			background-color: #B4B4B4;
 			moz-opacity: 0.70;
 			opacity: 0.70;
 			filter: alpha(opacity=70);
@@ -253,8 +256,8 @@
 
 		video::-internal-media-controls-download-button { display:none; }
 		video::-webkit-media-controls-enclosure { overflow:hidden; }
-		video::-webkit-media-controls-panel { width: calc(100% + 30px); }
+		video::-webkit-media-controls-panel { width: calc(100% + 35px); }
 
 		audio::-internal-media-controls-download-button { display:none; }
 		audio::-webkit-media-controls-enclosure { overflow:hidden; }
-		audio::-webkit-media-controls-panel { width: calc(100% + 30px); }
+		audio::-webkit-media-controls-panel { width: calc(100% + 35px); }

@@ -28,6 +28,7 @@
 	var todaydate = year+'-'+month+'-'+day;
 	var todaydate_br = day+'/'+month+'/'+year;
 	var cdatebtn = $('#dpbtn').ladda();
+	var cadsbtn = $('#adsbtn').ladda();
 
 	var tablenews = $('#tablenews').DataTable({
 		'autoWidth': false,
@@ -136,27 +137,23 @@
 		}
 	});
 
-	$('body audio').bind('contextmenu', function() { return false; });
-	$('body video').bind('contextmenu', function() { return false; });
-	$('body img').bind('contextmenu', function() { return false; });
-
-	$('#datepicker').datepicker({
+	$('#adsdatepicker').datepicker({
 		format: "dd/mm/yyyy",
 		language: 'pt-BR',
 		todayBtn: true,
 		todayHighlight: true,
 		autoclose: true
 		}).on('change', function(){
-			$('#enddate').focus();
+			$('#adsenddate').focus();
 	});
 
-	$('#starttime').clockpicker({
+	$('#adsstarttime').clockpicker({
 		autoclose: true,
 	}).on('change', function(){
-			$('#endtime').focus();
+			$('#adsendtime').focus();
 	});
 
-	$('#endtime').clockpicker({
+	$('#adsendtime').clockpicker({
 		autoclose: true
 	});
 
@@ -212,7 +209,31 @@
 		count_states(cid, fdpstartdate, fdpenddate);
 		count_client(cid, fdpstartdate, fdpenddate);
 		get_subject_keywords(cid, fdpstartdate, fdpenddate, true);
-		add_keyword_news(subkeywordsarr[0], cliid, fdpstartdate, fdpenddate, true);
+		// console.log(subkeywordsarr[0]);
+		// add_keyword_news(subkeywordsarr[0], cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
+	});
+
+	cadsbtn.click(function(event) {
+		cadsbtn.ladda('start');
+
+		if (clientselid == 0) {
+			cliid = cid;
+		} else {
+			cliid = clientselid;
+		}
+
+		adsstartdate = $('#adsstartdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+		adsenddate = $('#adsenddate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+
+		$('#dpsdate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
+		$('#dpedate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
+
+		count_vtype(cid, adsstartdate, adsenddate);
+		count_rating(cid, adsstartdate, adsenddate);
+		count_states(cid, adsstartdate, adsenddate);
+		count_client(cid, adsstartdate, adsenddate);
+		get_subject_keywords(cid, adsstartdate, adsenddate, true);
+		add_keyword_news(subkeywordsarr[0], cliid, adsstartdate, adsenddate, true, 'advancedsearch');
 	});
 
 	$('.modal').on('show.bs.modal', function(event) {
@@ -554,11 +575,11 @@
 
 			switch(opttype) {
 				case 'keyword':
-					keywid = $(this).attr('id');
+					keywid = $(this).attr('data-keywordid');
 					if($(this).is(':selected')) {
 						if(subkeywordsarr.indexOf(keywid) == -1) {
 							subkeywordsarr.push(keywid);
-							add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
+							add_keyword_news(keywid, cliid, fopstartdate, fopenddate, false, 'subjectkeyword');
 						}
 					} else {
 						subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
@@ -567,19 +588,22 @@
 						});
 					}
 					break;
-				case 'adstveiculo':
-				console.log
-					// if($(this).is(':selected')) {
-					// 	if(subkeywordsarr.indexOf(keywid) == -1) {
+				case 'adssubject':
+					subjid = $(this).attr('data-subjectid');
+					if($(this).is(':selected')) {
+						console.log('Advanced search: Assunto id '+subjid+' selected');
+
+						// if(subkeywordsarr.indexOf(keywid) == -1) {
 					// 		subkeywordsarr.push(keywid);
 					// 		add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
 					// 	}
-					// } else {
+					} else {
+						console.log('Advanced search: Assunto id '+subjid+' deselected');
 					// 	subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
 					// 		remove_keyword_news(keywid);
 					// 		return value != keywid;
 					// 	});
-					// }
+					}
 					break;
 				default:
 					console.log('Option Invalid!');
@@ -616,10 +640,11 @@
 			name: 'brasil',
 			defaultArea: {
 				attrs: {
-					stroke: "##FFFFFF",
+					"stroke": "##FFFFFF",
 					"stroke-width": 2
 				},
 					attrsHover: {
+					"fill": "#838383",
 					"stroke-width": 2
 				}
 			}
@@ -726,12 +751,12 @@
 		count_rating(clientselid, todaydate, todaydate);
 		count_states(clientselid, todaydate, todaydate);
 		count_client(clientselid, todaydate, todaydate);
-		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00-03:00'));
+		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
 		get_subject_keywords(clientselid, todaydate, todaydate, true);
 
 		get_subjects(clientselid, function(data){
 			data.map(function(val, index) {
-				html = '<option data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+				html = '<option data-type="adssubject" data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
 				$('#adssubject').append(html);
 			});
 			$('#adssubject').selectpicker('refresh');
@@ -900,7 +925,7 @@
 								{
 									max: 0,
 									attrs: {
-										fill: "#004351"
+										fill: "#CFCFCF"
 									},
 									label: "Nenhum"
 								},
@@ -990,9 +1015,7 @@
 	function get_subject_keywords(clientid, startdate, enddate, updatesubjects = false) {
 		$.get('/home_client/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
 			function(cdata, textStatus, xhr) {
-				// console.log(cdata);
 				subjectskeywords = cdata;
-				// console.log(subjectskeywords.length);
 
 				if (updatesubjects) {
 					$('#sublist .selectpicker').selectpicker('destroy');
@@ -1035,7 +1058,6 @@
 					html += '</select>';
 					$('#sublist').append(html);
 					$('#sublist .selectpicker').selectpicker('render');
-					// $('#sublist .selectpicker').selectpicker('refresh');
 				});
 
 				var result = $.grep(subjectskeywords, function(e){ return e.IdAssunto == subjecctid; });
@@ -1056,7 +1078,7 @@
 
 				subkeywordsarr.push(keywordidchosen);
 				$('#sublist .selectpicker').selectpicker('val', keywordnmchosen);
-				add_keyword_news(keywordidchosen, clientid, startdate, enddate, true);
+				add_keyword_news(keywordidchosen, clientid, startdate, enddate, true, 'startpage');
 			}
 		);
 	};
@@ -1085,7 +1107,8 @@
 		});
 	};
 
-	function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false) {
+	function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false, type) {
+		$('.dataTables_processing').show();
 		$.get('/home_client/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
 		function(redata, textStatus, xhr) {
 			// console.log(redata.length);
@@ -1169,9 +1192,23 @@
 				$(rowNode).attr('data-keywordid', keywordid);
 			});
 
-			cdatebtn.ladda('stop');
+			switch(type) {
+				case 'advancedsearch':
+					cadsbtn.ladda('stop');
+					$('#advancedsearch').modal('hide');
+					break;
+				case 'selecteddate':
+					cdatebtn.ladda('stop');
+					salertloadingdone(isTouchDevice());
+					break;
+				case 'subjectkeyword':
+					break;
+				default:
+					salertloadingdone(isTouchDevice());
+					break;
+			}
 
-			salertloadingdone(isTouchDevice());
+			$('.dataTables_processing').hide();
 		});
 	};
 
