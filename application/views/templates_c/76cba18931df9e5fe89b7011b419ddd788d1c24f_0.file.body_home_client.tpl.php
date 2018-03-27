@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-26 15:28:12
+/* Smarty version 3.1.30, created on 2018-03-26 19:14:08
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab93bbcbc53b2_71648185',
+  'unifunc' => 'content_5ab970b020f2d6_32612476',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522072932,
+      1 => 1522102432,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ab93bbcbc53b2_71648185 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab970b020f2d6_32612476 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16901084485ab93bbcba9cd4_84561041', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14409664265ab970b01f3780_61234516', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_16901084485ab93bbcba9cd4_84561041 extends Smarty_Internal_Block
+class Block_14409664265ab970b01f3780_61234516 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -126,13 +126,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 				<div class="col-sm-5 col-md-5 col-lg-5 element">
 					<div class="hpanel stats">
-						<div class="panel-body h-200 center-block">
+						<div class="panel-body h-200">
 							
 							<div class="row">
-								<div class="col-sm-12 col-md-12 col-lg-12">
+								<div class="col-sm-12 col-md-12 col-lg-12 text-center">
 									<div id="event_period">
-										<div id="dpsdate" type="text" class="actual_range text-center"><h5>DATA INICIAL</h5></div>
-										<div id="dpedate" type="text" class="actual_range text-center"><h5>DATA FINAL</h5></div>
+										<div id="dpsdate" type="text" class="actual_range">
+											<h5 class="text-center">DATA INICIAL</h5>
+										</div>
+										<div id="dpedate" type="text" class="actual_range">
+											<h5 class="text-center">DATA FINAL</h5>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -154,26 +158,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
 							<div class="panel-body text-center">
-								<div class=btn-group>
-									<button id="btnasearch" class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
-									<button id="btnmyclipp" class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
-									<button id="btncharts" class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
-								</div>
-
-								<div class=btn-group>
-									<button id="btnnpapper" class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
-									<button id="btnepdf" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
-									<button id="btneexcel" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
-									<button id="btnforward" class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-6 col-lg-6 element">
-						<div class="hpanel">
-							<div id="div2btns" class="panel-body text-center">
-
+								<button id="btnasearch" class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
+								<button id="btnmyclipp" class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
+								<button id="btncharts" class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
+								<button id="btnnpapper" class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
+								<button id="btnepdf" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
+								<button id="btneexcel" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
+								<button id="btnforward" class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
 							</div>
 						</div>
 					</div>

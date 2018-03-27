@@ -231,7 +231,14 @@
 
 		.hollow-dots-spinner .dot:nth-child(3) {
 			animation-delay: calc(100ms * 3);
+		}
 
+		.mgr-center{
+			margin: auto;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
 		}
 
 		@keyframes hollow-dots-spinner-animation {
