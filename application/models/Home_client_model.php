@@ -132,6 +132,21 @@ class Home_client_model extends CI_Model {
 		return $this->db->query($sqlquery)->result_array();
 	}
 
+	public function get_veiculos_tipoveiculos($tveiculoid) {
+		$sqlquery = "SELECT * FROM Veiculo WHERE idTipoVeiculo = $tveiculoid ORDER BY Nome ASC";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function get_editorias_veiculos($veiculoid) {
+		$sqlquery = "SELECT * FROM Editorias WHERE idVeiculo = $veiculoid ORDER BY Nome ASC";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function get_editorias_sites($qtext) {
+		$sqlquery = "SELECT Id, Nome FROM Veiculo WHERE idTipoVeiculo = 4 AND Nome LIKE '%".$qtext."%' ORDER BY Nome ASC";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
 	public function get_client_subjectskeywords($idclient, $startdate = null, $enddate = null) {
 		if (is_null($startdate)) {
 			$startdate = date('Y-m-d');

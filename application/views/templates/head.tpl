@@ -13,6 +13,7 @@
 	<script src="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-pt_BR.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 
 	<!--C3 Charts-->
 	<script src="http://webapplayers.com/homer_admin-v2.0/light-shadow/vendor/d3/d3.min.js"></script>

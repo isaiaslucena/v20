@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-27 19:23:49
+/* Smarty version 3.1.30, created on 2018-03-28 15:25:34
   from "/app/application/views/templates/head.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abac475191b48_00299128',
+  'unifunc' => 'content_5abbde1eec8627_12270949',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9fa740764ad3014055f0469798871ffc26655bac' => 
     array (
       0 => '/app/application/views/templates/head.tpl',
-      1 => 1522189425,
+      1 => 1522260904,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:layout.tpl' => 1,
   ),
 ),false)) {
-function content_5abac475191b48_00299128 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abbde1eec8627_12270949 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10569643435abac47518aa37_44833095', 'head');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14624356205abbde1eec03e5_29192410', 'head');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'head'} */
-class Block_10569643435abac47518aa37_44833095 extends Smarty_Internal_Block
+class Block_14624356205abbde1eec03e5_29192410 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -69,6 +69,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 >
 	<?php echo '<script'; ?>
  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-pt_BR.min.js"><?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"><?php echo '</script'; ?>
 >
 
 	<!--C3 Charts-->

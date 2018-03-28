@@ -298,6 +298,11 @@
 									</select>
 								</div>
 								<div class="form-group">
+									<label>Veículo - Sites</label>
+									<input id="adsveiculosites" type="text" class="form-control typeahead">
+									</select>
+								</div>
+								<div class="form-group">
 									<label>Editoria</label>
 									<select id="adseditoria" class="selectpicker form-control disabled"
 									data-size="10" data-style="btn btn-sm btn-default" data-live-search="true"
@@ -327,7 +332,7 @@
 
 								<div class="form-group">
 									<label>Estado</label>
-									<select id="adsstates" class="selectpicker form-control" data-size="10" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+									<select id="adsstates" class="selectpicker form-control" data-size="10" data-style="btn btn-sm btn-default" data-live-search="true" multiple>
 									</select>
 								</div>
 

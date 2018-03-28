@@ -18,6 +18,7 @@
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
+	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
 
 	var d = new Date();
 	var day = d.getDate();
@@ -245,6 +246,10 @@
 
 	$('.modal').on('hide.bs.modal', function(event) {
 		$('html').css('overflow-y', 'auto');
+	});
+
+	$('#advancedsearch').on('shown.bs.modal', function(event){
+		adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
 	});
 
 	$('#modal-texti').slimScroll({
@@ -572,7 +577,7 @@
 	});
 
 	$(document).on('change', 'select', function(event) {
-		$(this).find("option").each(function() {
+		$(this).find('option').each(function() {
 			opttype = $(this).attr('data-type');
 			fopstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 			fopenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
@@ -600,23 +605,119 @@
 					break;
 				case 'adssubject':
 					subjid = $(this).attr('data-subjectid');
-					if($(this).is(':selected')) {
-						console.log('Advanced search: Assunto id '+subjid+' selected');
+					subname = $(this).val();
 
-						// if(subkeywordsarr.indexOf(keywid) == -1) {
-					// 		subkeywordsarr.push(keywid);
-					// 		add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
-					// 	}
+					if($(this).is(':selected')) {
+						if(adssubjectarr.indexOf(subjid) == -1) {
+							adssubjectarr.push(subjid);
+
+							subsname = $(this).val();
+							$('#adskeyword').selectpicker({title: 'Aguarde...'});
+							$('#adskeyword').selectpicker('refresh');
+							get_keywordsfromsubject(subjid, function(data) {
+								data.map(function(val, index) {
+									html =	'<option data-type="adskeyword" data-subjectid="'+val.idAssunto+'" data-keywordid="'+val.Id+'" '+
+													'data-subtext="('+subsname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+									$('#adskeyword').append(html);
+								})
+
+								$('#adskeyword').removeAttr('disabled');
+								$('#adskeyword').removeClass('disabled');
+								$('#adskeyword').selectpicker({title: 'Nada selecionado'});
+								$('#adskeyword').selectpicker('refresh');
+							});
+						}
 					} else {
-						console.log('Advanced search: Assunto id '+subjid+' deselected');
-					// 	subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
-					// 		remove_keyword_news(keywid);
-					// 		return value != keywid;
-					// 	});
+						adssubjectarr = jQuery.grep(adssubjectarr, function(value) {
+							$('#adskeyword').find('[data-subjectid='+subjid+']').remove();
+
+							return value != subjid;
+						});
+						$('#adskeyword').selectpicker('refresh');
+					}
+					break;
+				case 'adskeyword':
+					keywid = $(this).attr('data-subjectid');
+					keywname = $(this).val();
+
+					if($(this).is(':selected')) {
+						if(adskeywordarr.indexOf(keywid) == -1) {
+								adskeywordarr.push(keywid);
+							}
+					} else {
+						adskeywordarr = jQuery.grep(adskeywordarr, function(value) {
+							return value != keywid;
+						});
+					}
+					break;
+				case 'adstveiculo':
+					tveid = $(this).attr('data-tveiculoid');
+					tvename = $(this).val();
+
+					if($(this).is(':selected')) {
+						if(adstveiculoarr.indexOf(tveid) == -1) {
+							adstveiculoarr.push(tveid);
+
+							tvesname = $(this).val();
+							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
+							$('#adsveiculo').selectpicker('refresh');
+							get_veiculosfromtipoveiculos(tveid, function(data) {
+								data.map(function(val, index) {
+									html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
+													'data-subtext="('+tvesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+									$('#adsveiculo').append(html);
+								})
+
+								$('#adsveiculo').removeAttr('disabled');
+								$('#adsveiculo').removeClass('disabled');
+								$('#adsveiculo').selectpicker({title: 'Nada selecionado'});
+								$('#adsveiculo').selectpicker('refresh');
+							});
+						}
+					} else {
+						adstveiculoarr = jQuery.grep(adstveiculoarr, function(value) {
+							$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
+
+							return value != tveid;
+						});
+						$('#adsveiculo').selectpicker('refresh');
+					}
+					break;
+				case 'adsveiculo':
+					veid = $(this).attr('data-veiculoid');
+					vename = $(this).val();
+
+					if($(this).is(':selected')) {
+						if(adsveiculoarr.indexOf(tveid) == -1) {
+							adsveiculoarr.push(tveid);
+
+							vesname = $(this).val();
+							$('#adseditoria').selectpicker({title: 'Aguarde...'});
+							$('#adseditoria').selectpicker('refresh');
+							get_editoriasfromveiculos(veid, function(data) {
+								data.map(function(val, index) {
+									html =	'<option data-type="adseditoria" data-veiculoid="'+val.idVeiculo+'" data-editoriaid="'+val.Id+'" '+
+													'data-subtext="('+vesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+									$('#adseditoria').append(html);
+								})
+
+								$('#adseditoria').removeAttr('disabled');
+								$('#adseditoria').removeClass('disabled');
+								$('#adseditoria').selectpicker({title: 'Nada selecionado'});
+								$('#adseditoria').selectpicker('refresh');
+							});
+						}
+					} else {
+						adsveiculoarr = jQuery.grep(adsveiculoarr, function(value) {
+							$('#adseditoria').find('[data-veiculoid='+veid+']').remove();
+
+							return value != veid;
+						});
+						$('#adseditoria').selectpicker('refresh');
 					}
 					break;
 				default:
-					console.log('Option Invalid!');
+					console.log('Option not recognized!');
 			}
 		});
 	});
@@ -729,6 +830,37 @@
 			$('#adsstates').append(html);
 		});
 		$('#adsstates').selectpicker('refresh');
+	});
+
+	var sites = new Bloodhound({
+			datumTokenizer: function (datum) {
+					return Bloodhound.tokenizers.whitespace(datum.value);
+			},
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+					url: '/home_client/editorias_sites?query=%QUERY',
+					filter: function (sites) {
+						console.log(sites);
+							// Map the remote source JSON array to a JavaScript object array
+							return $.map(sites.results, function (site) {
+									return {
+											value: site.Nome
+									};
+							});
+					}
+			}
+	});
+
+	sites.initialize();
+
+	// Instantiate the Typeahead UI
+	$('#adsveiculosites').typeahead(null, {
+			// Use 'value' as the displayKey because the filter function
+			// returns suggestions in a javascript object with a variable called 'value'
+			displayKey: 'value',
+			source: sites.ttAdapter(),
+			minLength: 3,
+			limit: 20
 	});
 
 	if (clientselb) {
@@ -1241,6 +1373,18 @@
 
 	function get_keywordsfromsubject(subjectid, callback) {
 		$.get('/home_client/subject_keywords/'+subjectid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_veiculosfromtipoveiculos(tveiculoid, callback) {
+		$.get('/home_client/veiculos_tipoveiculos/'+tveiculoid, function(data) {
+			callback(data);
+		});
+	};
+
+	function get_editoriasfromveiculos(veiculoid, callback) {
+		$.get('/home_client/editorias_veiculos/'+veiculoid, function(data) {
 			callback(data);
 		});
 	};

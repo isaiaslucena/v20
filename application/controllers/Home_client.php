@@ -157,6 +157,27 @@ class Home_client extends CI_Controller {
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
+	public function veiculos_tipoveiculos($tveiculoid) {
+		$data = $this->utf8_encoder($this->home_client_model->get_veiculos_tipoveiculos($tveiculoid));
+
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function editorias_veiculos($veiculoid) {
+		$data = $this->utf8_encoder($this->home_client_model->get_editorias_veiculos($veiculoid));
+
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function editorias_sites($qtext) {
+		$data = $this->utf8_encoder($this->home_client_model->get_editorias_sites(urldecode($qtext)));
+
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($data, JSON_PRETTY_PRINT);
+	}
+
 	public function get_tveiculos(){
 		$data = $this->utf8_encoder($this->home_client_model->get_tveiculos());
 
