@@ -215,7 +215,7 @@
 								<p id="datemediactni" class="text-muted"></p>
 								<p id="modaltitlevki" class="text-primary"></p>
 								<h3 id="mediactnti"></h3>
-								<p id="modal-texti" class="text-justify" style="max-height: 280px; overflow-y: auto"></p>
+								<p id="modal-texti" class="text-justify"></p>
 							</div>
 						</div>
 
@@ -245,10 +245,14 @@
 						</div>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
-						<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
-						<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
-						<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
-						<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+						<div class="row">
+							<div class="col-md-12">
+								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+								<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -266,7 +270,7 @@
 								<div class="form-group">
 									<label>Assunto</label>
 									<select id="adssubject" class="selectpicker form-control"
-									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-size="10" data-style="btn btn-sm btn-default"
 									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
@@ -274,14 +278,14 @@
 									<label>Palavra-chave</label>
 									<select id="adskeyword" class="selectpicker form-control disabled"
 									data-size="10" data-style="btn btn-sm btn-default"
-									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									data-live-search="true" data-selected-text-format="count > 5"
 									title="Selecione o assunto" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Tipo de Veículo</label>
 									<select id="adstveiculo" class="selectpicker form-control"
-									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-size="10" data-style="btn btn-sm btn-default"
 									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
@@ -289,15 +293,15 @@
 									<label>Veículo</label>
 									<select id="adsveiculo" class="selectpicker form-control disabled"
 									data-size="10" data-style="btn btn-sm btn-default"
-									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									data-live-search="true" data-selected-text-format="count > 5"
 									title="Selecione o tipo de veículo" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Editoria</label>
 									<select id="adseditoria" class="selectpicker form-control disabled"
-									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
-									data-live-search="true" data-selected-text-format="count > 5" title="Selecione o veículo" multiple disabled>
+									data-size="10" data-style="btn btn-sm btn-default" data-live-search="true"
+									data-selected-text-format="count > 5" title="Selecione o veículo" multiple disabled>
 									</select>
 								</div>
 							</div>
@@ -319,6 +323,17 @@
 										<span class="input-group-addon">Até</span>
 										<input required type="text" class="input-sm form-control clockpicker" id="adsendtime" name="adsendtime" placeholder="Fim" value="23:59" autocomplete="off"/>
 									</div>
+								</div>
+
+								<div class="form-group">
+									<label>Estado</label>
+									<select id="adsstates" class="selectpicker form-control" data-size="10" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label>Texto</label>
+									<input type="text" id="adstext" name="stext" class="form-control input-sm" autocomplete="off">
 								</div>
 
 								<div class="row">
@@ -402,17 +417,6 @@
 											</div>
 										</div>
 									</div>
-								</div>
-
-								<div class="form-group">
-									<label>Estado</label>
-									<select id="adsstates" class="selectpicker form-control" data-size="10" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label>Texto</label>
-									<input type="text" id="adstext" name="stext" class="form-control input-sm" autocomplete="off">
 								</div>
 							</div>
 						</div>

@@ -150,7 +150,7 @@
 	$('#adsstarttime').clockpicker({
 		autoclose: true,
 	}).on('change', function(){
-			$('#adsendtime').focus();
+		$('#adsendtime').focus();
 	});
 
 	$('#adsendtime').clockpicker({
@@ -174,7 +174,9 @@
 		count_states(cid, todaydate, todaydate);
 		count_client(cid, todaydate, todaydate);
 		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00-03:00'));
-		get_subject_keywords(cid, todaydate, todaydate, true);
+		get_subject_keywords(cid, todaydate, todaydate, true, function(keywid){
+			add_keyword_news(keywid, cid, todaydate, todaydate, true, 'startpage');
+		});
 	});
 
 	$('#bannerheader').on('load', function() {
@@ -208,9 +210,9 @@
 		count_rating(cid, fdpstartdate, fdpenddate);
 		count_states(cid, fdpstartdate, fdpenddate);
 		count_client(cid, fdpstartdate, fdpenddate);
-		get_subject_keywords(cid, fdpstartdate, fdpenddate, true);
-		// console.log(subkeywordsarr[0]);
-		// add_keyword_news(subkeywordsarr[0], cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
+		get_subject_keywords(cid, fdpstartdate, fdpenddate, true, function(keywid){
+			add_keyword_news(keywid, cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
+		});
 	});
 
 	cadsbtn.click(function(event) {
@@ -226,14 +228,15 @@
 		adsenddate = $('#adsenddate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
 		$('#dpsdate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
-		$('#dpedate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
+		$('#dpedate').datepicker('update', new Date(adsenddate+'T00:00:00'));
 
 		count_vtype(cid, adsstartdate, adsenddate);
 		count_rating(cid, adsstartdate, adsenddate);
 		count_states(cid, adsstartdate, adsenddate);
 		count_client(cid, adsstartdate, adsenddate);
-		get_subject_keywords(cid, adsstartdate, adsenddate, true);
-		add_keyword_news(subkeywordsarr[0], cliid, adsstartdate, adsenddate, true, 'advancedsearch');
+		get_subject_keywords(cid, adsstartdate, adsenddate, true, function(keywid){
+			add_keyword_news(keywid, cliid, adsstartdate, adsenddate, true, 'advancedsearch');
+		});
 	});
 
 	$('.modal').on('show.bs.modal', function(event) {
@@ -242,6 +245,13 @@
 
 	$('.modal').on('hide.bs.modal', function(event) {
 		$('html').css('overflow-y', 'auto');
+	});
+
+	$('#modal-texti').slimScroll({
+		height: '250px',
+		railVisible: true,
+		alwaysVisible: true,
+		touchScrollStep: 800
 	});
 
 	$('#showsinglenews').on('hide.bs.modal', function(event) {
@@ -300,8 +310,6 @@
 		var titlenid = titlec.attr('data-newsid');
 		var titlekid = titlec.attr('data-keywordid');
 		var titlecid = titlec.attr('data-clientid');
-
-		// titlec.parent().parent().removeClass('selected');
 
 		$('#showsinglenews').modal('show');
 		get_single_news(titlenid, titlecid, function(tndata) {
@@ -544,7 +552,8 @@
 	});
 
 	$('#btnselclo').click(function(event) {
-		$('#modal-texti').scrollTop(0);
+		// $('#modal-texti').scrollTop(0);
+		$('#modal-texti').slimScroll({ scrollTo: '0px' });
 		$('#mediactni').scrollTop(0);
 
 		btnsctrid = $(this).attr('data-trid');
@@ -557,7 +566,8 @@
 	});
 
 	document.getElementById('btnclose').addEventListener('click', function(){
-		document.getElementById('modal-texti').scrollTop = 0;
+		// document.getElementById('modal-texti').scrollTop = 0;
+		$('#modal-texti').slimScroll({ scrollTo: '0px' });
 		document.getElementById('mediactni').scrollTop = 0;
 	});
 
@@ -608,22 +618,6 @@
 				default:
 					console.log('Option Invalid!');
 			}
-
-
-			// if (opttype == 'keyword') {
-			// 	keywid = $(this).attr('id');
-			// 	if($(this).is(':selected')) {
-			// 		if(subkeywordsarr.indexOf(keywid) == -1) {
-			// 			subkeywordsarr.push(keywid);
-			// 			add_keyword_news(keywid, cliid, fopstartdate, fopenddate);
-			// 		}
-			// 	} else {
-			// 		subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
-			// 			remove_keyword_news(keywid);
-			// 			return value != keywid;
-			// 		});
-			// 	}
-			// }
 		});
 	});
 
@@ -752,7 +746,9 @@
 		count_states(clientselid, todaydate, todaydate);
 		count_client(clientselid, todaydate, todaydate);
 		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-		get_subject_keywords(clientselid, todaydate, todaydate, true);
+		get_subject_keywords(clientselid, todaydate, todaydate, true, function(keywid){
+			add_keyword_news(keywid, clientselid, todaydate, todaydate, true, 'startpage');
+		});
 
 		get_subjects(clientselid, function(data){
 			data.map(function(val, index) {
@@ -1012,7 +1008,7 @@
 		);
 	};
 
-	function get_subject_keywords(clientid, startdate, enddate, updatesubjects = false) {
+	function get_subject_keywords(clientid, startdate, enddate, updatesubjects = false, callback) {
 		$.get('/home_client/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
 			function(cdata, textStatus, xhr) {
 				subjectskeywords = cdata;
@@ -1037,9 +1033,10 @@
 					}
 
 					if (subjectcount != null) {
-						html = '<select id="'+subjectid+'" class="selectpicker" data-type="subject" '+
-										'data-style="btn-default btn-sm" data-size="10" data-width="150px" '+
-										'data-live-search="true" data-selected-text-format="count > 3" '+
+						html = '<select class="selectpicker" data-subjectid="'+subjectid+'" '+
+										'data-style="btn-default btn-sm" data-size="10" data-width="200px" '+
+										'data-actions-box="true" data-live-search="true" '+
+										'data-selected-text-format="count > 3" '+
 										'title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
 					}
 
@@ -1057,7 +1054,7 @@
 
 					html += '</select>';
 					$('#sublist').append(html);
-					$('#sublist .selectpicker').selectpicker('render');
+					$('#sublist .selectpicker').selectpicker('refresh');
 				});
 
 				var result = $.grep(subjectskeywords, function(e){ return e.IdAssunto == subjecctid; });
@@ -1078,7 +1075,8 @@
 
 				subkeywordsarr.push(keywordidchosen);
 				$('#sublist .selectpicker').selectpicker('val', keywordnmchosen);
-				add_keyword_news(keywordidchosen, clientid, startdate, enddate, true, 'startpage');
+				// add_keyword_news(keywordidchosen, clientid, startdate, enddate, true, 'startpage');
+				callback(keywordidchosen);
 			}
 		);
 	};
@@ -1111,8 +1109,6 @@
 		$('.dataTables_processing').show();
 		$.get('/home_client/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
 		function(redata, textStatus, xhr) {
-			// console.log(redata.length);
-
 			if (cleartable) {
 				tablenews.clear().draw();
 			}

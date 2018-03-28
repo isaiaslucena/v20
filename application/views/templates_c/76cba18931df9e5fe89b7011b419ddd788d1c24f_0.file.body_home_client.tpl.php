@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-27 13:59:18
+/* Smarty version 3.1.30, created on 2018-03-27 18:28:08
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aba7866d04235_20892679',
+  'unifunc' => 'content_5abab7685a1473_79684307',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522169891,
+      1 => 1522186084,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5aba7866d04235_20892679 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abab7685a1473_79684307 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20940836805aba7866cea4e8_37117014', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18937784625abab76858a0a3_94300777', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_20940836805aba7866cea4e8_37117014 extends Smarty_Internal_Block
+class Block_18937784625abab76858a0a3_94300777 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -263,7 +263,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<p id="datemediactni" class="text-muted"></p>
 								<p id="modaltitlevki" class="text-primary"></p>
 								<h3 id="mediactnti"></h3>
-								<p id="modal-texti" class="text-justify" style="max-height: 280px; overflow-y: auto"></p>
+								<p id="modal-texti" class="text-justify"></p>
 							</div>
 						</div>
 
@@ -293,10 +293,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
-						<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
-						<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
-						<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
-						<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+						<div class="row">
+							<div class="col-md-12">
+								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+								<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -314,7 +318,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<div class="form-group">
 									<label>Assunto</label>
 									<select id="adssubject" class="selectpicker form-control"
-									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-size="10" data-style="btn btn-sm btn-default"
 									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
@@ -322,14 +326,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 									<label>Palavra-chave</label>
 									<select id="adskeyword" class="selectpicker form-control disabled"
 									data-size="10" data-style="btn btn-sm btn-default"
-									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									data-live-search="true" data-selected-text-format="count > 5"
 									title="Selecione o assunto" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Tipo de Veículo</label>
 									<select id="adstveiculo" class="selectpicker form-control"
-									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
+									data-size="10" data-style="btn btn-sm btn-default"
 									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
@@ -337,15 +341,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 									<label>Veículo</label>
 									<select id="adsveiculo" class="selectpicker form-control disabled"
 									data-size="10" data-style="btn btn-sm btn-default"
-									data-actions-box="true" data-live-search="true" data-selected-text-format="count > 5"
+									data-live-search="true" data-selected-text-format="count > 5"
 									title="Selecione o tipo de veículo" multiple disabled>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Editoria</label>
 									<select id="adseditoria" class="selectpicker form-control disabled"
-									data-size="10" data-style="btn btn-sm btn-default" data-actions-box="true"
-									data-live-search="true" data-selected-text-format="count > 5" title="Selecione o veículo" multiple disabled>
+									data-size="10" data-style="btn btn-sm btn-default" data-live-search="true"
+									data-selected-text-format="count > 5" title="Selecione o veículo" multiple disabled>
 									</select>
 								</div>
 							</div>
@@ -367,6 +371,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 										<span class="input-group-addon">Até</span>
 										<input required type="text" class="input-sm form-control clockpicker" id="adsendtime" name="adsendtime" placeholder="Fim" value="23:59" autocomplete="off"/>
 									</div>
+								</div>
+
+								<div class="form-group">
+									<label>Estado</label>
+									<select id="adsstates" class="selectpicker form-control" data-size="10" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label>Texto</label>
+									<input type="text" id="adstext" name="stext" class="form-control input-sm" autocomplete="off">
 								</div>
 
 								<div class="row">
@@ -450,17 +465,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											</div>
 										</div>
 									</div>
-								</div>
-
-								<div class="form-group">
-									<label>Estado</label>
-									<select id="adsstates" class="selectpicker form-control" data-size="10" data-style="btn btn-sm btn-default" multiple data-actions-box="true" data-live-search="true">
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label>Texto</label>
-									<input type="text" id="adstext" name="stext" class="form-control input-sm" autocomplete="off">
 								</div>
 							</div>
 						</div>
