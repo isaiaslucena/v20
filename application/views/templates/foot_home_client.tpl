@@ -557,7 +557,7 @@
 
 	$('#btnselclo').click(function(event) {
 		// $('#modal-texti').scrollTop(0);
-		$('#modal-texti').slimScroll({ scrollTo: '0px' });
+		$('#modal-texti').slimScroll({scrollTo: '0px'});
 		$('#mediactni').scrollTop(0);
 
 		btnsctrid = $(this).attr('data-trid');
@@ -656,26 +656,33 @@
 					if($(this).is(':selected')) {
 						if(adstveiculoarr.indexOf(tveid) == -1) {
 							adstveiculoarr.push(tveid);
-
-							tvesname = $(this).val();
-							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
-							$('#adsveiculo').selectpicker('refresh');
-							get_veiculosfromtipoveiculos(tveid, function(data) {
-								data.map(function(val, index) {
-									html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
-													'data-subtext="('+tvesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
-									$('#adsveiculo').append(html);
-								})
-
-								$('#adsveiculo').removeAttr('disabled');
-								$('#adsveiculo').removeClass('disabled');
-								$('#adsveiculo').selectpicker({title: 'Nada selecionado'});
+							if (tveid == 4) {
+								$('#adsveiculositesfg').slideDown('fast');
+							} else {
+								tvesname = $(this).val();
+								$('#adsveiculo').selectpicker({title: 'Aguarde...'});
 								$('#adsveiculo').selectpicker('refresh');
-							});
+								get_veiculosfromtipoveiculos(tveid, function(data) {
+									data.map(function(val, index) {
+										html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
+														'data-subtext="('+tvesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+										$('#adsveiculo').append(html);
+									})
+
+									$('#adsveiculo').removeAttr('disabled');
+									$('#adsveiculo').removeClass('disabled');
+									$('#adsveiculo').selectpicker({title: 'Nada selecionado'});
+									$('#adsveiculo').selectpicker('refresh');
+								});
+							}
 						}
 					} else {
 						adstveiculoarr = jQuery.grep(adstveiculoarr, function(value) {
-							$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
+							if (tveid == 4) {
+								$('#adsveiculositesfg').slideUp('fast');
+							} else {
+								$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
+							}
 
 							return value != tveid;
 						});
@@ -717,6 +724,7 @@
 					break;
 				default:
 					console.log('Option not recognized!');
+					break;
 			}
 		});
 	});
@@ -837,7 +845,7 @@
 		},
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
-			url: 'http://v20.intranet.dataclip/home_client/editorias_sites?query=%QUERY',
+			url: document.origin+'/home_client/editorias_sites?query=%QUERY',
 			wildcard: '%QUERY',
 			filter: function (rsites) {
 				return $.map(rsites, function(site) {
@@ -855,20 +863,20 @@
 	$('#adsveiculosites').typeahead(null, {
 			displayKey: 'Nome',
 			source: sites.ttAdapter(),
-			hint: true,
-			highlight: true,
 			minLength: 3,
+			highlight: true,
 			limit: 20
 	});
 
 	if (clientselb) {
 		subkeywordsarr = [];
 		tvarr = [], varr = [], earr = [], pcarr = [];
+
+		salertloading(isTouchDevice());
+
 		$('#changeclient').css('display', 'none');
 		$('#selclient').attr('disabled', true);
 		$('#selclient').addClass('disabled');
-
-		salertloading(isTouchDevice());
 
 		get_client_info(clientselid, true);
 		count_vtype(clientselid, todaydate, todaydate);
@@ -914,6 +922,7 @@
 
 	function salertloadingdone(mobile) {
 		if (mobile) {
+			$('.selectpicker').selectpicker('mobile');
 			swalwidth = 150;
 		} else {
 			swalwidth = 300;
@@ -1164,7 +1173,7 @@
 
 					if (subjectcount != null) {
 						html = '<select class="selectpicker" data-subjectid="'+subjectid+'" '+
-										'data-style="btn-default btn-sm" data-size="10" data-width="200px" '+
+										'data-style="btn btn-sm btn-default" data-size="10" data-width="200px" '+
 										'data-actions-box="true" data-live-search="true" '+
 										'data-selected-text-format="count > 3" '+
 										'title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
@@ -1185,6 +1194,9 @@
 					html += '</select>';
 					$('#sublist').append(html);
 					$('#sublist .selectpicker').selectpicker('refresh');
+
+					$('#sublist .bs-deselect-all').css('float', 'none');
+					$('#sublist .actions-btn').css('font-size', '70%');
 				});
 
 				var result = $.grep(subjectskeywords, function(e){ return e.IdAssunto == subjecctid; });

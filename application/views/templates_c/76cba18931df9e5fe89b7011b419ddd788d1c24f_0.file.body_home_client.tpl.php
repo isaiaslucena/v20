@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-28 18:27:12
+/* Smarty version 3.1.30, created on 2018-03-29 15:59:49
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abc08b0b28781_17237812',
+  'unifunc' => 'content_5abd37a5e26014_58073961',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522272414,
+      1 => 1522349987,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5abc08b0b28781_17237812 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abd37a5e26014_58073961 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20233962535abc08b0b10d08_26321120', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9573648165abd37a5e07a92_09990351', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_20233962535abc08b0b10d08_26321120 extends Smarty_Internal_Block
+class Block_9573648165abd37a5e07a92_09990351 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -157,14 +157,34 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			<div class="row">
 					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
-							<div class="panel-body text-center">
-								<button id="btnasearch" class="btn w-xs btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
-								<button id="btnmyclipp" class="btn w-xs btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
-								<button id="btncharts" class="btn w-xs btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
-								<button id="btnnpapper" class="btn w-xs btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
-								<button id="btnepdf" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
-								<button id="btneexcel" class="btn w-xs btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
-								<button id="btnforward" class="btn w-xs btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
+							<div class="panel-body">
+								<div class="container">
+								<div class="btn-group btn-group-justified">
+									<div class="btn-group">
+										<button id="btnasearch" class="btn btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
+									</div>
+									<div class="btn-group">
+										<button id="btnmyclipp" class="btn btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
+									</div>
+									<div class="btn-group">
+										<button id="btncharts" class="btn btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
+									</div>
+									<div class="btn-group">
+										<button id="btnnpapper" class="btn btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></button>
+									</div>
+									<div class="btn-group">
+										<button id="btnepdf" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
+									</div>
+									<div class="btn-group">
+										<button id="btneexcel" class="btn btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
+									</div>
+									<div class="btn-group">
+										<button id="btnforward" class="btn btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
+									</div>
+									<div class="btn-group">
+									</div>
+								</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -260,7 +280,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; overflow-x: hidden; display: none">
 							</div>
 							<div class="col-lg-8">
-								<p id="datemediactni" class="text-muted"></p>
+								<h5 id="datemediactni" class="text-muted"></h5>
 								<p id="modaltitlevki" class="text-primary"></p>
 								<h3 id="mediactnti"></h3>
 								<p id="modal-texti" class="text-justify"></p>
@@ -276,7 +296,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							</div>
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12 center-block">
-									<p id="datemediactnv" class="text-muted"></p>
+									<h5 id="datemediactnv" class="text-muted"></h5>
 									<p id="modaltitlevkv" class="text-primary"></p>
 									<h3 id="mediactntv"></h3>
 									<p id="modal-textv" class="text-justify"></p>
@@ -337,17 +357,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 									data-live-search="true" data-selected-text-format="count > 5" multiple>
 									</select>
 								</div>
+								<div id="adsveiculositesfg" class="form-group" style="display: none;">
+									<label>Veículo - Sites</label>
+									<input id="adsveiculosites" type="text" class="form-control input-sm" placeholder="Digite para pesquisar" autocomplete="off">
+									</select>
+								</div>
 								<div class="form-group">
 									<label>Veículo</label>
 									<select id="adsveiculo" class="selectpicker form-control disabled"
 									data-size="10" data-style="btn btn-sm btn-default"
 									data-live-search="true" data-selected-text-format="count > 5"
 									title="Selecione o tipo de veículo" multiple disabled>
-									</select>
-								</div>
-								<div class="form-group">
-									<label>Veículo - Sites</label>
-									<input id="adsveiculosites" type="text" class="form-control input-sm" placeholder="Digite para pesquisar" autocomplete="off">
 									</select>
 								</div>
 								<div class="form-group">

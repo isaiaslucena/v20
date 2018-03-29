@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-28 18:27:12
+/* Smarty version 3.1.30, created on 2018-03-29 15:31:48
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abc08b0ad4360_77244826',
+  'unifunc' => 'content_5abd31145d31d2_87414342',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1522272429,
+      1 => 1522348302,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5abc08b0ad4360_77244826 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abd31145d31d2_87414342 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20950319345abc08b0a966d2_01915302', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18281348875abd311458c3d8_06136014', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_20950319345abc08b0a966d2_01915302 extends Smarty_Internal_Block
+class Block_18281348875abd311458c3d8_06136014 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -599,7 +599,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 	$('#btnselclo').click(function(event) {
 		// $('#modal-texti').scrollTop(0);
-		$('#modal-texti').slimScroll({ scrollTo: '0px' });
+		$('#modal-texti').slimScroll({scrollTo: '0px'});
 		$('#mediactni').scrollTop(0);
 
 		btnsctrid = $(this).attr('data-trid');
@@ -698,26 +698,33 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					if($(this).is(':selected')) {
 						if(adstveiculoarr.indexOf(tveid) == -1) {
 							adstveiculoarr.push(tveid);
-
-							tvesname = $(this).val();
-							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
-							$('#adsveiculo').selectpicker('refresh');
-							get_veiculosfromtipoveiculos(tveid, function(data) {
-								data.map(function(val, index) {
-									html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
-													'data-subtext="('+tvesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
-									$('#adsveiculo').append(html);
-								})
-
-								$('#adsveiculo').removeAttr('disabled');
-								$('#adsveiculo').removeClass('disabled');
-								$('#adsveiculo').selectpicker({title: 'Nada selecionado'});
+							if (tveid == 4) {
+								$('#adsveiculositesfg').slideDown('fast');
+							} else {
+								tvesname = $(this).val();
+								$('#adsveiculo').selectpicker({title: 'Aguarde...'});
 								$('#adsveiculo').selectpicker('refresh');
-							});
+								get_veiculosfromtipoveiculos(tveid, function(data) {
+									data.map(function(val, index) {
+										html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
+														'data-subtext="('+tvesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+										$('#adsveiculo').append(html);
+									})
+
+									$('#adsveiculo').removeAttr('disabled');
+									$('#adsveiculo').removeClass('disabled');
+									$('#adsveiculo').selectpicker({title: 'Nada selecionado'});
+									$('#adsveiculo').selectpicker('refresh');
+								});
+							}
 						}
 					} else {
 						adstveiculoarr = jQuery.grep(adstveiculoarr, function(value) {
-							$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
+							if (tveid == 4) {
+								$('#adsveiculositesfg').slideUp('fast');
+							} else {
+								$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
+							}
 
 							return value != tveid;
 						});
@@ -759,6 +766,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					break;
 				default:
 					console.log('Option not recognized!');
+					break;
 			}
 		});
 	});
@@ -879,7 +887,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		},
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
-			url: 'http://v20.intranet.dataclip/home_client/editorias_sites?query=%QUERY',
+			url: document.origin+'/home_client/editorias_sites?query=%QUERY',
 			wildcard: '%QUERY',
 			filter: function (rsites) {
 				return $.map(rsites, function(site) {
@@ -897,20 +905,20 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	$('#adsveiculosites').typeahead(null, {
 			displayKey: 'Nome',
 			source: sites.ttAdapter(),
-			hint: true,
-			highlight: true,
 			minLength: 3,
+			highlight: true,
 			limit: 20
 	});
 
 	if (clientselb) {
 		subkeywordsarr = [];
 		tvarr = [], varr = [], earr = [], pcarr = [];
+
+		salertloading(isTouchDevice());
+
 		$('#changeclient').css('display', 'none');
 		$('#selclient').attr('disabled', true);
 		$('#selclient').addClass('disabled');
-
-		salertloading(isTouchDevice());
 
 		get_client_info(clientselid, true);
 		count_vtype(clientselid, todaydate, todaydate);
@@ -956,6 +964,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 	function salertloadingdone(mobile) {
 		if (mobile) {
+			$('.selectpicker').selectpicker('mobile');
 			swalwidth = 150;
 		} else {
 			swalwidth = 300;
@@ -1206,7 +1215,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 					if (subjectcount != null) {
 						html = '<select class="selectpicker" data-subjectid="'+subjectid+'" '+
-										'data-style="btn-default btn-sm" data-size="10" data-width="200px" '+
+										'data-style="btn btn-sm btn-default" data-size="10" data-width="200px" '+
 										'data-actions-box="true" data-live-search="true" '+
 										'data-selected-text-format="count > 3" '+
 										'title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
@@ -1227,6 +1236,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 					html += '</select>';
 					$('#sublist').append(html);
 					$('#sublist .selectpicker').selectpicker('refresh');
+
+					$('#sublist .bs-deselect-all').css('float', 'none');
+					$('#sublist .actions-btn').css('font-size', '70%');
 				});
 
 				var result = $.grep(subjectskeywords, function(e){ return e.IdAssunto == subjecctid; });
