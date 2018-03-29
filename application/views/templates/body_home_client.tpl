@@ -299,7 +299,7 @@
 								</div>
 								<div class="form-group">
 									<label>Veículo - Sites</label>
-									<input id="adsveiculosites" type="text" class="form-control typeahead">
+									<input id="adsveiculosites" type="text" class="form-control input-sm" placeholder="Digite para pesquisar" autocomplete="off">
 									</select>
 								</div>
 								<div class="form-group">

@@ -171,8 +171,10 @@ class Home_client extends CI_Controller {
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
-	public function editorias_sites($qtext) {
-		$data = $this->utf8_encoder($this->home_client_model->get_editorias_sites(urldecode($qtext)));
+	public function editorias_sites() {
+		$qtext = $this->input->get('query');
+		// var_dump($qtext);
+		$data = $this->utf8_encoder($this->home_client_model->get_editorias_sites($qtext));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);

@@ -255,7 +255,6 @@
 	$('#modal-texti').slimScroll({
 		height: '250px',
 		railVisible: true,
-		alwaysVisible: true,
 		touchScrollStep: 800
 	});
 
@@ -833,32 +832,31 @@
 	});
 
 	var sites = new Bloodhound({
-			datumTokenizer: function (datum) {
-					return Bloodhound.tokenizers.whitespace(datum.value);
-			},
-			queryTokenizer: Bloodhound.tokenizers.whitespace,
-			remote: {
-					url: '/home_client/editorias_sites?query=%QUERY',
-					filter: function (sites) {
-						console.log(sites);
-							// Map the remote source JSON array to a JavaScript object array
-							return $.map(sites.results, function (site) {
-									return {
-											value: site.Nome
-									};
-							});
-					}
+		datumTokenizer: function (datum) {
+			return Bloodhound.tokenizers.whitespace(datum.value);
+		},
+		queryTokenizer: Bloodhound.tokenizers.whitespace,
+		remote: {
+			url: 'http://v20.intranet.dataclip/home_client/editorias_sites?query=%QUERY',
+			wildcard: '%QUERY',
+			filter: function (rsites) {
+				return $.map(rsites, function(site) {
+					return {
+						Id: site.Id,
+						Nome: site.Nome
+					};
+				});
 			}
+		}
 	});
 
 	sites.initialize();
 
-	// Instantiate the Typeahead UI
 	$('#adsveiculosites').typeahead(null, {
-			// Use 'value' as the displayKey because the filter function
-			// returns suggestions in a javascript object with a variable called 'value'
-			displayKey: 'value',
+			displayKey: 'Nome',
 			source: sites.ttAdapter(),
+			hint: true,
+			highlight: true,
 			minLength: 3,
 			limit: 20
 	});

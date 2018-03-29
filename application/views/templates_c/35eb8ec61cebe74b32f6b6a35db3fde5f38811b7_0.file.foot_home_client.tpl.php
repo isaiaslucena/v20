@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-28 15:42:20
+/* Smarty version 3.1.30, created on 2018-03-28 18:27:12
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abbe20c9d7155_42825076',
+  'unifunc' => 'content_5abc08b0ad4360_77244826',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1522262533,
+      1 => 1522272429,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5abbe20c9d7155_42825076 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abc08b0ad4360_77244826 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16278972555abbe20c999005_32318968', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20950319345abc08b0a966d2_01915302', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_16278972555abbe20c999005_32318968 extends Smarty_Internal_Block
+class Block_20950319345abc08b0a966d2_01915302 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -297,7 +297,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	$('#modal-texti').slimScroll({
 		height: '250px',
 		railVisible: true,
-		alwaysVisible: true,
 		touchScrollStep: 800
 	});
 
@@ -875,32 +874,31 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	});
 
 	var sites = new Bloodhound({
-			datumTokenizer: function (datum) {
-					return Bloodhound.tokenizers.whitespace(datum.value);
-			},
-			queryTokenizer: Bloodhound.tokenizers.whitespace,
-			remote: {
-					url: '/home_client/editorias_sites?query=%QUERY',
-					filter: function (sites) {
-						console.log(sites);
-							// Map the remote source JSON array to a JavaScript object array
-							return $.map(sites.results, function (site) {
-									return {
-											value: site.Nome
-									};
-							});
-					}
+		datumTokenizer: function (datum) {
+			return Bloodhound.tokenizers.whitespace(datum.value);
+		},
+		queryTokenizer: Bloodhound.tokenizers.whitespace,
+		remote: {
+			url: 'http://v20.intranet.dataclip/home_client/editorias_sites?query=%QUERY',
+			wildcard: '%QUERY',
+			filter: function (rsites) {
+				return $.map(rsites, function(site) {
+					return {
+						Id: site.Id,
+						Nome: site.Nome
+					};
+				});
 			}
+		}
 	});
 
 	sites.initialize();
 
-	// Instantiate the Typeahead UI
 	$('#adsveiculosites').typeahead(null, {
-			// Use 'value' as the displayKey because the filter function
-			// returns suggestions in a javascript object with a variable called 'value'
-			displayKey: 'value',
+			displayKey: 'Nome',
 			source: sites.ttAdapter(),
+			hint: true,
+			highlight: true,
 			minLength: 3,
 			limit: 20
 	});

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-28 15:33:17
+/* Smarty version 3.1.30, created on 2018-03-28 18:27:12
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abbdfedcf9816_41983001',
+  'unifunc' => 'content_5abc08b0b28781_17237812',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522261989,
+      1 => 1522272414,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5abbdfedcf9816_41983001 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abc08b0b28781_17237812 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21167196075abbdfedcde979_96733513', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20233962535abc08b0b10d08_26321120', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_21167196075abbdfedcde979_96733513 extends Smarty_Internal_Block
+class Block_20233962535abc08b0b10d08_26321120 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -347,7 +347,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								</div>
 								<div class="form-group">
 									<label>Veículo - Sites</label>
-									<input id="adsveiculosites" type="text" class="form-control typeahead">
+									<input id="adsveiculosites" type="text" class="form-control input-sm" placeholder="Digite para pesquisar" autocomplete="off">
 									</select>
 								</div>
 								<div class="form-group">
