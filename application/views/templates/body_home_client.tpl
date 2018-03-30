@@ -110,8 +110,7 @@
 					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
 							<div class="panel-body">
-								<div class="container">
-								<div class="btn-group btn-group-justified">
+								<div id="btnsgroupnews" class="btn-group btn-group-justified center-block">
 									<div class="btn-group">
 										<button id="btnasearch" class="btn btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
 									</div>
@@ -133,9 +132,6 @@
 									<div class="btn-group">
 										<button id="btnforward" class="btn btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
 									</div>
-									<div class="btn-group">
-									</div>
-								</div>
 								</div>
 							</div>
 						</div>

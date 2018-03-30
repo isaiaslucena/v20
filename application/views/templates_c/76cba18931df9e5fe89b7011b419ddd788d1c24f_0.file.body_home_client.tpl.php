@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-29 15:59:49
+/* Smarty version 3.1.30, created on 2018-03-29 16:27:40
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abd37a5e26014_58073961',
+  'unifunc' => 'content_5abd3e2cbfe821_80669262',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522349987,
+      1 => 1522351576,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5abd37a5e26014_58073961 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abd3e2cbfe821_80669262 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9573648165abd37a5e07a92_09990351', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8345276825abd3e2cbe50b0_15922452', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_9573648165abd37a5e07a92_09990351 extends Smarty_Internal_Block
+class Block_8345276825abd3e2cbe50b0_15922452 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -158,8 +158,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
 							<div class="panel-body">
-								<div class="container">
-								<div class="btn-group btn-group-justified">
+								<div id="btnsgroupnews" class="btn-group btn-group-justified center-block">
 									<div class="btn-group">
 										<button id="btnasearch" class="btn btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
 									</div>
@@ -181,9 +180,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 									<div class="btn-group">
 										<button id="btnforward" class="btn btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
 									</div>
-									<div class="btn-group">
-									</div>
-								</div>
 								</div>
 							</div>
 						</div>

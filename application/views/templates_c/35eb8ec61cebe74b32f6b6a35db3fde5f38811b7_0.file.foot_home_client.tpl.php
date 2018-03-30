@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-29 15:31:48
+/* Smarty version 3.1.30, created on 2018-03-29 18:08:48
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abd31145d31d2_87414342',
+  'unifunc' => 'content_5abd55e090e0b2_25413307',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1522348302,
+      1 => 1522357725,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5abd31145d31d2_87414342 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abd55e090e0b2_25413307 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18281348875abd311458c3d8_06136014', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17621820955abd55e08ce003_17693769', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_18281348875abd311458c3d8_06136014 extends Smarty_Internal_Block
+class Block_17621820955abd55e08ce003_17693769 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -42,7 +42,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	<!-- Footer-->
 	<footer class="footer">
 		<span class="pull-right">
-			Dataclip - Business Inteligence
+			<span id="dtworkerspan"></span>
+			 ____ Dataclip - Business Inteligence ____ 
+			<span id="testworkerspan"></span>
 		</span>
 	</footer>
 </div><!-- Main Wrapper -->
@@ -56,7 +58,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	var clientselb = (clientsel == 'true');
 
 	
-	var cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
+	var dtworker, cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
@@ -943,6 +945,23 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		$('#advancedsearch').modal('show');
 	});
 
+	if (window.Worker) {
+		// console.log('worker available');
+
+		dtworker = new Worker('/assets/dataclip/dtworker.js');
+		testworker = new Worker('/assets/dataclip/testworker.js');
+
+		dtworker.onmessage = function(event) {
+			// console.log(event.data);
+			document.getElementById('dtworkerspan').innerText = event.data;
+		}
+
+		testworker.onmessage = function(event) {
+			// console.log(event.data);
+			document.getElementById('testworkerspan').innerText = event.data;
+		}
+	}
+
 	function salertloading(mobile) {
 		if (mobile) {
 			swalwidth = 150;
@@ -965,6 +984,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	function salertloadingdone(mobile) {
 		if (mobile) {
 			$('.selectpicker').selectpicker('mobile');
+			$('#btnsgroupnews').removeClass('btn-group-justified');
+			$('#btnsgroupnews').addClass('btn-group-vertical');
 			swalwidth = 150;
 		} else {
 			swalwidth = 300;

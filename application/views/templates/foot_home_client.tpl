@@ -3,7 +3,9 @@
 	<!-- Footer-->
 	<footer class="footer">
 		<span class="pull-right">
-			Dataclip - Business Inteligence
+			<span id="dtworkerspan"></span>
+			 ____ Dataclip - Business Inteligence ____ 
+			<span id="testworkerspan"></span>
 		</span>
 	</footer>
 </div><!-- Main Wrapper -->
@@ -14,7 +16,7 @@
 	var clientselb = (clientsel == 'true');
 
 	{literal}
-	var cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
+	var dtworker, cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
@@ -901,6 +903,23 @@
 		$('#advancedsearch').modal('show');
 	});
 
+	if (window.Worker) {
+		// console.log('worker available');
+
+		dtworker = new Worker('/assets/dataclip/dtworker.js');
+		testworker = new Worker('/assets/dataclip/testworker.js');
+
+		dtworker.onmessage = function(event) {
+			// console.log(event.data);
+			document.getElementById('dtworkerspan').innerText = event.data;
+		}
+
+		testworker.onmessage = function(event) {
+			// console.log(event.data);
+			document.getElementById('testworkerspan').innerText = event.data;
+		}
+	}
+
 	function salertloading(mobile) {
 		if (mobile) {
 			swalwidth = 150;
@@ -923,6 +942,8 @@
 	function salertloadingdone(mobile) {
 		if (mobile) {
 			$('.selectpicker').selectpicker('mobile');
+			$('#btnsgroupnews').removeClass('btn-group-justified');
+			$('#btnsgroupnews').addClass('btn-group-vertical');
 			swalwidth = 150;
 		} else {
 			swalwidth = 300;
