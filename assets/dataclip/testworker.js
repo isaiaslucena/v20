@@ -3,10 +3,10 @@ console.log('testworker loaded!');
 
 var num = 0;
 
-msgtest();
+// msgtest();
 
-function msgtest() {
-	num = num + 1;
-	postMessage(num);
-	setTimeout("msgtest()", 2000);
-}
+// function msgtest() {
+// 	num = num + 1;
+// 	postMessage(num);
+// 	setTimeout("msgtest()", 2000);
+// }

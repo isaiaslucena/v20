@@ -43,7 +43,8 @@ class Home_client extends CI_Controller {
 			$data['client_sel_id'] = $idclient;
 		}
 		$data['title'] = 'DataClip - Business Inteligence';
-		$data['clients'] = $this->home_client_model->get_clients();
+		$data['clients'] = $this->utf8_encoder($this->home_client_model->get_clients());
+		header ('Access-Control-Allow-Origin: *');
 		$this->smarty->view('foot_home_client.tpl', $data);
 	}
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-29 16:27:40
+/* Smarty version 3.1.30, created on 2018-04-02 15:39:45
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abd3e2cbfe821_80669262',
+  'unifunc' => 'content_5ac278f1b19a13_06301094',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522351576,
+      1 => 1522694373,
       2 => 'file',
     ),
   ),
@@ -21,25 +21,81 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5abd3e2cbfe821_80669262 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac278f1b19a13_06301094 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8345276825abd3e2cbe50b0_15922452', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3824844135ac278f1afa567_95871274', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_8345276825abd3e2cbe50b0_15922452 extends Smarty_Internal_Block
+class Block_3824844135ac278f1afa567_95871274 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 	<!-- Header -->
-	<div id="header" class="thumbnail">
-		<img id="bannerheader" crossOrigin="anonymous" src="/assets/banner/dataclip_logo.jpg" alt="Logo" class="center-block img-responsive" style="height: 100%;">
+	<div id="header">
+		<div id="logo" class="light-version" style="padding: 0; margin: auto; position: absolute; width: 100%;">
+			
+		</div>
+		<div id="logomobile" class="small-logo" style="padding-top: none; position: absolute; width: 100%; height: 100%">
+			
+		</div>
+		<div role="navigation">
+			<div class="mobile-menu">
+				<button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
+					<i class="fa fa-chevron-down"></i>
+				</button>
+				<div class="collapse mobile-navbar" id="mobile-collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a class="" href="#">Perfil</a>
+						</li>
+						<li>
+							<a class="" href="#">Configurações</a>
+						</li>
+						<li>
+							<a class="" href="#">Sair</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="navbar-right">
+					<ul class="nav navbar-nav no-borders">
+						<li class="dropdown" title="Atualizar">
+							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
+								<i class="pe-7s-refresh"></i>
+								<span class="label label-success" style="right: 5px; display: none;">30</span>
+							</a>
+							<ul class="dropdown-menu hdropdown bounceInDown">
+									<div class="title">Auto-atualizar</div>
+									<li><a>10 segundos</a></li>
+									<li><a>30 segundos</a></li>
+									<li><a>1 minuto</a></li>
+									<li><a>5 minutos</a></li>
+									<li><a>10 Minutos</a></li>
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
+							<i class="pe-7s-user"></i>
+							</a>
+							<ul class="dropdown-menu hdropdown bounceInDown">
+								<div class="title">Fulano de Tal</div>
+								<li><a>Perfil</a></li>
+								<li><a>Cofigurações</a></li>
+								<li class="summary"><a href="#">Sair</a></li>
+							</ul>
+						</li>
+					</ul>
+			</div>
+		</div>
 	</div>
 
 	<!-- Main Wrapper -->
@@ -56,8 +112,8 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['client']->value) {
 ?>
-									<option id="<?php echo $_smarty_tpl->tpl_vars['client']->value['Id'];?>
-"><?php echo utf8_encode($_smarty_tpl->tpl_vars['client']->value['Nome']);?>
+									<option data-clientid="<?php echo $_smarty_tpl->tpl_vars['client']->value['Id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['client']->value['Nome'];?>
 </option>
 								<?php
 }

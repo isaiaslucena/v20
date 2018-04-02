@@ -1,8 +1,64 @@
 {extends file="head.tpl"}
 {block name=body}
 	<!-- Header -->
-	<div id="header" class="thumbnail">
-		<img id="bannerheader" crossOrigin="anonymous" src="/assets/banner/dataclip_logo.jpg" alt="Logo" class="center-block img-responsive" style="height: 100%;">
+	<div id="header">
+		<div id="logo" class="light-version" style="padding: 0; margin: auto; position: absolute; width: 100%;">
+			{* <img  id="bannerheader" style="height: 100%" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous" style="display: none;"> *}
+		</div>
+		<div id="logomobile" class="small-logo" style="padding-top: none; position: absolute; width: 100%; height: 100%">
+			{* <img id="bannerheaders" crossOrigin="anonymous" src="/assets/banner/dataclip_logo.jpg" alt="Logo"> *}
+		</div>
+		<div role="navigation">
+			<div class="mobile-menu">
+				<button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
+					<i class="fa fa-chevron-down"></i>
+				</button>
+				<div class="collapse mobile-navbar" id="mobile-collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a class="" href="#">Perfil</a>
+						</li>
+						<li>
+							<a class="" href="#">Configurações</a>
+						</li>
+						<li>
+							<a class="" href="#">Sair</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="navbar-right">
+					<ul class="nav navbar-nav no-borders">
+						<li class="dropdown" title="Atualizar">
+							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
+								<i class="pe-7s-refresh"></i>
+								<span class="label label-success" style="right: 5px; display: none;">30</span>
+							</a>
+							<ul class="dropdown-menu hdropdown bounceInDown">
+									<div class="title">Auto-atualizar</div>
+									<li><a>10 segundos</a></li>
+									<li><a>30 segundos</a></li>
+									<li><a>1 minuto</a></li>
+									<li><a>5 minutos</a></li>
+									<li><a>10 Minutos</a></li>
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
+							<i class="pe-7s-user"></i>
+							</a>
+							<ul class="dropdown-menu hdropdown bounceInDown">
+								<div class="title">Fulano de Tal</div>
+								<li><a>Perfil</a></li>
+								<li><a>Cofigurações</a></li>
+								<li class="summary"><a href="#">Sair</a></li>
+							</ul>
+						</li>
+					</ul>
+			</div>
+		</div>
 	</div>
 
 	<!-- Main Wrapper -->
@@ -15,7 +71,7 @@
 						<div class="panel-body">
 							<select id="selclient" class="selectpicker" data-size="10" data-width="fit" data-live-search="true" data-style="btn-default btn-sm" title="Selecione um cliente">
 								{foreach from=$clients item=client}
-									<option id="{$client.Id}">{$client.Nome|utf8_encode}</option>
+									<option data-clientid="{$client.Id}">{$client.Nome}</option>
 								{/foreach}
 							</select>
 						</div>
