@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-$db['default'] = array(
+$db['mssql'] = array(
 	'dsn' => '',
 	'hostname' => 'rds-aws',
 	'username' => 'mclipp',
@@ -95,7 +95,7 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-$db['mysql'] = array(
+$db['default'] = array(
 	'dsn' => '',
 	'hostname' => 'multclipp15.cwrmpe42w71l.sa-east-1.rds.amazonaws.com',
 	'username' => 'mclipp',
