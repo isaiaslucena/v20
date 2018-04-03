@@ -560,3 +560,11 @@ $(document).on('change', 'select', function(event) {
 $('#btnasearch').click(function(event) {
 	$('#advancedsearch').modal('show');
 });
+
+
+$('.cdrefreshitem').click(function(event) {
+	refreshtm = $(this).attr('data-refreshtm');
+
+	clearInterval(rfdata);
+	refresh_countdown(refreshtm);
+});

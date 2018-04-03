@@ -33,15 +33,43 @@
 						<li class="dropdown" title="Atualizar">
 							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
 								<i class="pe-7s-refresh"></i>
-								<span class="label label-success" style="right: 5px; display: none;">30</span>
+								<span id="countdownrefresh" class="label label-success" style="right: 5px; display: none;">30</span>
 							</a>
-							<ul class="dropdown-menu hdropdown bounceInDown">
-									<div class="title">Auto-atualizar</div>
-									<li><a>10 segundos</a></li>
-									<li><a>30 segundos</a></li>
-									<li><a>1 minuto</a></li>
-									<li><a>5 minutos</a></li>
-									<li><a>10 Minutos</a></li>
+							<ul id="cdrefreshlist" class="dropdown-menu hdropdown bounceInDown">
+									<div class="title">Atualizar em:</div>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="10">
+											<i id="icheck10" class="fa fa-check" style="display: none"></i>
+											10 segundos
+										</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="30">
+											<i id="icheck30" class="fa fa-check" style="display: none"></i>
+											30 segundos
+										</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="60">
+											<i id="icheck60" class="fa fa-check" style="display: none"></i>
+											1 minuto</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="300">
+											<i id="icheck300" class="fa fa-check" style="display: none"></i>
+											5 minutos</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="600">
+											<i id="icheck600" class="fa fa-check" style="display: none"></i>
+											10 Minutos</a>
+									</li>
+									<li class="summary">
+										<a class="cdrefreshitem" data-refreshtm="disable">
+											<i id="icheckdisable" class="fa fa-check"></i>
+											Desligado
+										</a>
+									</li>
 							</ul>
 						</li>
 
@@ -50,10 +78,10 @@
 							<i class="pe-7s-user"></i>
 							</a>
 							<ul class="dropdown-menu hdropdown bounceInDown">
-								<div class="title">Fulano de Tal</div>
+								<div class="title">Nome do Usuário</div>
 								<li><a>Perfil</a></li>
 								<li><a>Cofigurações</a></li>
-								<li class="summary"><a href="#">Sair</a></li>
+								<li class="summary"><a>Sair</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -240,18 +268,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="pagewaitmodal" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content" style="height: 200px">
-					<div class="hollow-dots-spinner center-block" style="vertical-align: middle;">
-						<div class="dot"></div>
-						<div class="dot"></div>
-						<div class="dot"></div>
 					</div>
 				</div>
 			</div>

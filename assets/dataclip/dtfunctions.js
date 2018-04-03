@@ -80,17 +80,13 @@ function set_client_info(cid, cname, cbanner, setselpicker) {
 		$('#selclient').selectpicker('val', cname);
 	}
 
-	headerlogo = new Image();
-	headerlogo.src = cbanner;
-	headerlogo.setAttribute('crossOrigin', 'anonymous');
-	// headerlogo.setAttribute('id', 'bannerheader');
-	// imgsrcb64 = '';
+	headerlogo = document.createElement('img');
+	headerlogo.setAttribute('crossOrigin', '');
+	headerlogo.setAttribute('src', cbanner);
 
-	headerlogo.onload = function(event) {
-		// document.getElementById('bannerheader').setAttribute('src', 'data:image/png;base64,'+imgsrcb64)
-		// document.getElementById('logo').innerHTML = '<img id="bannerheader" src="'+cbanner+'" crossOrigin="anonymous" style="display: none">';
-		// setcolors();
-	};
+	headerlogo.addEventListener('load', () => {
+		setcolors();
+	} )
 
 	// $('#bannerheader').attr('src', cbanner);
 	$('#logo, #logomobile').css({
@@ -750,6 +746,7 @@ function set_subjects(subjdata) {
 		$('#adssubject').append(html);
 	});
 	$('#adssubject').selectpicker('refresh');
+	console.log('Done.');
 };
 
 function get_keywordsfromsubject(subjectid, callback) {
@@ -781,3 +778,59 @@ function get_states(callback) {
 		callback(data);
 	});
 };
+
+function sectostring(secs) {
+	var sec_num = parseInt(secs, 10);
+	var hours   = Math.floor(sec_num / 3600);
+	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	var seconds = sec_num - (hours * 3600) - (minutes * 60);
+	var mseconds = String(secs);
+	var milliseconds =  mseconds.slice(-3);
+
+	if (hours  < 10) {hours = "0" + hours;}
+	if (minutes < 10) {minutes = "0" + minutes;}
+	if (seconds < 10) {seconds = "0" + seconds;}
+	// return hours+':'+minutes+':'+seconds+'.'+milliseconds;
+
+	if (secs >= 60) {
+		return minutes+':'+seconds;
+	} else {
+		return seconds;
+	}
+}
+
+function refresh_countdown(seconds) {
+	$('.fa.fa-check').fadeOut('fast');
+	$('#icheck'+seconds).fadeIn('fast');
+
+	if (seconds == 'disable') {
+		$('#countdownrefresh').fadeOut('fast');
+
+		clearInterval(rfdata);
+	} else {
+		miliseconds = seconds * 1000;
+		countdowns = seconds;
+
+		$('#countdownrefresh').text(sectostring(countdowns));
+		$('#countdownrefresh').fadeIn('fast');
+
+		// if (window.Worker) {
+		// 	dtrefreshworker = new Worker('/assets/dataclip/dtrefreshworker.js');
+		// }
+
+		$(function(){
+			rfdata = setInterval(function() {
+				if (countdowns <= 0) {
+					countdowns = seconds;
+
+					console.log('Updating data...');
+					load_data();
+				} else {
+					countdowns--;
+				}
+
+				$('#countdownrefresh').text(sectostring(countdowns))
+			}, 1000);
+		});
+	}
+}

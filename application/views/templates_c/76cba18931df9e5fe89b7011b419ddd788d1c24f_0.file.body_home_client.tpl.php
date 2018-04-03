@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-02 15:39:45
+/* Smarty version 3.1.30, created on 2018-04-03 15:55:10
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac278f1b19a13_06301094',
+  'unifunc' => 'content_5ac3ce0ec95609_10403757',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522694373,
+      1 => 1522781610,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ac278f1b19a13_06301094 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac3ce0ec95609_10403757 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3824844135ac278f1afa567_95871274', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20616372465ac3ce0ec73b63_25625693', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_3824844135ac278f1afa567_95871274 extends Smarty_Internal_Block
+class Block_20616372465ac3ce0ec73b63_25625693 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -70,15 +70,43 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						<li class="dropdown" title="Atualizar">
 							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
 								<i class="pe-7s-refresh"></i>
-								<span class="label label-success" style="right: 5px; display: none;">30</span>
+								<span id="countdownrefresh" class="label label-success" style="right: 5px; display: none;">30</span>
 							</a>
-							<ul class="dropdown-menu hdropdown bounceInDown">
-									<div class="title">Auto-atualizar</div>
-									<li><a>10 segundos</a></li>
-									<li><a>30 segundos</a></li>
-									<li><a>1 minuto</a></li>
-									<li><a>5 minutos</a></li>
-									<li><a>10 Minutos</a></li>
+							<ul id="cdrefreshlist" class="dropdown-menu hdropdown bounceInDown">
+									<div class="title">Atualizar em:</div>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="10">
+											<i id="icheck10" class="fa fa-check" style="display: none"></i>
+											10 segundos
+										</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="30">
+											<i id="icheck30" class="fa fa-check" style="display: none"></i>
+											30 segundos
+										</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="60">
+											<i id="icheck60" class="fa fa-check" style="display: none"></i>
+											1 minuto</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="300">
+											<i id="icheck300" class="fa fa-check" style="display: none"></i>
+											5 minutos</a>
+									</li>
+									<li>
+										<a class="cdrefreshitem" data-refreshtm="600">
+											<i id="icheck600" class="fa fa-check" style="display: none"></i>
+											10 Minutos</a>
+									</li>
+									<li class="summary">
+										<a class="cdrefreshitem" data-refreshtm="disable">
+											<i id="icheckdisable" class="fa fa-check"></i>
+											Desligado
+										</a>
+									</li>
 							</ul>
 						</li>
 
@@ -87,10 +115,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 							<i class="pe-7s-user"></i>
 							</a>
 							<ul class="dropdown-menu hdropdown bounceInDown">
-								<div class="title">Fulano de Tal</div>
+								<div class="title">Nome do Usuário</div>
 								<li><a>Perfil</a></li>
 								<li><a>Cofigurações</a></li>
-								<li class="summary"><a href="#">Sair</a></li>
+								<li class="summary"><a>Sair</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -288,18 +316,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								</table>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="pagewaitmodal" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content" style="height: 200px">
-					<div class="hollow-dots-spinner center-block" style="vertical-align: middle;">
-						<div class="dot"></div>
-						<div class="dot"></div>
-						<div class="dot"></div>
 					</div>
 				</div>
 			</div>

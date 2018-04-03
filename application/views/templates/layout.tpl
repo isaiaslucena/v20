@@ -7,7 +7,7 @@
 		<title>{$title}</title>
 		{block name=head}{/block}
 	</head>
-	<body class="light-skin fixed-navbar sidebar-scroll hide-sidebar" style="color: black" crossorigin="anonymous">
+	<body class="light-skin fixed-navbar sidebar-scroll hide-sidebar" style="color: black">
 		{block name=body}{/block}
 		{block name=foot}{/block}
 	</body>
