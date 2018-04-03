@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-02 15:39:45
+/* Smarty version 3.1.30, created on 2018-04-02 18:58:30
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac278f19ca8d3_96454303',
+  'unifunc' => 'content_5ac2a7867e92e6_54514503',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1522694271,
+      1 => 1522706303,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ac278f19ca8d3_96454303 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac2a7867e92e6_54514503 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2265996785ac278f19b81e6_29212479', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20987032085ac2a7867d30d0_34742144', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_2265996785ac278f19b81e6_29212479 extends Smarty_Internal_Block
+class Block_20987032085ac2a7867d30d0_34742144 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -368,42 +368,115 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 		salertloading(isTouchDevice());
 
-		if (window.Worker) {
-			// console.log('worker available');
+		// setTimeout(function(){
 
-			dtworker = new Worker('/assets/dataclip/dtworker.js');
-			// testworker = new Worker('/assets/dataclip/testworker.js');
+			if (window.Worker) {
+				dtworker1 = new Worker('/assets/dataclip/dtworker.js');
+				dtworker2 = new Worker('/assets/dataclip/dtworker.js');
+				dtworker3 = new Worker('/assets/dataclip/dtworker.js');
+				dtworker4 = new Worker('/assets/dataclip/dtworker.js');
+				dtworker5 = new Worker('/assets/dataclip/dtworker.js');
+				dtworker6 = new Worker('/assets/dataclip/dtworker.js');
+				dtworker7 = new Worker('/assets/dataclip/dtworker.js');
 
-			dtworker.postMessage({'vfunction': 'get_client_info', 'clientid': 282});
+				dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home_client/client_info/'+clientselid});
+				dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home_client/count_vtype_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+				dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home_client/count_states_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+				dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home_client/count_rating_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+				dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home_client/count_client_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+				dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home_client/client_subjects_keywords/'+clientselid+'/'+todaydate+'/'+todaydate});
+				dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home_client/client_subjects/'+clientselid});
 
-			dtworker.onmessage = function(event) {
-				console.log(event);
-				// document.getElementById('dtworkerspan').innerText = event.data;
+				dtworker1.onmessage = function(event) {
+					jresponse = JSON.parse(event.data.response);
+					set_client_info(clientselid, jresponse.name, jresponse.banner, true);
+				};
+
+				dtworker2.onmessage = function(event) {
+					jresponse = JSON.parse(event.data.response);
+					set_count_vtype(jresponse);
+				};
+
+				dtworker3.onmessage = function(event) {
+					jresponse = JSON.parse(event.data.response);
+					set_count_states(jresponse);
+				};
+
+				dtworker4.onmessage = function(event) {
+					jresponse = JSON.parse(event.data.response);
+					set_count_rating(jresponse);
+				};
+
+				dtworker5.onmessage = function(event) {
+					jresponse = JSON.parse(event.data.response);
+					set_count_client(jresponse);
+				};
+
+				dtworker6.onmessage = function(event) {
+					jresponse = JSON.parse(event.data.response);
+					$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
+					add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, 'startpage');
+				};
+
+				dtworker7.onmessage = function(event) {
+					jresponse = JSON.parse(event.data.response);
+					set_subjects(jresponse);
+				};
+
+				// dtworker.onmessage = function(event) {
+				// 	// console.log(event.data);
+				// 	jresponse = JSON.parse(event.data.response);
+				// 	// console.log(jresponse);
+
+				// 	vfunc = event.data.vfunction;
+				// 	switch (vfunc) {
+				// 		case 'get_client_info':
+				// 			set_client_info(clientselid, jresponse.name, jresponse.banner, true);
+				// 			break;
+				// 		case 'count_vtype':
+				// 			set_count_vtype(jresponse);
+				// 			break;
+				// 		case 'count_states':
+				// 			set_count_states(jresponse);
+				// 			break;
+				// 		case 'count_rating':
+				// 			set_count_rating(jresponse);
+				// 			break;
+				// 		case 'count_client':
+				// 			set_count_client(jresponse);
+				// 			break;
+				// 		case 'get_subject_keywords':
+				// 			$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
+				// 			add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, 'startpage');
+				// 			break;
+				// 		case 'get_subjects':
+				// 			set_subjects(jresponse);
+				// 			break;
+				// 		default:
+				// 			console.log('Nothing to do!')
+				// 			break;
+				// 	}
+				// }
 			}
 
-			// testworker.onmessage = function(event) {
-				// console.log(event.data);
-				// document.getElementById('testworkerspan').innerText = event.data;
-			// }
-		}
+		// }, 300);
 
 		// get_client_info(clientselid, true);
-		count_vtype(clientselid, todaydate, todaydate);
-		count_rating(clientselid, todaydate, todaydate);
-		count_states(clientselid, todaydate, todaydate);
-		count_client(clientselid, todaydate, todaydate);
-		$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-		get_subject_keywords(clientselid, todaydate, todaydate, true, function(keywid){
-			add_keyword_news(keywid, clientselid, todaydate, todaydate, true, 'startpage');
-		});
-
-		get_subjects(clientselid, function(data){
-			data.map(function(val, index) {
-				html = '<option data-type="adssubject" data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
-				$('#adssubject').append(html);
-			});
-			$('#adssubject').selectpicker('refresh');
-		});
+		// count_vtype(clientselid, todaydate, todaydate);
+		// count_rating(clientselid, todaydate, todaydate);
+		// count_states(clientselid, todaydate, todaydate);
+		// count_client(clientselid, todaydate, todaydate);
+		// $('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
+		// get_subject_keywords(clientselid, todaydate, todaydate, true, function(keywid){
+		// 	add_keyword_news(keywid, clientselid, todaydate, todaydate, true, 'startpage');
+		// });
+		// get_subjects(clientselid, function(data){
+		// 	data.map(function(val, index) {
+		// 		html = '<option data-type="adssubject" data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+		// 		$('#adssubject').append(html);
+		// 	});
+		// 	$('#adssubject').selectpicker('refresh');
+		// });
 	}
 <?php echo '</script'; ?>
 >

@@ -2,20 +2,19 @@
 
 function salertloading(mobile) {
 	if (mobile) {
-		swalwidth = 150;
+		swalwidth = '16em';
 	} else {
-		swalwidth = 300;
+		swalwidth = '32em';
 	}
 
 	swal({
-		title: "Carregando...",
-		type: "info",
-		width: swalwidth,
-		showCancelButton: false,
-		showConfirmButton: false,
 		onOpen: () => {
 			swal.showLoading()
-		}
+		},
+		title: "Carregando...",
+		// width: swalwidth,
+		showCancelButton: false,
+		showConfirmButton: false,
 	});
 };
 
@@ -24,15 +23,15 @@ function salertloadingdone(mobile) {
 		$('.selectpicker').selectpicker('mobile');
 		$('#btnsgroupnews').removeClass('btn-group-justified');
 		$('#btnsgroupnews').addClass('btn-group-vertical');
-		swalwidth = 150;
+		swalwidth = '16em';
 	} else {
-		swalwidth = 300;
+		swalwidth = '32em';
 	}
 
 	swal({
 		title: "Pronto!",
 		type: "success",
-		width: swalwidth,
+		// width: swalwidth,
 		showCancelButton: false,
 		showConfirmButton: false,
 		timer: 1500
@@ -76,7 +75,33 @@ function get_client_info(clientid, setselpicker) {
 	});
 };
 
-function setcolors(imgurl) {
+function set_client_info(cid, cname, cbanner, setselpicker) {
+	if (setselpicker) {
+		$('#selclient').selectpicker('val', cname);
+	}
+
+	headerlogo = new Image();
+	headerlogo.src = cbanner;
+	headerlogo.setAttribute('crossOrigin', 'anonymous');
+	// headerlogo.setAttribute('id', 'bannerheader');
+	// imgsrcb64 = '';
+
+	headerlogo.onload = function(event) {
+		// document.getElementById('bannerheader').setAttribute('src', 'data:image/png;base64,'+imgsrcb64)
+		// document.getElementById('logo').innerHTML = '<img id="bannerheader" src="'+cbanner+'" crossOrigin="anonymous" style="display: none">';
+		// setcolors();
+	};
+
+	// $('#bannerheader').attr('src', cbanner);
+	$('#logo, #logomobile').css({
+		'background-image': 'url("'+cbanner+'")',
+		'background-repeat': 'no-repeat',
+		'background-size': 'auto 100%',
+		'background-position': 'center'
+	});
+};
+
+function setcolors() {
 	// sourceImage = $('#bannerheader');
 	// sourceImage = document.getElementById('bannerheader');
 	// console.log(headerlogo);
@@ -130,6 +155,19 @@ function count_vtype(clientid, startdate, enddate) {
 	);
 };
 
+function set_count_vtype(cvtypedata) {
+	var chartdonutdata = [];
+	cvtypedata.map(function(obj, index){
+		var arrtmp = [obj.Nome, obj.QNoticias];
+		chartdonutdata.push(arrtmp);
+	});
+
+	chartdonut.load({
+		unload: true,
+		columns: chartdonutdata,
+	});
+};
+
 function count_rating(clientid, startdate, enddate) {
 	var chartstackeddata = [];
 	$.get('/home_client/count_rating_news/'+clientid+'/'+startdate+'/'+enddate,
@@ -145,6 +183,26 @@ function count_rating(clientid, startdate, enddate) {
 			});
 		}
 	);
+};
+
+function set_count_rating(cratdata) {
+	// console.log(cratdata);
+	var chartstackeddata = [];
+	// console.log(chartstackeddata);
+	// cratdata.each(function(index, obj) {
+	// 	var arrtmp = [obj.Avaliacao, obj.QNoticias];
+	// 	chartstackeddata.push(arrtmp);
+	// });
+
+	cratdata.map(function(obj, index){
+		var arrtmp = [obj.Avaliacao, obj.QNoticias];
+		chartstackeddata.push(arrtmp);
+	});
+
+	chartstacked.load({
+		unload: true,
+		columns: chartstackeddata,
+	});
 };
 
 function count_states(clientid, startdate, enddate) {
@@ -232,6 +290,87 @@ function count_states(clientid, startdate, enddate) {
 	);
 };
 
+function set_count_states(esdata) {
+	mapareas = {};
+	// console.log(esdata);
+	esdata.map(function(obj, index){
+		mapareas[obj.Id] = {
+			text: {
+				content: obj.uf,
+				attrs: {
+					'font-size': 20,
+					'fill': '#202020'
+				}
+			},
+			value: obj.QNoticias,
+			tooltip: {content: '<span style="font-weight:bold;">'+obj.Estado+'</span><br />Matérias: '+obj.QNoticias}
+		}
+	});
+
+	$('#brmap').mapael({
+		map : {
+			name: 'brasil',
+			defaultArea: {
+				attrs: {
+					fill: '#CFCFCF',
+					stroke: '#FFFFFF',
+					'stroke-width': 2
+				},
+					attrsHover: {
+					fill: '#DA7910',
+					animDuration: 50,
+					'stroke-width': 2
+				}
+			}
+		},
+		legend: {
+			area: {
+				slices: [
+					{
+						max: 0,
+						attrs: {
+							fill: "#CFCFCF"
+						},
+						label: "Nenhum"
+					},
+					{
+						min: 1,
+						max: 10,
+						attrs: {
+							fill: "#66D1E7"
+						},
+						label: "Menos que 10"
+					},
+					{
+						min: 11,
+						max: 20,
+						attrs: {
+							fill: "#4DBCD3"
+						},
+						label: "Entre 11 e 20"
+					},
+					{
+						min: 21,
+						max: 30,
+						attrs: {
+							fill: "#3291AA"
+						},
+						label: "Entre 21 e 30"
+					},
+					{
+						min: 31,
+						attrs: {
+							fill: "#1A727D"
+						},
+						label: "Acima de 31"
+					}
+				]
+			}
+		},
+		areas: mapareas
+	});
+};
+
 function count_client(clientid, startdate, enddate) {
 	var chartbarlinedata = [];
 	var arrdatf = ['Data'];
@@ -273,6 +412,30 @@ function count_client(clientid, startdate, enddate) {
 			});
 		}
 	);
+};
+
+function set_count_client(cldata) {
+	var chartbarlinedata = [];
+	var arrdatf = ['Data'];
+	var arrnotf = ['QNoticias'];
+	var arrvalf = ['EdValor'];
+	var arraudf = ['EdAudiencia'];
+
+	cldata.map(function(obj, index){
+		arrdatf.push(obj.Data);
+		arrnotf.push(obj.QNoticias);
+		arrvalf.push(obj.EdValor);
+		arraudf.push(obj.EdAudiencia);
+	});
+	chartbarlinedata.push(arrdatf);
+	chartbarlinedata.push(arrnotf);
+	chartbarlinedata.push(arrvalf);
+	chartbarlinedata.push(arraudf);
+
+	chartlinestacked.load({
+		unload: true,
+		columns: chartbarlinedata,
+	});
 };
 
 function get_subject_keywords(clientid, startdate, enddate, updatesubjects = false, callback) {
@@ -349,6 +512,78 @@ function get_subject_keywords(clientid, startdate, enddate, updatesubjects = fal
 			callback(keywordidchosen);
 		}
 	);
+};
+
+function set_subject_keywords(cdata, updatesubjects = false, callback) {
+	subjectskeywords = cdata;
+
+	if (updatesubjects) {
+		$('#sublist .selectpicker').selectpicker('destroy');
+		$('#sublist').html('');
+	}
+
+	$.each(subjectskeywords, function(index, sval) {
+		subjectid = sval.IdAssunto;
+		subjectnm = sval.Assunto;
+		subjectcount = sval.QNoticias;
+		skeywords = sval.PChaves;
+
+		if (subjectnm == cname) {
+			subjecchosen = subjectnm;
+			subjecctid = subjectid;
+		} else {
+			subjecchosen = subjectskeywords[0].Assunto;
+			subjecctid = subjectskeywords[0].IdAssunto;
+		}
+
+		if (subjectcount != null) {
+			html = '<select class="selectpicker" data-subjectid="'+subjectid+'" '+
+							'data-style="btn btn-sm btn-default" data-size="10" data-width="200px" '+
+							'data-actions-box="true" data-live-search="true" '+
+							'data-selected-text-format="count > 3" '+
+							'title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
+		}
+
+		$.each(skeywords, function(index, kval) {
+			keywordid = kval.IdPChave;
+			keywordnm = kval.PChave;
+			keywordtb = kval.TermoBusca;
+			keywordgf = kval.Grifar;
+			keywordcount = kval.QNoticias;
+			if (keywordcount != null) {
+				html += '<option data-type="keyword" data-keywordid="'+keywordid+'" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
+				// keywordcount = 0;
+			}
+		});
+
+		html += '</select>';
+		$('#sublist').append(html);
+		$('#sublist .selectpicker').selectpicker('refresh');
+
+		$('#sublist .bs-deselect-all').css('float', 'none');
+		$('#sublist .actions-btn').css('font-size', '70%');
+	});
+
+	var result = $.grep(subjectskeywords, function(e){ return e.IdAssunto == subjecctid; });
+	$.each(result[0].PChaves, function(index, kval) {
+		keywordid = kval.IdPChave;
+		keywordnm = kval.PChave;
+		keywordtb = kval.TermoBusca;
+		keywordgf = kval.Grifar;
+
+		if (keywordnm == cname) {
+			keywordidchosen = keywordid;
+			keywordnmchosen = keywordnm;
+		} else {
+			keywordidchosen = result[0].PChaves[0].IdPChave;
+			keywordnmchosen = result[0].PChaves[0].PChave;
+		}
+	});
+
+	subkeywordsarr.push(keywordidchosen);
+	$('#sublist .selectpicker').selectpicker('val', keywordnmchosen);
+	// add_keyword_news(keywordidchosen, clientid, startdate, enddate, true, 'startpage');
+	return keywordidchosen;
 };
 
 function get_keyword_news(keywordid, startdate, enddate) {
@@ -507,6 +742,14 @@ function get_subjects(clientid, callback) {
 	$.get('/home_client/client_subjects/'+clientid, function(data) {
 		callback(data);
 	});
+};
+
+function set_subjects(subjdata) {
+	subjdata.map(function(val, index) {
+		html = '<option data-type="adssubject" data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+		$('#adssubject').append(html);
+	});
+	$('#adssubject').selectpicker('refresh');
 };
 
 function get_keywordsfromsubject(subjectid, callback) {
