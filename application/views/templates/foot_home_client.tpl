@@ -332,7 +332,7 @@
 
 		salertloading(isTouchDevice());
 
-		load_data('startpage');
+		load_data('startpage', clientselid,todaydate, todaydate);
 
 		// get_client_info(clientselid, true);
 		// count_vtype(clientselid, todaydate, todaydate);
@@ -352,16 +352,31 @@
 		// });
 	}
 
-	function load_data(ptype) {
-		if (window.Worker) {
+	function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
+		if (ldstartdate == ldenddate) {
+			var ed = new Date(ldstartdate+'T00:00:00-03:00');
+			ed.setDate(ed.getDate()-6);
+			var edday = ed.getDate();
+			var edday = ('0' + edday).slice(-2);
+			var edmonth = (ed.getMonth() + 1);
+			var edmonth = ('0' + edmonth).slice(-2);
+			var edyear = ed.getFullYear();
 
-			dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+clientselid});
-			dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+clientselid});
+			var fstartdate = edyear+'-'+edmonth+'-'+edday;
+			var fenddate = ldenddate;
+		} else {
+			var fstartdate = ldstartdate;
+			var fenddate = ldenddate;
+		}
+
+		if (window.Worker) {
+			dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+ldclientid});
+			dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+			dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+			dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+			dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+ldclientid+'/'+fstartdate+'/'+fenddate});
+			dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+			dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+ldclientid});
 
 			dtworker1.onmessage = function(event) {
 				jresponse = JSON.parse(event.data.response);

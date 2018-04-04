@@ -23,6 +23,7 @@ function salertloadingdone(mobile) {
 		$('.selectpicker').selectpicker('mobile');
 		$('#btnsgroupnews').removeClass('btn-group-justified');
 		$('#btnsgroupnews').addClass('btn-group-vertical');
+		$('#btnexpand').css('display', 'none');
 		swalwidth = '16em';
 	} else {
 		swalwidth = '32em';
@@ -53,19 +54,8 @@ function get_client_info(clientid, setselpicker) {
 			$('#selclient').selectpicker('val', cname);
 		}
 
-		headerlogo = new Image();
-		headerlogo.src = cbanner;
-		headerlogo.setAttribute('crossOrigin', 'anonymous');
-		// headerlogo.setAttribute('id', 'bannerheader');
-		// imgsrcb64 = '';
-
-		headerlogo.onload = function(event) {
-			// document.getElementById('bannerheader').setAttribute('src', 'data:image/png;base64,'+)
-			// document.getElementById('logo').innerHTML = '<img id="bannerheader" src="'+cbanner+'" crossOrigin="anonymous" style="display: none">';
-			setcolors();
-		};
-
 		$('#bannerheader').attr('src', cbanner);
+		$('#bannerheaders').attr('src', cbanner);
 		$('#logo, #logomobile').css({
 			'background-image': 'url("'+cbanner+'")',
 			'background-repeat': 'no-repeat',
@@ -82,15 +72,8 @@ function set_client_info(cid, cname, cbanner, setselpicker) {
 
 	cbanner = '/home/proxy/'+btoa(cbanner);
 	$('#bannerheader').attr('src', cbanner);
+	$('#bannerheaders').css('margin-top', '3%');
 	$('#bannerheaders').attr('src', cbanner);
-
-	// headerlogo = new Image();
-	// headerlogo.setAttribute('crossOrigin', 'anonymous');
-	// headerlogo.src = cbanner;
-
-	// headerlogo.onload = function() {
-		// console.log('Image loaded!');
-	// };
 };
 
 function setcolors() {

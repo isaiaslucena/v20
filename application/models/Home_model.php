@@ -116,6 +116,7 @@ class Home_model extends CI_Model {
 					WHERE
 					ent.Liberada = 1 AND
 					ent.IdEmpresa = $idclient AND
+					tve.Id NOT IN (17,27,26,24,23) AND
 					nt.DATA >= '$startdate' AND nt.DATA <= '$enddate'
 					ORDER BY nt.DATA, nt.HORA DESC";
 		$result = $this->db->query($query)->result_array();
@@ -197,11 +198,11 @@ class Home_model extends CI_Model {
 								nt.idEditoria as IdEditoria, ed.Nome as Editoria,
 								nt.Data, nt.Hora
 								FROM Noticias nt
-								JOIN EmpresaNoticia ent ON nt.Id=ent.idNoticia
-								JOIN Empresa em ON ent.IdEmpresa=em.Id
-								JOIN Veiculo ve ON nt.idVeiculo=ve.Id
-								JOIN TipoVeiculo tve ON ve.idTipoVeiculo=tve.Id
-								JOIN Editorias ed ON nt.idEditoria=ed.Id
+								JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+								JOIN Empresa em ON ent.IdEmpresa = em.Id
+								JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+								JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								JOIN Editorias ed ON nt.idEditoria = ed.Id
 								WHERE
 								tve.Id IN (3, 10, 12, 14, 18, 27) AND
 								ent.Liberada = 1 AND

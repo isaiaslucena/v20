@@ -306,9 +306,12 @@ class Home extends CI_Controller {
 		$datan = $this->utf8_encoder($datan);
 		$datan = $this->linebreak_to_br($datan);
 
-		// var_dump($data);
+		if (isset($datan[0])) {
+			$data = $datan[0];
+		} else {
+			$data = $datan;
+		}
 
-		$data = $datan[0];
 		$data['PChaves'] = array();
 		$newkeywordid = 0;
 		$ncount = -1;

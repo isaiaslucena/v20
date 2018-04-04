@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-03 19:14:15
+/* Smarty version 3.1.30, created on 2018-04-04 14:45:35
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac3fcb7688fe7_91211159',
+  'unifunc' => 'content_5ac50f3f676c90_36706184',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522793653,
+      1 => 1522863933,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ac3fcb7688fe7_91211159 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac50f3f676c90_36706184 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15076407335ac3fcb766a648_42595809', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13135858685ac50f3f64bb86_88983904', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_15076407335ac3fcb766a648_42595809 extends Smarty_Internal_Block
+class Block_13135858685ac50f3f64bb86_88983904 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -40,10 +40,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	<!-- Header -->
 	<div id="header">
 		<div id="logo" class="light-version" style="padding: 0; margin: auto; position: absolute; width: 100%;">
-			<img id="bannerheader" style="height: 100%" class="center-block" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
+			<img id="bannerheader" class="center-block" style="max-height: 100%" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
 		<div id="logomobile" class="small-logo" style="padding-top: 0px; position: absolute; width: 100%; height: 100%">
-			<img id="bannerheaders" class="center-block img-responsive" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
+			<img id="bannerheaders" class="center-block" style="max-height: 100%; max-width: 100%;" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
 		<div role="navigation">
 			<div class="mobile-menu">
@@ -74,18 +74,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 							</a>
 							<ul id="cdrefreshlist" class="dropdown-menu hdropdown bounceInDown">
 									<div class="title">Atualizar em:</div>
-									<li>
-										<a class="cdrefreshitem" data-refreshtm="10">
-											<i id="icheck10" class="fa fa-check" style="display: none"></i>
-											10 segundos
-										</a>
-									</li>
-									<li>
-										<a class="cdrefreshitem" data-refreshtm="30">
-											<i id="icheck30" class="fa fa-check" style="display: none"></i>
-											30 segundos
-										</a>
-									</li>
+									
 									<li>
 										<a class="cdrefreshitem" data-refreshtm="60">
 											<i id="icheck60" class="fa fa-check" style="display: none"></i>
@@ -347,7 +336,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							</div>
 							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; overflow-x: hidden; display: none">
 							</div>
-							<div class="col-lg-8">
+							<div class="col-sm-8 col-md-8 col-lg-8">
 								<h5 id="datemediactni" class="text-muted"></h5>
 								<p id="modaltitlevki" class="text-primary"></p>
 								<h3 id="mediactnti"></h3>
@@ -383,6 +372,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					<div id="modasnfooter" class="modal-footer">
 						<div class="row">
 							<div class="col-md-12">
+								<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
+								<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
 								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
 								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
 								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>

@@ -3,10 +3,10 @@
 	<!-- Header -->
 	<div id="header">
 		<div id="logo" class="light-version" style="padding: 0; margin: auto; position: absolute; width: 100%;">
-			<img id="bannerheader" style="height: 100%" class="center-block" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
+			<img id="bannerheader" class="center-block" style="max-height: 100%" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
 		<div id="logomobile" class="small-logo" style="padding-top: 0px; position: absolute; width: 100%; height: 100%">
-			<img id="bannerheaders" class="center-block img-responsive" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
+			<img id="bannerheaders" class="center-block" style="max-height: 100%; max-width: 100%;" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
 		<div role="navigation">
 			<div class="mobile-menu">
@@ -37,7 +37,7 @@
 							</a>
 							<ul id="cdrefreshlist" class="dropdown-menu hdropdown bounceInDown">
 									<div class="title">Atualizar em:</div>
-									<li>
+									{* <li>
 										<a class="cdrefreshitem" data-refreshtm="10">
 											<i id="icheck10" class="fa fa-check" style="display: none"></i>
 											10 segundos
@@ -48,7 +48,7 @@
 											<i id="icheck30" class="fa fa-check" style="display: none"></i>
 											30 segundos
 										</a>
-									</li>
+									</li> *}
 									<li>
 										<a class="cdrefreshitem" data-refreshtm="60">
 											<i id="icheck60" class="fa fa-check" style="display: none"></i>
@@ -299,7 +299,7 @@
 							</div>
 							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; overflow-x: hidden; display: none">
 							</div>
-							<div class="col-lg-8">
+							<div class="col-sm-8 col-md-8 col-lg-8">
 								<h5 id="datemediactni" class="text-muted"></h5>
 								<p id="modaltitlevki" class="text-primary"></p>
 								<h3 id="mediactnti"></h3>
@@ -335,6 +335,8 @@
 					<div id="modasnfooter" class="modal-footer">
 						<div class="row">
 							<div class="col-md-12">
+								<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
+								<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
 								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
 								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
 								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
