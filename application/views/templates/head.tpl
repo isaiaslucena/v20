@@ -2,7 +2,7 @@
 {block name=head}
 	<link rel="shortcut icon" href="/assets/imgs/dataclip.ico" type="image/x-icon">
 
-	{* JS *}
+	<!-- JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.0.1/color-thief.min.js"></script>
@@ -36,7 +36,7 @@
 	<script src="http://webapplayers.com/homer_admin-v2.0/light-shadow/vendor/slimScroll/jquery.slimscroll.min.js"></script>
 	<script src="http://webapplayers.com/homer_admin-v2.0/light-shadow/scripts/homer.js"></script>
 
-	{* CSS *}
+	<!-- CSS -->
 	<!-- Vendor styles -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

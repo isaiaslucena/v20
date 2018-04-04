@@ -22,10 +22,11 @@ $('#selclient').change(function(event) {
 	});
 });
 
-// $('#bannerheader').on('load', function() {
-// 	bannerurl = $(this).attr('src');
-// 	setcolors();
-// });
+$('#bannerheader').on('load', function() {
+	console.log('Image loaded in DOM!');
+	// bannerurl = $(this).attr('src');
+	setcolors();
+});
 
 cdatebtn.click(function(event) {
 	salertloading(isTouchDevice());
@@ -560,7 +561,6 @@ $(document).on('change', 'select', function(event) {
 $('#btnasearch').click(function(event) {
 	$('#advancedsearch').modal('show');
 });
-
 
 $('.cdrefreshitem').click(function(event) {
 	refreshtm = $(this).attr('data-refreshtm');

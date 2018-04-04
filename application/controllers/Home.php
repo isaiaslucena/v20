@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home_client extends CI_Controller {
+class Home extends CI_Controller {
 	function htmlchars_decoder($array) {
 		array_walk_recursive($array, function(&$item, $key) {
 			$item = htmlspecialchars_decode($item);
@@ -43,13 +43,13 @@ class Home_client extends CI_Controller {
 			$data['client_sel_id'] = $idclient;
 		}
 		$data['title'] = 'DataClip - Business Inteligence';
-		$data['clients'] = $this->utf8_encoder($this->home_client_model->get_clients());
+		$data['clients'] = $this->utf8_encoder($this->home_model->get_clients());
 		header ('Access-Control-Allow-Origin: *');
 		$this->smarty->view('foot_home_client.tpl', $data);
 	}
 
 	public function client_info($id) {
-		$datae = $this->home_client_model->get_client_info($id);
+		$datae = $this->home_model->get_client_info($id);
 
 		// if (isset($datae['last_tvn'][0])) {
 		// 	$datae['last_tvn'][0]['Titulo'] = htmlspecialchars_decode($datae['last_tvn'][0]['Titulo']);
@@ -145,28 +145,28 @@ class Home_client extends CI_Controller {
 	}
 
 	public function client_subjects($clientid) {
-		$data = $this->utf8_encoder($this->home_client_model->get_client_subjects($clientid));
+		$data = $this->utf8_encoder($this->home_model->get_client_subjects($clientid));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function subject_keywords($subjectid) {
-		$data = $this->utf8_encoder($this->home_client_model->get_subject_keywords($subjectid));
+		$data = $this->utf8_encoder($this->home_model->get_subject_keywords($subjectid));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function veiculos_tipoveiculos($tveiculoid) {
-		$data = $this->utf8_encoder($this->home_client_model->get_veiculos_tipoveiculos($tveiculoid));
+		$data = $this->utf8_encoder($this->home_model->get_veiculos_tipoveiculos($tveiculoid));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function editorias_veiculos($veiculoid) {
-		$data = $this->utf8_encoder($this->home_client_model->get_editorias_veiculos($veiculoid));
+		$data = $this->utf8_encoder($this->home_model->get_editorias_veiculos($veiculoid));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
@@ -175,21 +175,21 @@ class Home_client extends CI_Controller {
 	public function editorias_sites() {
 		$qtext = $this->input->get('query');
 		// var_dump($qtext);
-		$data = $this->utf8_encoder($this->home_client_model->get_editorias_sites($qtext));
+		$data = $this->utf8_encoder($this->home_model->get_editorias_sites($qtext));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function get_tveiculos(){
-		$data = $this->utf8_encoder($this->home_client_model->get_tveiculos());
+		$data = $this->utf8_encoder($this->home_model->get_tveiculos());
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function client_subjects_keywords($id, $startdate = null, $enddate = null) {
-		$subs_keyws = $this->utf8_encoder($this->home_client_model->get_client_subjectskeywords($id, $startdate, $enddate));
+		$subs_keyws = $this->utf8_encoder($this->home_model->get_client_subjectskeywords($id, $startdate, $enddate));
 
 		$subjects_keywords = array();
 		$newsubjectid = 0;
@@ -240,56 +240,56 @@ class Home_client extends CI_Controller {
 	}
 
 	public function count_subject_news($id, $startdate = null, $enddate = null) {
-		$count = $this->home_client_model->count_subject_news($id, $startdate, $enddate);
+		$count = $this->home_model->count_subject_news($id, $startdate, $enddate);
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
 	public function count_keyword_news($id, $startdate = null, $enddate = null) {
-		$count = $this->home_client_model->count_keyword_news($id, $startdate, $enddate);
+		$count = $this->home_model->count_keyword_news($id, $startdate, $enddate);
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
 	public function count_client_news($id, $startdate = null, $enddate = null) {
-		$count = $this->home_client_model->count_client_news($id, $startdate, $enddate);
+		$count = $this->home_model->count_client_news($id, $startdate, $enddate);
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
 	public function count_vtype_news($clientid, $startdate = null, $enddate = null) {
-		$count = $this->utf8_encoder($this->home_client_model->count_vtype_news($clientid, $startdate, $enddate));
+		$count = $this->utf8_encoder($this->home_model->count_vtype_news($clientid, $startdate, $enddate));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
 	public function count_rating_news($clientid, $startdate = null, $enddate = null) {
-		$count = $this->utf8_encoder($this->home_client_model->count_rating_news($clientid, $startdate, $enddate));
+		$count = $this->utf8_encoder($this->home_model->count_rating_news($clientid, $startdate, $enddate));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
 	public function count_states_news($clientid, $startdate = null, $enddate = null) {
-		$count = $this->utf8_encoder($this->home_client_model->count_states_news($clientid, $startdate, $enddate));
+		$count = $this->utf8_encoder($this->home_model->count_states_news($clientid, $startdate, $enddate));
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($count, JSON_PRETTY_PRINT);
 	}
 
 	public function get_states(){
-		$data = $this->utf8_encoder($this->home_client_model->get_states());
+		$data = $this->utf8_encoder($this->home_model->get_states());
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function single_news_keyword($idnews, $keywordid) {
-		$data = $this->home_client_model->get_single_news_keyword($idnews, $keywordid);
+		$data = $this->home_model->get_single_news_keyword($idnews, $keywordid);
 		$data = $this->htmlchars_decoder($data);
 		$data = $this->tags_stripper($data);
 		$data = $this->utf8_encoder($data);
@@ -300,7 +300,7 @@ class Home_client extends CI_Controller {
 	}
 
 	public function single_news($idnews, $idclient) {
-		$datan = $this->home_client_model->get_single_news($idnews, $idclient);
+		$datan = $this->home_model->get_single_news($idnews, $idclient);
 		$datan = $this->htmlchars_decoder($datan);
 		$datan = $this->tags_stripper($datan);
 		$datan = $this->utf8_encoder($datan);
@@ -337,7 +337,7 @@ class Home_client extends CI_Controller {
 	}
 
 	public function keyword_news($keywordid, $clientid, $startdate = null, $enddate = null) {
-		$data['data'] = $this->home_client_model->get_client_keyword_news($keywordid, $clientid, $startdate, $enddate);
+		$data['data'] = $this->home_model->get_client_keyword_news($keywordid, $clientid, $startdate, $enddate);
 		$data['data'] = $this->htmlchars_decoder($data['data']);
 		// $data = $this->tags_stripper($data);
 		$data['data'] = $this->utf8_encoder($data['data']);
@@ -347,8 +347,8 @@ class Home_client extends CI_Controller {
 	}
 
 	public function today_news($id) {
-		// $this->load->model('home_client_model');
-		$data = $this->home_client_model->get_client_news($id);
+		// $this->load->model('home_model');
+		$data = $this->home_model->get_client_news($id);
 
 		$nn = 0;
 		foreach ($data as $item) {
@@ -379,7 +379,7 @@ class Home_client extends CI_Controller {
 	}
 
 	public function news_export($clientid, $startdate = null, $enddate = null) {
-		$datan = $this->home_client_model->get_news_export($clientid, $startdate, $enddate);
+		$datan = $this->home_model->get_news_export($clientid, $startdate, $enddate);
 		$datan = $this->htmlchars_decoder($datan);
 		$datan = $this->tags_stripper($datan);
 		$datan = $this->utf8_encoder($datan);
@@ -468,6 +468,34 @@ class Home_client extends CI_Controller {
 			$message = "Método não permitido!";
 			print json_encode($message, JSON_PRETTY_PRINT);
 		}
+	}
+
+	public function proxy($url = null) {
+		$durl = base64_decode($url);
+		$fmimetype = exif_imagetype($durl);
+
+		switch ($fmimetype) {
+			case 1:
+				$fcontenttype = "image/gif";
+				break;
+			case 2:
+				$fcontenttype = "image/jpeg";
+				break;
+			case 3:
+				$fcontenttype = "image/png";
+				break;
+			case 6:
+				$fcontenttype = "image/bmp";
+				break;
+			default:
+				$fcontenttype = "image/jpg";
+				break;
+		}
+
+		header("Cache-Control: max-age=3600, public");
+		header("Content-type: ".$fcontenttype);
+
+		print file_get_contents($durl);
 	}
 }
 ?>

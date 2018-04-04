@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-03 15:55:10
+/* Smarty version 3.1.30, created on 2018-04-03 19:14:15
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac3ce0ec95609_10403757',
+  'unifunc' => 'content_5ac3fcb7688fe7_91211159',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522781610,
+      1 => 1522793653,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ac3ce0ec95609_10403757 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac3fcb7688fe7_91211159 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20616372465ac3ce0ec73b63_25625693', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15076407335ac3fcb766a648_42595809', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_20616372465ac3ce0ec73b63_25625693 extends Smarty_Internal_Block
+class Block_15076407335ac3fcb766a648_42595809 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -40,10 +40,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	<!-- Header -->
 	<div id="header">
 		<div id="logo" class="light-version" style="padding: 0; margin: auto; position: absolute; width: 100%;">
-			
+			<img id="bannerheader" style="height: 100%" class="center-block" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
-		<div id="logomobile" class="small-logo" style="padding-top: none; position: absolute; width: 100%; height: 100%">
-			
+		<div id="logomobile" class="small-logo" style="padding-top: 0px; position: absolute; width: 100%; height: 100%">
+			<img id="bannerheaders" class="center-block img-responsive" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
 		<div role="navigation">
 			<div class="mobile-menu">
@@ -70,7 +70,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						<li class="dropdown" title="Atualizar">
 							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
 								<i class="pe-7s-refresh"></i>
-								<span id="countdownrefresh" class="label label-success" style="right: 5px; display: none;">30</span>
+								<span id="countdownrefresh" class="label label-success" style="right: 5px; display: none;">0</span>
 							</a>
 							<ul id="cdrefreshlist" class="dropdown-menu hdropdown bounceInDown">
 									<div class="title">Atualizar em:</div>
@@ -118,7 +118,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 								<div class="title">Nome do Usuário</div>
 								<li><a>Perfil</a></li>
 								<li><a>Cofigurações</a></li>
-								<li class="summary"><a>Sair</a></li>
+								<li class="summary"><a href="/login">Sair</a></li>
 							</ul>
 						</li>
 					</ul>

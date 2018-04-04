@@ -3,10 +3,10 @@
 	<!-- Header -->
 	<div id="header">
 		<div id="logo" class="light-version" style="padding: 0; margin: auto; position: absolute; width: 100%;">
-			{* <img  id="bannerheader" style="height: 100%" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous" style="display: none;"> *}
+			<img id="bannerheader" style="height: 100%" class="center-block" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
-		<div id="logomobile" class="small-logo" style="padding-top: none; position: absolute; width: 100%; height: 100%">
-			{* <img id="bannerheaders" crossOrigin="anonymous" src="/assets/banner/dataclip_logo.jpg" alt="Logo"> *}
+		<div id="logomobile" class="small-logo" style="padding-top: 0px; position: absolute; width: 100%; height: 100%">
+			<img id="bannerheaders" class="center-block img-responsive" src="/assets/banner/dataclip_logo.jpg" alt="Logo" crossOrigin="anonymous">
 		</div>
 		<div role="navigation">
 			<div class="mobile-menu">
@@ -33,7 +33,7 @@
 						<li class="dropdown" title="Atualizar">
 							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
 								<i class="pe-7s-refresh"></i>
-								<span id="countdownrefresh" class="label label-success" style="right: 5px; display: none;">30</span>
+								<span id="countdownrefresh" class="label label-success" style="right: 5px; display: none;">0</span>
 							</a>
 							<ul id="cdrefreshlist" class="dropdown-menu hdropdown bounceInDown">
 									<div class="title">Atualizar em:</div>
@@ -81,7 +81,7 @@
 								<div class="title">Nome do Usuário</div>
 								<li><a>Perfil</a></li>
 								<li><a>Cofigurações</a></li>
-								<li class="summary"><a>Sair</a></li>
+								<li class="summary"><a href="/login">Sair</a></li>
 							</ul>
 						</li>
 					</ul>

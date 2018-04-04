@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-03 15:55:56
+/* Smarty version 3.1.30, created on 2018-04-03 18:08:15
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac3ce3cd04370_38524408',
+  'unifunc' => 'content_5ac3ed3f6855b4_45294373',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1522781751,
+      1 => 1522789630,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ac3ce3cd04370_38524408 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac3ed3f6855b4_45294373 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3612332675ac3ce3cced263_59103985', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3407268035ac3ed3f66df46_98271953', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_3612332675ac3ce3cced263_59103985 extends Smarty_Internal_Block
+class Block_3407268035ac3ed3f66df46_98271953 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -66,6 +66,14 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
 	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
+
+	dtworker1 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker2 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker3 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker4 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker5 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker6 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker7 = new Worker('/assets/dataclip/dtworker.js');
 
 	var d = new Date();
 	var day = d.getDate();
@@ -335,7 +343,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		},
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
-			url: document.origin+'/home_client/editorias_sites?query=%QUERY',
+			url: document.origin+'/home/editorias_sites?query=%QUERY',
 			wildcard: '%QUERY',
 			filter: function (rsites) {
 				return $.map(rsites, function(site) {
@@ -368,7 +376,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 		salertloading(isTouchDevice());
 
-		load_data();
+		load_data('startpage');
 
 		// get_client_info(clientselid, true);
 		// count_vtype(clientselid, todaydate, todaydate);
@@ -388,23 +396,16 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		// });
 	}
 
-	function load_data() {
+	function load_data(ptype) {
 		if (window.Worker) {
-			dtworker1 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker2 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker3 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker4 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker5 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker6 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker7 = new Worker('/assets/dataclip/dtworker.js');
 
-			dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home_client/client_info/'+clientselid});
-			dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home_client/count_vtype_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home_client/count_states_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home_client/count_rating_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home_client/count_client_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home_client/client_subjects_keywords/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home_client/client_subjects/'+clientselid});
+			dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+clientselid});
+			dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+clientselid});
 
 			dtworker1.onmessage = function(event) {
 				jresponse = JSON.parse(event.data.response);
@@ -434,7 +435,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			dtworker6.onmessage = function(event) {
 				jresponse = JSON.parse(event.data.response);
 				$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-				add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, 'startpage');
+				add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, ptype);
 			};
 
 			dtworker7.onmessage = function(event) {

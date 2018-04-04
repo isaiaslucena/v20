@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home_client_model extends CI_Model {
+class Home_model extends CI_Model {
 	public function get_clients() {
 		// $this->db->cache_on();
 		$sqlquery = "SELECT Id, Nome FROM Empresa WHERE Status = 1 AND Owner = 2 AND Banner IS NOT NULL ORDER BY Nome ASC";

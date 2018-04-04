@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-03 11:01:44
+/* Smarty version 3.1.30, created on 2018-04-03 18:06:23
   from "/app/application/views/templates/head.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac3894870f9b5_23247463',
+  'unifunc' => 'content_5ac3eccf30c6e5_04983173',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9fa740764ad3014055f0469798871ffc26655bac' => 
     array (
       0 => '/app/application/views/templates/head.tpl',
-      1 => 1522764016,
+      1 => 1522789519,
       2 => 'file',
     ),
   ),
@@ -21,25 +21,25 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:layout.tpl' => 1,
   ),
 ),false)) {
-function content_5ac3894870f9b5_23247463 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac3eccf30c6e5_04983173 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17527358315ac38948707fb4_27073958', 'head');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2194826335ac3eccf3056a8_67111442', 'head');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'head'} */
-class Block_17527358315ac38948707fb4_27073958 extends Smarty_Internal_Block
+class Block_2194826335ac3eccf3056a8_67111442 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 	<link rel="shortcut icon" href="/assets/imgs/dataclip.ico" type="image/x-icon">
 
-	
+	<!-- JS -->
 	<?php echo '<script'; ?>
  src="https://code.jquery.com/jquery-3.3.1.min.js"><?php echo '</script'; ?>
 >
@@ -125,7 +125,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
  src="http://webapplayers.com/homer_admin-v2.0/light-shadow/scripts/homer.js"><?php echo '</script'; ?>
 >
 
-	
+	<!-- CSS -->
 	<!-- Vendor styles -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

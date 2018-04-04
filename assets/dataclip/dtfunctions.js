@@ -43,7 +43,7 @@ function isTouchDevice() {
 };
 
 function get_client_info(clientid, setselpicker) {
-	$.get('/home_client/client_info/'+clientid,
+	$.get('/home/client_info/'+clientid,
 	function(data, textStatus, xhr) {
 		cid = data.id;
 		cname = data.name;
@@ -80,42 +80,37 @@ function set_client_info(cid, cname, cbanner, setselpicker) {
 		$('#selclient').selectpicker('val', cname);
 	}
 
-	headerlogo = document.createElement('img');
-	headerlogo.setAttribute('crossOrigin', '');
-	headerlogo.setAttribute('src', cbanner);
+	cbanner = '/home/proxy/'+btoa(cbanner);
+	$('#bannerheader').attr('src', cbanner);
+	$('#bannerheaders').attr('src', cbanner);
 
-	headerlogo.addEventListener('load', () => {
-		setcolors();
-	} )
+	// headerlogo = new Image();
+	// headerlogo.setAttribute('crossOrigin', 'anonymous');
+	// headerlogo.src = cbanner;
 
-	// $('#bannerheader').attr('src', cbanner);
-	$('#logo, #logomobile').css({
-		'background-image': 'url("'+cbanner+'")',
-		'background-repeat': 'no-repeat',
-		'background-size': 'auto 100%',
-		'background-position': 'center'
-	});
+	// headerlogo.onload = function() {
+		// console.log('Image loaded!');
+	// };
 };
 
 function setcolors() {
 	// sourceImage = $('#bannerheader');
-	// sourceImage = document.getElementById('bannerheader');
-	// console.log(headerlogo);
+	sourceImage = document.getElementById('bannerheader');
+
 	var colorThief = new ColorThief();
-	dominantcolor = colorThief.getColor(headerlogo);
-	palettcolor = colorThief.getPalette(headerlogo, 10);
+	dominantcolor = colorThief.getColor(sourceImage);
+	palettcolor = colorThief.getPalette(sourceImage, 10);
+
 	$('meta[name=theme-color]').attr('content', 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')');
-	$('#header').css({
-		'background': 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')'
-	});
-	$('.navbar-nav > li').hover(function(e) {
-		var bghover = 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+',0.5)';
-		var nbghover = 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')';
-		$(this).css({
-			'background-color': e.type === 'mouseenter' ? bghover : nbghover,
-			'border-color': e.type === 'mouseenter' ? bghover : nbghover
-		});
-	});
+	$('#logo, #logomobile').css('background', 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')');
+	// $('.navbar.navbar-static-top a i, .nav.navbar-nav li a i').css('color', 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+',0.01)');
+	// $('.navbar.navbar-static-top a, .nav.navbar-nav li a').hover(function(e) {
+	// 	var bghover = 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+',0.5)';
+	// 	var nbghover = 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+')';
+	// 	$(this).css({
+	// 		'background-color': e.type === 'mouseenter' ? bghover : nbghover
+	// 	});
+	// });
 	$('body').css({
 		'background': 'rgb('+dominantcolor[0]+','+dominantcolor[1]+','+dominantcolor[2]+',0.03)'
 	});
@@ -136,7 +131,7 @@ function setcolors() {
 
 function count_vtype(clientid, startdate, enddate) {
 	var chartdonutdata = [];
-	$.get('/home_client/count_vtype_news/'+clientid+'/'+startdate+'/'+enddate,
+	$.get('/home/count_vtype_news/'+clientid+'/'+startdate+'/'+enddate,
 		function(resdata) {
 			resdata.map(function(obj, index){
 				var arrtmp = [obj.Nome, obj.QNoticias];
@@ -166,7 +161,7 @@ function set_count_vtype(cvtypedata) {
 
 function count_rating(clientid, startdate, enddate) {
 	var chartstackeddata = [];
-	$.get('/home_client/count_rating_news/'+clientid+'/'+startdate+'/'+enddate,
+	$.get('/home/count_rating_news/'+clientid+'/'+startdate+'/'+enddate,
 		function(resdata) {
 			resdata.map(function(obj, index){
 				var arrtmp = [obj.Avaliacao, obj.QNoticias];
@@ -203,7 +198,7 @@ function set_count_rating(cratdata) {
 
 function count_states(clientid, startdate, enddate) {
 	mapareas = {};
-	$.get('/home_client/count_states_news/'+clientid+'/'+startdate+'/'+enddate,
+	$.get('/home/count_states_news/'+clientid+'/'+startdate+'/'+enddate,
 		function(esdata) {
 			// console.log(esdata);
 			esdata.map(function(obj, index){
@@ -389,7 +384,7 @@ function count_client(clientid, startdate, enddate) {
 		var fenddate = enddate;
 	}
 
-	$.get('/home_client/count_client_news/'+clientid+'/'+fstartdate+'/'+fenddate,
+	$.get('/home/count_client_news/'+clientid+'/'+fstartdate+'/'+fenddate,
 		function(cldata) {
 			cldata.map(function(obj, index){
 				arrdatf.push(obj.Data);
@@ -435,7 +430,7 @@ function set_count_client(cldata) {
 };
 
 function get_subject_keywords(clientid, startdate, enddate, updatesubjects = false, callback) {
-	$.get('/home_client/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
+	$.get('/home/client_subjects_keywords/'+clientid+'/'+startdate+'/'+enddate,
 		function(cdata, textStatus, xhr) {
 			subjectskeywords = cdata;
 
@@ -586,7 +581,7 @@ function get_keyword_news(keywordid, startdate, enddate) {
 	$('#tablenews').dataTable().fnClearTable();
 	$('#tablenews').dataTable().fnDestroy();
 	$('#tablenews').DataTable({
-		'ajax': '/home_client/keyword_news/'+keywordid+'/'+startdate+'/'+enddate,
+		'ajax': '/home/keyword_news/'+keywordid+'/'+startdate+'/'+enddate,
 		'columns': [
 			{ 'data': 'Data' },
 			{ 'data': 'Hora' },
@@ -608,7 +603,7 @@ function get_keyword_news(keywordid, startdate, enddate) {
 
 function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false, type) {
 	$('.dataTables_processing').show();
-	$.get('/home_client/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
+	$.get('/home/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
 	function(redata, textStatus, xhr) {
 		if (cleartable) {
 			tablenews.clear().draw();
@@ -700,6 +695,8 @@ function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = 
 				break;
 			case 'subjectkeyword':
 				break;
+			case 'autorefresh':
+				break;
 			default:
 				salertloadingdone(isTouchDevice());
 				break;
@@ -723,19 +720,19 @@ function remove_keyword_news(keywordid) {
 };
 
 function get_single_news_keyword(newsid, newskwid, kcallback) {
-	$.get('/home_client/single_news_keyword/'+newsid+'/'+newskwid, function(data) {
+	$.get('/home/single_news_keyword/'+newsid+'/'+newskwid, function(data) {
 		kcallback(data);
 	});
 };
 
 function get_single_news(newsid, clientid, callback) {
-	$.get('/home_client/single_news/'+newsid+'/'+clientid, function(data) {
+	$.get('/home/single_news/'+newsid+'/'+clientid, function(data) {
 		callback(data);
 	});
 };
 
 function get_subjects(clientid, callback) {
-	$.get('/home_client/client_subjects/'+clientid, function(data) {
+	$.get('/home/client_subjects/'+clientid, function(data) {
 		callback(data);
 	});
 };
@@ -750,31 +747,31 @@ function set_subjects(subjdata) {
 };
 
 function get_keywordsfromsubject(subjectid, callback) {
-	$.get('/home_client/subject_keywords/'+subjectid, function(data) {
+	$.get('/home/subject_keywords/'+subjectid, function(data) {
 		callback(data);
 	});
 };
 
 function get_veiculosfromtipoveiculos(tveiculoid, callback) {
-	$.get('/home_client/veiculos_tipoveiculos/'+tveiculoid, function(data) {
+	$.get('/home/veiculos_tipoveiculos/'+tveiculoid, function(data) {
 		callback(data);
 	});
 };
 
 function get_editoriasfromveiculos(veiculoid, callback) {
-	$.get('/home_client/editorias_veiculos/'+veiculoid, function(data) {
+	$.get('/home/editorias_veiculos/'+veiculoid, function(data) {
 		callback(data);
 	});
 };
 
 function get_tveiculos(callback) {
-	$.get('/home_client/get_tveiculos', function(data) {
+	$.get('/home/get_tveiculos', function(data) {
 		callback(data);
 	});
 };
 
 function get_states(callback) {
-	$.get('/home_client/get_states', function(data) {
+	$.get('/home/get_states', function(data) {
 		callback(data);
 	});
 };
@@ -824,7 +821,7 @@ function refresh_countdown(seconds) {
 					countdowns = seconds;
 
 					console.log('Updating data...');
-					load_data();
+					load_data('autorefresh');
 				} else {
 					countdowns--;
 				}

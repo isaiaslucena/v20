@@ -23,6 +23,14 @@
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
 	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
 
+	dtworker1 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker2 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker3 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker4 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker5 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker6 = new Worker('/assets/dataclip/dtworker.js');
+	dtworker7 = new Worker('/assets/dataclip/dtworker.js');
+
 	var d = new Date();
 	var day = d.getDate();
 	var day = ('0' + day).slice(-2);
@@ -291,7 +299,7 @@
 		},
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
-			url: document.origin+'/home_client/editorias_sites?query=%QUERY',
+			url: document.origin+'/home/editorias_sites?query=%QUERY',
 			wildcard: '%QUERY',
 			filter: function (rsites) {
 				return $.map(rsites, function(site) {
@@ -324,7 +332,7 @@
 
 		salertloading(isTouchDevice());
 
-		load_data();
+		load_data('startpage');
 
 		// get_client_info(clientselid, true);
 		// count_vtype(clientselid, todaydate, todaydate);
@@ -344,23 +352,16 @@
 		// });
 	}
 
-	function load_data() {
+	function load_data(ptype) {
 		if (window.Worker) {
-			dtworker1 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker2 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker3 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker4 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker5 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker6 = new Worker('/assets/dataclip/dtworker.js');
-			dtworker7 = new Worker('/assets/dataclip/dtworker.js');
 
-			dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home_client/client_info/'+clientselid});
-			dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home_client/count_vtype_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home_client/count_states_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home_client/count_rating_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home_client/count_client_news/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home_client/client_subjects_keywords/'+clientselid+'/'+todaydate+'/'+todaydate});
-			dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home_client/client_subjects/'+clientselid});
+			dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+clientselid});
+			dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+clientselid+'/'+todaydate+'/'+todaydate});
+			dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+clientselid});
 
 			dtworker1.onmessage = function(event) {
 				jresponse = JSON.parse(event.data.response);
@@ -390,7 +391,7 @@
 			dtworker6.onmessage = function(event) {
 				jresponse = JSON.parse(event.data.response);
 				$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-				add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, 'startpage');
+				add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, ptype);
 			};
 
 			dtworker7.onmessage = function(event) {

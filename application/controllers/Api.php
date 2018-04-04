@@ -35,8 +35,8 @@ class Api extends CI_Controller {
 	}
 
 	public function clients() {
-		$this->load->model('home_client_model');
-		$datac = $this->home_client_model->get_clients();
+		$this->load->model('home_model');
+		$datac = $this->home_model->get_clients();
 
 		$arrk = 0;
 		foreach ($datac as $data) {
@@ -50,7 +50,7 @@ class Api extends CI_Controller {
 		}
 
 		header('Content-Type: application/json, charset=utf-8');
-		print json_encode($datac);
+		print json_encode($datac, JSON_PRETTY_PRINT);
 		// print_r($datac);
 		// print $datac;
 	}
@@ -59,13 +59,13 @@ class Api extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
-			$this->load->model('home_client_model');
+			$this->load->model('home_model');
 			if (isset($startdate)) {
 				$startdate = $postdata['startdate'];
 				$enddate = $postdata['enddate'];
-				$news = $this->home_client_model->get_print_news($startdate, $enddate);
+				$news = $this->home_model->get_print_news($startdate, $enddate);
 			} else {
-				$news = $this->home_client_model->get_print_news();
+				$news = $this->home_model->get_print_news();
 			}
 
 			$news = $this->htmlchars_decoder($news);
@@ -131,13 +131,13 @@ class Api extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
-			$this->load->model('home_client_model');
+			$this->load->model('home_model');
 			if (isset($startdate)) {
 				$startdate = $postdata['startdate'];
 				$enddate = $postdata['enddate'];
-				$news = $this->home_client_model->get_newspaper($startdate, $enddate);
+				$news = $this->home_model->get_newspaper($startdate, $enddate);
 			} else {
-				$news = $this->home_client_model->get_newspaper();
+				$news = $this->home_model->get_newspaper();
 			}
 
 			$news = $this->htmlchars_decoder($news);
@@ -233,14 +233,14 @@ class Api extends CI_Controller {
 			$idnclient = $postdata['idclient'];
 			$offset = $postdata['offset'];
 
-			$this->load->model('home_client_model');
+			$this->load->model('home_model');
 			if (isset($postdata['startdate'])) {
 				$startdate = $postdata['startdate'];
 				$enddate = $postdata['enddate'];
-				$news = $this->home_client_model->get_newspaper_clientnews($idnpaper, $idnclient, $offset, $startdate, $enddate);
+				$news = $this->home_model->get_newspaper_clientnews($idnpaper, $idnclient, $offset, $startdate, $enddate);
 			} else {
-				$news['Query']['Quantidade'] = $this->home_client_model->count_newspaper_clientnews($idnpaper, $idnclient, $offset);
-				$nfnews = $this->home_client_model->get_newspaper_clientnews($idnpaper, $idnclient, $offset);
+				$news['Query']['Quantidade'] = $this->home_model->count_newspaper_clientnews($idnpaper, $idnclient, $offset);
+				$nfnews = $this->home_model->get_newspaper_clientnews($idnpaper, $idnclient, $offset);
 			}
 
 			$news['Query']['Offset'] = $offset;
@@ -354,15 +354,15 @@ class Api extends CI_Controller {
 			$idclient = $postdata['idclient'];
 			$offset = $postdata['offset'];
 
-			$this->load->model('home_client_model');
+			$this->load->model('home_model');
 			if (isset($startdate)) {
 				$startdate = $postdata['startdate'];
 				$enddate = $postdata['enddate'];
-				$news['total'] = $this->home_client_model->count_client_print_news($idclient, $startdate, $enddate);
-				$news['result'] = $this->home_client_model->get_client_print_news($idclient, $offset, $startdate, $enddate);
+				$news['total'] = $this->home_model->count_client_print_news($idclient, $startdate, $enddate);
+				$news['result'] = $this->home_model->get_client_print_news($idclient, $offset, $startdate, $enddate);
 			} else {
-				$news['total'] = $this->home_client_model->count_client_print_news($idclient);
-				$news['result'] = $this->home_client_model->get_client_print_news($idclient, $offset);
+				$news['total'] = $this->home_model->count_client_print_news($idclient);
+				$news['result'] = $this->home_model->get_client_print_news($idclient, $offset);
 			}
 
 			$news['offset'] = $offset;
