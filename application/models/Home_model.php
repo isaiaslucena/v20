@@ -618,6 +618,35 @@ class Home_model extends CI_Model {
 									ORDER BY nt.Id ASC LIMIT 20";
 		return $this->db->query($sqlquery)->result_array();
 	}
+
+	public function get_imgs_novalues($startdate, $enddate) {
+		$sqlquery =		"SELECT
+									nt.Id as IdNoticia, nt.Data,
+									nti.Id as IdImagem, ixp.img_id_imagem as IdImagemExp,
+									nti.MarcarX1, nti.MarcarX2, nti.MarcarY1, nti.MarcarY2, nti.MarcarW, nti.MarcarH,
+									nti.Imagem, ed.Valor as ValorEditoria, ed.Formato
+									FROM Noticias nt
+									JOIN Editorias ed ON nt.idEditoria = ed.Id
+									JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+									JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+									JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									LEFT JOIN ImagemExp ixp ON nt.Id = ixp.img_id_noticia
+									WHERE
+									tve.Id IN (3,10,12,18) AND
+									nt.Data >= '$startdate' AND nt.Data <= '$enddate' AND
+									ixp.img_id_imagem IS NULL AND
+									nti.MarcarH > 0
+									ORDER BY nt.Id ASC LIMIT 1";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function set_imgs_values($data) {
+		$data_insert = array(
+			'keyword' => $data['keywordname'],
+			'priority' => $data['keywordpriority']
+		);
+		$this->db->insert('keyword', $data_insert_keyword);
+	}
 }
 
 ?>

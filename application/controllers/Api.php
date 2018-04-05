@@ -374,5 +374,55 @@ class Api extends CI_Controller {
 			print json_encode($news);
 		}
 	}
+
+	public function set_imgs_values($startdate, $enddate) {
+		$data = $this->home_model->get_imgs_novalues($startdate, $enddate);
+
+		// var_dump($data);
+		// print_r($data);
+
+		// exit();
+
+		foreach ($data as $img) {
+			$idnoticia = $img['IdNoticia'];
+			$data = $img['Data'];
+			$idimagem = $img['IdImagem'];
+			$imagem = $img['Imagem'];
+			$mwidth = $img['MarcarW'];
+			$mheight = $img['MarcarH'];
+			$edvalor = $img['ValorEditoria'];
+			$edformato = $img['Formato'];
+			switch ($edformato) {
+				case 1:
+					//Jornal
+					$larguracm = 29.7;
+					$alturacm = 52;
+					break;
+				case 2:
+					// Tabloide
+					$larguracm = 20;
+					$alturacm = 26.5;
+					break;
+				case 3:
+					// Revista
+					$larguracm = 26;
+					$alturacm = 29.7;
+					break;
+				default:
+					$larguracm = 29.7;
+					$alturacm = 52;
+					break;
+			}
+
+
+			$imgurl = 'http://www.multclipp.com.br/arquivos/noticias/'.str_replace('-', '/', $data).'/'.$idnoticia.'/'+$imagem;
+			// list($width, $height) = getimagesize($imgurl);
+			// $imgsizes = getimagesize($imgurl);
+
+			// var_dump($imgsizes);
+			var_dump($imgurl);
+			// exit();
+		}
+	}
 }
 ?>
