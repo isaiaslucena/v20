@@ -622,30 +622,42 @@ class Home_model extends CI_Model {
 	public function get_imgs_novalues($startdate, $enddate) {
 		$sqlquery =		"SELECT
 									nt.Id as IdNoticia, nt.Data,
-									nti.Id as IdImagem, ixp.img_id_imagem as IdImagemExp,
-									nti.MarcarX1, nti.MarcarX2, nti.MarcarY1, nti.MarcarY2, nti.MarcarW, nti.MarcarH,
-									nti.Imagem, ed.Valor as ValorEditoria, ed.Formato
+									nti.Id as IdImagem, nti.Imagem,
+									nti.MarcarW, nti.MarcarH,
+									ed.Valor as ValorEditoria, ed.Formato
 									FROM Noticias nt
-									JOIN Editorias ed ON nt.idEditoria = ed.Id
-									JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
-									JOIN Veiculo ve ON nt.idVeiculo = ve.Id
-									JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-									LEFT JOIN ImagemExp ixp ON nt.Id = ixp.img_id_noticia
+									INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+									INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									INNER JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+									LEFT OUTER JOIN ImagemExp ixp ON nt.Id = ixp.img_id_noticia
 									WHERE
+									nt.Data BETWEEN '$startdate' AND '$enddate' AND
 									tve.Id IN (3,10,12,18) AND
-									nt.Data >= '$startdate' AND nt.Data <= '$enddate' AND
 									ixp.img_id_imagem IS NULL AND
-									nti.MarcarH > 0
-									ORDER BY nt.Id ASC LIMIT 1";
+									nti.MarcarH > 0";
 		return $this->db->query($sqlquery)->result_array();
 	}
 
 	public function set_imgs_values($data) {
-		$data_insert = array(
-			'keyword' => $data['keywordname'],
-			'priority' => $data['keywordpriority']
-		);
-		$this->db->insert('keyword', $data_insert_keyword);
+		$query = $this->db->query("SELECT * FROM ImagemExp WHERE img_id_imagem = ".$data['IdImagem']);
+		$resultquery = $query->num_rows();
+		if ($resultquery == 0) {
+			$data_insert = array(
+				'img_id_imagem' => $data['IdImagem'],
+				'img_id_noticia' => $data['IdNoticia'],
+				'img_width' => $data['imgwidth'],
+				'img_height' => $data['imgheight'],
+				'img_midia' => 1,
+				'img_valor' => $data['equivalencia'],
+				'img_cm' => 0
+			);
+			$this->db->insert('ImagemExp', $data_insert);
+		} else {
+			$this->db->set('img_valor', $data['equivalencia']);
+			$this->db->where('img_id_imagem', $data['IdImagem']);
+			$this->db->update('ImagemExp');
+		}
 	}
 }
 

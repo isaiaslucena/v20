@@ -500,5 +500,9 @@ class Home extends CI_Controller {
 
 		print file_get_contents($durl);
 	}
+
+	public function imgs_values() {
+		$this->load->view('imgs_values');
+	}
 }
 ?>

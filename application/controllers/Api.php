@@ -375,15 +375,19 @@ class Api extends CI_Controller {
 		}
 	}
 
-	public function set_imgs_values($startdate, $enddate) {
-		$data = $this->home_model->get_imgs_novalues($startdate, $enddate);
+	public function get_imgs_values($startdate, $enddate) {
+		$imgs = $this->home_model->get_imgs_novalues($startdate, $enddate);
 
-		// var_dump($data);
-		// print_r($data);
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($imgs);
 
-		// exit();
+		die();
+		$path = '/app/assets/temp/';
+		if(!is_dir($path)){
+			mkdir($path.$startdate.'_'.$enddate);
+		}
 
-		foreach ($data as $img) {
+		foreach ($imgs as $img) {
 			$idnoticia = $img['IdNoticia'];
 			$data = $img['Data'];
 			$idimagem = $img['IdImagem'];
@@ -415,13 +419,37 @@ class Api extends CI_Controller {
 			}
 
 
-			$imgurl = 'http://www.multclipp.com.br/arquivos/noticias/'.str_replace('-', '/', $data).'/'.$idnoticia.'/'+$imagem;
-			// list($width, $height) = getimagesize($imgurl);
-			// $imgsizes = getimagesize($imgurl);
+			// $imgurl = "http://www.multclipp.com.br/arquivos/noticias/".str_replace('-', '/', $data)."/".$idnoticia."/".$imagem;
+			// $imgurl = "https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/2018/03/01/9140334/FOLHAA16.png";
+			$imgurl = "https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/".$data."/".$idnoticia."/".$imagem;
 
-			// var_dump($imgsizes);
+			file_put_contents($path.$startdate.'_'.$enddate.'idnt-'.$idnoticia.'_idimg-'.$idimagem, fopen($imgurl, 'r'));
+			// $imgsizes = getimagesize($imgurl);
+			// $imgswidth = $imgsizes[0];
+			// $imgsheight = $imgsizes[1];
+
 			var_dump($imgurl);
+			echo "<br>";
+			// var_dump($imgsizes);
+			echo "<br>";
+			echo "<br>";
 			// exit();
+		}
+	}
+
+	public function set_imgs_values() {
+		if ($this->input->method(TRUE) == 'POST') {
+			// $postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
+			$postdata['IdImagem'] = $this->input->post('IdImagem');
+			$postdata['IdNoticia'] = $this->input->post('IdNoticia');
+			$postdata['imgwidth'] = $this->input->post('imgwidth');
+			$postdata['imgheight'] = $this->input->post('imgheight');
+			$postdata['equivalencia'] = $this->input->post('equivalencia');
+
+			$this->home_model->set_imgs_values($postdata);
+
+			header('Content-Type: application/json, charset=utf-8');
+			print json_encode('IdImagem '.$postdata['IdImagem'].' e IdNoticia '.$postdata['IdNoticia'].' cadastrado.');
 		}
 	}
 }
