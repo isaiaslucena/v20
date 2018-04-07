@@ -653,10 +653,13 @@ class Home_model extends CI_Model {
 				'img_cm' => 0
 			);
 			$this->db->insert('ImagemExp', $data_insert);
+			return 'insert';
 		} else {
 			$this->db->set('img_valor', $data['equivalencia']);
 			$this->db->where('img_id_imagem', $data['IdImagem']);
+			$this->db->where('img_id_noticia', $data['IdNoticia']);
 			$this->db->update('ImagemExp');
+			return 'update';
 		}
 	}
 }

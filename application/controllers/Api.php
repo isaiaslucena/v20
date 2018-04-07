@@ -446,10 +446,16 @@ class Api extends CI_Controller {
 			$postdata['imgheight'] = $this->input->post('imgheight');
 			$postdata['equivalencia'] = $this->input->post('equivalencia');
 
-			$this->home_model->set_imgs_values($postdata);
+			$resp = $this->home_model->set_imgs_values($postdata);
+
+			$msg = array(
+				'IdImagem' => $postdata['IdImagem'],
+				'IdNoticia' => $postdata['IdNoticia'],
+				'query' => $resp
+			);
 
 			header('Content-Type: application/json, charset=utf-8');
-			print json_encode('IdImagem '.$postdata['IdImagem'].' e IdNoticia '.$postdata['IdNoticia'].' cadastrado.');
+			print json_encode($msg);
 		}
 	}
 }

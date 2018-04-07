@@ -303,6 +303,9 @@ span.twitter-typeahead {
 }
 
 
+.swal2-popup {
+	font-size: 1.6rem !important;
+}
 
 
 video::-internal-media-controls-download-button { display:none; }
