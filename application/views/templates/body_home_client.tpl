@@ -282,11 +282,11 @@
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-4 text-left">
+							<div class="col-lg-4 text-center">
 								<h5 id="modaltitlevm" class="text-primary"></h5>
 								<h5 id="modaltitleva" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-4 text-left">
+							<div class="col-lg-4 text-right">
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>

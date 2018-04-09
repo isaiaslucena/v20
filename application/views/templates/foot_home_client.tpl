@@ -23,13 +23,17 @@
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
 	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
 
-	dtworker1 = new Worker('/assets/dataclip/dtworker.js');
-	dtworker2 = new Worker('/assets/dataclip/dtworker.js');
-	dtworker3 = new Worker('/assets/dataclip/dtworker.js');
-	dtworker4 = new Worker('/assets/dataclip/dtworker.js');
-	dtworker5 = new Worker('/assets/dataclip/dtworker.js');
-	dtworker6 = new Worker('/assets/dataclip/dtworker.js');
-	dtworker7 = new Worker('/assets/dataclip/dtworker.js');
+	if (window.Worker) {
+		dtworker = new Worker('/assets/dataclip/dtworker.js');
+
+		// dtworker1 = new Worker('/assets/dataclip/dtworker.js');
+		// dtworker2 = new Worker('/assets/dataclip/dtworker.js');
+		// dtworker3 = new Worker('/assets/dataclip/dtworker.js');
+		// dtworker4 = new Worker('/assets/dataclip/dtworker.js');
+		// dtworker5 = new Worker('/assets/dataclip/dtworker.js');
+		// dtworker6 = new Worker('/assets/dataclip/dtworker.js');
+		// dtworker7 = new Worker('/assets/dataclip/dtworker.js');
+	}
 
 	var d = new Date();
 	var day = d.getDate();
@@ -279,7 +283,7 @@
 
 	get_tveiculos(function(data) {
 		data.map(function(val, index) {
-			html = '<option data-type="adstveiculo" data-tveiculoid="'+val.Id+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+			html = '<option data-type="adstveiculo" data-tveiculoid="'+val.Id+'" value="'+val.Id+'">'+val.Nome+'</option>';
 			$('#adstveiculo').append(html);
 		});
 		$('#adstveiculo').selectpicker('refresh');
@@ -287,7 +291,7 @@
 
 	get_states(function(data) {
 		data.map(function(val, index) {
-			html = '<option data-type="adsstates" data-stateid="'+val.id+'" value="'+val.uf+'" title="'+val.uf+'">'+val.nome+'</option>';
+			html = '<option data-type="adsstates" data-stateid="'+val.id+'" title="'+val.uf+'" value="'+val.id+'">'+val.nome+'</option>';
 			$('#adsstates').append(html);
 		});
 		$('#adsstates').selectpicker('refresh');
@@ -332,7 +336,7 @@
 
 		salertloading(isTouchDevice());
 
-		load_data('startpage', clientselid,todaydate, todaydate);
+		load_data('startpage', clientselid, todaydate, todaydate);
 
 		// get_client_info(clientselid, true);
 		// count_vtype(clientselid, todaydate, todaydate);
@@ -369,85 +373,91 @@
 			var fenddate = ldenddate;
 		}
 
-		if (window.Worker) {
-			dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+ldclientid});
-			dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-			dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-			dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-			dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+ldclientid+'/'+fstartdate+'/'+fenddate});
-			dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-			dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+ldclientid});
+		dtworker.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+ldclientid});
+		dtworker.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		dtworker.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		dtworker.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		dtworker.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+ldclientid+'/'+fstartdate+'/'+fenddate});
+		dtworker.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		dtworker.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+ldclientid});
 
-			dtworker1.onmessage = function(event) {
-				jresponse = JSON.parse(event.data.response);
-				set_client_info(clientselid, jresponse.name, jresponse.banner, true);
-			};
+		// dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+ldclientid});
+		// dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		// dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		// dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		// dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+ldclientid+'/'+fstartdate+'/'+fenddate});
+		// dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
+		// dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+ldclientid});
 
-			dtworker2.onmessage = function(event) {
-				jresponse = JSON.parse(event.data.response);
-				set_count_vtype(jresponse);
-			};
+		// dtworker1.onmessage = function(event) {
+		// 	jresponse = JSON.parse(event.data.response);
+		// 	set_client_info(clientselid, jresponse.name, jresponse.banner, true);
+		// };
 
-			dtworker3.onmessage = function(event) {
-				jresponse = JSON.parse(event.data.response);
-				set_count_states(jresponse);
-			};
+		// dtworker2.onmessage = function(event) {
+		// 	jresponse = JSON.parse(event.data.response);
+		// 	set_count_vtype(jresponse);
+		// };
 
-			dtworker4.onmessage = function(event) {
-				jresponse = JSON.parse(event.data.response);
-				set_count_rating(jresponse);
-			};
+		// dtworker3.onmessage = function(event) {
+		// 	jresponse = JSON.parse(event.data.response);
+		// 	set_count_states(jresponse);
+		// };
 
-			dtworker5.onmessage = function(event) {
-				jresponse = JSON.parse(event.data.response);
-				set_count_client(jresponse);
-			};
+		// dtworker4.onmessage = function(event) {
+		// 	jresponse = JSON.parse(event.data.response);
+		// 	set_count_rating(jresponse);
+		// };
 
-			dtworker6.onmessage = function(event) {
-				jresponse = JSON.parse(event.data.response);
-				$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-				add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, ptype);
-			};
+		// dtworker5.onmessage = function(event) {
+		// 	jresponse = JSON.parse(event.data.response);
+		// 	set_count_client(jresponse);
+		// };
 
-			dtworker7.onmessage = function(event) {
-				jresponse = JSON.parse(event.data.response);
-				set_subjects(jresponse);
-			};
+		// dtworker6.onmessage = function(event) {
+		// 	jresponse = JSON.parse(event.data.response);
+		// 	$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
+		// 	add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, ptype);
+		// };
 
-			// dtworker.onmessage = function(event) {
-			// 	// console.log(event.data);
-			// 	jresponse = JSON.parse(event.data.response);
-			// 	// console.log(jresponse);
+		// dtworker7.onmessage = function(event) {
+		// 	jresponse = JSON.parse(event.data.response);
+		// 	set_subjects(jresponse);
+		// };
 
-			// 	vfunc = event.data.vfunction;
-			// 	switch (vfunc) {
-			// 		case 'get_client_info':
-			// 			set_client_info(clientselid, jresponse.name, jresponse.banner, true);
-			// 			break;
-			// 		case 'count_vtype':
-			// 			set_count_vtype(jresponse);
-			// 			break;
-			// 		case 'count_states':
-			// 			set_count_states(jresponse);
-			// 			break;
-			// 		case 'count_rating':
-			// 			set_count_rating(jresponse);
-			// 			break;
-			// 		case 'count_client':
-			// 			set_count_client(jresponse);
-			// 			break;
-			// 		case 'get_subject_keywords':
-			// 			$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-			// 			add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, 'startpage');
-			// 			break;
-			// 		case 'get_subjects':
-			// 			set_subjects(jresponse);
-			// 			break;
-			// 		default:
-			// 			console.log('Nothing to do!')
-			// 			break;
-			// 	}
-			// }
+		dtworker.onmessage = function(event) {
+			// console.log(event.data);
+			jresponse = JSON.parse(event.data.response);
+			// console.log(jresponse);
+
+			vfunc = event.data.vfunction;
+			switch (vfunc) {
+				case 'get_client_info':
+					set_client_info(clientselid, jresponse.name, jresponse.banner, true);
+					break;
+				case 'count_vtype':
+					set_count_vtype(jresponse);
+					break;
+				case 'count_states':
+					set_count_states(jresponse);
+					break;
+				case 'count_rating':
+					set_count_rating(jresponse);
+					break;
+				case 'count_client':
+					set_count_client(jresponse);
+					break;
+				case 'get_subject_keywords':
+					$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
+					add_keyword_news(set_subject_keywords(jresponse, true), clientselid, ldstartdate, ldenddate, true, ptype);
+					break;
+				case 'get_subjects':
+					set_subjects(jresponse);
+					break;
+				default:
+					console.log('Nothing to do!')
+					break;
+			}
 		}
 	}
 </script>

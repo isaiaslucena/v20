@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-04 14:45:35
+/* Smarty version 3.1.30, created on 2018-04-09 11:47:11
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac50f3f676c90_36706184',
+  'unifunc' => 'content_5acb7cef5c9d44_21289142',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1522863933,
+      1 => 1523285227,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ac50f3f676c90_36706184 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5acb7cef5c9d44_21289142 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13135858685ac50f3f64bb86_88983904', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14573467025acb7cef5ad4b2_19619575', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_13135858685ac50f3f64bb86_88983904 extends Smarty_Internal_Block
+class Block_14573467025acb7cef5ad4b2_19619575 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -319,11 +319,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-4 text-left">
+							<div class="col-lg-4 text-center">
 								<h5 id="modaltitlevm" class="text-primary"></h5>
 								<h5 id="modaltitleva" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-4 text-left">
+							<div class="col-lg-4 text-right">
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>

@@ -52,7 +52,7 @@ cdatebtn.click(function(event) {
 });
 
 cadsbtn.click(function(event) {
-	cadsbtn.ladda('start');
+	// cadsbtn.ladda('start');
 
 	if (clientselid == 0) {
 		cliid = cid;
@@ -66,13 +66,27 @@ cadsbtn.click(function(event) {
 	$('#dpsdate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
 	$('#dpedate').datepicker('update', new Date(adsenddate+'T00:00:00'));
 
-	count_vtype(cid, adsstartdate, adsenddate);
-	count_rating(cid, adsstartdate, adsenddate);
-	count_states(cid, adsstartdate, adsenddate);
-	count_client(cid, adsstartdate, adsenddate);
-	get_subject_keywords(cid, adsstartdate, adsenddate, true, function(keywid){
-		add_keyword_news(keywid, cliid, adsstartdate, adsenddate, true, 'advancedsearch');
-	});
+	idassutos = $('#adssubject').selectpicker('val');
+	idpchaves = $('#adskeyword').selectpicker('val');
+	idtveiculos = $('#adstveiculo').selectpicker('val');
+	idveiculossites = $('#adsveiculosites').val();
+	idveiculos = $('#adsveiculo').selectpicker('val');
+	ideditorias = $('#adseditoria').selectpicker('val');
+
+	console.log(idassutos);
+	console.log(idpchaves);
+	console.log(idtveiculos);
+	console.log(idveiculossites);
+	console.log(idveiculos);
+	console.log(ideditorias);
+
+	// count_vtype(cid, adsstartdate, adsenddate);
+	// count_rating(cid, adsstartdate, adsenddate);
+	// count_states(cid, adsstartdate, adsenddate);
+	// count_client(cid, adsstartdate, adsenddate);
+	// get_subject_keywords(cid, adsstartdate, adsenddate, true, function(keywid){
+	// 	add_keyword_news(keywid, cliid, adsstartdate, adsenddate, true, 'advancedsearch');
+	// });
 });
 
 $('.modal').on('show.bs.modal', function(event) {
@@ -454,7 +468,7 @@ $(document).on('change', 'select', function(event) {
 						get_keywordsfromsubject(subjid, function(data) {
 							data.map(function(val, index) {
 								html =	'<option data-type="adskeyword" data-subjectid="'+val.idAssunto+'" data-keywordid="'+val.Id+'" '+
-												'data-subtext="('+subsname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+												'data-subtext="('+subsname+')" val="'+val.Id+'">'+val.Nome+'</option>';
 								$('#adskeyword').append(html);
 							})
 
@@ -503,7 +517,7 @@ $(document).on('change', 'select', function(event) {
 							get_veiculosfromtipoveiculos(tveid, function(data) {
 								data.map(function(val, index) {
 									html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
-													'data-subtext="('+tvesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+													'data-subtext="('+tvesname+')" val="'+val.Id+'">'+val.Nome+'</option>';
 									$('#adsveiculo').append(html);
 								})
 
@@ -541,7 +555,7 @@ $(document).on('change', 'select', function(event) {
 						get_editoriasfromveiculos(veid, function(data) {
 							data.map(function(val, index) {
 								html =	'<option data-type="adseditoria" data-veiculoid="'+val.idVeiculo+'" data-editoriaid="'+val.Id+'" '+
-												'data-subtext="('+vesname+')" val="'+val.Nome+'">'+val.Nome+'</option>';
+												'data-subtext="('+vesname+')" val="'+val.Id+'">'+val.Nome+'</option>';
 								$('#adseditoria').append(html);
 							})
 

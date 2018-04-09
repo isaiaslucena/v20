@@ -46,15 +46,15 @@
 
 		<div class="row">
 			<div class="col-lg-4">
-				<ul id="ullist" class="list-group" style="max-height: 600px; overflow-y: auto"></ul>
+				<ul id="ullist" class="list-group" style="max-height: 500px; overflow-y: auto"></ul>
 			</div>
 
 			<div class="col-lg-4">
-				<div id="ullisterror" class="list-group" style="max-height: 600px; overflow-y: auto"></div>
+				<div id="ullisterror" class="list-group" style="max-height: 500px; overflow-y: auto"></div>
 			</div>
 
 			<div class="col-lg-4">
-				<div id="ullisterrorbk" class="list-group" style="max-height: 600px; overflow-y: auto"></div>
+				<div id="ullisterrorbk" class="list-group" style="max-height: 500px; overflow-y: auto"></div>
 			</div>
 		</div>
 	</div>

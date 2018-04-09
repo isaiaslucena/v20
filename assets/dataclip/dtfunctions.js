@@ -451,7 +451,7 @@ function get_subject_keywords(clientid, startdate, enddate, updatesubjects = fal
 					keywordgf = kval.Grifar;
 					keywordcount = kval.QNoticias;
 					if (keywordcount != null) {
-						html += '<option data-type="keyword" data-keywordid="'+keywordid+'" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
+						html += '<option data-type="keyword" data-keywordid="'+keywordid+'" data-subtext="('+keywordcount+')" val="'+keywordid+'">'+keywordnm+'</option>';
 						// keywordcount = 0;
 					}
 				});
@@ -525,7 +525,7 @@ function set_subject_keywords(cdata, updatesubjects = false, callback) {
 			keywordgf = kval.Grifar;
 			keywordcount = kval.QNoticias;
 			if (keywordcount != null) {
-				html += '<option data-type="keyword" data-keywordid="'+keywordid+'" data-subtext="('+keywordcount+')">'+keywordnm+'</option>';
+				html += '<option data-type="keyword" data-keywordid="'+keywordid+'" data-subtext="('+keywordcount+')" val="'+keywordid+'">'+keywordnm+'</option>';
 				// keywordcount = 0;
 			}
 		});
@@ -722,7 +722,7 @@ function get_subjects(clientid, callback) {
 
 function set_subjects(subjdata) {
 	subjdata.map(function(val, index) {
-		html = '<option data-type="adssubject" data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
+		html = '<option data-type="adssubject" data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Id+'">'+val.Nome+'</option>';
 		$('#adssubject').append(html);
 	});
 	$('#adssubject').selectpicker('refresh');
