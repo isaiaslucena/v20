@@ -456,13 +456,13 @@ $(document).on('change', 'select', function(event) {
 				break;
 			case 'adssubject':
 				subjid = $(this).attr('data-subjectid');
-				subname = $(this).val();
+				subname = $(this).text();
 
 				if($(this).is(':selected')) {
 					if(adssubjectarr.indexOf(subjid) == -1) {
 						adssubjectarr.push(subjid);
 
-						subsname = $(this).val();
+						subsname = $(this).text();
 						$('#adskeyword').selectpicker({title: 'Aguarde...'});
 						$('#adskeyword').selectpicker('refresh');
 						get_keywordsfromsubject(subjid, function(data) {
@@ -489,7 +489,7 @@ $(document).on('change', 'select', function(event) {
 				break;
 			case 'adskeyword':
 				keywid = $(this).attr('data-subjectid');
-				keywname = $(this).val();
+				keywname = $(this).text();
 
 				if($(this).is(':selected')) {
 					if(adskeywordarr.indexOf(keywid) == -1) {
@@ -503,7 +503,7 @@ $(document).on('change', 'select', function(event) {
 				break;
 			case 'adstveiculo':
 				tveid = $(this).attr('data-tveiculoid');
-				tvename = $(this).val();
+				tvename = $(this).text();
 
 				if($(this).is(':selected')) {
 					if(adstveiculoarr.indexOf(tveid) == -1) {
@@ -511,7 +511,7 @@ $(document).on('change', 'select', function(event) {
 						if (tveid == 4) {
 							$('#adsveiculositesfg').slideDown('fast');
 						} else {
-							tvesname = $(this).val();
+							tvesname = $(this).text();
 							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
 							$('#adsveiculo').selectpicker('refresh');
 							get_veiculosfromtipoveiculos(tveid, function(data) {
@@ -543,13 +543,13 @@ $(document).on('change', 'select', function(event) {
 				break;
 			case 'adsveiculo':
 				veid = $(this).attr('data-veiculoid');
-				vename = $(this).val();
+				vename = $(this).text();
 
 				if($(this).is(':selected')) {
 					if(adsveiculoarr.indexOf(tveid) == -1) {
 						adsveiculoarr.push(tveid);
 
-						vesname = $(this).val();
+						vesname = $(this).text();
 						$('#adseditoria').selectpicker({title: 'Aguarde...'});
 						$('#adseditoria').selectpicker('refresh');
 						get_editoriasfromveiculos(veid, function(data) {
