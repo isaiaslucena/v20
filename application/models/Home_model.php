@@ -662,6 +662,10 @@ class Home_model extends CI_Model {
 			return 'update';
 		}
 	}
+
+	public function advsearch($data){
+		$query = 'SELECT * FROM Noticias';
+	}
 }
 
 ?>

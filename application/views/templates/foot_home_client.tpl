@@ -21,7 +21,7 @@
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords, headerlogo,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
-	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
+	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
 
 	if (window.Worker) {
 		dtworker = new Worker('/assets/dataclip/dtworker.js');

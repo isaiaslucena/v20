@@ -428,7 +428,7 @@
 
 								<div class="form-group">
 									<label>Texto</label>
-									<input type="text" id="adstext" name="stext" class="form-control input-sm" autocomplete="off">
+									<input type="text" id="adstext" name="adstext" class="form-control input-sm" autocomplete="off">
 								</div>
 
 								<div class="row">
@@ -437,18 +437,18 @@
 											<label>Destaque</label>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="iradio_square-blue" style="position: relative;">
-														<input type="radio" name="adsdestaque" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													<div class="iradio_square-blue">
+														<input type="radio" id="adsdestaquey" name="adsdestaque" data-val="1" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Sim
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="iradio_square-blue" style="position: relative;">
-														<input type="radio" name="adsdestaque" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													<div class="iradio_square-blue">
+														<input type="radio" id="adsdestaquen" name="adsdestaque" data-val="2" class="i-checks">
+														<ins class="iCheck-helper" ></ins>
 													</div>
 												</label>
 												Não
@@ -460,19 +460,19 @@
 										<div class="form-group">
 											<label>Motivação</label>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsmotivacao" name="adsmotivacao" data-val="0" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Espontânea
 											</div>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsmotivacao" name="adsmotivacao" data-val="1" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Provocada
@@ -484,28 +484,28 @@
 										<div class="form-group">
 											<label>Avaliação</label>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Negativo
 											</div>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" name="motivradio" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Neutro
 											</div>
 											<div>
 												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Positivo

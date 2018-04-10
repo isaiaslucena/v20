@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-09 11:47:11
+/* Smarty version 3.1.30, created on 2018-04-10 15:28:48
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5acb7cef5c9d44_21289142',
+  'unifunc' => 'content_5acd0260089692_56108506',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1523285227,
+      1 => 1523384923,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5acb7cef5c9d44_21289142 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5acd0260089692_56108506 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14573467025acb7cef5ad4b2_19619575', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20066506525acd026006c8f6_73250828', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_14573467025acb7cef5ad4b2_19619575 extends Smarty_Internal_Block
+class Block_20066506525acd026006c8f6_73250828 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -465,7 +465,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 								<div class="form-group">
 									<label>Texto</label>
-									<input type="text" id="adstext" name="stext" class="form-control input-sm" autocomplete="off">
+									<input type="text" id="adstext" name="adstext" class="form-control input-sm" autocomplete="off">
 								</div>
 
 								<div class="row">
@@ -474,18 +474,18 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<label>Destaque</label>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="iradio_square-blue" style="position: relative;">
-														<input type="radio" name="adsdestaque" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													<div class="iradio_square-blue">
+														<input type="radio" id="adsdestaquey" name="adsdestaque" data-val="1" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Sim
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="iradio_square-blue" style="position: relative;">
-														<input type="radio" name="adsdestaque" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													<div class="iradio_square-blue">
+														<input type="radio" id="adsdestaquen" name="adsdestaque" data-val="2" class="i-checks">
+														<ins class="iCheck-helper" ></ins>
 													</div>
 												</label>
 												Não
@@ -497,19 +497,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 										<div class="form-group">
 											<label>Motivação</label>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsmotivacao" name="adsmotivacao" data-val="0" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Espontânea
 											</div>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsmotivacao" name="adsmotivacao" data-val="1" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Provocada
@@ -521,28 +521,28 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 										<div class="form-group">
 											<label>Avaliação</label>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Negativo
 											</div>
 											<div>
-												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" name="motivradio" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+												<label style="font-weight: normal;">
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Neutro
 											</div>
 											<div>
 												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue" style="position: relative;">
-														<input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+													<div class="icheckbox_square-blue">
+														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks">
+														<ins class="iCheck-helper"></ins>
 													</div>
 												</label>
 												Positivo

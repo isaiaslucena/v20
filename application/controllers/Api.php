@@ -380,61 +380,6 @@ class Api extends CI_Controller {
 
 		header('Content-Type: application/json, charset=utf-8');
 		print json_encode($imgs);
-
-		die();
-		$path = '/app/assets/temp/';
-		if(!is_dir($path)){
-			mkdir($path.$startdate.'_'.$enddate);
-		}
-
-		foreach ($imgs as $img) {
-			$idnoticia = $img['IdNoticia'];
-			$data = $img['Data'];
-			$idimagem = $img['IdImagem'];
-			$imagem = $img['Imagem'];
-			$mwidth = $img['MarcarW'];
-			$mheight = $img['MarcarH'];
-			$edvalor = $img['ValorEditoria'];
-			$edformato = $img['Formato'];
-			switch ($edformato) {
-				case 1:
-					//Jornal
-					$larguracm = 29.7;
-					$alturacm = 52;
-					break;
-				case 2:
-					// Tabloide
-					$larguracm = 20;
-					$alturacm = 26.5;
-					break;
-				case 3:
-					// Revista
-					$larguracm = 26;
-					$alturacm = 29.7;
-					break;
-				default:
-					$larguracm = 29.7;
-					$alturacm = 52;
-					break;
-			}
-
-
-			// $imgurl = "http://www.multclipp.com.br/arquivos/noticias/".str_replace('-', '/', $data)."/".$idnoticia."/".$imagem;
-			// $imgurl = "https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/2018/03/01/9140334/FOLHAA16.png";
-			$imgurl = "https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/".$data."/".$idnoticia."/".$imagem;
-
-			file_put_contents($path.$startdate.'_'.$enddate.'idnt-'.$idnoticia.'_idimg-'.$idimagem, fopen($imgurl, 'r'));
-			// $imgsizes = getimagesize($imgurl);
-			// $imgswidth = $imgsizes[0];
-			// $imgsheight = $imgsizes[1];
-
-			var_dump($imgurl);
-			echo "<br>";
-			// var_dump($imgsizes);
-			echo "<br>";
-			echo "<br>";
-			// exit();
-		}
 	}
 
 	public function set_imgs_values() {

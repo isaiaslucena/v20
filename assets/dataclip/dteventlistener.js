@@ -63,22 +63,48 @@ cadsbtn.click(function(event) {
 	adsstartdate = $('#adsstartdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	adsenddate = $('#adsenddate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
+	adsstarttime = $('#adsstarttime').val();
+	adsendtime = $('#adsendtime').val();
+
 	$('#dpsdate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
 	$('#dpedate').datepicker('update', new Date(adsenddate+'T00:00:00'));
 
-	idassutos = $('#adssubject').selectpicker('val');
-	idpchaves = $('#adskeyword').selectpicker('val');
-	idtveiculos = $('#adstveiculo').selectpicker('val');
-	idveiculossites = $('#adsveiculosites').val();
-	idveiculos = $('#adsveiculo').selectpicker('val');
-	ideditorias = $('#adseditoria').selectpicker('val');
+	adsveiculossites = $('#adsveiculosites').val();
 
-	console.log(idassutos);
-	console.log(idpchaves);
-	console.log(idtveiculos);
-	console.log(idveiculossites);
-	console.log(idveiculos);
-	console.log(ideditorias);
+	adstext = $('#adstext').val();
+
+	adsdestaque = parseInt($('input[name=adsdestaque]:checked').attr('data-val'));
+
+	// console.log(adssubjectarr);
+	// console.log(adskeywordarr);
+	// console.log(adstveiculoarr);
+	// console.log(adsveiculoarr);
+	// console.log(adsveiculossites);
+	// console.log(adseditoriaarr);
+	// console.log(adsstatesarr);
+
+	var adssearchdata = {
+		'startdate': adsstartdate,
+		'enddate': adsenddate,
+		'starttime': adsstarttime,
+		'endtime': adsendtime,
+		'subjectsid': adssubjectarr,
+		'keywordsid': adskeywordarr,
+		'tveiculosid': adstveiculoarr,
+		'veiculosid': adsveiculossites,
+		'editoriasid': adseditoriaarr,
+		'estadosid': adsstatesarr,
+		'texto': adstext,
+		'destaque': adsdestaque,
+		'motivacao': adsmotivacao,
+		'avaliacao': adsavaliacao
+	}
+
+ console.log(adssearchdata);
+
+	// postData('/home/advsearch', adssearchdata)
+	// .then(data => console.log(data)) // JSON from `response.json()` call
+	// .catch(error => console.error(error))
 
 	// count_vtype(cid, adsstartdate, adsenddate);
 	// count_rating(cid, adsstartdate, adsenddate);
@@ -87,6 +113,30 @@ cadsbtn.click(function(event) {
 	// get_subject_keywords(cid, adsstartdate, adsenddate, true, function(keywid){
 	// 	add_keyword_news(keywid, cliid, adsstartdate, adsenddate, true, 'advancedsearch');
 	// });
+});
+
+$('input[name="adsmotivacao"]').click(function(event) {
+	checked = event.target.checked;
+	dval = $(this).attr('data-val');
+	if (checked) {
+		adsmotivacaoarr.push(dval);
+	} else {
+		aindex = filestojoin.indexOf(dval);
+		adsmotivacaoarr.splice(aindex, 1);
+	}
+	console.log(adsmotivacaoarr);
+});
+
+$('input[name="adsavaliacao"]').click(function(event) {
+	checked = event.target.checked;
+	dval = $(this).attr('data-val');
+	if (checked) {
+		adsavaliacaoarr.push(dval);
+	} else {
+		aindex = filestojoin.indexOf(dval);
+		adsavaliacaoarr.splice(aindex, 1);
+	}
+	console.log(adsavaliacaoarr);
 });
 
 $('.modal').on('show.bs.modal', function(event) {
@@ -572,6 +622,34 @@ $(document).on('change', 'select', function(event) {
 						return value != veid;
 					});
 					$('#adseditoria').selectpicker('refresh');
+				}
+				break;
+			case 'adseditoria':
+				edid = $(this).attr('data-editoriaid');
+				edname = $(this).text();
+
+				if($(this).is(':selected')) {
+					if(adseditoriaarr.indexOf(edid) == -1) {
+						adseditoriaarr.push(edid);
+					}
+				} else {
+					adseditoriaarr = jQuery.grep(adseditoriaarr, function(value) {
+						return value != veid;
+					});
+				}
+				break;
+			case 'adsstates':
+				stateid = $(this).attr('data-stateid');
+				statename = $(this).text();
+
+				if($(this).is(':selected')) {
+					if(adsstatesarr.indexOf(stateid) == -1) {
+						adsstatesarr.push(stateid);
+					}
+				} else {
+					adsstatesarr = jQuery.grep(adsstatesarr, function(value) {
+						return value != stateid;
+					});
 				}
 				break;
 			default:
