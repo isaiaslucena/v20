@@ -48,6 +48,10 @@ class Home extends CI_Controller {
 		$this->smarty->view('foot_home_client.tpl', $data);
 	}
 
+	public function noticia($idnoticia) {
+		$this->smarty->view('foot_noticia.tpl', $data);
+	}
+
 	public function client_info($id) {
 		$datae = $this->home_model->get_client_info($id);
 

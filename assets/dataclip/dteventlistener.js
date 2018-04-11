@@ -30,7 +30,6 @@ $('#bannerheader').on('load', function() {
 
 cdatebtn.click(function(event) {
 	salertloading(isTouchDevice());
-
 	cdatebtn.ladda('start');
 
 	if (clientselid == 0) {
@@ -42,11 +41,11 @@ cdatebtn.click(function(event) {
 	fdpstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	fdpenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
-	count_vtype(cid, fdpstartdate, fdpenddate);
-	count_rating(cid, fdpstartdate, fdpenddate);
-	count_states(cid, fdpstartdate, fdpenddate);
-	count_client(cid, fdpstartdate, fdpenddate);
-	get_subject_keywords(cid, fdpstartdate, fdpenddate, true, function(keywid){
+	count_vtype(cliid, fdpstartdate, fdpenddate);
+	count_rating(cliid, fdpstartdate, fdpenddate);
+	count_states(cliid, fdpstartdate, fdpenddate);
+	count_client(cliid, fdpstartdate, fdpenddate);
+	get_subject_keywords(cliid, fdpstartdate, fdpenddate, true, function(keywid){
 		add_keyword_news(keywid, cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
 	});
 });
@@ -113,9 +112,11 @@ cadsbtn.click(function(event) {
 	// get_subject_keywords(cid, adsstartdate, adsenddate, true, function(keywid){
 	// 	add_keyword_news(keywid, cliid, adsstartdate, adsenddate, true, 'advancedsearch');
 	// });
+
+	$('input').iCheck('uncheck');
 });
 
-$('input[name="adsmotivacao"]').click(function(event) {
+$('.checkmotivacao').click(function(event) {
 	checked = event.target.checked;
 	dval = $(this).attr('data-val');
 	if (checked) {
@@ -127,16 +128,17 @@ $('input[name="adsmotivacao"]').click(function(event) {
 	console.log(adsmotivacaoarr);
 });
 
-$('input[name="adsavaliacao"]').click(function(event) {
-	checked = event.target.checked;
-	dval = $(this).attr('data-val');
-	if (checked) {
-		adsavaliacaoarr.push(dval);
-	} else {
-		aindex = filestojoin.indexOf(dval);
-		adsavaliacaoarr.splice(aindex, 1);
-	}
-	console.log(adsavaliacaoarr);
+$('input').on('ifChecked', function(event) {
+	console.log(event.target.checked);
+	// checked = $(this).parent().hasClass('checked');
+	// dval = $(this).attr('data-val');
+	// if (checked) {
+	// 	adsavaliacaoarr.push(dval);
+	// } else {
+	// 	aindex = filestojoin.indexOf(dval);
+	// 	adsavaliacaoarr.splice(aindex, 1);
+	// }
+	// console.log(adsavaliacaoarr);
 });
 
 $('.modal').on('show.bs.modal', function(event) {

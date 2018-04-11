@@ -73,7 +73,7 @@
 							</ul>
 						</li>
 
-						<li class="dropdown">
+						<li class="dropdown" title="Opções">
 							<a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown" aria-expanded="false">
 							<i class="pe-7s-user"></i>
 							</a>
@@ -180,7 +180,7 @@
 							<div class="row">
 								<div class="col-sm-12 col-md-12 col-lg-12">
 									<div class="center-block text-center">
-										<button id="dpbtn" class="ladda-button btn btn-success" data-style="zoom-in">Confirmar</button>
+										<button id="dpbtn" class="ladda-button btn btn-primary" data-style="zoom-in">Confirmar</button>
 									</div>
 								</div>
 							</div>
@@ -278,15 +278,15 @@
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<div id="modaltitlerow" class="row">
-							<div class="col-lg-4 text-left">
+							<div class="col-sm-4 col-md-4 col-lg-4 text-left">
 								<h5 id="modaltitleve" class="text-primary"></h5>
 								<h5 id="modaltitleed" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-4 text-center">
+							<div class="col-sm-4 col-md-4 col-lg-4 text-center">
 								<h5 id="modaltitlevm" class="text-primary"></h5>
 								<h5 id="modaltitleva" class="text-primary"></h5>
 							</div>
-							<div class="col-lg-4 text-right">
+							<div class="col-sm-4 col-md-4 col-lg-4 text-right">
 								<h5 id="modaltitlevq" class="text-primary"></h5>
 								<h5 id="modaltitlevv" class="text-primary"></h5>
 							</div>
@@ -437,19 +437,13 @@
 											<label>Destaque</label>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="iradio_square-blue">
-														<input type="radio" id="adsdestaquey" name="adsdestaque" data-val="1" class="i-checks">
-														<ins class="iCheck-helper"></ins>
-													</div>
+													<input type="radio" id="adsdestaquey" name="adsdestaque" data-val="1" class="i-checks">
 												</label>
 												Sim
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="iradio_square-blue">
-														<input type="radio" id="adsdestaquen" name="adsdestaque" data-val="2" class="i-checks">
-														<ins class="iCheck-helper" ></ins>
-													</div>
+													<input type="radio" id="adsdestaquen" name="adsdestaque" data-val="2" class="i-checks">
 												</label>
 												Não
 											</div>
@@ -461,19 +455,13 @@
 											<label>Motivação</label>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="icheckbox_square-blue">
-														<input type="checkbox" id="adsmotivacao" name="adsmotivacao" data-val="0" class="i-checks">
-														<ins class="iCheck-helper"></ins>
-													</div>
+													<input type="checkbox" name="adsmotivacao" data-val="0" class="i-checks">
 												</label>
 												Espontânea
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="icheckbox_square-blue">
-														<input type="checkbox" id="adsmotivacao" name="adsmotivacao" data-val="1" class="i-checks">
-														<ins class="iCheck-helper"></ins>
-													</div>
+													<input type="checkbox" name="adsmotivacao" data-val="1" class="i-checks">
 												</label>
 												Provocada
 											</div>
@@ -485,28 +473,19 @@
 											<label>Avaliação</label>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="icheckbox_square-blue">
-														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks">
-														<ins class="iCheck-helper"></ins>
-													</div>
+													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks checkavaliacao">
 												</label>
 												Negativo
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<div class="icheckbox_square-blue">
-														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks">
-														<ins class="iCheck-helper"></ins>
-													</div>
+													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks checkavaliacao">
 												</label>
 												Neutro
 											</div>
 											<div>
 												<label class="" style="font-weight: normal;">
-													<div class="icheckbox_square-blue">
-														<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks">
-														<ins class="iCheck-helper"></ins>
-													</div>
+													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks checkavaliacao">
 												</label>
 												Positivo
 											</div>
