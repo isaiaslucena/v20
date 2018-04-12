@@ -178,7 +178,6 @@ class Home extends CI_Controller {
 
 	public function editorias_sites() {
 		$qtext = $this->input->get('query');
-		// var_dump($qtext);
 		$data = $this->utf8_encoder($this->home_model->get_editorias_sites($qtext));
 
 		header('Content-Type: application/json, charset=utf-8');

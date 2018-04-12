@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-11 15:14:26
+/* Smarty version 3.1.30, created on 2018-04-11 17:13:39
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ace5082b771d1_80022829',
+  'unifunc' => 'content_5ace6c73461483_31477725',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1523470367,
+      1 => 1523477463,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ace5082b771d1_80022829 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ace6c73461483_31477725 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15016048935ace5082b582b4_29355743', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15854523925ace6c73444763_34068412', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_15016048935ace5082b582b4_29355743 extends Smarty_Internal_Block
+class Block_15854523925ace6c73444763_34068412 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -370,16 +370,26 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
-						<div class="row">
-							<div class="col-md-12">
-								<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
-								<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
-								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
-								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
-								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
-								<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+							<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block">
+								<div class="btn-group">
+									<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -474,13 +484,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<label>Destaque</label>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="radio" id="adsdestaquey" name="adsdestaque" data-val="1" class="i-checks">
+													<input type="radio" data-type="adsdestaque" name="adsdestaque" data-val="1" class="i-checks">
 												</label>
 												Sim
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="radio" id="adsdestaquen" name="adsdestaque" data-val="2" class="i-checks">
+													<input type="radio" data-type="adsdestaque" name="adsdestaque" data-val="2" class="i-checks">
 												</label>
 												Não
 											</div>
@@ -492,13 +502,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<label>Motivação</label>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" name="adsmotivacao" data-val="0" class="i-checks">
+													<input type="checkbox" data-type="adsmotivacao" data-val="0" class="i-checks">
 												</label>
 												Espontânea
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" name="adsmotivacao" data-val="1" class="i-checks">
+													<input type="checkbox" data-type="adsmotivacao" data-val="1" class="i-checks">
 												</label>
 												Provocada
 											</div>
@@ -510,19 +520,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<label>Avaliação</label>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks checkavaliacao">
+													<input type="checkbox" data-type="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks checkavaliacao">
 												</label>
 												Negativo
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks checkavaliacao">
+													<input type="checkbox" data-type="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks checkavaliacao">
 												</label>
 												Neutro
 											</div>
 											<div>
 												<label class="" style="font-weight: normal;">
-													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks checkavaliacao">
+													<input type="checkbox" data-type="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks checkavaliacao">
 												</label>
 												Positivo
 											</div>

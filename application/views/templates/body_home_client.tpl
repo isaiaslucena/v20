@@ -333,16 +333,26 @@
 						</div>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
-						<div class="row">
-							<div class="col-md-12">
-								<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
-								<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
-								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
-								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
-								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
-								<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+							<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block">
+								<div class="btn-group">
+									<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+								</div>
+								<div class="btn-group">
+									<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -437,13 +447,13 @@
 											<label>Destaque</label>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="radio" id="adsdestaquey" name="adsdestaque" data-val="1" class="i-checks">
+													<input type="radio" data-type="adsdestaque" name="adsdestaque" data-val="1" class="i-checks">
 												</label>
 												Sim
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="radio" id="adsdestaquen" name="adsdestaque" data-val="2" class="i-checks">
+													<input type="radio" data-type="adsdestaque" name="adsdestaque" data-val="2" class="i-checks">
 												</label>
 												Não
 											</div>
@@ -455,13 +465,13 @@
 											<label>Motivação</label>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" name="adsmotivacao" data-val="0" class="i-checks">
+													<input type="checkbox" data-type="adsmotivacao" data-val="0" class="i-checks">
 												</label>
 												Espontânea
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" name="adsmotivacao" data-val="1" class="i-checks">
+													<input type="checkbox" data-type="adsmotivacao" data-val="1" class="i-checks">
 												</label>
 												Provocada
 											</div>
@@ -473,19 +483,19 @@
 											<label>Avaliação</label>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks checkavaliacao">
+													<input type="checkbox" data-type="adsavaliacao" name="adsavaliacao" data-val="1" class="i-checks checkavaliacao">
 												</label>
 												Negativo
 											</div>
 											<div>
 												<label style="font-weight: normal;">
-													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks checkavaliacao">
+													<input type="checkbox" data-type="adsavaliacao" name="adsavaliacao" data-val="2" class="i-checks checkavaliacao">
 												</label>
 												Neutro
 											</div>
 											<div>
 												<label class="" style="font-weight: normal;">
-													<input type="checkbox" id="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks checkavaliacao">
+													<input type="checkbox" data-type="adsavaliacao" name="adsavaliacao" data-val="3" class="i-checks checkavaliacao">
 												</label>
 												Positivo
 											</div>

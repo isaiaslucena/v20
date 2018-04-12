@@ -61,7 +61,6 @@ cadsbtn.click(function(event) {
 
 	adsstartdate = $('#adsstartdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	adsenddate = $('#adsenddate').data('datepicker').getFormattedDate('yyyy-mm-dd');
-
 	adsstarttime = $('#adsstarttime').val();
 	adsendtime = $('#adsendtime').val();
 
@@ -69,10 +68,14 @@ cadsbtn.click(function(event) {
 	$('#dpedate').datepicker('update', new Date(adsenddate+'T00:00:00'));
 
 	adsveiculossites = $('#adsveiculosites').val();
+	if (adsveiculossites.length > 0) {
+		console.log('veiculo sites selecionado!');
+	} else {
+		console.log('nenhum veiculo sites selecionado!');
+	}
+	console.log(adsveiculossites);
 
 	adstext = $('#adstext').val();
-
-	adsdestaque = parseInt($('input[name=adsdestaque]:checked').attr('data-val'));
 
 	// console.log(adssubjectarr);
 	// console.log(adskeywordarr);
@@ -95,8 +98,8 @@ cadsbtn.click(function(event) {
 		'estadosid': adsstatesarr,
 		'texto': adstext,
 		'destaque': adsdestaque,
-		'motivacao': adsmotivacao,
-		'avaliacao': adsavaliacao
+		'motivacao': adsmotivacaoarr,
+		'avaliacao': adsavaliacaoarr
 	}
 
  console.log(adssearchdata);
@@ -116,29 +119,54 @@ cadsbtn.click(function(event) {
 	$('input').iCheck('uncheck');
 });
 
-$('.checkmotivacao').click(function(event) {
-	checked = event.target.checked;
+$('input').on('ifChecked', function(event) {
+	dtype = $(this).attr('data-type');
 	dval = $(this).attr('data-val');
-	if (checked) {
-		adsmotivacaoarr.push(dval);
-	} else {
-		aindex = filestojoin.indexOf(dval);
-		adsmotivacaoarr.splice(aindex, 1);
+
+	switch (dtype) {
+		case 'adsdestaque':
+			adsdestaque = dval;
+			break;
+		case 'adsmotivacao':
+			adsmotivacaoarr.push(dval);
+			break;
+		case 'adsavaliacao':
+			adsavaliacaoarr.push(dval);
+			break;
+		default:
+			console.log('option not recognized!');
+			break;
 	}
+	console.log('destaque:');
+	console.log(adsdestaque);
+
+	console.log('motivacao:');
 	console.log(adsmotivacaoarr);
+
+	console.log('avaliacao:');
+	console.log(adsavaliacaoarr);
 });
 
-$('input').on('ifChecked', function(event) {
-	console.log(event.target.checked);
-	// checked = $(this).parent().hasClass('checked');
-	// dval = $(this).attr('data-val');
-	// if (checked) {
-	// 	adsavaliacaoarr.push(dval);
-	// } else {
-	// 	aindex = filestojoin.indexOf(dval);
-	// 	adsavaliacaoarr.splice(aindex, 1);
-	// }
-	// console.log(adsavaliacaoarr);
+$('input').on('ifUnchecked', function(event) {
+	dtype = $(this).attr('data-type');
+	dval = $(this).attr('data-val');
+
+	switch (dtype) {
+		case 'adsdestaque':
+			//do nothing;
+			break;
+		case 'adsmotivacao':
+			aindex = adsmotivacaoarr.indexOf(dval);
+			adsmotivacaoarr.splice(aindex, 1);
+			break;
+		case 'adsavaliacao':
+			aindex = adsavaliacaoarr.indexOf(dval);
+			adsavaliacaoarr.splice(aindex, 1);
+			break;
+		default:
+			console.log('option not recognized!');
+			break;
+	}
 });
 
 $('.modal').on('show.bs.modal', function(event) {
@@ -561,8 +589,10 @@ $(document).on('change', 'select', function(event) {
 					if(adstveiculoarr.indexOf(tveid) == -1) {
 						adstveiculoarr.push(tveid);
 						if (tveid == 4) {
+							$('#adstveiculo').selectpicker('toggle');
 							$('#adsveiculositesfg').slideDown('fast');
 						} else {
+							$('#adsveiculositesfg').slideUp('fast');
 							tvesname = $(this).text();
 							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
 							$('#adsveiculo').selectpicker('refresh');

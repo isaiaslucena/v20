@@ -23,9 +23,10 @@ function salertloading(mobile) {
 function salertloadingdone(mobile) {
 	if (mobile) {
 		$('.selectpicker').selectpicker('mobile');
-		$('#btnsgroupnews').removeClass('btn-group-justified');
-		$('#btnsgroupnews').addClass('btn-group-vertical');
+		$('#btnsgroupnews').removeClass('btn-group-justified').addClass('btn-group-vertical');
+		$('#btnsgroupsnews').removeClass('btn-group-justified').addClass('btn-group-vertical');
 		$('#btnexpand').css('display', 'none');
+		$('#modaltitlerow > div.col-sm-4.col-md-4.col-lg-4').removeClass('text-center').removeClass('text-right').addClass('text-left');
 		swalwidth = '16em';
 	} else {
 		swalwidth = '32em';

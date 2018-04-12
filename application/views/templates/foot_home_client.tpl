@@ -3,9 +3,7 @@
 	<!-- Footer-->
 	<footer class="footer">
 		<span class="pull-right">
-			{* <span id="dtworkerspan"></span> *}
 			 Dataclip - Business Inteligence
-			{* <span id="testworkerspan"></span> *}
 		</span>
 	</footer>
 </div><!-- Main Wrapper -->
@@ -19,7 +17,7 @@
 	{literal}
 	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords, headerlogo,
-	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
+	subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
 	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
 
@@ -312,7 +310,8 @@
 						Nome: site.Nome
 					};
 				});
-			}
+			},
+			identify: function(rsites) { return rsites.Id; }
 		}
 	});
 

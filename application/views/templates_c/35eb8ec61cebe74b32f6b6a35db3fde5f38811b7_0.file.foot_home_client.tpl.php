@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-11 14:33:10
+/* Smarty version 3.1.30, created on 2018-04-11 17:16:52
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ace46d63e6f27_73847501',
+  'unifunc' => 'content_5ace6d34cfbe28_64853897',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1523467980,
+      1 => 1523477801,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ace46d63e6f27_73847501 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ace6d34cfbe28_64853897 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17373986265ace46d63cfb95_71756552', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10776078945ace6d34ce8a00_19450625', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_17373986265ace46d63cfb95_71756552 extends Smarty_Internal_Block
+class Block_10776078945ace6d34ce8a00_19450625 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -42,9 +42,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	<!-- Footer-->
 	<footer class="footer">
 		<span class="pull-right">
-			
 			 Dataclip - Business Inteligence
-			
 		</span>
 	</footer>
 </div><!-- Main Wrapper -->
@@ -63,7 +61,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	
 	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords, headerlogo,
-	subjecctid, subjectcount, keywordcount, mediatype, idtitle;
+	subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
 	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
 
@@ -356,7 +354,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						Nome: site.Nome
 					};
 				});
-			}
+			},
+			identify: function(rsites) { return rsites.Id; }
 		}
 	});
 
