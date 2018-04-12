@@ -319,8 +319,10 @@
 
 	$('#adsveiculosites').typeahead(null, {
 		displayKey: 'Nome',
+		async: true,
 		source: sites.ttAdapter(),
 		minLength: 3,
+		hint: true,
 		highlight: true,
 		limit: 20
 	});

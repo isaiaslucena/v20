@@ -75,6 +75,8 @@ cadsbtn.click(function(event) {
 	}
 	console.log(adsveiculossites);
 
+	adsveiculoarr = adsveiculoarr.concat(adsveiculossites);
+
 	adstext = $('#adstext').val();
 
 	// console.log(adssubjectarr);
@@ -93,7 +95,7 @@ cadsbtn.click(function(event) {
 		'subjectsid': adssubjectarr,
 		'keywordsid': adskeywordarr,
 		'tveiculosid': adstveiculoarr,
-		'veiculosid': adsveiculossites,
+		'veiculosid': adsveiculoarr,
 		'editoriasid': adseditoriaarr,
 		'estadosid': adsstatesarr,
 		'texto': adstext,
