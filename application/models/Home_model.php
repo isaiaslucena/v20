@@ -635,7 +635,11 @@ class Home_model extends CI_Model {
 									nt.Data BETWEEN '$startdate' AND '$enddate' AND
 									tve.Id IN (3,10,12,18) AND
 									ixp.img_id_imagem IS NULL AND
-									nti.MarcarH > 0";
+									nti.MarcarW > 1 AND nti.MarcarH > 1
+									OR nt.Data BETWEEN '$startdate' AND '$enddate' AND
+									tve.Id IN (3,10,12,18) AND
+									ixp.img_id_imagem IS NOT NULL AND
+									nti.MarcarW > 1 AND nti.MarcarH > 1 AND ixp.img_valor = 0";
 		return $this->db->query($sqlquery)->result_array();
 	}
 

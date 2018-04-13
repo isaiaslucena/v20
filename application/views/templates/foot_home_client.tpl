@@ -318,6 +318,7 @@
 	sites.initialize();
 
 	$('#adsveiculosites').typeahead(null, {
+		mode: 'multiple',
 		displayKey: 'Nome',
 		async: true,
 		source: sites.ttAdapter(),
