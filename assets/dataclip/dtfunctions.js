@@ -764,6 +764,11 @@ function get_states(callback) {
 	});
 };
 
+function set_facsimile(){
+	console.log('teste');
+	//teste
+};
+
 function sectostring(secs) {
 	var sec_num = parseInt(secs, 10);
 	var hours   = Math.floor(sec_num / 3600);
@@ -782,7 +787,7 @@ function sectostring(secs) {
 	} else {
 		return seconds;
 	}
-}
+};
 
 function refresh_countdown(seconds) {
 	$('.fa.fa-check').fadeOut('fast');
@@ -808,8 +813,17 @@ function refresh_countdown(seconds) {
 				if (countdowns <= 0) {
 					countdowns = seconds;
 
+					rstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+					renddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+					if (clientselid == 0) {
+						cliid = cid;
+					} else {
+						cliid = clientselid;
+					}
+
+
 					console.log('Updating data...');
-					load_data('autorefresh');
+					load_data('autorefresh', cliid, rstartdate, renddate);
 				} else {
 					countdowns--;
 				}
@@ -818,7 +832,7 @@ function refresh_countdown(seconds) {
 			}, 1000);
 		});
 	}
-}
+};
 
 function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 	if (ldstartdate == ldenddate) {
@@ -923,7 +937,7 @@ function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 				break;
 		}
 	}
-}
+};
 
 function postData(url, data) {
 	// Default options are marked with *
@@ -941,4 +955,4 @@ function postData(url, data) {
 		referrer: 'no-referrer', // *client, no-referrer
 	})
 	.then(response => response.json()) // parses response to JSON
-}
+};

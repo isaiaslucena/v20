@@ -18,8 +18,9 @@
 	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords, headerlogo,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque;
-	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
-	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
+	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
+	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
+	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
 
 	if (window.Worker) {
 		dtworker = new Worker('/assets/dataclip/dtworker.js');
@@ -318,7 +319,6 @@
 	sites.initialize();
 
 	$('#adsveiculosites').typeahead(null, {
-		mode: 'multiple',
 		displayKey: 'Nome',
 		async: true,
 		source: sites.ttAdapter(),

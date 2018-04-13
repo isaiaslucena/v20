@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-12 17:39:21
+/* Smarty version 3.1.30, created on 2018-04-13 15:33:51
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5acfc3f96f2fa2_64984475',
+  'unifunc' => 'content_5ad0f80fb41858_20897537',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1523565555,
+      1 => 1523644155,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5acfc3f96f2fa2_64984475 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad0f80fb41858_20897537 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12506007845acfc3f96df764_18633455', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17884847205ad0f80fb2b048_79328274', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_12506007845acfc3f96df764_18633455 extends Smarty_Internal_Block
+class Block_17884847205ad0f80fb2b048_79328274 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -62,8 +62,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
 	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords, headerlogo,
 	subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque;
-	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [];
-	var adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
+	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
+	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
+	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
 
 	if (window.Worker) {
 		dtworker = new Worker('/assets/dataclip/dtworker.js');
@@ -362,7 +363,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	sites.initialize();
 
 	$('#adsveiculosites').typeahead(null, {
-		mode: 'multiple',
 		displayKey: 'Nome',
 		async: true,
 		source: sites.ttAdapter(),
