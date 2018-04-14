@@ -640,10 +640,13 @@ function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = 
 			}
 
 			vtitle = val.Titulo;
-			if (vtitle.length > 50) {
+			vtitlelth = vtitle.length;
+			// console.log(vtitle);
+			// console.log(vtitle.length);
+			if (vtitlelth > 50) {
 				vtitle = vtitle.slice(0, 47) + '...';
 				vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'+val.Titulo+'">'+vtitle+'</a>'
-			} else if (vtitle.length = 1) {
+			} else if (vtitlelth == 1) {
 				vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">Sem Título</a>';
 			} else {
 				vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';

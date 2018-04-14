@@ -512,7 +512,9 @@ class Home extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
-			var_dump($postdata);
+			// var_dump($postdata);
+
+			
 		}
 	}
 }

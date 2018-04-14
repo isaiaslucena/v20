@@ -232,7 +232,7 @@ class Home_model extends CI_Model {
 
 	public function get_single_news($newsid, $idclient) {
 		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria,
-								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
+								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL, nti.MarcarW, nti.MarcarW,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
 								pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar,
 								ent.Motivacao, ent.Avaliacao,
