@@ -231,8 +231,10 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_single_news($newsid, $idclient) {
-		$sqlquery =	"SELECT nt.*, ve.Nome as Veiculo, ed.Nome as Editoria,
-								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL, nti.MarcarW, nti.MarcarW,
+		$sqlquery =	"SELECT nt.*, tve.id IdTipoVeiculo, tve.Nome as TipoVeiculo,
+								ve.Nome as Veiculo, ed.Nome as Editoria,
+								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
+								nti.MarcarX1, nti.MarcarX2, nti.MarcarY1, nti.MarcarY2, nti.MarcarW, nti.MarcarH,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
 								pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar,
 								ent.Motivacao, ent.Avaliacao,
@@ -245,9 +247,10 @@ class Home_model extends CI_Model {
 								JOIN Assunto ass ON ass.Id = pc.idAssunto
 								JOIN EmpresaNoticia ent ON  ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
 								JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+								JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
 								JOIN Editorias ed ON nt.idEditoria = ed.Id
 								JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-								LEFT JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+								LEFT OUTER JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
 								WHERE nt.Id = $newsid AND ent.IdEmpresa = $idclient";
 		return $this->db->query($sqlquery)->result_array();
 	}

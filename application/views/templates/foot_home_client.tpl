@@ -15,9 +15,11 @@
 	var clientselb = (clientsel == 'true');
 
 	{literal}
-	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn, sectabn, subjectid, subjectnm,
-	keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords, headerlogo,
-	subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque;
+	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn,
+	sectabn, subjectid, subjectnm, keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
+	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque,
+	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
+	var jcropdestroy = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];

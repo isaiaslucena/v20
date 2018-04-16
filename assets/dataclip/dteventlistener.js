@@ -188,6 +188,7 @@ $('#showsinglenews').on('hide.bs.modal', function(event) {
 	$('#modalcsinglenewsi').css('display', 'none');
 	$('#modalcsinglenewsv').css('display', 'none');
 	$('#modaltitlerow').css('display', 'none');
+	$('#btnsgroupsnews').css('display', 'none');
 	if (isTouchDevice() == false) {
 		$('#showsinglenews > .modal-dialog.modal-lg').css('width', '900px');
 	}
@@ -298,11 +299,19 @@ $(document).on('click', '.tooltipa', function(event) {
 		snewscontent = tndata.Noticia;
 		snewsauthor = tndata.Autor;
 		snewsurl = tndata.URL;
-		snewsvid = tndata.idVeiculo;
+		snewstveid = parseInt(tndata.IdTipoVeiculo);
+		snewstve = tndata.TipoVeiculo;
+		snewsvid = parseInt(tndata.idVeiculo);
 		snewsve = tndata.Veiculo;
-		snewseid = tndata.idEditoria;
+		snewseid = parseInt(tndata.idEditoria);
 		snewsed = tndata.Editoria;
 		snewsimg = tndata.Imagem;
+		snewsmw = parseInt(tndata.MarcarW);
+		snewsmh = parseInt(tndata.MarcarH);
+		snewsx1 = parseInt(tndata.MarcarX1);
+		snewsx2 = parseInt(tndata.MarcarX2);
+		snewsy1 = parseInt(tndata.MarcarY1);
+		snewsy2 = parseInt(tndata.MarcarY2);
 
 		var snewspchave = '';
 		arrcount = tndata.PChaves.length;
@@ -370,7 +379,8 @@ $(document).on('click', '.tooltipa', function(event) {
 			$('#btnselclo').attr('data-trid', titletrid);
 		}
 
-		multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
+		// multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
+		multclipimgurl = 'https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
 		rgxvideo = new RegExp('(.mp4)', 'ig');
 		rgxaudio = new RegExp('(.mp3)', 'ig');
 		rgximage = new RegExp('(.jpeg|.jpg|.png|.bmp)', 'ig');
@@ -394,10 +404,73 @@ $(document).on('click', '.tooltipa', function(event) {
 			$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 			$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 			$('#datemediactni').text(snewsfdatetime);
-			$('#mediactni').html(
-				'<div class="imggrad"><span>Exibir tudo</span></div>'+
-				'<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">'
-			);
+
+			if (snewstveid == 3 || snewstveid == 10 || snewstveid == 12 || snewstveid == 18) {
+				imgobj = new Image();
+				// imgobj.crossOrigin = 'Anonymous';
+				crosimg = '/home/proxy/'+btoa(multclipimgurl+'/'+snewsimg);
+				// imgobj.src = multclipimgurl+'/'+snewsimg;
+				imgobj.src = crosimg;
+
+				imgobj.onload = function(event) {
+					imgobjw = imgobj.width;
+					imgobjh = imgobj.height;
+
+					// imgobjboxw = (imgobjw * 12) / 100;
+					// imgobjboxh = (imgobjh * 12) / 100;
+					// imgobjboxw = $('#mediactni').width();
+					// imgobjboxh = $('#mediactni').height();
+
+					document.getElementById('mediactni').innerHTML = '';
+					imgobj.setAttribute('id', 'mediaelimg');
+					document.getElementById('mediactni').appendChild(imgobj);
+
+					$('#mediaelimg').Jcrop(
+						{
+							trueSize: [imgobjw, imgobjh],
+							setSelect: [ 0, 0, 0, 0 ],
+							boxWidth: 280,
+							boxHeight: 400,
+						},
+						function()
+						{
+							jcropdestroy = true;
+							jcrop_api = this;
+						}
+					);
+
+					jcrop_api.animateTo([ snewsx1, snewsy1, snewsx2, snewsy2 ]);
+					jcrop_api.disable();
+
+					$('#mediaimgload').fadeOut('fast', function() {
+						$('#mediactni').fadeIn('fast');
+						// $('#mediactni').click(function(event) {
+						// 	$('.imggrad').css('display', 'none');
+						// 	$(this).css('overflow-y', 'auto');
+						// });
+					});
+				}
+
+				imgobj.onerror = function() {
+					imgobj.src = '/assets/imgs/noimage.png';
+				}
+			} else {
+				$('#mediactni').html(
+					'<div class="imggrad"><span>Exibir tudo</span></div>'+
+					'<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">'
+				);
+
+				$('#mediaelimg').on('load', function() {
+					$('#mediaimgload').fadeOut('fast', function() {
+						$('#mediactni').fadeIn('fast');
+						$('#mediactni').click(function(event) {
+							$('.imggrad').css('display', 'none');
+							$(this).css('overflow-y', 'auto');
+						});
+					});
+				});
+			}
+
 			$('#btnurl').removeClass('disabled');
 			$('#btnurl').attr('disabled', false);
 			$('#btnurl').attr('href', snewsurl);
@@ -461,14 +534,9 @@ $(document).on('click', '.tooltipa', function(event) {
 		}
 
 		if (mediatype == 'image') {
-			$('#mediaelimg').on('load', function() {
-				$('#mediaimgload').fadeOut('fast', function() {
-					$('#mediactni').fadeIn('fast');
-					$('#mediactni').click(function(event) {
-						$('.imggrad').css('display', 'none');
-						$(this).css('overflow-y', 'auto');
-					});
-				});
+			$('#mediaelimg').on('error', function() {
+				$(this).attr('src', '/assets/imgs/noimage.png');
+				$('.imggrad').css('display', 'none');
 			});
 		} else {
 			$('#mediaelvideo').on('loadeddata', function() {
@@ -485,6 +553,7 @@ $(document).on('click', '.tooltipa', function(event) {
 			} else {
 				$('#modalcsinglenewsv').fadeIn('fast');
 			}
+			$('#btnsgroupsnews').fadeIn('fast');
 		});
 	});
 });
@@ -705,8 +774,36 @@ $('.cdrefreshitem').click(function(event) {
 });
 
 $('#btnexpand').click(function(event) {
+	$('#mediactni').animate({'height': '100%'}, 'fast');
 	$('#showsinglenews > .modal-dialog.modal-lg').animate({'width': '98%'}, 'fast');
 	$('#modal-texti').slimScroll({
 		height: 'auto',
 	});
+});
+
+$('#btndowbfs').click(function(event) {
+	canvas = document.createElement('canvas');
+	ctx = canvas.getContext('2d');
+
+	imgw = imgobj.width;
+	imgh = imgobj.height;
+	ctx.canvas.width = imgw;
+	ctx.canvas.height = imgh;
+
+	ctx.drawImage(imgobj, 0, 0);
+	ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+	ctx.fillRect(0, 0, imgw, imgh);
+	ctx.drawImage(imgobj, snewsx1, snewsy1, snewsmw, snewsmh, snewsx1, snewsy1, snewsmw, snewsmh);
+
+	document.getElementById('divmediacanvas').innerHTML = '';
+	canvas.setAttribute('id', 'mediacanvas');
+	document.getElementById('divmediacanvas').appendChild(canvas);
+
+	canvasel = document.getElementById('mediacanvas');
+	canvasdataURL = canvasel.toDataURL();
+
+	windowo = window.open();
+	windowo.document.write('<img src="'+canvasdataURL+'"/>');
+	open().document.write('<img src="'+canvasdataURL+'"/>');
+	return false;
 });

@@ -297,7 +297,7 @@
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
 							</div>
-							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 420px; overflow-y: hidden; overflow-x: hidden; display: none">
+							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 400px; overflow-y: auto; overflow-x: hidden; display: none">
 							</div>
 							<div class="col-sm-8 col-md-8 col-lg-8">
 								<h5 id="datemediactni" class="text-muted"></h5>
@@ -305,6 +305,7 @@
 								<h3 id="mediactnti"></h3>
 								<p id="modal-texti" class="text-justify"></p>
 							</div>
+							<div id="divmediacanvas" style="display: none"></div>
 						</div>
 
 						<div id="modalcsinglenewsv" style="display: none">
@@ -333,7 +334,10 @@
 						</div>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
-							<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block">
+							<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block" style="display: none;">
+								<div class="btn-group">
+									<a id="btndowbfs" class="btn btn-sm w-xs btn-default">Baixar Fac-Símile</a>
+								</div>
 								<div class="btn-group">
 									<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
 								</div>
