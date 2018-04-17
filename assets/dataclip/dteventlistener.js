@@ -53,6 +53,12 @@ cdatebtn.click(function(event) {
 cadsbtn.click(function(event) {
 	cadsbtn.ladda('start');
 
+	vstartdate = $('#adsstartdate').val();
+	venddate = $('#adsenddate').val();
+
+	console.log(vstartdate.length);
+	console.log(venddate);
+
 	if (clientselid == 0) {
 		cliid = cid;
 	} else {
@@ -390,6 +396,7 @@ $(document).on('click', '.tooltipa', function(event) {
 		rgximageaws = new RegExp('s3.amazonaws.com', 'ig');
 		if (rgxvideo.test(snewsimg)) {
 			mediatype = 'video';
+			$('#btndown').attr('data-downtype', 'video');
 			$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 			$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 			$('#datemediactnv').text(snewsfdatetime)
@@ -397,6 +404,7 @@ $(document).on('click', '.tooltipa', function(event) {
 			$('#modal-textv').html(snewscontent);
 		} else if (rgxaudio.test(snewsimg)) {
 			mediatype = 'audio';
+			$('#btndown').attr('data-downtype', 'audio');
 			$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 			$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 			$('#datemediactnv').text(snewsfdatetime);
@@ -409,6 +417,7 @@ $(document).on('click', '.tooltipa', function(event) {
 			$('#datemediactni').text(snewsfdatetime);
 
 			if (snewstveid == 3 || snewstveid == 10 || snewstveid == 12 || snewstveid == 18) {
+				$('#btndown').attr('data-downtype', 'facsimile');
 				imgobj = new Image();
 				// imgobj.crossOrigin = 'Anonymous';
 				crosimg = '/home/proxy/'+btoa(multclipimgurl+'/'+snewsimg);
@@ -481,6 +490,7 @@ $(document).on('click', '.tooltipa', function(event) {
 					imgobj.src = '/assets/imgs/noimage.png';
 				}
 			} else {
+				$('#btndown').attr('data-downtype', 'image');
 				$('#mediactni').html(
 					'<div class="imggrad"><span>Exibir tudo</span></div>'+
 					'<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">'
@@ -534,6 +544,7 @@ $(document).on('click', '.tooltipa', function(event) {
 			});
 			$('#modal-texti').html(snewscontent);
 		} else {
+			$('#btndown').attr('data-downtype', 'noimage');
 			mediatype = 'image';
 			$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
 			$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
@@ -807,41 +818,68 @@ $('#btnexpand').click(function(event) {
 	});
 });
 
-$('#btndowbfs').click(function(event) {
-	canvas = document.createElement('canvas');
-	ctx = canvas.getContext('2d');
+$('#btndown').click(function(event) {
+	downtype = $(this).attr('data-downtype');
 
-	imgw = imgobj.width;
-	imgh = imgobj.height;
-	ctx.canvas.width = imgw;
-	ctx.canvas.height = imgh;
+	$(this).removeClass('disabled');
+	$(this).removeAttr('disabled');
 
-	ctx.drawImage(imgobj, 0, 0);
-	ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-	ctx.fillRect(0, 0, imgw, imgh);
-	ctx.drawImage(imgobj, snewsx1, snewsy1, snewsmw, snewsmh, snewsx1, snewsy1, snewsmw, snewsmh);
+	switch (downtype) {
+		case 'video':
+			// statements_1
+			break;
+		case 'audio':
+			// statements_1
+			break;
+		case 'image':
+			// statements_1
+			break;
+		case 'noimage':
+			$(this).addClass('disabled');
+			$(this).attr('disabled', true);
+			break;
+		case 'facsimile':
+			canvas = document.createElement('canvas');
+			ctx = canvas.getContext('2d');
 
-	document.getElementById('divmediacanvas').innerHTML = '';
-	canvas.setAttribute('id', 'mediacanvas');
-	document.getElementById('divmediacanvas').appendChild(canvas);
+			imgw = imgobj.width;
+			imgh = imgobj.height;
+			ctx.canvas.width = imgw;
+			ctx.canvas.height = imgh;
 
-	canvasel = document.getElementById('mediacanvas');
-	canvasdataURL = canvasel.toDataURL('image/png');
-	cvdowndataURL = canvasel.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-	// canvasdataURL = canvasel.toDataURL('image/png').replace('image/png', 'application/stream');
+			ctx.drawImage(imgobj, 0, 0);
+			ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+			ctx.fillRect(0, 0, imgw, imgh);
+			ctx.drawImage(imgobj, snewsx1, snewsy1, snewsmw, snewsmh, snewsx1, snewsy1, snewsmw, snewsmh);
 
-	// imgwred = (imgw * 25) / 100;
-	// imghred = (imgh * 25) / 100;
+			document.getElementById('divmediacanvas').innerHTML = '';
+			canvas.setAttribute('id', 'mediacanvas');
+			document.getElementById('divmediacanvas').appendChild(canvas);
 
-	windowo = window.open();
-	windowo.document.write(
-		'<a href="'+canvasdataURL+'" download="facsimile.png">'+
-		'<img src="'+canvasdataURL+'" style="width: 50%"/></a>'+
-		'<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>'+
-		'<script type="text/javascript" charset="utf-8">'+
-		'$("img").click(function(event) {'+
-			'$(this).animate({"width": "100%"}, "fast");'+
-		'});'+
-		'</script>'
-		);
+			canvasel = document.getElementById('mediacanvas');
+			canvasdataURL = canvasel.toDataURL('image/png');
+			cvdowndataURL = canvasel.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+			// canvasdataURL = canvasel.toDataURL('image/png').replace('image/png', 'application/stream');
+
+			// imgwred = (imgw * 25) / 100;
+			// imghred = (imgh * 25) / 100;
+
+			windowo = window.open();
+			windowo.document.write(
+				'<img src="'+canvasdataURL+'" style="width: 30%"/>'+
+				'<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>'+
+				'<script type="text/javascript" charset="utf-8">'+
+				'$("img").click(function(event) {'+
+						'if ($(this).hasClass("expanded")) {'+
+							'$(this).removeClass("expanded");'+
+							'$(this).animate({"width": "30%"}, "fast");'+
+						'} else {'+
+							'$(this).addClass("expanded");'+
+							'$(this).animate({"width": "100%"}, "fast");'+
+						'}'+
+				'	});'+
+				'</script>'
+				);
+			break;
+	}
 });

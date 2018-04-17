@@ -8,8 +8,8 @@
 	</footer>
 </div><!-- Main Wrapper -->
 
-<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js"></script>
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js" async></script>
+<script type="text/javascript" charset="utf-8" async>
 	var clientsel = '{$client_selected}';
 	var clientselid = {$client_sel_id};
 	var clientselb = (clientsel == 'true');
@@ -361,6 +361,6 @@
 		// });
 	}
 </script>
-<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dteventlistener.js"></script>
+<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dteventlistener.js" async></script>
 {/literal}
 {/block}

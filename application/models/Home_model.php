@@ -723,11 +723,6 @@ class Home_model extends CI_Model {
 			$sqlquery .= "AND npc.Avaliacao IN ($avaliacao) ";
 		}
 
-
-		// var_dump($sqlquery);
-
-		// die();
-
 		return $this->db->query($sqlquery)->result_array();
 	}
 }
