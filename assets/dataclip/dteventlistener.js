@@ -51,7 +51,7 @@ cdatebtn.click(function(event) {
 });
 
 cadsbtn.click(function(event) {
-	// cadsbtn.ladda('start');
+	cadsbtn.ladda('start');
 
 	if (clientselid == 0) {
 		cliid = cid;
@@ -79,15 +79,8 @@ cadsbtn.click(function(event) {
 
 	adstext = $('#adstext').val();
 
-	// console.log(adssubjectarr);
-	// console.log(adskeywordarr);
-	// console.log(adstveiculoarr);
-	// console.log(adsveiculoarr);
-	// console.log(adsveiculossites);
-	// console.log(adseditoriaarr);
-	// console.log(adsstatesarr);
-
 	var adssearchdata = {
+		'idempresa': cliid,
 		'startdate': adsstartdate,
 		'enddate': adsenddate,
 		'starttime': adsstarttime,
@@ -104,11 +97,21 @@ cadsbtn.click(function(event) {
 		'avaliacao': adsavaliacaoarr
 	}
 
- console.log(adssearchdata);
+ // console.log(adssearchdata);
 
-	// postData('/home/advsearch', adssearchdata)
-	// .then(data => console.log(data)) // JSON from `response.json()` call
-	// .catch(error => console.error(error))
+	postData('/home/advsearch', adssearchdata)
+	.then(
+		data => {
+			console.log(data);
+			cadsbtn.ladda('stop');
+			// setTimeout(cadsbtn.ladda('stop'), 4000);
+		}
+	).catch(
+		error => {
+			console.error(error);
+			cadsbtn.ladda('stop');
+		}
+	);
 
 	// count_vtype(cid, adsstartdate, adsenddate);
 	// count_rating(cid, adsstartdate, adsenddate);
@@ -139,14 +142,14 @@ $('input').on('ifChecked', function(event) {
 			console.log('option not recognized!');
 			break;
 	}
-	console.log('destaque:');
-	console.log(adsdestaque);
+	// console.log('destaque:');
+	// console.log(adsdestaque);
 
-	console.log('motivacao:');
-	console.log(adsmotivacaoarr);
+	// console.log('motivacao:');
+	// console.log(adsmotivacaoarr);
 
-	console.log('avaliacao:');
-	console.log(adsavaliacaoarr);
+	// console.log('avaliacao:');
+	// console.log(adsavaliacaoarr);
 });
 
 $('input').on('ifUnchecked', function(event) {
@@ -416,17 +419,13 @@ $(document).on('click', '.tooltipa', function(event) {
 					imgobjw = imgobj.width;
 					imgobjh = imgobj.height;
 
-					// imgobjboxw = (imgobjw * 12) / 100;
-					// imgobjboxh = (imgobjh * 12) / 100;
-					// imgobjboxw = $('#mediactni').width();
-					// imgobjboxh = $('#mediactni').height();
-
 					document.getElementById('mediactni').innerHTML = '';
 					imgobj.setAttribute('id', 'mediaelimg');
 					document.getElementById('mediactni').appendChild(imgobj);
 
 					$('#mediaelimg').Jcrop(
 						{
+							keySupport: false,
 							trueSize: [imgobjw, imgobjh],
 							setSelect: [ 0, 0, 0, 0 ],
 							boxWidth: 280,
@@ -441,6 +440,33 @@ $(document).on('click', '.tooltipa', function(event) {
 
 					jcrop_api.animateTo([ snewsx1, snewsy1, snewsx2, snewsy2 ]);
 					jcrop_api.disable();
+
+
+					//imgdown
+					// canvas = document.createElement('canvas');
+					// ctx = canvas.getContext('2d');
+
+					// imgw = imgobj.width;
+					// imgh = imgobj.height;
+					// ctx.canvas.width = imgw;
+					// ctx.canvas.height = imgh;
+
+					// ctx.drawImage(imgobj, 0, 0);
+					// ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+					// ctx.fillRect(0, 0, imgw, imgh);
+					// ctx.drawImage(imgobj, snewsx1, snewsy1, snewsmw, snewsmh, snewsx1, snewsy1, snewsmw, snewsmh);
+
+					// document.getElementById('divmediacanvas').innerHTML = '';
+					// canvas.setAttribute('id', 'mediacanvas');
+					// document.getElementById('divmediacanvas').appendChild(canvas);
+
+					// canvasel = document.getElementById('mediacanvas');
+					// canvasdataURL = canvasel.toDataURL('image/png').replace('image/png', 'application/stream');
+
+					// $('#btndowbfs').attr({
+					// 	'href': canvasdataURL,
+					// 	'download': 'facsimile.png'
+					// });
 
 					$('#mediaimgload').fadeOut('fast', function() {
 						$('#mediactni').fadeIn('fast');
@@ -791,7 +817,7 @@ $('#btndowbfs').click(function(event) {
 	ctx.canvas.height = imgh;
 
 	ctx.drawImage(imgobj, 0, 0);
-	ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+	ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
 	ctx.fillRect(0, 0, imgw, imgh);
 	ctx.drawImage(imgobj, snewsx1, snewsy1, snewsmw, snewsmh, snewsx1, snewsy1, snewsmw, snewsmh);
 
@@ -800,10 +826,22 @@ $('#btndowbfs').click(function(event) {
 	document.getElementById('divmediacanvas').appendChild(canvas);
 
 	canvasel = document.getElementById('mediacanvas');
-	canvasdataURL = canvasel.toDataURL();
+	canvasdataURL = canvasel.toDataURL('image/png');
+	cvdowndataURL = canvasel.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+	// canvasdataURL = canvasel.toDataURL('image/png').replace('image/png', 'application/stream');
+
+	// imgwred = (imgw * 25) / 100;
+	// imghred = (imgh * 25) / 100;
 
 	windowo = window.open();
-	windowo.document.write('<img src="'+canvasdataURL+'"/>');
-	open().document.write('<img src="'+canvasdataURL+'"/>');
-	return false;
+	windowo.document.write(
+		'<a href="'+canvasdataURL+'" download="facsimile.png">'+
+		'<img src="'+canvasdataURL+'" style="width: 50%"/></a>'+
+		'<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>'+
+		'<script type="text/javascript" charset="utf-8">'+
+		'$("img").click(function(event) {'+
+			'$(this).animate({"width": "100%"}, "fast");'+
+		'});'+
+		'</script>'
+		);
 });

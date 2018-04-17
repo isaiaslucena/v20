@@ -17,8 +17,9 @@
 	{literal}
 	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn,
 	sectabn, subjectid, subjectnm, keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
-	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque,
+	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
+	var adsdestaque = null;
 	var jcropdestroy = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],

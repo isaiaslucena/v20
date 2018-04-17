@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-16 15:18:02
+/* Smarty version 3.1.30, created on 2018-04-16 19:19:13
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad4e8da02f826_43990058',
+  'unifunc' => 'content_5ad521619d0316_01548512',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1523902653,
+      1 => 1523917145,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ad4e8da02f826_43990058 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad521619d0316_01548512 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_465159655ad4e8da01d219_74679861', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5027256815ad521619beb31_67794146', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_465159655ad4e8da01d219_74679861 extends Smarty_Internal_Block
+class Block_5027256815ad521619beb31_67794146 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -61,8 +61,9 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	
 	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn,
 	sectabn, subjectid, subjectnm, keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
-	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle, adsdestaque,
+	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
+	var adsdestaque = null;
 	var jcropdestroy = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],

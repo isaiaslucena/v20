@@ -671,7 +671,64 @@ class Home_model extends CI_Model {
 	}
 
 	public function advsearch($data){
-		$query = 'SELECT * FROM Noticias';
+		// var_dump($data);
+
+		$startdate = $data['startdate'];
+		$enddate = $data['enddate'];
+		$starttime = $data['starttime'];
+		$endtime = $data['endtime'];
+		$idempresa = $data['idempresa'];
+
+		$sqlquery =	"SELECT nt.*
+								FROM Noticias nt
+								INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
+								INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
+								INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
+								INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
+								INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								LEFT JOIN dados_estados est ON ve.idEstado = est.id
+								LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
+								INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+								INNER JOIN Empresa em ON ent.idEmpresa = em.Id
+								WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
+								AND npc.idEmpresa = $idempresa ";
+
+		if (count($data['subjectsid']) > 0) {
+			$idsassunto = implode(',', $data['subjectsid']);
+			$sqlquery .= "AND npc.idAssunto IN ($idsassunto) ";
+		} else if (count($data['keywordsid']) > 0) {
+			$idspchave = implode(',', $data['keywordsid']);
+			$sqlquery .= "AND npc.idPalavraChave IN ($idspchave) ";
+ 		} else if (count($data['tveiculosid']) > 0) {
+			$idstveiculo = implode(',', $data['tveiculosid']);
+			$sqlquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
+ 		} else if (!empty($data['veiculosid'][0])) {
+			$idsveiculo = implode(',', $data['veiculosid']);
+			$sqlquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
+ 		} else if (count($data['editoriasid']) > 0) {
+			$idseditoria = implode(',', $data['editoriasid']);
+			$sqlquery .= "AND npc.idEditoria IN ($idseditoria) ";
+ 		} else if (count($data['estadosid']) > 0) {
+			$idsestados = implode(',', $data['estadosid']);
+			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
+		} else if (!is_null($data['destaque'])) {
+			$destaque = $data['destaque'];
+			$sqlquery .= "AND npc.Destaque = $destaque ";
+ 		} else if (count($data['motivacao']) > 0) {
+			$motivacao = implode(',', $data['motivacao']);
+			$sqlquery .= "AND npc.Motivacao IN ($motivacao) ";
+		} else if (count($data['avaliacao'])) {
+			$avaliacao = implode(',', $data['avaliacao']);
+			$sqlquery .= "AND npc.Avaliacao IN ($avaliacao) ";
+		}
+
+
+		// var_dump($sqlquery);
+
+		// die();
+
+		return $this->db->query($sqlquery)->result_array();
 	}
 }
 
