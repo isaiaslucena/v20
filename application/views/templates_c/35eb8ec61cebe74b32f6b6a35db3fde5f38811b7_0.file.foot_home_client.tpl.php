@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-17 15:43:43
+/* Smarty version 3.1.30, created on 2018-04-17 19:17:10
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad6405fe59b60_79211553',
+  'unifunc' => 'content_5ad67266018e24_07333513',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1523990133,
+      1 => 1524002968,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ad6405fe59b60_79211553 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad67266018e24_07333513 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4708872785ad6405fe486d5_31552151', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6859912895ad67266003eb3_20733738', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_4708872785ad6405fe486d5_31552151 extends Smarty_Internal_Block
+class Block_6859912895ad67266003eb3_20733738 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -51,7 +51,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
  type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js" async><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
- type="text/javascript" charset="utf-8" async>
+ type="text/javascript" charset="utf-8">
 	var clientsel = '<?php echo $_smarty_tpl->tpl_vars['client_selected']->value;?>
 ';
 	var clientselid = <?php echo $_smarty_tpl->tpl_vars['client_sel_id']->value;?>
@@ -92,7 +92,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	var cdatebtn = $('#dpbtn').ladda();
 	var cadsbtn = $('#adsbtn').ladda();
 
-	var tablenews = $('#tablenews').DataTable({
+	tablenews = $('#tablenews').DataTable({
+		'destroy': true,
 		'autoWidth': false,
 		'order': [
 			[0, 'desc'],
@@ -194,7 +195,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			})
 			$('.filter.selectpicker').selectpicker('refresh');
 			if(isTouchDevice() === false) {
-				$('[data-toggle="tooltip"]').tooltip();
+				$('.tooltipa').tooltip();
 			}
 		}
 	});
@@ -225,6 +226,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		todayBtn: true,
 		todayHighlight: true,
 		inputs: $('.actual_range')
+	});
+
+	$('.tooltipinput').tooltip({
+		trigger: 'manual'
 	});
 
 	$('#modal-texti').slimScroll({

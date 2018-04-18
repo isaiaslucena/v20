@@ -419,9 +419,11 @@
 								<div class="form-group">
 									<label>Data</label>
 									<div class="input-daterange input-group" id="adsdatepicker">
-										<input required type="text" class="input-sm form-control" id="adsstartdate" name="adsstartdate" placeholder="Início" autocomplete="off"/>
+										<input type="text" class="input-sm form-control tooltipinput" id="adsstartdate" name="adsstartdate" placeholder="Início" autocomplete="off"
+										data-toggle="tooltip" data-placement="top" title="Preenchimento obrigatório!"/>
 										<span class="input-group-addon">Até</span>
-										<input required type="text" class="input-sm form-control" id="adsenddate" name="adsenddate" placeholder="Fim" autocomplete="off"/>
+										<input type="text" class="input-sm form-control tooltipinput" id="adsenddate" name="adsenddate" placeholder="Fim" autocomplete="off"
+										data-toggle="tooltip" data-placement="top" title="Preenchimento obrigatório!"/>
 									</div>
 								</div>
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-17 15:43:43
+/* Smarty version 3.1.30, created on 2018-04-17 16:38:58
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad64060006357_82645878',
+  'unifunc' => 'content_5ad64d524c61e6_02887848',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1523990060,
+      1 => 1523993221,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ad64060006357_82645878 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad64d524c61e6_02887848 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12549713255ad6405ff278b2_25293294', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_342658945ad64d524aa050_07041679', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_12549713255ad6405ff278b2_25293294 extends Smarty_Internal_Block
+class Block_342658945ad64d524aa050_07041679 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -456,9 +456,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<div class="form-group">
 									<label>Data</label>
 									<div class="input-daterange input-group" id="adsdatepicker">
-										<input required type="text" class="input-sm form-control" id="adsstartdate" name="adsstartdate" placeholder="Início" autocomplete="off"/>
+										<input type="text" class="input-sm form-control tooltipinput" id="adsstartdate" name="adsstartdate" placeholder="Início" autocomplete="off"
+										data-toggle="tooltip" data-placement="top" title="Preenchimento obrigatório!"/>
 										<span class="input-group-addon">Até</span>
-										<input required type="text" class="input-sm form-control" id="adsenddate" name="adsenddate" placeholder="Fim" autocomplete="off"/>
+										<input type="text" class="input-sm form-control tooltipinput" id="adsenddate" name="adsenddate" placeholder="Fim" autocomplete="off"
+										data-toggle="tooltip" data-placement="top" title="Preenchimento obrigatório!"/>
 									</div>
 								</div>
 

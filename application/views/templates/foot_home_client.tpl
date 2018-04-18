@@ -9,7 +9,7 @@
 </div><!-- Main Wrapper -->
 
 <script type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js" async></script>
-<script type="text/javascript" charset="utf-8" async>
+<script type="text/javascript" charset="utf-8">
 	var clientsel = '{$client_selected}';
 	var clientselid = {$client_sel_id};
 	var clientselb = (clientsel == 'true');
@@ -48,7 +48,8 @@
 	var cdatebtn = $('#dpbtn').ladda();
 	var cadsbtn = $('#adsbtn').ladda();
 
-	var tablenews = $('#tablenews').DataTable({
+	tablenews = $('#tablenews').DataTable({
+		'destroy': true,
 		'autoWidth': false,
 		'order': [
 			[0, 'desc'],
@@ -150,7 +151,7 @@
 			})
 			$('.filter.selectpicker').selectpicker('refresh');
 			if(isTouchDevice() === false) {
-				$('[data-toggle="tooltip"]').tooltip();
+				$('.tooltipa').tooltip();
 			}
 		}
 	});
@@ -181,6 +182,10 @@
 		todayBtn: true,
 		todayHighlight: true,
 		inputs: $('.actual_range')
+	});
+
+	$('.tooltipinput').tooltip({
+		trigger: 'manual'
 	});
 
 	$('#modal-texti').slimScroll({

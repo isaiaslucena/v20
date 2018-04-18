@@ -521,5 +521,29 @@ class Home extends CI_Controller {
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
 		}
 	}
+
+	public function advsearch_nonjson(){
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata['idempresa'] = $this->input->post('idempresa');
+			$postdata['startdate'] = $this->input->post('startdate');
+			$postdata['enddate'] = $this->input->post('enddate');
+			$postdata['starttime'] = $this->input->post('starttime');
+			$postdata['endtime'] = $this->input->post('endtime');
+			$postdata['subjectsid'] = $this->input->post('subjectsid');
+			$postdata['keywordsid'] = $this->input->post('keywordsid');
+			$postdata['tveiculosid'] = $this->input->post('tveiculosid');
+			$postdata['veiculosid'] = $this->input->post('veiculosid');
+			$postdata['editoriasid'] = $this->input->post('editoriasid');
+			$postdata['estadosid'] = $this->input->post('estadosid');
+			$postdata['destaque'] = $this->input->post('destaque');
+			$postdata['motivacao'] = $this->input->post('motivacao');
+			$postdata['avaliacao'] = $this->input->post('avaliacao');
+
+			$searchdata = $this->home_model->advsearch($postdata);
+
+			header('Content-Type: application/json');
+			print json_encode($searchdata, JSON_PRETTY_PRINT);
+		}
+	}
 }
 ?>

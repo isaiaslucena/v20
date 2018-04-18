@@ -56,8 +56,20 @@ cadsbtn.click(function(event) {
 	vstartdate = $('#adsstartdate').val();
 	venddate = $('#adsenddate').val();
 
-	console.log(vstartdate.length);
-	console.log(venddate);
+	if (vstartdate.length == 0) {
+		$('#adsstartdate.tooltipinput').tooltip('show');
+		return
+	} else {
+		$('#adsstartdate.tooltipinput').tooltip('hide');
+	}
+
+	if (venddate.length == 0) {
+		$('#adsenddate.tooltipinput').tooltip('show');
+		return
+	} else {
+		$('#adsenddate.tooltipinput').tooltip('hide');
+	}
+
 
 	if (clientselid == 0) {
 		cliid = cid;
@@ -79,7 +91,7 @@ cadsbtn.click(function(event) {
 	} else {
 		console.log('nenhum veiculo sites selecionado!');
 	}
-	console.log(adsveiculossites);
+	// console.log(adsveiculossites);
 
 	adsveiculoarr = adsveiculoarr.concat(adsveiculossites);
 
@@ -101,32 +113,151 @@ cadsbtn.click(function(event) {
 		'destaque': adsdestaque,
 		'motivacao': adsmotivacaoarr,
 		'avaliacao': adsavaliacaoarr
-	}
+	};
 
- // console.log(adssearchdata);
+	// tablenews.destroy();
 
-	postData('/home/advsearch', adssearchdata)
-	.then(
-		data => {
-			console.log(data);
-			cadsbtn.ladda('stop');
-			// setTimeout(cadsbtn.ladda('stop'), 4000);
+	tablenews = $('#tablenews').DataTable({
+		'destroy': true,
+		'autoWidth': false,
+		'order': [
+			[0, 'desc'],
+			[1, 'desc']
+		],
+		'columnDefs': [
+			{'searchable': false, 'width': '5%', 'responsivePriority': 0, 'targets': 0},
+			{'searchable': false, 'width': '5%', 'targets': 1},
+			{'searchable': true, 'width': '15%', 'targets': 2},
+			{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 3},
+			{'searchable': true, 'width': '5%', 'targets': 4},
+			{'searchable': true, 'width': '15%', 'targets': 5},
+			{'searchable': false, 'width': '40%', 'responsivePriority': 2, 'targets': 6},
+			{'searchable': false, 'width': '10%', 'targets': 7},
+			{'searchable': false, 'width': '10%', 'targets': 8}
+		],
+		'responsive': true,
+		'scrollX': false,
+		'processing': true,
+		'server-side': true,
+		'ajax': {
+			'url': '/home/advsearch',
+			'type': 'POST',
+			'data': function(d) {return JSON.stringify(adssearchdata)}
+		},
+		"columns": [
+			{'data': 'Data'},
+			{'data': 'Hora'},
+			{'data': 'TipoVeiculo'},
+			{'data': 'Veiculo'},
+			{'data': 'Editoria'},
+			{'data': 'PalavraChave'},
+			{'data': 'Titulo'},
+			{'data': 'EdValor'},
+			{'data': 'EdAudiencia'}
+		],
+		'rowId': 'id',
+		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
+		'initComplete': function(settings) {
+			this.api().columns(2).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+
+			this.api().columns(3).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+
+			this.api().columns(4).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+
+			this.api().columns(5).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+			$('.filter.selectpicker').selectpicker('refresh');
+		},
+		'drawCallback': function(settings) {
+			this.api().column(2).data().each(function(tvcurrent, i) {
+				if (tvarr.indexOf(tvcurrent) == -1) {
+					tvarr.push(tvcurrent);
+					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_2');
+				}
+			})
+
+			this.api().column(3).data().each(function (vcurrent, i) {
+				if (varr.indexOf(vcurrent) == -1) {
+					varr.push(vcurrent);
+					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_3');
+				}
+			})
+
+			this.api().column(4).data().each(function (ecurrent, i) {
+				if (earr.indexOf(ecurrent) == -1) {
+					earr.push(ecurrent);
+					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_4');
+				}
+			})
+
+			this.api().column(5).data().each(function (pccurrent, i) {
+				if (pcarr.indexOf(pccurrent) == -1) {
+					pcarr.push(pccurrent);
+					ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_5');
+				}
+			})
+			$('.filter.selectpicker').selectpicker('refresh');
+			if(isTouchDevice() === false) {
+				$('.tooltipa').tooltip();
+			}
 		}
-	).catch(
-		error => {
-			console.error(error);
-			cadsbtn.ladda('stop');
-		}
-	);
+	});
 
-	// count_vtype(cid, adsstartdate, adsenddate);
-	// count_rating(cid, adsstartdate, adsenddate);
-	// count_states(cid, adsstartdate, adsenddate);
-	// count_client(cid, adsstartdate, adsenddate);
-	// get_subject_keywords(cid, adsstartdate, adsenddate, true, function(keywid){
-	// 	add_keyword_news(keywid, cliid, adsstartdate, adsenddate, true, 'advancedsearch');
-	// });
+	// postData('/home/advsearch', adssearchdata)
+	// .then(
+	// 	data => {
+	// 		console.log(data);
+	// 		cadsbtn.ladda('stop');
+	// 		// setTimeout(cadsbtn.ladda('stop'), 4000);
+	// 	}
+	// ).catch(
+	// 	error => {
+	// 		console.error(error);
+	// 		cadsbtn.ladda('stop');
+	// 	}
+	// );
 
+	cadsbtn.ladda('stop');
+	$('#advancedsearch').modal('hide');
 	$('input').iCheck('uncheck');
 });
 
