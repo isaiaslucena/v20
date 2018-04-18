@@ -678,22 +678,22 @@ class Home_model extends CI_Model {
 		$idempresa = $data['idempresa'];
 
 		$countquery =	"SELECT
-								COUNT(nt.Id) as quant
-								FROM Noticias nt
-								INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
-								INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
-								INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
-								INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
-								INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
-								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-								LEFT JOIN dados_estados est ON ve.idEstado = est.id
-								LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
-								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
-								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-								INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
-								INNER JOIN Empresa em ON ent.idEmpresa = em.Id
-								WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
-								AND npc.idEmpresa = $idempresa ";
+									COUNT(nt.Id) as quant
+									FROM Noticias nt
+									INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
+									INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
+									INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
+									INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
+									INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									LEFT JOIN dados_estados est ON ve.idEstado = est.id
+									LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
+									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+									INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+									INNER JOIN Empresa em ON ent.idEmpresa = em.Id
+									WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
+									AND npc.idEmpresa = $idempresa ";
 
 		$sqlquery =	"SELECT
 								nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
@@ -758,7 +758,7 @@ class Home_model extends CI_Model {
 		}
 
 		// $offset = $offset + 10;
-		$sqlquery .= "LIMIT 10, 10;";
+		// $sqlquery .= "LIMIT 10, 10;";
 
 		$countdata = $this->db->query($countquery)->row('quant');
 		$fulldata['recordsTotal'] = $countdata;

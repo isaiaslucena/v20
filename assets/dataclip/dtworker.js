@@ -6,9 +6,25 @@ self.onmessage = function(e) {
 	vfunction = e.data.vfunction;
 	vmethod = e.data.method;
 	vurl = e.data.url;
+	vclientid = e.data.clientid;
+	vstartdate = e.data.startdate;
+	venddate = e.data.enddate;
+	vptype = e.data.ptype;
+	if (typeof e.data.keywordid !== 'undefined') {
+		vkeywordid = e.data.keywordid;
+	} else {
+		vkeywordid = 0;
+	}
 
 	http_req(vmethod, vurl, function(resp){
-		postMessage({'vfunction': vfunction, 'response': resp.responseText});
+		postMessage({
+			'vfunction': vfunction,
+			'clientid': vclientid,
+			'keywordid': vkeywordid,
+			'startdate': vstartdate,
+			'enddate': venddate,
+			'ptype': vptype,
+			'response': resp.responseText});
 	});
 }
 

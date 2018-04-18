@@ -561,7 +561,6 @@ function set_subject_keywords(cdata, updatesubjects = false, callback) {
 
 	subkeywordsarr.push(keywordidchosen);
 	$('#sublist .selectpicker').selectpicker('val', keywordnmchosen);
-	// add_keyword_news(keywordidchosen, clientid, startdate, enddate, true, 'startpage');
 	return keywordidchosen;
 };
 
@@ -591,12 +590,13 @@ function get_keyword_news(keywordid, startdate, enddate) {
 
 function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false, type) {
 	$('.dataTables_processing').show();
+
+	if (cleartable) {
+		tablenews.clear().draw();
+	}
+
 	$.get('/home/keyword_news/'+keywordid+'/'+clientid+'/'+startdate+'/'+enddate,
 	function(redata, textStatus, xhr) {
-		if (cleartable) {
-			tablenews.clear().draw();
-		}
-
 		$.each(redata.data, function(index, val) {
 			vid = val.Id;
 			vdata = val.Data.trim();
@@ -697,7 +697,107 @@ function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = 
 	});
 };
 
+function add_keyword_news_data(redata, keywordid, clientid, cleartable = false, type) {
+	if (cleartable) {
+		tablenews.clear().draw();
+	}
+
+	$.each(redata.data, function(index, val) {
+		vid = val.Id;
+		vdata = val.Data.trim();
+		vhora = val.Hora.trim();
+		if (vhora == '' || vhora == ' ' || vhora == '0:0') {
+			vhora = '00:00';
+		}
+		valdataf = vdata+'T'+vhora;
+		vdatetime = new Date(valdataf);
+		vday = vdatetime.getDate();
+		vday = ('0'+vday).slice(-2);
+		vmonth = (vdatetime.getMonth() + 1);
+		vmonth = ('0'+vmonth).slice(-2);
+		vnmonharr = vdatetime.toString().split(' ');
+		vnmonth = vnmonharr[1];
+		vyear = vdatetime.getFullYear();
+		vhour = vdatetime.getHours();
+		vhour = ('0'+vhour).slice(-2);
+		vminutes = vdatetime.getMinutes();
+		vminutes = ('0'+vminutes).slice(-2)
+
+		vdatetimenow = new Date();
+		vnday = vdatetimenow.getDate();
+		vnday = ('0'+vnday).slice(-2);
+		vnnmonth = (vdatetimenow.getMonth() + 1);
+		vnnmonth = ('0'+vnnmonth).slice(-2);
+		vnnmonharr = vdatetimenow.toString().split(' ');
+		vnnmonth = vnnmonharr[1];
+		vnyear = vdatetimenow.getFullYear();
+		vnhour = vdatetimenow.getHours();
+		vnhour = ('0'+vnhour).slice(-2);
+		vnminutes = vdatetimenow.getMinutes();
+		vnminutes = ('0'+vnminutes).slice(-2)
+
+		if (vdatetime > vdatetimenow) {
+			vdate = vnday+'/'+vnnmonth;
+			vtime = vnhour+':'+vnminutes;
+		} else {
+			vdate = vday+'/'+vnmonth;
+			vtime = vhour+':'+vminutes;
+		}
+
+		vtitle = val.Titulo;
+		vtitlelth = vtitle.length;
+		if (vtitlelth > 50) {
+			vtitle = vtitle.slice(0, 47) + '...';
+			vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'+val.Titulo+'">'+vtitle+'</a>'
+		} else if (vtitlelth == 1) {
+			vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">Sem Título</a>';
+		} else {
+			vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';
+		}
+
+		vedvalor = Number(val.EdValor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+		vedvalor = 'R$ '+vedvalor;
+
+		vaudiencia = Number(val.EdAudiencia).toLocaleString("pt-BR", {minimumFractionDigits: 0});
+
+		var rowNode = tablenews.row.add([
+			vdate,
+			vtime,
+			val.TipoVeiculo,
+			val.Veiculo,
+			val.Editoria,
+			val.PalavraChave,
+			vftitle,
+			vedvalor,
+			vaudiencia
+		]).draw(false).node();
+		$(rowNode).attr('id', 'tr_'+val.Id);
+		$(rowNode).attr('data-keywordid', keywordid);
+	});
+
+	switch(type) {
+		case 'advancedsearch':
+			cadsbtn.ladda('stop');
+			$('#advancedsearch').modal('hide');
+			break;
+		case 'selecteddate':
+			cdatebtn.ladda('stop');
+			salertloadingdone(isTouchDevice());
+			break;
+		case 'subjectkeyword':
+			break;
+		case 'autorefresh':
+			break;
+		default:
+			salertloadingdone(isTouchDevice());
+			break;
+	}
+
+	$('.dataTables_processing').hide();
+};
+
 function remove_keyword_news(keywordid) {
+	$('.dataTables_processing').show();
 	drows = tablenews.rows('tr[data-keywordid='+keywordid+']');
 	$('#selpckr_2').html('<option val=""></option>');
 	tvarr = [];
@@ -708,6 +808,7 @@ function remove_keyword_news(keywordid) {
 	$('#selpckr_5').html('<option val=""></option>');
 	pcarr = [];
 	drows.remove().draw();
+	$('.dataTables_processing').hide();
 };
 
 function get_single_news_keyword(newsid, newskwid, kcallback) {
@@ -784,12 +885,13 @@ function sectostring(secs) {
 	if (minutes < 10) {minutes = "0" + minutes;}
 	if (seconds < 10) {seconds = "0" + seconds;}
 	// return hours+':'+minutes+':'+seconds+'.'+milliseconds;
+	return minutes+':'+seconds;
 
-	if (secs >= 60) {
-		return minutes+':'+seconds;
-	} else {
-		return seconds;
-	}
+	// if (secs >= 60) {
+	// 	return minutes+':'+seconds;
+	// } else {
+	// 	return seconds;
+	// }
 };
 
 function refresh_countdown(seconds) {
@@ -854,92 +956,69 @@ function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 		var fenddate = ldenddate;
 	}
 
-	dtworker.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+ldclientid});
-	dtworker.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	dtworker.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	dtworker.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	dtworker.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+ldclientid+'/'+fstartdate+'/'+fenddate});
-	dtworker.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	dtworker.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+ldclientid});
-
-	// dtworker1.postMessage({'vfunction':'get_client_info', 'method':'GET', 'url': '/home/client_info/'+ldclientid});
-	// dtworker2.postMessage({'vfunction':'count_vtype', 'method':'GET', 'url': '/home/count_vtype_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	// dtworker3.postMessage({'vfunction':'count_states', 'method':'GET', 'url': '/home/count_states_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	// dtworker4.postMessage({'vfunction':'count_rating', 'method':'GET', 'url': '/home/count_rating_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	// dtworker5.postMessage({'vfunction':'count_client', 'method':'GET', 'url': '/home/count_client_news/'+ldclientid+'/'+fstartdate+'/'+fenddate});
-	// dtworker6.postMessage({'vfunction':'get_subject_keywords', 'method':'GET', 'url': '/home/client_subjects_keywords/'+ldclientid+'/'+ldstartdate+'/'+ldenddate});
-	// dtworker7.postMessage({'vfunction':'get_subjects', 'method':'GET', 'url': '/home/client_subjects/'+ldclientid});
-
-	// dtworker1.onmessage = function(event) {
-	// 	jresponse = JSON.parse(event.data.response);
-	// 	set_client_info(clientselid, jresponse.name, jresponse.banner, true);
-	// };
-
-	// dtworker2.onmessage = function(event) {
-	// 	jresponse = JSON.parse(event.data.response);
-	// 	set_count_vtype(jresponse);
-	// };
-
-	// dtworker3.onmessage = function(event) {
-	// 	jresponse = JSON.parse(event.data.response);
-	// 	set_count_states(jresponse);
-	// };
-
-	// dtworker4.onmessage = function(event) {
-	// 	jresponse = JSON.parse(event.data.response);
-	// 	set_count_rating(jresponse);
-	// };
-
-	// dtworker5.onmessage = function(event) {
-	// 	jresponse = JSON.parse(event.data.response);
-	// 	set_count_client(jresponse);
-	// };
-
-	// dtworker6.onmessage = function(event) {
-	// 	jresponse = JSON.parse(event.data.response);
-	// 	$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-	// 	add_keyword_news(set_subject_keywords(jresponse, true), clientselid, todaydate, todaydate, true, ptype);
-	// };
-
-	// dtworker7.onmessage = function(event) {
-	// 	jresponse = JSON.parse(event.data.response);
-	// 	set_subjects(jresponse);
-	// };
-
-	dtworker.onmessage = function(event) {
-		// console.log(event.data);
-		jresponse = JSON.parse(event.data.response);
-		// console.log(jresponse);
-
-		vfunc = event.data.vfunction;
-		switch (vfunc) {
-			case 'get_client_info':
-				set_client_info(clientselid, jresponse.name, jresponse.banner, true);
-				break;
-			case 'count_vtype':
-				set_count_vtype(jresponse);
-				break;
-			case 'count_states':
-				set_count_states(jresponse);
-				break;
-			case 'count_rating':
-				set_count_rating(jresponse);
-				break;
-			case 'count_client':
-				set_count_client(jresponse);
-				break;
-			case 'get_subject_keywords':
-				$('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-				add_keyword_news(set_subject_keywords(jresponse, true), clientselid, ldstartdate, ldenddate, true, ptype);
-				break;
-			case 'get_subjects':
-				set_subjects(jresponse);
-				break;
-			default:
-				console.log('Nothing to do!')
-				break;
-		}
-	}
+	dtworker.postMessage({
+		'vfunction':'get_client_info',
+		'method':'GET',
+		'url': '/home/client_info/'+ldclientid,
+		'clientid': ldclientid,
+		'startdate': ldstartdate,
+		'enddate': ldenddate,
+		'ptype': ptype
+	});
+	dtworker.postMessage({
+		'vfunction':'count_vtype',
+		'method':'GET',
+		'url': '/home/count_vtype_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate,
+		'clientid': ldclientid,
+		'startdate': ldstartdate,
+		'enddate': ldenddate,
+		'ptype': ptype
+	});
+	dtworker.postMessage({
+		'vfunction':'count_states',
+		'method':'GET',
+		'url': '/home/count_states_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate,
+		'clientid': ldclientid,
+		'startdate': ldstartdate,
+		'enddate': ldenddate,
+		'ptype': ptype
+	});
+	dtworker.postMessage({
+		'vfunction':'count_rating',
+		'method':'GET',
+		'url': '/home/count_rating_news/'+ldclientid+'/'+ldstartdate+'/'+ldenddate,
+		'clientid': ldclientid,
+		'startdate': ldstartdate,
+		'enddate': ldenddate,
+		'ptype': ptype
+	});
+	dtworker.postMessage({
+		'vfunction':'count_client',
+		'method':'GET',
+		'url': '/home/count_client_news/'+ldclientid+'/'+fstartdate+'/'+fenddate,
+		'clientid': ldclientid,
+		'startdate': fstartdate,
+		'enddate': fenddate,
+		'ptype': ptype
+	});
+	dtworker.postMessage({
+		'vfunction':'get_subject_keywords',
+		'method':'GET',
+		'url': '/home/client_subjects_keywords/'+ldclientid+'/'+ldstartdate+'/'+ldenddate,
+		'clientid': ldclientid,
+		'startdate': ldstartdate,
+		'enddate': ldenddate,
+		'ptype': ptype
+	});
+	dtworker.postMessage({
+		'vfunction':'get_subjects',
+		'method':'GET',
+		'url': '/home/client_subjects/'+ldclientid,
+		'clientid': ldclientid,
+		'startdate': ldstartdate,
+		'enddate': ldenddate,
+		'ptype': ptype
+	});
 };
 
 function postData(url, data) {

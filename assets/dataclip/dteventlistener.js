@@ -155,7 +155,7 @@ cadsbtn.click(function(event) {
 			{'data': 'EdValor'},
 			{'data': 'EdAudiencia'}
 		],
-		'rowId': 'id',
+		'rowId': 'Id',
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
 		'initComplete': function(settings) {
 			this.api().columns(2).every(function(coln) {
@@ -202,43 +202,6 @@ cadsbtn.click(function(event) {
 				});
 			});
 			$('.filter.selectpicker').selectpicker('refresh');
-		},
-		'drawCallback': function(settings) {
-			this.api().column(2).data().each(function(tvcurrent, i) {
-				if (tvarr.indexOf(tvcurrent) == -1) {
-					tvarr.push(tvcurrent);
-					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_2');
-				}
-			})
-
-			this.api().column(3).data().each(function (vcurrent, i) {
-				if (varr.indexOf(vcurrent) == -1) {
-					varr.push(vcurrent);
-					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_3');
-				}
-			})
-
-			this.api().column(4).data().each(function (ecurrent, i) {
-				if (earr.indexOf(ecurrent) == -1) {
-					earr.push(ecurrent);
-					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_4');
-				}
-			})
-
-			this.api().column(5).data().each(function (pccurrent, i) {
-				if (pcarr.indexOf(pccurrent) == -1) {
-					pcarr.push(pccurrent);
-					ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_5');
-				}
-			})
-			$('.filter.selectpicker').selectpicker('refresh');
-			if(isTouchDevice() === false) {
-				$('.tooltipa').tooltip();
-			}
 		}
 	});
 
@@ -764,7 +727,18 @@ $(document).on('change', 'select', function(event) {
 				if($(this).is(':selected')) {
 					if(subkeywordsarr.indexOf(keywid) == -1) {
 						subkeywordsarr.push(keywid);
-						add_keyword_news(keywid, cliid, fopstartdate, fopenddate, false, 'subjectkeyword');
+						$('.dataTables_processing').show();
+						dtworker.postMessage({
+							'vfunction':'add_keyword_news_data',
+							'method':'GET',
+							'url': '/home/keyword_news/'+keywid+'/'+cliid+'/'+fopstartdate+'/'+fopenddate,
+							'clientid': cliid,
+							'keywordid': keywid,
+							'startdate': fopstartdate,
+							'enddate': fopenddate,
+							'ptype': 'subjectkeyword'
+						});
+						// add_keyword_news(keywid, cliid, fopstartdate, fopenddate, false, 'subjectkeyword');
 					}
 				} else {
 					subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
@@ -923,9 +897,6 @@ $(document).on('change', 'select', function(event) {
 					});
 				}
 				break;
-			default:
-				console.log('Option not recognized!');
-				break;
 		}
 	});
 });
@@ -1014,3 +985,54 @@ $('#btndown').click(function(event) {
 			break;
 	}
 });
+
+dtworker.onmessage = function(event) {
+	jresponse = JSON.parse(event.data.response);
+	if (typeof event.data.clientid !== 'undefined') {
+		wcliendid = event.data.clientid;
+	} else {
+		wcliendid = 0;
+	}
+	wstartdate = event.data.startdate;
+	wenddate = event.data.enddate;
+	wptype = event.data.ptype;
+	if (typeof event.data.keywordid !== 'undefined') {
+		wkeywordid = event.data.keywordid;
+	} else {
+		wkeywordid = 0;
+	}
+
+	vfunc = event.data.vfunction;
+	switch (vfunc) {
+		case 'get_client_info':
+			set_client_info(wcliendid, jresponse.name, jresponse.banner, true);
+			break;
+		case 'count_vtype':
+			set_count_vtype(jresponse);
+			break;
+		case 'count_states':
+			set_count_states(jresponse);
+			break;
+		case 'count_rating':
+			set_count_rating(jresponse);
+			break;
+		case 'count_client':
+			set_count_client(jresponse);
+			break;
+		case 'get_subject_keywords':
+			$('#dpsdate').datepicker('update', new Date(wstartdate+'T00:00:00'));
+			$('#dpedate').datepicker('update', new Date(wenddate+'T00:00:00'));
+			add_keyword_news(set_subject_keywords(jresponse, true), wcliendid, wstartdate, wenddate, true, wptype);
+			break;
+		case 'get_subjects':
+			set_subjects(jresponse);
+			break;
+		case 'add_keyword_news_data':
+			add_keyword_news_data(jresponse, wkeywordid, wcliendid, false, wptype);
+			$('.dataTables_processing').hide();
+			break;
+		default:
+			console.log('Function not recog!');
+			break;
+	}
+}

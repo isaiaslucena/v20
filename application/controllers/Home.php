@@ -511,13 +511,10 @@ class Home extends CI_Controller {
 	public function advsearch(){
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
-			// var_dump($postdata);
 
 			$searchdata = $this->home_model->advsearch($postdata);
 
-			// var_dump($searchdata);
 			header('Content-Type: application/json');
-			// $message = "Erro ao tentar enviar o email!";
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
 		}
 	}

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-17 19:17:10
+/* Smarty version 3.1.30, created on 2018-04-18 12:02:17
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad67266018e24_07333513',
+  'unifunc' => 'content_5ad75df97688b7_38696850',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1524002968,
+      1 => 1524059263,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ad67266018e24_07333513 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad75df97688b7_38696850 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6859912895ad67266003eb3_20733738', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2081104355ad75df9750720_92638129', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_6859912895ad67266003eb3_20733738 extends Smarty_Internal_Block
+class Block_2081104355ad75df9750720_92638129 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -48,7 +48,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 </div><!-- Main Wrapper -->
 
 <?php echo '<script'; ?>
- type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js" async><?php echo '</script'; ?>
+ type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  type="text/javascript" charset="utf-8">
@@ -71,14 +71,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 	if (window.Worker) {
 		dtworker = new Worker('/assets/dataclip/dtworker.js');
-
-		// dtworker1 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker2 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker3 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker4 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker5 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker6 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker7 = new Worker('/assets/dataclip/dtworker.js');
 	}
 
 	var d = new Date();
@@ -412,7 +404,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 <?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
- type="text/javascript" charset="utf-8" src="/assets/dataclip/dteventlistener.js" async><?php echo '</script'; ?>
+ type="text/javascript" charset="utf-8" src="/assets/dataclip/dteventlistener.js"><?php echo '</script'; ?>
 >
 
 <?php

@@ -8,7 +8,7 @@
 	</footer>
 </div><!-- Main Wrapper -->
 
-<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js" async></script>
+<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dtfunctions.js"></script>
 <script type="text/javascript" charset="utf-8">
 	var clientsel = '{$client_selected}';
 	var clientselid = {$client_sel_id};
@@ -27,14 +27,6 @@
 
 	if (window.Worker) {
 		dtworker = new Worker('/assets/dataclip/dtworker.js');
-
-		// dtworker1 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker2 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker3 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker4 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker5 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker6 = new Worker('/assets/dataclip/dtworker.js');
-		// dtworker7 = new Worker('/assets/dataclip/dtworker.js');
 	}
 
 	var d = new Date();
@@ -366,6 +358,6 @@
 		// });
 	}
 </script>
-<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dteventlistener.js" async></script>
+<script type="text/javascript" charset="utf-8" src="/assets/dataclip/dteventlistener.js"></script>
 {/literal}
 {/block}
