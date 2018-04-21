@@ -7,6 +7,11 @@ self.onmessage = function(e) {
 	vmethod = e.data.method;
 	vurl = e.data.url;
 	vclientid = e.data.clientid;
+	if (typeof e.data.trid !== 'undefined') {
+		vtrid = e.data.trid;
+	} else {
+		vtrid = null;
+	}
 	vstartdate = e.data.startdate;
 	venddate = e.data.enddate;
 	vptype = e.data.ptype;
@@ -19,6 +24,7 @@ self.onmessage = function(e) {
 	http_req(vmethod, vurl, function(resp){
 		postMessage({
 			'vfunction': vfunction,
+			'trid': vtrid,
 			'clientid': vclientid,
 			'keywordid': vkeywordid,
 			'startdate': vstartdate,

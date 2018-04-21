@@ -336,7 +336,7 @@
 					<div id="modasnfooter" class="modal-footer">
 							<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block" style="display: none;">
 								<div class="btn-group">
-									<a id="btndown" class="btn btn-sm w-xs btn-default">Baixar Fac-Símile</a>
+									<a id="btndown" class="btn btn-sm w-xs btn-default">Baixar</a>
 								</div>
 								<div class="btn-group">
 									<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
