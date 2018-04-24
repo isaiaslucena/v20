@@ -296,10 +296,28 @@
 		$('#adsstates').selectpicker('refresh');
 	});
 
+	// var sites = new Bloodhound({
+	// 	datumTokenizer: function (datum) {
+	// 		return Bloodhound.tokenizers.whitespace(datum.value);
+	// 	},
+	// 	queryTokenizer: Bloodhound.tokenizers.whitespace,
+	// 	remote: {
+	// 		url: document.origin+'/home/editorias_sites?query=%QUERY',
+	// 		wildcard: '%QUERY',
+	// 		filter: function (rsites) {
+	// 			return $.map(rsites, function(site) {
+	// 				return {
+	// 					Id: site.Id,
+	// 					Nome: site.Nome
+	// 				};
+	// 			});
+	// 		},
+	// 		identify: function(rsites) { return rsites.Id; }
+	// 	}
+	// });
+
 	var sites = new Bloodhound({
-		datumTokenizer: function (datum) {
-			return Bloodhound.tokenizers.whitespace(datum.value);
-		},
+		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Nome'),
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
 			url: document.origin+'/home/editorias_sites?query=%QUERY',
@@ -307,8 +325,8 @@
 			filter: function (rsites) {
 				return $.map(rsites, function(site) {
 					return {
-						Id: site.Id,
-						Nome: site.Nome
+						'Id': site.Id,
+						'Nome': site.Nome
 					};
 				});
 			},
@@ -318,15 +336,32 @@
 
 	sites.initialize();
 
-	$('#adsveiculosites').typeahead(null, {
-		displayKey: 'Nome',
-		async: true,
-		source: sites.ttAdapter(),
-		minLength: 3,
-		hint: true,
-		highlight: true,
-		limit: 20
+	// $('#adsveiculosites').typeahead(null, {
+	// 	displayKey: 'Nome',
+	// 	async: true,
+	// 	source: sites.ttAdapter(),
+	// 	minLength: 3,
+	// 	hint: true,
+	// 	highlight: true,
+	// 	limit: 20
+	// });
+
+	$('#adsveiculosites').tagsinput({
+		freeInput: false,
+		itemValue: 'Id',
+		itemText: 'Nome',
+		typeaheadjs: {
+			name: 'sites',
+			displayKey: 'Nome',
+			source: sites.ttAdapter(),
+			minLength: 3,
+			hint: true,
+			highlight: true,
+			limit: 20
+		}
 	});
+
+	$('.twitter-typeahead').css('display', 'inline');
 
 	if (clientselb) {
 		subkeywordsarr = [];

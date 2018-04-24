@@ -60,18 +60,19 @@ cadsbtn.click(function(event) {
 
 	if (vstartdate.length == 0) {
 		$('#adsstartdate.tooltipinput').tooltip('show');
-		return
+		cadsbtn.ladda('stop');
+		return;
 	} else {
 		$('#adsstartdate.tooltipinput').tooltip('hide');
 	}
 
 	if (venddate.length == 0) {
 		$('#adsenddate.tooltipinput').tooltip('show');
-		return
+		cadsbtn.ladda('stop');
+		return;
 	} else {
 		$('#adsenddate.tooltipinput').tooltip('hide');
 	}
-
 
 	if (clientselid == 0) {
 		cliid = cid;
@@ -90,12 +91,16 @@ cadsbtn.click(function(event) {
 	adsveiculossites = $('#adsveiculosites').val();
 	if (adsveiculossites.length > 0) {
 		console.log('veiculo sites selecionado!');
+
+		adsveiculossitesarr = adsveiculossites.split(',');
+
+		console.log(adsveiculossites);
+		console.log(adsveiculossitesarr);
 	} else {
 		console.log('nenhum veiculo sites selecionado!');
 	}
-	// console.log(adsveiculossites);
 
-	adsveiculoarr = adsveiculoarr.concat(adsveiculossites);
+	adsveiculoarr = adsveiculoarr.concat(adsveiculossitesarr);
 
 	adstext = $('#adstext').val();
 
@@ -117,95 +122,7 @@ cadsbtn.click(function(event) {
 		'avaliacao': adsavaliacaoarr
 	};
 
-	// tablenews.destroy();
-
-	// tablenews = $('#tablenews').DataTable({
-	// 	'destroy': true,
-	// 	'autoWidth': false,
-	// 	'order': [
-	// 		[0, 'desc'],
-	// 		[1, 'desc']
-	// 	],
-	// 	'columnDefs': [
-	// 		{'searchable': false, 'width': '5%', 'responsivePriority': 0, 'targets': 0},
-	// 		{'searchable': false, 'width': '5%', 'targets': 1},
-	// 		{'searchable': true, 'width': '15%', 'targets': 2},
-	// 		{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 3},
-	// 		{'searchable': true, 'width': '5%', 'targets': 4},
-	// 		{'searchable': true, 'width': '15%', 'targets': 5},
-	// 		{'searchable': false, 'width': '40%', 'responsivePriority': 2, 'targets': 6},
-	// 		{'searchable': false, 'width': '10%', 'targets': 7},
-	// 		{'searchable': false, 'width': '10%', 'targets': 8}
-	// 	],
-	// 	'responsive': true,
-	// 	'scrollX': false,
-	// 	'processing': true,
-	// 	'server-side': true,
-	// 	'ajax': {
-	// 		'url': '/home/advsearch',
-	// 		'type': 'POST',
-	// 		'data': function(d) {return JSON.stringify(adssearchdata)}
-	// 	},
-	// 	"columns": [
-	// 		{'data': 'Data'},
-	// 		{'data': 'Hora'},
-	// 		{'data': 'TipoVeiculo'},
-	// 		{'data': 'Veiculo'},
-	// 		{'data': 'Editoria'},
-	// 		{'data': 'PalavraChave'},
-	// 		{'data': 'Titulo'},
-	// 		{'data': 'EdValor'},
-	// 		{'data': 'EdAudiencia'}
-	// 	],
-	// 	'rowId': 'Id',
-	// 	'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
-	// 	'initComplete': function(settings) {
-	// 		this.api().columns(2).every(function(coln) {
-	// 			var column = this;
-	// 			var seltitle = $(column.header()).text();
-	// 			var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-	// 			.appendTo($(column.footer()))
-	// 			.on('change', function() {
-	// 				var val = $.fn.dataTable.util.escapeRegex($(this).val());
-	// 				column.search( val ? '^'+val+'$' : '', true, false).draw();
-	// 			});
-	// 		});
-
-	// 		this.api().columns(3).every(function(coln) {
-	// 			var column = this;
-	// 			var seltitle = $(column.header()).text();
-	// 			var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-	// 			.appendTo($(column.footer()))
-	// 			.on('change', function() {
-	// 				var val = $.fn.dataTable.util.escapeRegex($(this).val());
-	// 				column.search( val ? '^'+val+'$' : '', true, false).draw();
-	// 			});
-	// 		});
-
-	// 		this.api().columns(4).every(function(coln) {
-	// 			var column = this;
-	// 			var seltitle = $(column.header()).text();
-	// 			var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-	// 			.appendTo($(column.footer()))
-	// 			.on('change', function() {
-	// 				var val = $.fn.dataTable.util.escapeRegex($(this).val());
-	// 				column.search( val ? '^'+val+'$' : '', true, false).draw();
-	// 			});
-	// 		});
-
-	// 		this.api().columns(5).every(function(coln) {
-	// 			var column = this;
-	// 			var seltitle = $(column.header()).text();
-	// 			var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-	// 			.appendTo($(column.footer()))
-	// 			.on('change', function() {
-	// 				var val = $.fn.dataTable.util.escapeRegex($(this).val());
-	// 				column.search( val ? '^'+val+'$' : '', true, false).draw();
-	// 			});
-	// 		});
-	// 		$('.filter.selectpicker').selectpicker('refresh');
-	// 	}
-	// });
+	console.log(adssearchdata);
 
 	postData('/home/advsearch', adssearchdata)
 	.then(
@@ -213,17 +130,20 @@ cadsbtn.click(function(event) {
 			console.log(data);
 
 			cadsbtn.ladda('stop');
+			$('#advancedsearch').modal('hide');
+			$('input').iCheck('uncheck');
 		}
 	).catch(
 		error => {
 			console.error(error);
+
 			cadsbtn.ladda('stop');
 		}
 	);
+});
 
-	cadsbtn.ladda('stop');
-	$('#advancedsearch').modal('hide');
-	$('input').iCheck('uncheck');
+$('input').on('itemAdded', function(event) {
+	console.log(event);
 });
 
 $('input').on('ifChecked', function(event) {
@@ -700,7 +620,6 @@ $(document).on('click', '.tooltipa', function(event) {
 		'enddate': null,
 		'ptype': null
 	});
-
 });
 
 $('#btnselclo').click(function(event) {

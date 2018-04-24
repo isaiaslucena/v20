@@ -395,7 +395,7 @@
 								</div>
 								<div id="adsveiculositesfg" class="form-group" style="display: none;">
 									<label>Veículo - Sites</label>
-									<input id="adsveiculosites" type="text" class="form-control input-sm" placeholder="Digite para pesquisar" autocomplete="off">
+									<input id="adsveiculosites" type="text" placeholder="Digite para pesquisar" autocomplete="off">
 									</select>
 								</div>
 								<div class="form-group">
