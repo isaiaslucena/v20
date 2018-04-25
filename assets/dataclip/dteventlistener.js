@@ -88,17 +88,17 @@ cadsbtn.click(function(event) {
 	$('#dpsdate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
 	$('#dpedate').datepicker('update', new Date(adsenddate+'T00:00:00'));
 
-	adsveiculossites = $('#adsveiculosites').val();
-	if (adsveiculossites.length > 0) {
-		console.log('veiculo sites selecionado!');
+	// adsveiculossites = $('#adsveiculosites').val();
+	// if (adsveiculossites.length > 0) {
+		// console.log('veiculo sites selecionado!');
 
-		adsveiculossitesarr = adsveiculossites.split(',');
+		// adsveiculossitesarr = adsveiculossites.split(',');
 
-		console.log(adsveiculossites);
-		console.log(adsveiculossitesarr);
-	} else {
-		console.log('nenhum veiculo sites selecionado!');
-	}
+		// console.log(adsveiculossites);
+		// console.log(adsveiculossitesarr);
+	// } else {
+		// console.log('nenhum veiculo sites selecionado!');
+	// }
 
 	adsveiculoarr = adsveiculoarr.concat(adsveiculossitesarr);
 
@@ -143,8 +143,39 @@ cadsbtn.click(function(event) {
 });
 
 $('input').on('itemAdded', function(event) {
-	console.log(event);
+	vsiteid = event.item.Id;
+	vsitenm = event.item.Nome;
+
+	adsveiculossitesarr.push(vsiteid);
+
+	$('#adseditoria').selectpicker({title: 'Aguarde...'});
+	$('#adseditoria').selectpicker('refresh');
+	get_editoriasfromveiculos(vsiteid, function(data) {
+		data.map(function(val, index) {
+			html =	'<option data-type="adseditoria" data-veiculoid="'+vsiteid+'" data-editoriaid="'+val.Id+'" '+
+							'data-subtext="('+vsitenm+')" val="'+val.Id+'">'+val.Nome+'</option>';
+			$('#adseditoria').append(html);
+		})
+
+		$('#adseditoria').removeAttr('disabled');
+		$('#adseditoria').removeClass('disabled');
+		$('#adseditoria').selectpicker({title: 'Nada selecionado'});
+		$('#adseditoria').selectpicker('refresh');
+	});
 });
+
+
+$('input').on('itemRemoved', function(event) {
+	vsiteid = event.item.Id;
+	vsitenm = event.item.Nome;
+
+	vindex = adsveiculossitesarr.indexOf(vsiteid);
+	adsveiculossitesarr.splice(vindex, 1);
+
+	$('#adseditoria').find('[data-veiculoid='+vsiteid+']').remove();
+	$('#adseditoria').selectpicker('refresh');
+});
+
 
 $('input').on('ifChecked', function(event) {
 	dtype = $(this).attr('data-type');
@@ -738,7 +769,15 @@ $(document).on('change', 'select', function(event) {
 							$('#adstveiculo').selectpicker('toggle');
 							$('#adsveiculositesfg').slideDown('fast');
 						} else {
-							$('#adsveiculositesfg').slideUp('fast');
+							adsvslt = $('#adsveiculosites').val();
+							if (adsvslt.length > 0) {
+								// console.log('veiculo sites selecionado!');
+							} else {
+								// console.log('nenhum veiculo sites selecionado!');
+								$('#adsveiculositesfg').slideUp('fast');
+							}
+
+
 							tvesname = $(this).text();
 							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
 							$('#adsveiculo').selectpicker('refresh');
@@ -759,7 +798,13 @@ $(document).on('change', 'select', function(event) {
 				} else {
 					adstveiculoarr = jQuery.grep(adstveiculoarr, function(value) {
 						if (tveid == 4) {
-							$('#adsveiculositesfg').slideUp('fast');
+							adsvslt = $('#adsveiculosites').val();
+							if (adsvslt.length > 0) {
+								// console.log('veiculo sites selecionado!');
+							} else {
+								// console.log('nenhum veiculo sites selecionado!');
+								$('#adsveiculositesfg').slideUp('fast');
+							}
 						} else {
 							$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
 						}

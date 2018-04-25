@@ -22,7 +22,7 @@
 	var adsdestaque = null;
 	var jcropdestroy = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
-	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
+	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [];
 
 	if (window.Worker) {
