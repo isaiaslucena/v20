@@ -711,7 +711,7 @@ $(document).on('change', 'select', function(event) {
 					});
 				}
 				break;
-			case 'adssubject':
+			case '_adssubject':
 				subjid = $(this).attr('data-subjectid');
 				subname = $(this).text();
 
@@ -744,7 +744,7 @@ $(document).on('change', 'select', function(event) {
 					$('#adskeyword').selectpicker('refresh');
 				}
 				break;
-			case 'adskeyword':
+			case '_adskeyword':
 				keywid = $(this).attr('data-subjectid');
 				keywname = $(this).text();
 
@@ -758,7 +758,7 @@ $(document).on('change', 'select', function(event) {
 					});
 				}
 				break;
-			case 'adstveiculo':
+			case '_adstveiculo':
 				tveid = $(this).attr('data-tveiculoid');
 				tvename = $(this).text();
 
@@ -776,7 +776,6 @@ $(document).on('change', 'select', function(event) {
 								// console.log('nenhum veiculo sites selecionado!');
 								$('#adsveiculositesfg').slideUp('fast');
 							}
-
 
 							tvesname = $(this).text();
 							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
@@ -814,11 +813,12 @@ $(document).on('change', 'select', function(event) {
 					$('#adsveiculo').selectpicker('refresh');
 				}
 				break;
-			case 'adsveiculo':
+			case '_adsveiculo':
 				veid = $(this).attr('data-veiculoid');
 				vename = $(this).text();
 
 				if($(this).is(':selected')) {
+					console.log('veiculo '+veid+' marcado!');
 					if(adsveiculoarr.indexOf(tveid) == -1) {
 						adsveiculoarr.push(tveid);
 
@@ -846,8 +846,9 @@ $(document).on('change', 'select', function(event) {
 					});
 					$('#adseditoria').selectpicker('refresh');
 				}
+				// console.log(adsveiculoarr);
 				break;
-			case 'adseditoria':
+			case '_adseditoria':
 				edid = $(this).attr('data-editoriaid');
 				edname = $(this).text();
 
@@ -861,7 +862,7 @@ $(document).on('change', 'select', function(event) {
 					});
 				}
 				break;
-			case 'adsstates':
+			case '_adsstates':
 				stateid = $(this).attr('data-stateid');
 				statename = $(this).text();
 
@@ -877,6 +878,15 @@ $(document).on('change', 'select', function(event) {
 				break;
 		}
 	});
+});
+
+$('#adstveiculo').on('changed.bs.select', function(event){
+	console.log(event);
+	selcts = event.target.selectedOptions;
+	console.log(typeof selcts);
+	console.log(selcts);
+	// arrtest = selcts.map(elem => elem.dataset.tveiculoid);
+	// console.log(arrtest);
 });
 
 $('#btnasearch').click(function(event) {
