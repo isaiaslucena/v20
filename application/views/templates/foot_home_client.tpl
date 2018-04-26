@@ -336,29 +336,25 @@
 
 	sites.initialize();
 
-	// $('#adsveiculosites').typeahead(null, {
-	// 	displayKey: 'Nome',
-	// 	async: true,
-	// 	source: sites.ttAdapter(),
-	// 	minLength: 3,
-	// 	hint: true,
-	// 	highlight: true,
-	// 	limit: 20
-	// });
-
 	$('#adsveiculosites').tagsinput({
+		typeaheadjs: [
+			{
+				minLength: 3,
+				hint: true,
+				highlight: true,
+				limit: 20,
+			},
+			{
+				itemText: 'Nome',
+				itemValue: 'Id',
+				name: 'sites',
+				displayKey: 'Nome',
+				source: sites.ttAdapter(),
+			},
+		],
 		freeInput: false,
-		itemValue: 'Id',
 		itemText: 'Nome',
-		typeaheadjs: {
-			name: 'sites',
-			displayKey: 'Nome',
-			source: sites.ttAdapter(),
-			minLength: 3,
-			hint: true,
-			highlight: true,
-			limit: 20
-		}
+		itemValue: 'Id'
 	});
 
 	$('.twitter-typeahead').css('display', 'inline');

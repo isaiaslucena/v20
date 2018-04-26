@@ -205,7 +205,7 @@
 
 
 /*typeahead*/
-/*span.twitter-typeahead .tt-menu,
+span.twitter-typeahead .tt-menu,
 span.twitter-typeahead .tt-dropdown-menu {
 	cursor: pointer;
 	position: absolute;
@@ -214,8 +214,8 @@ span.twitter-typeahead .tt-dropdown-menu {
 	z-index: 1000;
 	display: none;
 	float: left;
-	min-width: 160px;
-	max-height: 200px;
+	min-width: 100px;
+	max-height: 150px;
 	overflow-y: auto;
 	padding: 5px 0;
 	margin: 2px 0 0;
@@ -271,6 +271,8 @@ span.twitter-typeahead {
 .input-group span.twitter-typeahead .tt-menu,
 .input-group span.twitter-typeahead .tt-dropdown-menu {
 	top: 32px !important;
+	max-height: 150px;
+	overflow-y: auto;
 }
 .input-group span.twitter-typeahead:not(:first-child):not(:last-child) .form-control {
 	border-radius: 0;
@@ -293,6 +295,8 @@ span.twitter-typeahead {
 .input-group.input-group-sm span.twitter-typeahead .tt-menu,
 .input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
 	top: 30px !important;
+	max-height: 150px;
+	overflow-y: auto;
 }
 .input-group.input-group-lg span.twitter-typeahead {
 	height: 46px;
@@ -300,64 +304,16 @@ span.twitter-typeahead {
 .input-group.input-group-lg span.twitter-typeahead .tt-menu,
 .input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
 	top: 46px !important;
-}*/
+	max-height: 150px;
+	overflow-y: auto;
+}
 
 /*tags input*/
 .bootstrap-tagsinput {
 	width: 100%;
 }
-.twitter-typeahead .tt-query,
-.twitter-typeahead .tt-hint {
-	margin-bottom: 0;
-}
 
-.twitter-typeahead .tt-hint {
-	display: none;
-}
-
-.tt-menu {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 1000;
-	display: none;
-	float: left;
-	min-width: 160px;
-	padding: 5px 0;
-	margin: 2px 0 0;
-	list-style: none;
-	font-size: 14px;
-	background-color: #ffffff;
-	border: 1px solid #cccccc;
-	border: 1px solid rgba(0, 0, 0, 0.15);
-	border-radius: 4px;
-	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-	background-clip: padding-box;
-	cursor: pointer;
-}
-
-.tt-suggestion {
-	display: block;
-	padding: 3px 20px;
-	clear: both;
-	font-weight: normal;
-	line-height: 1.428571429;
-	color: #333333;
-	white-space: nowrap;
-}
-
-.tt-suggestion:hover,
-.tt-suggestion:focus {
-color: #ffffff;
-text-decoration: none;
-outline: 0;
-background-color: #428bca;
-}
-
-
-
-
+/*sweet alert*/
 .swal2-popup {
 	font-size: 1.6rem !important;
 }

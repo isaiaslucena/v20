@@ -11,15 +11,10 @@ $('#selclient').change(function(event) {
 	console.log('Client ID: '+cid);
 	console.log('Client Name: '+cname);
 
-	// get_client_info(cid, false);
-	// count_vtype(cid, todaydate, todaydate);
-	// count_rating(cid, todaydate, todaydate);
-	// count_states(cid, todaydate, todaydate);
-	// count_client(cid, todaydate, todaydate);
-	// $('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00-03:00'));
-	// get_subject_keywords(cid, todaydate, todaydate, true, function(keywid){
-	// 	add_keyword_news(keywid, cid, todaydate, todaydate, true, 'startpage');
-	// });
+	$('#btnnpapper').attr({
+		'href': 'http://v22.multclipp.com.br/banca/?path='+cid,
+		'target': '_blank'
+	});
 
 	load_data('startpage', cid, todaydate, todaydate);
 });
@@ -222,7 +217,10 @@ $('.modal').on('hide.bs.modal', function(event) {
 });
 
 $('#advancedsearch').on('shown.bs.modal', function(event){
-	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
+	var adssubjectarr = [], adskeywordarr = [],
+	adstveiculoarr = [], adsveiculoarr = [],
+	adseditoriaarr = [], adsstatesarr = [],
+	adsveiculossitesarr = [];
 });
 
 $('#advancedsearch').on('hidden.bs.modal', function(event){
@@ -726,6 +724,24 @@ $('#adssubject').on('changed.bs.select', function(e, clickedIndex, newValue, old
 		$('#adskeyword').find('[data-subjectid='+subjid+']').remove();
 		$('#adskeyword').selectpicker('refresh');
 	}
+
+	// console.log('Assunto:');
+	// console.log(adssubjectarr);
+});
+
+$('#adskeyword').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
+	var keywid = $(this).find('option').eq(clickedIndex).attr('data-keywordid');
+	var keywname = $(this).find('option').eq(clickedIndex).text();
+
+	if (newValue) {
+		adskeywordarr.push(keywid);
+	} else {
+		kindex = adskeywordarr.indexOf(keywid);
+		adskeywordarr.splice(kindex, 1);
+	}
+
+	// console.log('Palavra-chave:');
+	// console.log(adskeywordarr);
 });
 
 $('#adstveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
@@ -766,6 +782,9 @@ $('#adstveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, ol
 		$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
 		$('#adsveiculo').selectpicker('refresh');
 	}
+
+	// console.log('Tipo de Veiculo:');
+	// console.log(adstveiculoarr);
 });
 
 $('#adsveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
@@ -796,6 +815,9 @@ $('#adsveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, old
 		$('#adseditoria').find('[data-veiculoid='+veid+']').remove();
 		$('#adseditoria').selectpicker('refresh');
 	}
+
+	// console.log('Veiculo:');
+	// console.log(adsveiculoarr);
 });
 
 $('#adseditoria').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
@@ -808,6 +830,9 @@ $('#adseditoria').on('changed.bs.select', function(e, clickedIndex, newValue, ol
 		eindex = adseditoriaarr.indexOf(edid);
 		adseditoriaarr.splice(eindex, 1);
 	}
+
+	// console.log('Editoria:');
+	// console.log(adseditoriaarr);
 });
 
 $('#adsstates').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
@@ -820,6 +845,9 @@ $('#adsstates').on('changed.bs.select', function(e, clickedIndex, newValue, oldV
 		sindex = adsstatesarr.indexOf(stateid);
 		adsstatesarr.splice(sindex, 1);
 	}
+
+	// console.log('States:');
+	// console.log(adsstatesarr);
 });
 
 $('#btnasearch').click(function(event) {

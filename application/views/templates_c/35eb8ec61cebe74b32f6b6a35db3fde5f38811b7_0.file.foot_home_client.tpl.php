@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-25 19:13:45
+/* Smarty version 3.1.30, created on 2018-04-26 13:10:25
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae0fd99e8d523_95261489',
+  'unifunc' => 'content_5ae1f9f1b65513_27208409',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1524694424,
+      1 => 1524759023,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ae0fd99e8d523_95261489 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae1f9f1b65513_27208409 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10656877805ae0fd99e7ab30_66014485', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15068485225ae1f9f1b51c01_68736789', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_10656877805ae0fd99e7ab30_66014485 extends Smarty_Internal_Block
+class Block_15068485225ae1f9f1b51c01_68736789 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -380,29 +380,25 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 	sites.initialize();
 
-	// $('#adsveiculosites').typeahead(null, {
-	// 	displayKey: 'Nome',
-	// 	async: true,
-	// 	source: sites.ttAdapter(),
-	// 	minLength: 3,
-	// 	hint: true,
-	// 	highlight: true,
-	// 	limit: 20
-	// });
-
 	$('#adsveiculosites').tagsinput({
+		typeaheadjs: [
+			{
+				minLength: 3,
+				hint: true,
+				highlight: true,
+				limit: 20,
+			},
+			{
+				itemText: 'Nome',
+				itemValue: 'Id',
+				name: 'sites',
+				displayKey: 'Nome',
+				source: sites.ttAdapter(),
+			},
+		],
 		freeInput: false,
-		itemValue: 'Id',
 		itemText: 'Nome',
-		typeaheadjs: {
-			name: 'sites',
-			displayKey: 'Nome',
-			source: sites.ttAdapter(),
-			minLength: 3,
-			hint: true,
-			highlight: true,
-			limit: 20
-		}
+		itemValue: 'Id'
 	});
 
 	$('.twitter-typeahead').css('display', 'inline');

@@ -144,7 +144,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_editorias_sites($qtext) {
-		$sqlquery = "SELECT Id, Nome FROM Veiculo WHERE idTipoVeiculo = 4 AND Nome LIKE '%".$qtext."%' ORDER BY Nome ASC";
+		$sqlquery = "SELECT Id, Nome FROM Veiculo WHERE idTipoVeiculo = 4 AND Nome LIKE '".$qtext."%' ORDER BY Nome ASC";
 		return $this->db->query($sqlquery)->result_array();
 	}
 
@@ -700,6 +700,7 @@ class Home_model extends CI_Model {
 								tve.Id as IdTipoVeiculo, tve.Nome as TipoVeiculo,
 								nt.idVeiculo, ve.Nome as Veiculo,
 								nt.idEditoria, ed.Nome as Editoria,
+								ass.Id as IdAssunto, ass.Nome as Assunto,
 								npc.idPalavraChave, pc.Nome as PalavraChave,
 								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
 								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia
@@ -759,6 +760,8 @@ class Home_model extends CI_Model {
 
 		// $offset = $offset + 10;
 		// $sqlquery .= "LIMIT 10, 10;";
+		$sqlquery .= "GROUP BY pc.Id";
+		$countquery .= "GROUP BY pc.Id";
 
 		$countdata = $this->db->query($countquery)->row('quant');
 		$fulldata['recordsTotal'] = $countdata;
