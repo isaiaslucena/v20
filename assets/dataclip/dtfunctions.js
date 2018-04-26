@@ -511,7 +511,7 @@ function set_subject_keywords(cdata, updatesubjects = false, callback) {
 		}
 
 		if (subjectcount != null) {
-			html = '<select class="selectpicker" data-subjectid="'+subjectid+'" '+
+			html = '<select class="selectpicker subjectkewords" data-subjectid="'+subjectid+'" '+
 							'data-style="btn btn-sm btn-default" data-size="10" data-width="200px" '+
 							'data-actions-box="true" data-live-search="true" '+
 							'data-selected-text-format="count > 3" '+

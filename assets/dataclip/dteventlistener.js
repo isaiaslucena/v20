@@ -88,18 +88,6 @@ cadsbtn.click(function(event) {
 	$('#dpsdate').datepicker('update', new Date(adsstartdate+'T00:00:00'));
 	$('#dpedate').datepicker('update', new Date(adsenddate+'T00:00:00'));
 
-	// adsveiculossites = $('#adsveiculosites').val();
-	// if (adsveiculossites.length > 0) {
-		// console.log('veiculo sites selecionado!');
-
-		// adsveiculossitesarr = adsveiculossites.split(',');
-
-		// console.log(adsveiculossites);
-		// console.log(adsveiculossitesarr);
-	// } else {
-		// console.log('nenhum veiculo sites selecionado!');
-	// }
-
 	adsveiculoarr = adsveiculoarr.concat(adsveiculossitesarr);
 
 	adstext = $('#adstext').val();
@@ -164,7 +152,6 @@ $('input').on('itemAdded', function(event) {
 	});
 });
 
-
 $('input').on('itemRemoved', function(event) {
 	vsiteid = event.item.Id;
 	vsitenm = event.item.Nome;
@@ -175,7 +162,6 @@ $('input').on('itemRemoved', function(event) {
 	$('#adseditoria').find('[data-veiculoid='+vsiteid+']').remove();
 	$('#adseditoria').selectpicker('refresh');
 });
-
 
 $('input').on('ifChecked', function(event) {
 	dtype = $(this).attr('data-type');
@@ -237,6 +223,23 @@ $('.modal').on('hide.bs.modal', function(event) {
 
 $('#advancedsearch').on('shown.bs.modal', function(event){
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adseditoriaarr = [], adsstatesarr = [];
+});
+
+$('#advancedsearch').on('hidden.bs.modal', function(event){
+	$('#adssubject').selectpicker('deselectAll');
+	$('#adskeyword').selectpicker('deselectAll');
+	$('#adstveiculo').selectpicker('deselectAll');
+	$('#adsveiculosites').fadeOut('fast');
+	$('#adsveiculosites').tagsinput('removeAll');
+	$('#adsveiculo').selectpicker('deselectAll');
+	$('#adseditoria').selectpicker('deselectAll');
+	$('#adsstartdate').val(null);
+	$('#adsenddate').val(null);
+	$('#adsstarttime').val('00:00');
+	$('#adsendtime').val('23:59');
+	$('#adsstates').selectpicker('deselectAll');
+	$('#adstext').selectpicker('deselectAll');
+	$('.i-checks').iCheck('uncheck');
 });
 
 $('#showsinglenews').on('hide.bs.modal', function(event) {
@@ -673,220 +676,150 @@ document.getElementById('btnclose').addEventListener('click', function(){
 	document.getElementById('mediactni').scrollTop = 0;
 });
 
-$(document).on('change', 'select', function(event) {
-	$(this).find('option').each(function() {
-		opttype = $(this).attr('data-type');
-		fopstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
-		fopenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+$(document).on('changed.bs.select', '#sublist select', function(e, clickedIndex, newValue, oldValue) {
+	keywid = $(this).find('option').eq(clickedIndex).attr('data-keywordid');
+	fopstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+	fopenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
-		if (clientselid == 0) {
-			cliid = cid;
-		} else {
-			cliid = clientselid;
-		}
-
-		switch(opttype) {
-			case 'keyword':
-				keywid = $(this).attr('data-keywordid');
-				if($(this).is(':selected')) {
-					if(subkeywordsarr.indexOf(keywid) == -1) {
-						subkeywordsarr.push(keywid);
-						$('.dataTables_processing').show();
-						dtworker.postMessage({
-							'vfunction':'add_keyword_news_data',
-							'method':'GET',
-							'url': '/home/keyword_news/'+keywid+'/'+cliid+'/'+fopstartdate+'/'+fopenddate,
-							'clientid': cliid,
-							'keywordid': keywid,
-							'startdate': fopstartdate,
-							'enddate': fopenddate,
-							'ptype': 'subjectkeyword'
-						});
-						// add_keyword_news(keywid, cliid, fopstartdate, fopenddate, false, 'subjectkeyword');
-					}
-				} else {
-					subkeywordsarr = jQuery.grep(subkeywordsarr, function(value) {
-						remove_keyword_news(keywid);
-						return value != keywid;
-					});
-				}
-				break;
-			case '_adssubject':
-				subjid = $(this).attr('data-subjectid');
-				subname = $(this).text();
-
-				if($(this).is(':selected')) {
-					if(adssubjectarr.indexOf(subjid) == -1) {
-						adssubjectarr.push(subjid);
-
-						subsname = $(this).text();
-						$('#adskeyword').selectpicker({title: 'Aguarde...'});
-						$('#adskeyword').selectpicker('refresh');
-						get_keywordsfromsubject(subjid, function(data) {
-							data.map(function(val, index) {
-								html =	'<option data-type="adskeyword" data-subjectid="'+val.idAssunto+'" data-keywordid="'+val.Id+'" '+
-												'data-subtext="('+subsname+')" val="'+val.Id+'">'+val.Nome+'</option>';
-								$('#adskeyword').append(html);
-							})
-
-							$('#adskeyword').removeAttr('disabled');
-							$('#adskeyword').removeClass('disabled');
-							$('#adskeyword').selectpicker({title: 'Nada selecionado'});
-							$('#adskeyword').selectpicker('refresh');
-						});
-					}
-				} else {
-					adssubjectarr = jQuery.grep(adssubjectarr, function(value) {
-						$('#adskeyword').find('[data-subjectid='+subjid+']').remove();
-
-						return value != subjid;
-					});
-					$('#adskeyword').selectpicker('refresh');
-				}
-				break;
-			case '_adskeyword':
-				keywid = $(this).attr('data-subjectid');
-				keywname = $(this).text();
-
-				if($(this).is(':selected')) {
-					if(adskeywordarr.indexOf(keywid) == -1) {
-							adskeywordarr.push(keywid);
-						}
-				} else {
-					adskeywordarr = jQuery.grep(adskeywordarr, function(value) {
-						return value != keywid;
-					});
-				}
-				break;
-			case '_adstveiculo':
-				tveid = $(this).attr('data-tveiculoid');
-				tvename = $(this).text();
-
-				if($(this).is(':selected')) {
-					if(adstveiculoarr.indexOf(tveid) == -1) {
-						adstveiculoarr.push(tveid);
-						if (tveid == 4) {
-							$('#adstveiculo').selectpicker('toggle');
-							$('#adsveiculositesfg').slideDown('fast');
-						} else {
-							adsvslt = $('#adsveiculosites').val();
-							if (adsvslt.length > 0) {
-								// console.log('veiculo sites selecionado!');
-							} else {
-								// console.log('nenhum veiculo sites selecionado!');
-								$('#adsveiculositesfg').slideUp('fast');
-							}
-
-							tvesname = $(this).text();
-							$('#adsveiculo').selectpicker({title: 'Aguarde...'});
-							$('#adsveiculo').selectpicker('refresh');
-							get_veiculosfromtipoveiculos(tveid, function(data) {
-								data.map(function(val, index) {
-									html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
-													'data-subtext="('+tvesname+')" val="'+val.Id+'">'+val.Nome+'</option>';
-									$('#adsveiculo').append(html);
-								})
-
-								$('#adsveiculo').removeAttr('disabled');
-								$('#adsveiculo').removeClass('disabled');
-								$('#adsveiculo').selectpicker({title: 'Nada selecionado'});
-								$('#adsveiculo').selectpicker('refresh');
-							});
-						}
-					}
-				} else {
-					adstveiculoarr = jQuery.grep(adstveiculoarr, function(value) {
-						if (tveid == 4) {
-							adsvslt = $('#adsveiculosites').val();
-							if (adsvslt.length > 0) {
-								// console.log('veiculo sites selecionado!');
-							} else {
-								// console.log('nenhum veiculo sites selecionado!');
-								$('#adsveiculositesfg').slideUp('fast');
-							}
-						} else {
-							$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
-						}
-
-						return value != tveid;
-					});
-					$('#adsveiculo').selectpicker('refresh');
-				}
-				break;
-			case '_adsveiculo':
-				veid = $(this).attr('data-veiculoid');
-				vename = $(this).text();
-
-				if($(this).is(':selected')) {
-					console.log('veiculo '+veid+' marcado!');
-					if(adsveiculoarr.indexOf(tveid) == -1) {
-						adsveiculoarr.push(tveid);
-
-						vesname = $(this).text();
-						$('#adseditoria').selectpicker({title: 'Aguarde...'});
-						$('#adseditoria').selectpicker('refresh');
-						get_editoriasfromveiculos(veid, function(data) {
-							data.map(function(val, index) {
-								html =	'<option data-type="adseditoria" data-veiculoid="'+val.idVeiculo+'" data-editoriaid="'+val.Id+'" '+
-												'data-subtext="('+vesname+')" val="'+val.Id+'">'+val.Nome+'</option>';
-								$('#adseditoria').append(html);
-							})
-
-							$('#adseditoria').removeAttr('disabled');
-							$('#adseditoria').removeClass('disabled');
-							$('#adseditoria').selectpicker({title: 'Nada selecionado'});
-							$('#adseditoria').selectpicker('refresh');
-						});
-					}
-				} else {
-					adsveiculoarr = jQuery.grep(adsveiculoarr, function(value) {
-						$('#adseditoria').find('[data-veiculoid='+veid+']').remove();
-
-						return value != veid;
-					});
-					$('#adseditoria').selectpicker('refresh');
-				}
-				// console.log(adsveiculoarr);
-				break;
-			case '_adseditoria':
-				edid = $(this).attr('data-editoriaid');
-				edname = $(this).text();
-
-				if($(this).is(':selected')) {
-					if(adseditoriaarr.indexOf(edid) == -1) {
-						adseditoriaarr.push(edid);
-					}
-				} else {
-					adseditoriaarr = jQuery.grep(adseditoriaarr, function(value) {
-						return value != veid;
-					});
-				}
-				break;
-			case '_adsstates':
-				stateid = $(this).attr('data-stateid');
-				statename = $(this).text();
-
-				if($(this).is(':selected')) {
-					if(adsstatesarr.indexOf(stateid) == -1) {
-						adsstatesarr.push(stateid);
-					}
-				} else {
-					adsstatesarr = jQuery.grep(adsstatesarr, function(value) {
-						return value != stateid;
-					});
-				}
-				break;
-		}
-	});
+	if (newValue) {
+		$('.dataTables_processing').show();
+		dtworker.postMessage({
+			'vfunction':'add_keyword_news_data',
+			'method':'GET',
+			'url': '/home/keyword_news/'+keywid+'/'+cliid+'/'+fopstartdate+'/'+fopenddate,
+			'clientid': cliid,
+			'keywordid': keywid,
+			'startdate': fopstartdate,
+			'enddate': fopenddate,
+			'ptype': 'subjectkeyword'
+		});
+	} else {
+		remove_keyword_news(keywid);
+	}
 });
 
-$('#adstveiculo').on('changed.bs.select', function(event){
-	console.log(event);
-	selcts = event.target.selectedOptions;
-	console.log(typeof selcts);
-	console.log(selcts);
-	// arrtest = selcts.map(elem => elem.dataset.tveiculoid);
-	// console.log(arrtest);
+$('#adssubject').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
+	var subjid = $(this).find('option').eq(clickedIndex).attr('data-subjectid');
+	var subsname = $(this).find('option').eq(clickedIndex).text();
+
+	if (newValue) {
+		adssubjectarr.push(subjid);
+
+		$('#adskeyword').selectpicker({title: 'Aguarde...'});
+		$('#adskeyword').selectpicker('refresh');
+		get_keywordsfromsubject(subjid, function(data) {
+			data.map(function(val, index) {
+				html =	'<option data-type="adskeyword" data-subjectid="'+val.idAssunto+'" data-keywordid="'+val.Id+'" '+
+								'data-subtext="('+subsname+')" val="'+val.Id+'">'+val.Nome+'</option>';
+				$('#adskeyword').append(html);
+			})
+
+			$('#adskeyword').removeAttr('disabled');
+			$('#adskeyword').removeClass('disabled');
+			$('#adskeyword').selectpicker({title: 'Nada selecionado'});
+			$('#adskeyword').selectpicker('refresh');
+		});
+	} else {
+		sindex = adssubjectarr.indexOf(subjid);
+		adssubjectarr.splice(sindex, 1);
+
+		$('#adskeyword').find('[data-subjectid='+subjid+']').remove();
+		$('#adskeyword').selectpicker('refresh');
+	}
+});
+
+$('#adstveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
+	var tveid = $(this).find('option').eq(clickedIndex).attr('data-tveiculoid');
+	var tvesname = $(this).find('option').eq(clickedIndex).text();
+
+	if (newValue) {
+		adstveiculoarr.push(tveid);
+		if (tveid == 4) {
+			$('#adstveiculo').selectpicker('toggle');
+			$('#adsveiculositesfg').slideDown('fast');
+		} else {
+			adsvslt = $('#adsveiculosites').val();
+			if (adsvslt.length > 0) {
+			} else {
+				$('#adsveiculositesfg').slideUp('fast');
+			}
+
+			$('#adsveiculo').selectpicker({title: 'Aguarde...'});
+			$('#adsveiculo').selectpicker('refresh');
+			get_veiculosfromtipoveiculos(tveid, function(data) {
+				data.map(function(val, index) {
+					html =	'<option data-type="adsveiculo" data-tveiculoid="'+val.idTipoVeiculo+'" data-veiculoid="'+val.Id+'" '+
+									'data-subtext="('+tvesname+')" val="'+val.Id+'">'+val.Nome+'</option>';
+					$('#adsveiculo').append(html);
+				})
+
+				$('#adsveiculo').removeAttr('disabled');
+				$('#adsveiculo').removeClass('disabled');
+				$('#adsveiculo').selectpicker({title: 'Nada selecionado'});
+				$('#adsveiculo').selectpicker('refresh');
+			});
+		}
+	} else {
+		tvindex = adstveiculoarr.indexOf(tveid);
+		adstveiculoarr.splice(tvindex, 1);
+
+		$('#adsveiculo').find('[data-tveiculoid='+tveid+']').remove();
+		$('#adsveiculo').selectpicker('refresh');
+	}
+});
+
+$('#adsveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
+	var veid = $(this).find('option').eq(clickedIndex).attr('data-veiculoid');
+	var vesname = $(this).find('option').eq(clickedIndex).text();
+
+	if (newValue) {
+		adsveiculoarr.push(veid);
+
+		$('#adseditoria').selectpicker({title: 'Aguarde...'});
+		$('#adseditoria').selectpicker('refresh');
+		get_editoriasfromveiculos(veid, function(data) {
+			data.map(function(val, index) {
+				html =	'<option data-type="adseditoria" data-veiculoid="'+val.idVeiculo+'" data-editoriaid="'+val.Id+'" '+
+								'data-subtext="('+vesname+')" val="'+val.Id+'">'+val.Nome+'</option>';
+				$('#adseditoria').append(html);
+			})
+
+			$('#adseditoria').removeAttr('disabled');
+			$('#adseditoria').removeClass('disabled');
+			$('#adseditoria').selectpicker({title: 'Nada selecionado'});
+			$('#adseditoria').selectpicker('refresh');
+		});
+	} else {
+		vindex = adsveiculoarr.indexOf(veid);
+		adsveiculoarr.splice(vindex, 1);
+
+		$('#adseditoria').find('[data-veiculoid='+veid+']').remove();
+		$('#adseditoria').selectpicker('refresh');
+	}
+});
+
+$('#adseditoria').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
+	var edid = $(this).find('option').eq(clickedIndex).attr('data-editoriaid');
+	var vedsname = $(this).find('option').eq(clickedIndex).text();
+
+	if (newValue) {
+		adseditoriaarr.push(edid);
+	} else {
+		eindex = adseditoriaarr.indexOf(edid);
+		adseditoriaarr.splice(eindex, 1);
+	}
+});
+
+$('#adsstates').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
+	var stateid = $(this).find('option').eq(clickedIndex).attr('data-stateid');
+	var statename = $(this).find('option').eq(clickedIndex).text();
+
+	if (newValue) {
+		adsstatesarr.push(stateid);
+	} else {
+		sindex = adsstatesarr.indexOf(stateid);
+		adsstatesarr.splice(sindex, 1);
+	}
 });
 
 $('#btnasearch').click(function(event) {
@@ -1022,7 +955,6 @@ dtworker.onmessage = function(event) {
 			break;
 		case 'add_keyword_news_data':
 			add_keyword_news_data(jresponse, wkeywordid, wcliendid, false, wptype);
-			$('.dataTables_processing').hide();
 			break;
 		case 'set_single_news_dtw':
 			set_single_news_dtw(jresponse, wtrid);

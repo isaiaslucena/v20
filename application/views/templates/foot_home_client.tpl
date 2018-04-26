@@ -15,7 +15,7 @@
 	var clientselb = (clientsel == 'true');
 
 	{literal}
-	var rfdata, dtworker, dtrefreshworker, cid, tablenews, tablenewsfn, cname, firsttabn,
+	var rfdata, dtworker, dtrefreshworker, cid, cliid, tablenews, tablenewsfn, cname, firsttabn,
 	sectabn, subjectid, subjectnm, keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
@@ -371,26 +371,20 @@
 		$('#selclient').attr('disabled', true);
 		$('#selclient').addClass('disabled');
 
+		$('#btnnpapper').attr({
+			'href': 'http://v22.multclipp.com.br/banca/?path='+clientselid,
+			'target': '_blank'
+		});
+
 		salertloading(isTouchDevice());
 
 		load_data('startpage', clientselid, todaydate, todaydate);
+	}
 
-		// get_client_info(clientselid, true);
-		// count_vtype(clientselid, todaydate, todaydate);
-		// count_rating(clientselid, todaydate, todaydate);
-		// count_states(clientselid, todaydate, todaydate);
-		// count_client(clientselid, todaydate, todaydate);
-		// $('.actual_range').datepicker('update', new Date(todaydate+'T00:00:00'));
-		// get_subject_keywords(clientselid, todaydate, todaydate, true, function(keywid){
-		// 	add_keyword_news(keywid, clientselid, todaydate, todaydate, true, 'startpage');
-		// });
-		// get_subjects(clientselid, function(data){
-		// 	data.map(function(val, index) {
-		// 		html = '<option data-type="adssubject" data-subjectid="'+val.Id+'" data-subjectorder="'+val.Ordem+'" value="'+val.Nome+'">'+val.Nome+'</option>';
-		// 		$('#adssubject').append(html);
-		// 	});
-		// 	$('#adssubject').selectpicker('refresh');
-		// });
+	if (clientselid == 0) {
+		cliid = cid;
+	} else {
+		cliid = clientselid;
 	}
 </script>
 <script type="text/javascript" charset="utf-8" src="/assets/dataclip/dteventlistener.js"></script>
