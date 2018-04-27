@@ -791,6 +791,87 @@ function add_keyword_news_data(redata, keywordid, clientid, cleartable = false, 
 	$('.dataTables_processing').hide();
 };
 
+function add_advsearch_news_data(newsdata, clientid) {
+	tablenews.clear().draw();
+
+	$.map(newsdata.data, function(val, index) {
+		vid = val.Id;
+		vdata = val.Data.trim();
+		vhora = val.Hora.trim();
+		if (vhora == '' || vhora == ' ' || vhora == '0:0' || vhora == 'NaN' || vhora == null || vhora == 'undefined') {
+			vhora = '00:00';
+		}
+		valdataf = vdata+'T'+vhora;
+		vdatetime = new Date(valdataf);
+		vday = vdatetime.getDate();
+		vday = ('0'+vday).slice(-2);
+		vmonth = (vdatetime.getMonth() + 1);
+		vmonth = ('0'+vmonth).slice(-2);
+		vnmonharr = vdatetime.toString().split(' ');
+		vnmonth = vnmonharr[1];
+		vyear = vdatetime.getFullYear();
+		vhour = vdatetime.getHours();
+		vhour = ('0'+vhour).slice(-2);
+		vminutes = vdatetime.getMinutes();
+		vminutes = ('0'+vminutes).slice(-2)
+
+		vdatetimenow = new Date();
+		vnday = vdatetimenow.getDate();
+		vnday = ('0'+vnday).slice(-2);
+		vnnmonth = (vdatetimenow.getMonth() + 1);
+		vnnmonth = ('0'+vnnmonth).slice(-2);
+		vnnmonharr = vdatetimenow.toString().split(' ');
+		vnnmonth = vnnmonharr[1];
+		vnyear = vdatetimenow.getFullYear();
+		vnhour = vdatetimenow.getHours();
+		vnhour = ('0'+vnhour).slice(-2);
+		vnminutes = vdatetimenow.getMinutes();
+		vnminutes = ('0'+vnminutes).slice(-2)
+
+		if (vdatetime > vdatetimenow) {
+			vdate = vnday+'/'+vnnmonth;
+			vtime = vnhour+':'+vnminutes;
+		} else {
+			vdate = vday+'/'+vnmonth;
+			vtime = vhour+':'+vminutes;
+		}
+
+		vtitle = val.Titulo;
+		vtitlelth = vtitle.length;
+		if (vtitlelth > 50) {
+			vtitle = vtitle.slice(0, 47) + '...';
+			vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-clientid="'+clientid+'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'+val.Titulo+'">'+vtitle+'</a>'
+		} else if (vtitlelth == 1) {
+			vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-clientid="'+clientid+'">Sem Título</a>';
+		} else {
+			vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';
+		}
+
+		vedvalor = Number(val.EdValor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+		vedvalor = 'R$ '+vedvalor;
+
+		vaudiencia = Number(val.EdAudiencia).toLocaleString("pt-BR", {minimumFractionDigits: 0});
+
+		var rowNode = tablenews.row.add([
+			vdate,
+			vtime,
+			val.TipoVeiculo,
+			val.Veiculo,
+			val.Editoria,
+			val.PalavraChave,
+			vftitle,
+			vedvalor,
+			vaudiencia
+		]).draw(false).node();
+		$(rowNode).attr('id', 'tr_'+val.Id);
+		// $(rowNode).attr('data-keywordid', keywordid);
+	});
+
+	cadsbtn.ladda('stop');
+	$('#advancedsearch').modal('hide');
+	$('.dataTables_processing').hide();
+}
+
 function remove_keyword_news(keywordid) {
 	$('.dataTables_processing').show();
 	drows = tablenews.rows('tr[data-keywordid='+keywordid+']');

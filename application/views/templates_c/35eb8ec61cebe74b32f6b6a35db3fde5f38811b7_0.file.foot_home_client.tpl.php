@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-26 13:10:25
+/* Smarty version 3.1.30, created on 2018-04-26 19:25:04
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae1f9f1b65513_27208409',
+  'unifunc' => 'content_5ae251c08a1aa0_31123738',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1524759023,
+      1 => 1524781492,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ae1f9f1b65513_27208409 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae251c08a1aa0_31123738 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15068485225ae1f9f1b51c01_68736789', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5614855525ae251c0885f24_10521640', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_15068485225ae1f9f1b51c01_68736789 extends Smarty_Internal_Block
+class Block_5614855525ae251c0885f24_10521640 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -141,16 +141,17 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				});
 			});
 
-			this.api().columns(5).every(function(coln) {
-				var column = this;
-				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				.appendTo($(column.footer()))
-				.on('change', function() {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
-				});
-			});
+			// this.api().columns(5).every(function(coln) {
+			// 	var column = this;
+			// 	var seltitle = $(column.header()).text();
+			// 	var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+			// 	.appendTo($(column.footer()))
+			// 	.on('change', function() {
+			// 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
+			// 		column.search( val ? '^'+val+'$' : '', true, false).draw();
+			// 	});
+			// });
+
 			$('.filter.selectpicker').selectpicker('refresh');
 		},
 		'drawCallback': function(settings) {
@@ -178,13 +179,14 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 				}
 			})
 
-			this.api().column(5).data().each(function (pccurrent, i) {
-				if (pcarr.indexOf(pccurrent) == -1) {
-					pcarr.push(pccurrent);
-					ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_5');
-				}
-			})
+			// this.api().column(5).data().each(function (pccurrent, i) {
+			// 	if (pcarr.indexOf(pccurrent) == -1) {
+			// 		pcarr.push(pccurrent);
+			// 		ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
+			// 		$(ihtml).appendTo('#selpckr_5');
+			// 	}
+			// })
+
 			$('.filter.selectpicker').selectpicker('refresh');
 			if(isTouchDevice() === false) {
 				$('.tooltipa').tooltip();
@@ -206,6 +208,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		autoclose: true,
 	}).on('change', function(){
 		$('#adsendtime').focus();
+		$('html').css('overflow-y', 'hidden');
 	});
 
 	$('#adsendtime').clockpicker({

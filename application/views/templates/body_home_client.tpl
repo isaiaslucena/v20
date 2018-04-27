@@ -259,7 +259,7 @@
 											<th class="text-center"></th>
 											<th class="text-center"></th>
 											<th class="text-center"></th>
-											<th class="text-center"></th>
+											<th class="text-center">Palavra-Chave</th>
 											<th class="text-center">Título</th>
 											<th class="text-center">Valor</th>
 											<th class="text-center">Audiência</th>

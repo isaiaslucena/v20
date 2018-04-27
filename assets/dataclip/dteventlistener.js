@@ -45,10 +45,16 @@ cdatebtn.click(function(event) {
 	get_subject_keywords(cliid, fdpstartdate, fdpenddate, true, function(keywid){
 		add_keyword_news(keywid, cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
 	});
+
+	$('#sublist').slideDown('fast');
 });
 
 cadsbtn.click(function(event) {
 	cadsbtn.ladda('start');
+
+	$('#sublist').slideUp('fast');
+
+	$('.dataTables_processing').show();
 
 	vstartdate = $('#adsstartdate').val();
 	venddate = $('#adsenddate').val();
@@ -67,12 +73,6 @@ cadsbtn.click(function(event) {
 		return;
 	} else {
 		$('#adsenddate.tooltipinput').tooltip('hide');
-	}
-
-	if (clientselid == 0) {
-		cliid = cid;
-	} else {
-		cliid = clientselid;
 	}
 
 	adsstartdate = $('#adsstartdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
@@ -112,9 +112,11 @@ cadsbtn.click(function(event) {
 		data => {
 			console.log(data);
 
-			cadsbtn.ladda('stop');
-			$('#advancedsearch').modal('hide');
-			$('input').iCheck('uncheck');
+			add_advsearch_news_data(data, cliid);
+
+			// cadsbtn.ladda('stop');
+			// $('#advancedsearch').modal('hide');
+			// $('input').iCheck('uncheck');
 		}
 	).catch(
 		error => {
@@ -225,18 +227,35 @@ $('#advancedsearch').on('shown.bs.modal', function(event){
 
 $('#advancedsearch').on('hidden.bs.modal', function(event){
 	$('#adssubject').selectpicker('deselectAll');
+
 	$('#adskeyword').selectpicker('deselectAll');
+	$('#adskeyword').children('option').remove();
+	$('#adskeyword').selectpicker('refresh');
+
 	$('#adstveiculo').selectpicker('deselectAll');
-	$('#adsveiculosites').fadeOut('fast');
+
+	$('#adsveiculosites').slideUp('fast');
 	$('#adsveiculosites').tagsinput('removeAll');
+
 	$('#adsveiculo').selectpicker('deselectAll');
+	$('#adsveiculo').children('option').remove();
+	$('#adsveiculo').selectpicker('refresh');
+
 	$('#adseditoria').selectpicker('deselectAll');
+	$('#adseditoria').children('option').remove();
+	$('#adseditoria').selectpicker('refresh');
+
 	$('#adsstartdate').val(null);
 	$('#adsenddate').val(null);
+
 	$('#adsstarttime').val('00:00');
 	$('#adsendtime').val('23:59');
+
 	$('#adsstates').selectpicker('deselectAll');
-	$('#adstext').selectpicker('deselectAll');
+	$('#adsstates').children('option').remove();
+	$('#adsstates').selectpicker('refresh');
+
+	$('#adstext').val(null);
 	$('.i-checks').iCheck('uncheck');
 });
 

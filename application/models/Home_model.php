@@ -678,22 +678,22 @@ class Home_model extends CI_Model {
 		$idempresa = $data['idempresa'];
 
 		$countquery =	"SELECT
-									COUNT(nt.Id) as quant
-									FROM Noticias nt
-									INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
-									INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
-									INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
-									INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
-									INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
-									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-									LEFT JOIN dados_estados est ON ve.idEstado = est.id
-									LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
-									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
-									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-									INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
-									INNER JOIN Empresa em ON ent.idEmpresa = em.Id
-									WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
-									AND npc.idEmpresa = $idempresa ";
+								COUNT(nt.Id)
+								FROM Noticias nt
+								INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
+								INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
+								INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
+								INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
+								INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								LEFT JOIN dados_estados est ON ve.idEstado = est.id
+								LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+								INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+								INNER JOIN Empresa em ON ent.idEmpresa = em.Id
+								WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
+								AND npc.idEmpresa = $idempresa ";
 
 		$sqlquery =	"SELECT
 								nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
@@ -701,7 +701,7 @@ class Home_model extends CI_Model {
 								nt.idVeiculo, ve.Nome as Veiculo,
 								nt.idEditoria, ed.Nome as Editoria,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
-								npc.idPalavraChave, pc.Nome as PalavraChave,
+								GROUP_CONCAT(DISTINCT pc.Nome ORDER BY pc.Nome SEPARATOR ', ') as PalavraChave,
 								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
 								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia
 								FROM Noticias nt
@@ -724,35 +724,43 @@ class Home_model extends CI_Model {
 			$idsassunto = implode(',', $data['subjectsid']);
 			$sqlquery .= "AND npc.idAssunto IN ($idsassunto) ";
 			$countquery .= "AND npc.idAssunto IN ($idsassunto) ";
-		} else if (count($data['keywordsid']) > 0) {
+		}
+		if (count($data['keywordsid']) > 0) {
 			$idspchave = implode(',', $data['keywordsid']);
 			$sqlquery .= "AND npc.idPalavraChave IN ($idspchave) ";
 			$countquery .= "AND npc.idPalavraChave IN ($idspchave) ";
-		} else if (count($data['tveiculosid']) > 0) {
+		}
+		if (count($data['tveiculosid']) > 0) {
 			$idstveiculo = implode(',', $data['tveiculosid']);
 			$sqlquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
 			$countquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
-		} else if (!empty($data['veiculosid'][0])) {
+		}
+		if (count($data['veiculosid'] > 0)) {
 			$idsveiculo = implode(',', $data['veiculosid']);
 			$sqlquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
 			$countquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
-		} else if (count($data['editoriasid']) > 0) {
+		}
+		if (count($data['editoriasid']) > 0) {
 			$idseditoria = implode(',', $data['editoriasid']);
 			$sqlquery .= "AND npc.idEditoria IN ($idseditoria) ";
 			$countquery .= "AND npc.idEditoria IN ($idseditoria) ";
-		} else if (count($data['estadosid']) > 0) {
+		}
+		if (count($data['estadosid']) > 0) {
 			$idsestados = implode(',', $data['estadosid']);
 			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
 			$countquery .= "AND ve.idEstado IN ($idsestados) ";
-		} else if (!is_null($data['destaque'])) {
+		}
+		if (!is_null($data['destaque'])) {
 			$destaque = $data['destaque'];
 			$sqlquery .= "AND npc.Destaque = $destaque ";
 			$countquery .= "AND npc.Destaque = $destaque ";
-		} else if (count($data['motivacao']) > 0) {
+		}
+		if (count($data['motivacao']) > 0) {
 			$motivacao = implode(',', $data['motivacao']);
 			$sqlquery .= "AND npc.Motivacao IN ($motivacao) ";
 			$countquery .= "AND npc.Motivacao IN ($motivacao) ";
-		} else if (count($data['avaliacao'])) {
+		}
+		if (count($data['avaliacao'])) {
 			$avaliacao = implode(',', $data['avaliacao']);
 			$sqlquery .= "AND npc.Avaliacao IN ($avaliacao) ";
 			$countquery .= "AND npc.Avaliacao IN ($avaliacao) ";
@@ -760,12 +768,13 @@ class Home_model extends CI_Model {
 
 		// $offset = $offset + 10;
 		// $sqlquery .= "LIMIT 10, 10;";
-		$sqlquery .= "GROUP BY pc.Id";
-		$countquery .= "GROUP BY pc.Id";
+		$sqlquery .= "GROUP BY nt.Id";
+		$countquery .= "GROUP BY nt.Id";
 
 		$countdata = $this->db->query($countquery)->row('quant');
 		$fulldata['recordsTotal'] = $countdata;
 		$fulldata['recordsFiltered'] = $countdata;
+		$fulldata['query'] = $sqlquery;
 
 		if ($countdata <= 10) {
 			$fulldata['data'] = $this->db->query($sqlquery)->result_array();

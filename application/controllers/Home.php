@@ -512,9 +512,9 @@ class Home extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
-			$searchdata = $this->home_model->advsearch($postdata);
+			$searchdata = $this->utf8_encoder($this->home_model->advsearch($postdata));
 
-			header('Content-Type: application/json');
+			header('Content-Type: application/json, charset=utf-8');
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
 		}
 	}

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-25 19:13:30
+/* Smarty version 3.1.30, created on 2018-04-26 19:25:04
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae0fd8ae360b4_31050424',
+  'unifunc' => 'content_5ae251c0adc9b1_75548273',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1524694408,
+      1 => 1524781215,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ae0fd8ae360b4_31050424 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae251c0adc9b1_75548273 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12099801665ae0fd8ae18b04_75704714', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13769108025ae251c0ac02d4_47514012', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_12099801665ae0fd8ae18b04_75704714 extends Smarty_Internal_Block
+class Block_13769108025ae251c0ac02d4_47514012 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -296,7 +296,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<th class="text-center"></th>
 											<th class="text-center"></th>
 											<th class="text-center"></th>
-											<th class="text-center"></th>
+											<th class="text-center">Palavra-Chave</th>
 											<th class="text-center">Título</th>
 											<th class="text-center">Valor</th>
 											<th class="text-center">Audiência</th>
