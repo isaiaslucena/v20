@@ -268,7 +268,8 @@ class Home_model extends CI_Model {
 								nt.idEditoria, ed.Nome as Editoria,
 								ntp.idPalavraChave, plc.Nome as PalavraChave,
 								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
-								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia
+								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
+								ntp.Avaliacao, ntp.Motivacao
 								FROM Noticias nt
 								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
 								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
@@ -281,7 +282,7 @@ class Home_model extends CI_Model {
 								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
 								WHERE
 								ntp.idPalavraChave = $keywordid AND ent.IdEmpresa = $clientid AND
-								nt.Data >= '$startdate' AND nt.Data <= '$enddate'
+								nt.Data BETWEEN '$startdate' AND '$enddate'
 								ORDER BY nt.Data DESC";
 		return $this->db->query($sqlquery)->result_array();
 	}

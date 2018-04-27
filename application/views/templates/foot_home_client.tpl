@@ -20,7 +20,8 @@
 	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
-	var jcropdestroy = false;
+	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
+	vavaneg = true, vavaneu = true, vavapos = true, vavanenh = true;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [];
@@ -44,19 +45,18 @@
 		'destroy': true,
 		'autoWidth': false,
 		'order': [
-			[0, 'desc'],
-			[1, 'desc']
+			[0, 'desc']
 		],
 		'columnDefs': [
-			{'searchable': false, 'width': '5%', 'responsivePriority': 0, 'targets': 0},
-			{'searchable': false, 'width': '5%', 'targets': 1},
-			{'searchable': true, 'width': '15%', 'targets': 2},
-			{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 3},
-			{'searchable': true, 'width': '5%', 'targets': 4},
-			{'searchable': true, 'width': '15%', 'targets': 5},
-			{'searchable': false, 'width': '40%', 'responsivePriority': 2, 'targets': 6},
-			{'searchable': false, 'width': '10%', 'targets': 7},
-			{'searchable': false, 'width': '10%', 'targets': 8}
+			{'searchable': false, 'width': '2%', 'responsivePriority': 0, 'targets': 0},
+			{'searchable': true, 'width': '2%', 'responsivePriority': 50, 'targets': 1},
+			{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
+			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
+			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
+			{'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
+			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
+			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
+			{'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
 		],
 		'responsive': true,
 		'scrollX': false,
@@ -64,7 +64,7 @@
 		'rowId': 'id',
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
 		'initComplete': function(settings) {
-			this.api().columns(2).every(function(coln) {
+			this.api().columns(1).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
 				var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
@@ -75,7 +75,7 @@
 				});
 			});
 
-			this.api().columns(3).every(function(coln) {
+			this.api().columns(2).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
 				var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
@@ -86,7 +86,7 @@
 				});
 			});
 
-			this.api().columns(4).every(function(coln) {
+			this.api().columns(3).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
 				var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
@@ -97,7 +97,7 @@
 				});
 			});
 
-			// this.api().columns(5).every(function(coln) {
+			// this.api().columns(4).every(function(coln) {
 			// 	var column = this;
 			// 	var seltitle = $(column.header()).text();
 			// 	var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
@@ -111,7 +111,7 @@
 			$('.filter.selectpicker').selectpicker('refresh');
 		},
 		'drawCallback': function(settings) {
-			this.api().column(2).data().each(function(tvcurrent, i) {
+			this.api().column(1).data().each(function(tvcurrent, i) {
 				if (tvarr.indexOf(tvcurrent) == -1) {
 					tvarr.push(tvcurrent);
 					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
@@ -119,7 +119,7 @@
 				}
 			})
 
-			this.api().column(3).data().each(function (vcurrent, i) {
+			this.api().column(2).data().each(function (vcurrent, i) {
 				if (varr.indexOf(vcurrent) == -1) {
 					varr.push(vcurrent);
 					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
@@ -127,7 +127,7 @@
 				}
 			})
 
-			this.api().column(4).data().each(function (ecurrent, i) {
+			this.api().column(3).data().each(function (ecurrent, i) {
 				if (earr.indexOf(ecurrent) == -1) {
 					earr.push(ecurrent);
 					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
@@ -135,7 +135,7 @@
 				}
 			})
 
-			// this.api().column(5).data().each(function (pccurrent, i) {
+			// this.api().column(4).data().each(function (pccurrent, i) {
 			// 	if (pcarr.indexOf(pccurrent) == -1) {
 			// 		pcarr.push(pccurrent);
 			// 		ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
@@ -298,26 +298,6 @@
 		});
 		$('#adsstates').selectpicker('refresh');
 	});
-
-	// var sites = new Bloodhound({
-	// 	datumTokenizer: function (datum) {
-	// 		return Bloodhound.tokenizers.whitespace(datum.value);
-	// 	},
-	// 	queryTokenizer: Bloodhound.tokenizers.whitespace,
-	// 	remote: {
-	// 		url: document.origin+'/home/editorias_sites?query=%QUERY',
-	// 		wildcard: '%QUERY',
-	// 		filter: function (rsites) {
-	// 			return $.map(rsites, function(site) {
-	// 				return {
-	// 					Id: site.Id,
-	// 					Nome: site.Nome
-	// 				};
-	// 			});
-	// 		},
-	// 		identify: function(rsites) { return rsites.Id; }
-	// 	}
-	// });
 
 	var sites = new Bloodhound({
 		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Nome'),

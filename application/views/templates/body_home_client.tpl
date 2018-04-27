@@ -240,8 +240,7 @@
 								<table id="tablenews" cellpadding="0.5" cellspacing="1" class="table table-bordered table-striped table-hover">
 									<thead>
 										<tr>
-											<th class="text-center">Data</th>
-											<th class="text-center">Hora</th>
+											<th class="text-center">Data/Hora</th>
 											<th class="text-center">Tipo de Veículo</th>
 											<th class="text-center">Veículo</th>
 											<th class="text-center">Editoria</th>
@@ -249,13 +248,13 @@
 											<th class="text-center">Título</th>
 											<th class="text-center">Valor</th>
 											<th class="text-center">Audiência</th>
+											<th class="text-center">Aval/Motiv</th>
 										</tr>
 									</thead>
 									<tbody class="text-center"></tbody>
 									<tfoot>
 										<tr>
-											<th class="text-center">Data</th>
-											<th class="text-center">Hora</th>
+											<th class="text-center">Data/Hora</th>
 											<th class="text-center"></th>
 											<th class="text-center"></th>
 											<th class="text-center"></th>
@@ -263,6 +262,7 @@
 											<th class="text-center">Título</th>
 											<th class="text-center">Valor</th>
 											<th class="text-center">Audiência</th>
+											<th class="text-center">Aval/Motiv</th>
 										</tr>
 									</tfoot>
 								</table>

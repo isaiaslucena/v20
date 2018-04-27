@@ -584,6 +584,9 @@ function get_keyword_news(keywordid, startdate, enddate) {
 };
 
 function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = false, type) {
+	vmotesp = false, vmotprov = false, vmotnenh = false,
+	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false;
+
 	$('.dataTables_processing').show();
 
 	if (cleartable) {
@@ -633,11 +636,10 @@ function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = 
 				vdate = vday+'/'+vnmonth;
 				vtime = vhour+':'+vminutes;
 			}
+			vfdatetime = vdate+'<br>'+vtime;
 
 			vtitle = val.Titulo;
 			vtitlelth = vtitle.length;
-			// console.log(vtitle);
-			// console.log(vtitle.length);
 			if (vtitlelth > 50) {
 				vtitle = vtitle.slice(0, 47) + '...';
 				vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'+val.Titulo+'">'+vtitle+'</a>'
@@ -652,17 +654,71 @@ function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = 
 
 			vaudiencia = Number(val.EdAudiencia).toLocaleString("pt-BR", {minimumFractionDigits: 0});
 
+			vavaliacao = val.Avaliacao;
+			switch(vavaliacao) {
+				case '1':
+					vavaneg = true;
+					break;
+				case '2':
+					vavaneu = true;
+					break;
+				case '3':
+					vavapos = true;
+					break;
+				default:
+					vavanenh = true;
+					break;
+			}
+
+			vmotivacao = val.Motivacao;
+			switch(vmotivacao) {
+				case '1':
+					vmotesp = true;
+					break;
+				case '2':
+					vmotprov = true;
+					break;
+				default:
+					vmotnenh = true;
+					break;
+			}
+			avmobtns =	'<div id="btngpa_'+vid+'" data-toggle="buttons" class="btn-group">'+
+										'<label class="btn btn-xs rdaval '+(vavaneg ? 'active btn-danger' : 'btn-default')+'" title="Negativo" data-aval="1" data-newsid="'+vid+'">'+
+											'<input type="radio" id="avaliacao1" name="Aval">'+
+											'<i class="fa fa-frown-o"></i>'+
+										'</label>'+
+										'<label class="btn btn-xs rdaval '+(vavaneu ? 'active btn-warning' : 'btn-default')+'" title="Neutro" data-aval="2" data-newsid="'+vid+'"">'+
+											'<input type="radio" id="avaliacao2" name="Aval">'+
+											'<i class="fa fa-meh-o"></i>'+
+										'</label>'+
+										'<label class="btn btn-xs rdaval '+(vavapos ? 'active btn-success' : 'btn-default')+'" title="Positivo" data-aval="3" data-newsid="'+vid+'">'+
+											'<input type="radio" id="avaliacao3" name="Aval">'+
+											'<i class="fa fa-smile-o"></i>'+
+										'</label>'+
+									'</div>'+
+									'<br>'+
+									'<div id="btngpm_'+vid+'" data-toggle="buttons" class="btn-group">'+
+										'<label class="btn btn-xs rdmoti '+(vmotesp ? 'active btn-success' : 'btn-default')+'" title="Espontânea" data-moti="1" data-newsid="'+vid+'">'+
+											'<input type="radio" id="motivacao1" name="Moti">'+
+											'<i class="fa fa-level-up"></i>'+
+										'</label>'+
+										'<label class="btn btn-xs rdmoti '+(vmotprov ? 'active btn-warning' : 'btn-default')+'" title="Provocada" data-moti="2" data-newsid="'+vid+'">'+
+											'<input type="radio" id="motivacao2" name="Moti">'+
+											'<i class="fa fa-level-down">'+
+										'</label>'+
+									'</div>';
+
 			var rowNode = tablenews.row.add(
 				[
-					vdate,
-					vtime,
+					vfdatetime,
 					val.TipoVeiculo,
 					val.Veiculo,
 					val.Editoria,
 					val.PalavraChave,
 					vftitle,
 					vedvalor,
-					vaudiencia
+					vaudiencia,
+					avmobtns
 				]
 			).draw(false).node();
 			$(rowNode).attr('id', 'tr_'+val.Id);
@@ -693,6 +749,9 @@ function add_keyword_news(keywordid, clientid, startdate, enddate, cleartable = 
 };
 
 function add_keyword_news_data(redata, keywordid, clientid, cleartable = false, type) {
+	vmotesp = false, vmotprov = false, vmotnenh = false,
+	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false
+
 	if (cleartable) {
 		tablenews.clear().draw();
 	}
@@ -755,6 +814,17 @@ function add_keyword_news_data(redata, keywordid, clientid, cleartable = false, 
 
 		vaudiencia = Number(val.EdAudiencia).toLocaleString("pt-BR", {minimumFractionDigits: 0});
 
+		avmobtns =	'<div class="btn-group">'+
+									'<button class="btn btn-xs btn-default" type="button" title="Positiva"><i class="fa fa-smile-o"></i></button>'+
+									'<button class="btn btn-xs btn-default" type="button" title="Neutro"><i class="fa fa-meh-o"></i></button>'+
+									'<button class="btn btn-xs btn-default" type="button" title="Negativo"><i class="fa fa-frown-o"></i></button>'+
+								'</div>'+
+								'<br>'+
+								'<div class="btn-group">'+
+									'<button class="btn btn-xs btn-default" type="button" title="Espontânea"><i class="fa fa-level-up"></i></button>'+
+									'<button class="btn btn-xs btn-default" type="button" title="Provocada"><i class="fa fa-level-down"></i></button>'+
+								'</div>';
+
 		var rowNode = tablenews.row.add([
 			vdate,
 			vtime,
@@ -764,7 +834,8 @@ function add_keyword_news_data(redata, keywordid, clientid, cleartable = false, 
 			val.PalavraChave,
 			vftitle,
 			vedvalor,
-			vaudiencia
+			vaudiencia,
+			avmobtns
 		]).draw(false).node();
 		$(rowNode).attr('id', 'tr_'+val.Id);
 		$(rowNode).attr('data-keywordid', keywordid);
@@ -899,6 +970,350 @@ function get_single_news(newsid, clientid, callback) {
 	});
 };
 
+function xhr_single_news(){
+	get_single_news(titlenid, titlecid, function(tndata) {
+			snewsid = tndata.Id;
+			snewsdate = tndata.Data;
+			snewstime = tndata.Hora;
+
+			sdata = snewsdate.trim();
+			shora = snewstime.trim();
+			if (shora == '' || shora == ' ' || shora == '0:0') {
+				shora = '00:00';
+			}
+			saldataf = sdata+'T'+shora;
+			sdatetime = new Date(saldataf);
+			sday = sdatetime.getDate();
+			sday = ('0'+sday).slice(-2);
+			smonth = (sdatetime.getMonth() + 1);
+			smonth = ('0'+smonth).slice(-2);
+			snmonharr = sdatetime.toString().split(' ');
+			snmonth = snmonharr[1];
+			syear = sdatetime.getFullYear();
+			shour = sdatetime.getHours();
+			shour = ('0'+shour).slice(-2);
+			sminutes = sdatetime.getMinutes();
+			sminutes = ('0'+sminutes).slice(-2);
+
+			dtnow = new Date();
+			dtnday = dtnow.getDate();
+			dtnday = ('0'+dtnday).slice(-2);
+			dtnmonth = (dtnow.getMonth() + 1);
+			dtnmonth = ('0'+dtnmonth).slice(-2);
+			dtnnmonharr = dtnow.toString().split(' ');
+			dtnnmonth = dtnnmonharr[1];
+			dtnyear = dtnow.getFullYear();
+			dtnhour = dtnow.getHours();
+			dtnhour = ('0'+dtnhour).slice(-2);
+			dtnminutes = dtnow.getMinutes();
+			dtnminutes = ('0'+dtnminutes).slice(-2);
+
+			if (sdatetime > dtnow) {
+				snewsfdatetime = dtnday+'/'+dtnmonth+'/'+dtnyear+' '+dtnhour+':'+dtnminutes;
+			} else {
+				snewsfdatetime = sday+'/'+smonth+'/'+syear+' '+shour+':'+sminutes;
+			}
+
+			snewstitle = tndata.Titulo;
+			snewssubtitle = tndata.Subtitulo;
+			snewscontent = tndata.Noticia;
+			snewsauthor = tndata.Autor;
+			snewsurl = tndata.URL;
+			snewstveid = parseInt(tndata.IdTipoVeiculo);
+			snewstve = tndata.TipoVeiculo;
+			snewsvid = parseInt(tndata.idVeiculo);
+			snewsve = tndata.Veiculo;
+			snewseid = parseInt(tndata.idEditoria);
+			snewsed = tndata.Editoria;
+			snewsimg = tndata.Imagem;
+			snewsmw = parseInt(tndata.MarcarW);
+			snewsmh = parseInt(tndata.MarcarH);
+			snewsx1 = parseInt(tndata.MarcarX1);
+			snewsx2 = parseInt(tndata.MarcarX2);
+			snewsy1 = parseInt(tndata.MarcarY1);
+			snewsy2 = parseInt(tndata.MarcarY2);
+
+			var snewspchave = '';
+			arrcount = tndata.PChaves.length;
+			pcount = 1;
+			$.each(tndata.PChaves, function(index, val) {
+				if (pcount == arrcount){
+					snewspchave += val.PChave;
+				} else {
+					snewspchave += val.PChave+' | ';
+				}
+				pcount += 1;
+			});
+
+			snewsidass = tndata.IdAssunto;
+			snewsass = tndata.Assunto;
+
+			snewsmot = tndata.Motivacao;
+			var snewsmotstr;
+			snewsava = tndata.Avaliacao;
+			var snewsavastr;
+
+			snewseqv = Number(tndata.Equivalencia).toLocaleString("pt-BR", {minimumFractionDigits: 2});
+			snewseqv = 'R$ '+snewseqv;
+			snewsaud = Number(tndata.Audiencia).toLocaleString("pt-BR");
+
+			switch(snewsmot) {
+				case '0':
+					snewsmotstr = '<span class="text-warning">Nenhuma</span>';
+					break;
+				case '1':
+					snewsmotstr = '<span class="text-warning">Espontânea</span>';
+					break;
+				case '2':
+					snewsmotstr = '<span class="text-warning">Provocada</span>';
+					break;
+				default:
+					snewsmotstr = '<span class="text-warning">Nenhuma</span>';
+					break;
+			}
+
+			switch(snewsava) {
+				case '0':
+					snewsavastr = '<span class="text-warning">Nenhum</span>';
+					break;
+				case '1':
+					snewsavastr = '<span class="text-danger">Negativo</span>';
+					break;
+				case '2':
+					snewsavastr = '<span class="text-warning">Neutro</span>';
+					break;
+				case '3':
+					snewsavastr = '<span class="text-success">Positiva</span>';
+					break;
+				default:
+					snewsavastr = '<span class="text-warning">Nenhum</span>';
+					break;
+			}
+
+			$('#modaltitleve').html('<strong>Veículo:</strong> '+snewsve);
+			$('#modaltitleed').html('<strong>Editoria:</strong> '+snewsed);
+			$('#modaltitlevm').html('<strong>Motivação:</strong> '+snewsmotstr);
+			$('#modaltitleva').html('<strong>Avaliação:</strong> '+snewsavastr);
+			$('#modaltitlevq').html('<strong>Audiência:</strong> '+snewsaud);
+			$('#modaltitlevv').html('<strong>Equivalência:</strong> '+snewseqv);
+
+			if ($('#'+titletrid).hasClass('selected')) {
+				$('#btnselclo').attr('disabled', true);
+				$('#btnselclo').addClass('disalbed');
+				$('#btnselclo').removeAttr('data-trid', titletrid);
+			} else {
+				$('#btnselclo').attr('disabled', false);
+				$('#btnselclo').removeClass('disalbed');
+				$('#btnselclo').attr('data-trid', titletrid);
+			}
+
+			// multclipimgurl = 'http://www.multclipp.com.br/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
+			multclipimgurl = 'https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
+			rgxvideo = new RegExp('(.mp4)', 'ig');
+			rgxaudio = new RegExp('(.mp3)', 'ig');
+			rgximage = new RegExp('(.jpeg|.jpg|.png|.bmp)', 'ig');
+			rgximageaws = new RegExp('s3.amazonaws.com', 'ig');
+			if (rgxvideo.test(snewsimg)) {
+				mediatype = 'video';
+				$('#btndown').attr('data-downtype', 'video');
+				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
+				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
+				$('#datemediactnv').text(snewsfdatetime)
+				$('#mediactnv').html('<video id="mediaelvideo" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls style="width: 65%"></video>');
+				$('#modal-textv').html(snewscontent);
+			} else if (rgxaudio.test(snewsimg)) {
+				mediatype = 'audio';
+				$('#btndown').attr('data-downtype', 'audio');
+				$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
+				$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
+				$('#datemediactnv').text(snewsfdatetime);
+				$('#mediactnv').html('<audio id="mediaelvideo" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio>');
+				$('#modal-textv').html(snewscontent);
+			} else if (rgximage.test(snewsimg)) {
+				mediatype = 'image';
+				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
+				$('#datemediactni').text(snewsfdatetime);
+
+				if (snewstveid == 3 || snewstveid == 10 || snewstveid == 12 || snewstveid == 18) {
+					$('#btndown').attr('data-downtype', 'facsimile');
+					imgobj = new Image();
+					// imgobj.crossOrigin = 'Anonymous';
+					crosimg = '/home/proxy/'+btoa(multclipimgurl+'/'+snewsimg);
+					// imgobj.src = multclipimgurl+'/'+snewsimg;
+					imgobj.src = crosimg;
+
+					imgobj.onload = function(event) {
+						imgobjw = imgobj.width;
+						imgobjh = imgobj.height;
+
+						document.getElementById('mediactni').innerHTML = '';
+						imgobj.setAttribute('id', 'mediaelimg');
+						document.getElementById('mediactni').appendChild(imgobj);
+
+						$('#mediaelimg').Jcrop(
+							{
+								keySupport: false,
+								trueSize: [imgobjw, imgobjh],
+								setSelect: [ 0, 0, 0, 0 ],
+								boxWidth: 280,
+								boxHeight: 400,
+							},
+							function()
+							{
+								jcropdestroy = true;
+								jcrop_api = this;
+							}
+						);
+
+						jcrop_api.animateTo([ snewsx1, snewsy1, snewsx2, snewsy2 ]);
+						jcrop_api.disable();
+
+
+						//imgdown
+						// canvas = document.createElement('canvas');
+						// ctx = canvas.getContext('2d');
+
+						// imgw = imgobj.width;
+						// imgh = imgobj.height;
+						// ctx.canvas.width = imgw;
+						// ctx.canvas.height = imgh;
+
+						// ctx.drawImage(imgobj, 0, 0);
+						// ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+						// ctx.fillRect(0, 0, imgw, imgh);
+						// ctx.drawImage(imgobj, snewsx1, snewsy1, snewsmw, snewsmh, snewsx1, snewsy1, snewsmw, snewsmh);
+
+						// document.getElementById('divmediacanvas').innerHTML = '';
+						// canvas.setAttribute('id', 'mediacanvas');
+						// document.getElementById('divmediacanvas').appendChild(canvas);
+
+						// canvasel = document.getElementById('mediacanvas');
+						// canvasdataURL = canvasel.toDataURL('image/png').replace('image/png', 'application/stream');
+
+						// $('#btndowbfs').attr({
+						// 	'href': canvasdataURL,
+						// 	'download': 'facsimile.png'
+						// });
+
+						$('#mediaimgload').fadeOut('fast', function() {
+							$('#mediactni').fadeIn('fast');
+							// $('#mediactni').click(function(event) {
+							// 	$('.imggrad').css('display', 'none');
+							// 	$(this).css('overflow-y', 'auto');
+							// });
+						});
+					}
+
+					imgobj.onerror = function() {
+						imgobj.src = '/assets/imgs/noimage.png';
+					}
+				} else {
+					$('#btndown').attr('data-downtype', 'image');
+					$('#mediactni').html(
+						'<div class="imggrad"><span>Exibir tudo</span></div>'+
+						'<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">'
+					);
+
+					$('#mediaelimg').on('load', function() {
+						$('#mediaimgload').fadeOut('fast', function() {
+							$('#mediactni').fadeIn('fast');
+							$('#mediactni').click(function(event) {
+								$('.imggrad').css('display', 'none');
+								$(this).css('overflow-y', 'auto');
+							});
+						});
+					});
+				}
+
+				$('#btnurl').removeClass('disabled');
+				$('#btnurl').attr('disabled', false);
+				$('#btnurl').attr('href', snewsurl);
+
+				$.each(tndata.PChaves, function(index, val) {
+					snewsgrf = val.Grifar.trim();
+					snewsgrf = snewsgrf.split(';');
+					$.each(snewsgrf, function(index, gval) {
+						if (gval.length > 0) {
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
+							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
+						}
+					});
+				});
+				$('#modal-texti').html(snewscontent);
+			} else if (rgximageaws.test(snewsurl)) {
+				mediatype = 'image';
+				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
+				$('#datemediactni').text(snewsfdatetime);
+				$('#mediactni').html(
+					'<div class="imggrad"><span>Exibir tudo</span></div>'+
+					'<img id="mediaelimg" class="img-responsive" src="'+snewsurl+'">'
+				);
+
+				$.each(tndata.PChaves, function(index, val) {
+					snewsgrf = val.Grifar.trim();
+					snewsgrf = snewsgrf.split(';');
+					$.each(snewsgrf, function(index, gval) {
+						if (gval.length > 0) {
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'g');
+							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
+						}
+					});
+				});
+				$('#modal-texti').html(snewscontent);
+			} else {
+				$('#btndown').attr('data-downtype', 'noimage');
+				mediatype = 'image';
+				$('#modaltitlevki').html('<strong>Palavra-chave:</strong> '+snewspchave);
+				$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
+				$('#datemediactni').text(snewsfdatetime);
+				$('#mediactni').html(
+					'<img id="mediaelimg" class="img-responsive" src="/assets/imgs/noimage.png">'
+				);
+
+				$.each(tndata.PChaves, function(index, val) {
+					snewsgrf = val.Grifar.trim();
+					snewsgrf = snewsgrf.split(';');
+					$.each(snewsgrf, function(index, gval) {
+						if (gval.length > 0) {
+							rgxkw = new RegExp('\\b'+gval+'\\b', 'ig');
+							snewscontent = snewscontent.replace(rgxkw, '<strong class="kwgrifar">'+gval+'</strong>');
+						}
+					});
+				});
+				$('#modal-texti').html(snewscontent);
+
+				$('#btnurl').removeClass('disabled');
+				$('#btnurl').attr('disabled', false);
+				$('#btnurl').attr('href', snewsurl);
+			}
+
+			if (mediatype == 'image') {
+				$('#mediaelimg').on('error', function() {
+					$(this).attr('src', '/assets/imgs/noimage.png');
+					$('.imggrad').css('display', 'none');
+				});
+			} else {
+				$('#mediaelvideo').on('loadeddata', function() {
+					$('#mediavideoload').fadeOut('fast', function() {
+						$('#mediactnv').fadeIn('fast');
+					});
+				});
+			}
+
+			$('#modalwsinglenews').fadeOut('fast', function() {
+				$('#modaltitlerow').fadeIn('fast');
+				if (mediatype == 'image') {
+					$('#modalcsinglenewsi').fadeIn('fast');
+				} else {
+					$('#modalcsinglenewsv').fadeIn('fast');
+				}
+				$('#btnsgroupsnews').fadeIn('fast');
+			});
+	});
+};
+
 function set_single_news_dtw(tndata, titletrid){
 	snewsid = tndata.Id;
 	snewsdate = tndata.Data;
@@ -986,20 +1401,18 @@ function set_single_news_dtw(tndata, titletrid){
 	snewsaud = Number(tndata.Audiencia).toLocaleString("pt-BR");
 
 	switch(snewsmot) {
-		case '0':
-			snewsmotstr = '<span class="text-warning">Espontânea</span>';
-			break;
 		case '1':
 			snewsmotstr = '<span class="text-warning">Espontânea</span>';
 			break;
+		case '2':
+			snewsmotstr = '<span class="text-warning">Provocada</span>';
+			break;
 		default:
-			snewsmotstr = 'Não Definido';
+			snewsmotstr = '<span class="text-warning">Nenhuma</span>';
+			break;
 	}
 
 	switch(snewsava) {
-		case '0':
-			snewsavastr = '<span class="text-warning">Neutro</span>';
-			break;
 		case '1':
 			snewsavastr = '<span class="text-danger">Negativo</span>';
 			break;
@@ -1007,7 +1420,11 @@ function set_single_news_dtw(tndata, titletrid){
 			snewsavastr = '<span class="text-warning">Neutro</span>';
 			break;
 		case '3':
-			snewsavastr = '<span class="text-success">Positivo</span>';
+			snewsavastr = '<span class="text-success">Positiva</span>';
+			break;
+		default:
+			snewsavastr = '<span class="text-warning">Nenhum</span>';
+			break;
 	}
 
 	$('#modaltitleve').html('<strong>Veículo:</strong> '+snewsve);
