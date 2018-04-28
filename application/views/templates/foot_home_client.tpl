@@ -21,7 +21,7 @@
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
 	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
-	vavaneg = true, vavaneu = true, vavapos = true, vavanenh = true;
+	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [];

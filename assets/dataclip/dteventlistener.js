@@ -348,12 +348,15 @@ $(document).on('click', '.rdaval', function(event){
 
 	switch(dataavaliacao) {
 		case '1':
+			$(this).removeClass('btn-default');
 			$(this).addClass('btn-danger active');
 			break;
 		case '2':
+			$(this).removeClass('btn-default');
 			$(this).addClass('btn-warning active');
 			break;
 		case '3':
+			$(this).removeClass('btn-default');
 			$(this).addClass('btn-success active');
 			break;
 		default:
@@ -368,13 +371,15 @@ $(document).on('click', '.rdmoti', function(event){
 	$('#'+dataparid+' .rdmoti').addClass('btn-default');
 
 	datanewsid = $(this).attr('data-newsid');
-	datamotivacao = $(this).attr('data-motiv');
+	datamotivacao = $(this).attr('data-moti');
 
 	switch(datamotivacao) {
 		case '1':
+			$(this).removeClass('btn-default');
 			$(this).addClass('btn-success active');
 			break;
 		case '2':
+			$(this).removeClass('btn-default');
 			$(this).addClass('btn-warning active');
 			break;
 		default:

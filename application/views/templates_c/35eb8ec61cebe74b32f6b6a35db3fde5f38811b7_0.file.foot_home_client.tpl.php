@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-27 15:32:38
+/* Smarty version 3.1.30, created on 2018-04-27 16:00:49
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae36cc609b7d4_96059348',
+  'unifunc' => 'content_5ae373613bb686_57204910',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1524853264,
+      1 => 1524855646,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ae36cc609b7d4_96059348 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae373613bb686_57204910 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_610216875ae36cc6086e75_58326575', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12114921025ae373613b0d69_32666051', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_610216875ae36cc6086e75_58326575 extends Smarty_Internal_Block
+class Block_12114921025ae373613b0d69_32666051 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -65,7 +65,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
 	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
-	vavaneg = true, vavaneu = true, vavapos = true, vavanenh = true;
+	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [];

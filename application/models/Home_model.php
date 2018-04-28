@@ -704,7 +704,8 @@ class Home_model extends CI_Model {
 								ass.Id as IdAssunto, ass.Nome as Assunto,
 								GROUP_CONCAT(DISTINCT pc.Nome ORDER BY pc.Nome SEPARATOR ', ') as PalavraChave,
 								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
-								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia
+								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
+								npc.Avaliacao, npc.Motivacao
 								FROM Noticias nt
 								INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
 								INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
@@ -721,32 +722,33 @@ class Home_model extends CI_Model {
 								WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
 								AND npc.idEmpresa = $idempresa ";
 
-		if (count($data['subjectsid']) > 0) {
+		if (count($data['subjectsid']) >= 1) {
 			$idsassunto = implode(',', $data['subjectsid']);
 			$sqlquery .= "AND npc.idAssunto IN ($idsassunto) ";
 			$countquery .= "AND npc.idAssunto IN ($idsassunto) ";
 		}
-		if (count($data['keywordsid']) > 0) {
+		if (count($data['keywordsid']) >= 1) {
 			$idspchave = implode(',', $data['keywordsid']);
 			$sqlquery .= "AND npc.idPalavraChave IN ($idspchave) ";
 			$countquery .= "AND npc.idPalavraChave IN ($idspchave) ";
 		}
-		if (count($data['tveiculosid']) > 0) {
+		if (count($data['tveiculosid']) >= 1) {
 			$idstveiculo = implode(',', $data['tveiculosid']);
 			$sqlquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
 			$countquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
 		}
-		if (count($data['veiculosid'] > 0)) {
+		if (count($data['veiculosid']) >= 1) {
+			var_dump('IdVeiculos Maior ou igual que 1');
 			$idsveiculo = implode(',', $data['veiculosid']);
 			$sqlquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
 			$countquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
 		}
-		if (count($data['editoriasid']) > 0) {
+		if (count($data['editoriasid']) >= 1) {
 			$idseditoria = implode(',', $data['editoriasid']);
 			$sqlquery .= "AND npc.idEditoria IN ($idseditoria) ";
 			$countquery .= "AND npc.idEditoria IN ($idseditoria) ";
 		}
-		if (count($data['estadosid']) > 0) {
+		if (count($data['estadosid']) >= 1) {
 			$idsestados = implode(',', $data['estadosid']);
 			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
 			$countquery .= "AND ve.idEstado IN ($idsestados) ";
@@ -756,12 +758,12 @@ class Home_model extends CI_Model {
 			$sqlquery .= "AND npc.Destaque = $destaque ";
 			$countquery .= "AND npc.Destaque = $destaque ";
 		}
-		if (count($data['motivacao']) > 0) {
+		if (count($data['motivacao']) >= 1) {
 			$motivacao = implode(',', $data['motivacao']);
 			$sqlquery .= "AND npc.Motivacao IN ($motivacao) ";
 			$countquery .= "AND npc.Motivacao IN ($motivacao) ";
 		}
-		if (count($data['avaliacao'])) {
+		if (count($data['avaliacao']) >= 1) {
 			$avaliacao = implode(',', $data['avaliacao']);
 			$sqlquery .= "AND npc.Avaliacao IN ($avaliacao) ";
 			$countquery .= "AND npc.Avaliacao IN ($avaliacao) ";
