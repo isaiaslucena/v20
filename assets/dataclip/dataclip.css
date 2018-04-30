@@ -173,9 +173,19 @@
 }
 
 .kwgrifar {
-	color: white;
-	background-color: red;
+	color: red;
+	/*background-color: gray;*/
 	/*font-size: 110%;*/
+}
+
+.tdaddf {
+	background: : #FF263C;
+	transition: background 1.5s linear;
+}
+
+.tdaddff {
+	background: #3D3D3D;
+	transition: background 1.5s linear;
 }
 
 .clockpicker-popover {

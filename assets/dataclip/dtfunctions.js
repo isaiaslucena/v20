@@ -761,19 +761,33 @@ function each_news_data(endata, keywordid, clientid) {
 									'</label>'+
 								'</div>';
 
-		var rowNode = tablenews.row.add(
-			[
-				vfdatetime,
-				val.TipoVeiculo,
-				val.Veiculo,
-				val.Editoria,
-				val.PalavraChave,
-				vftitle,
-				vedvalor,
-				vaudiencia,
-				avmobtns
-			]
-		).draw(false).node();
+		var tablenodes = tablenews.rows().nodes();
+		// console.log(tablenodes);
+		if($(tablenodes).filter('tr#tr_'+val.Id).length == 1) {
+			// console.log('the news with ID '+val.Id+' is already on table...');
+			rowindex = tablenews.row('#tr_'+val.Id).index();
+			olddata = tablenews.cell(rowindex,4).data();
+			newdata = olddata+', '+val.PalavraChave;
+			newnode = tablenews.cell(rowindex,4).data(newdata).draw(false).node();
+			$(newnode).animate({'color': 'red'}, 'slow', function() {
+				$(newnode).animate({'color': 'black' }, 'slow');
+			})
+		} else {
+			var rowNode = tablenews.row.add(
+				[
+					vfdatetime,
+					val.TipoVeiculo,
+					val.Veiculo,
+					val.Editoria,
+					val.PalavraChave,
+					vftitle,
+					vedvalor,
+					vaudiencia,
+					avmobtns
+				]
+			).draw(false).node();
+		}
+
 		$(rowNode).attr('id', 'tr_'+val.Id);
 		// $(rowNode).attr('data-clientid', clientid);
 		$(rowNode).attr('data-keywordid', keywordid);
