@@ -445,6 +445,40 @@ class Home extends CI_Controller {
 		// print json_encode($datan, JSON_PRETTY_PRINT);
 	}
 
+	public function set_aval() {
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"),true));
+
+			if ($this->home_model->set_aval($postdata) === TRUE) {
+				header('Content-Type: application/json');
+				$message = 'OK';
+				print json_encode($message, JSON_PRETTY_PRINT);
+			} else {
+				header("HTTP/1.1 500 Internal Server Error");
+			}
+		} else {
+			header("HTTP/1.1 405 Method Not Allowed");
+			// print json_encode($message, JSON_PRETTY_PRINT);
+		}
+	}
+
+	public function set_moti() {
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"),true));
+
+			if ($this->home_model->set_moti($postdata) === TRUE) {
+				header('Content-Type: application/json');
+				$message = 'OK';
+				print json_encode($message, JSON_PRETTY_PRINT);
+			} else {
+				header("HTTP/1.1 500 Internal Server Error");
+			}
+		} else {
+			header("HTTP/1.1 405 Method Not Allowed");
+			// print json_encode($message, JSON_PRETTY_PRINT);
+		}
+	}
+
 	public function send_mail() {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"),true));

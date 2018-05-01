@@ -105,7 +105,7 @@ cadsbtn.click(function(event) {
 		'avaliacao': adsavaliacaoarr
 	};
 
-	console.log(adssearchdata);
+	// console.log(adssearchdata);
 
 	postData('/home/advsearch', adssearchdata)
 	.then(
@@ -340,52 +340,112 @@ $(document).on('click', '.tooltipa', function(event) {
 
 $(document).on('click', '.rdaval', function(event){
 	dataparid = $(this).parent().attr('id');
-	$('#'+dataparid+' .rdaval').removeClass('active btn-danger btn-warning btn-success');
-	$('#'+dataparid+' .rdaval').addClass('btn-default');
+	dtnewsid = parseInt($(this).attr('data-newsid'));
+	dtselector = '#'+dataparid+' .rdaval';
+	$(dtselector).removeClass('active btn-danger btn-warning btn-success');
+	$(dtselector).addClass('btn-default');
+	$(this).children('i').remove();
+	$(this).append('<i class="fa fa-circle-o-notch fa-spin"</i>');
 
-	datanewsid = $(this).attr('data-newsid');
 	dataavaliacao = $(this).attr('data-aval');
 
 	switch(dataavaliacao) {
 		case '1':
-			$(this).removeClass('btn-default');
-			$(this).addClass('btn-danger active');
+			staval = 1;
+			ihtml = '<i class="fa fa-frown-o"></i>';
+			removeclass = 'btn-default';
+			addclass = 'btn-danger active';
 			break;
 		case '2':
-			$(this).removeClass('btn-default');
-			$(this).addClass('btn-warning active');
+			staval = 2;
+			ihtml = '<i class="fa fa-meh-o"></i>';
+			removeclass = 'btn-default';
+			addclass = 'btn-warning active';
 			break;
 		case '3':
-			$(this).removeClass('btn-default');
-			$(this).addClass('btn-success active');
+			staval = 3;
+			ihtml = '<i class="fa fa-smile-o"></i>';
+			removeclass = 'btn-default';
+			addclass = 'btn-success active';
 			break;
 		default:
 			//do nothing;
 			break;
 	}
+
+	objsetaval = {
+		'aval': staval,
+		'idclient': cliid,
+		'idnews': dtnewsid
+	};
+
+	postData('/home/set_aval', objsetaval)
+	.then(
+		data => {
+			console.log(data);
+
+			$(this).children('i').remove();
+			$(this).append(ihtml);
+			$(this).removeClass(removeclass);
+			$(this).addClass(addclass);
+		}
+	).catch(
+		error => {
+			console.error(error);
+		}
+	);
 });
 
 $(document).on('click', '.rdmoti', function(event){
 	dataparid = $(this).parent().attr('id');
-	$('#'+dataparid+' .rdmoti').removeClass('active btn-warning btn-success');
-	$('#'+dataparid+' .rdmoti').addClass('btn-default');
+	dtnewsid = parseInt($(this).attr('data-newsid'));
+	dtselector = '#'+dataparid+' .rdmoti';
+	$(dtselector).removeClass('active btn-warning btn-success');
+	$(dtselector).addClass('btn-default');
+	$(this).children('i').remove();
+	$(this).append('<i class="fa fa-circle-o-notch fa-spin"</i>');
 
-	datanewsid = $(this).attr('data-newsid');
 	datamotivacao = $(this).attr('data-moti');
 
 	switch(datamotivacao) {
 		case '1':
-			$(this).removeClass('btn-default');
-			$(this).addClass('btn-success active');
+			stmoti = 1;
+			ihtml = '<i class="fa fa-users"></i>';
+			removeclass = 'btn-default';
+			addclass = 'btn-success active'
 			break;
 		case '2':
-			$(this).removeClass('btn-default');
-			$(this).addClass('btn-warning active');
+			stmoti = 2;
+			ihtml = '<i class="fa fa-handshake-o">';
+			removeclass = 'btn-default';
+			addclass = 'btn-warning active';
 			break;
 		default:
 			//do nothing;
 			break;
 	}
+
+	objsetmoti = {
+		'moti': stmoti,
+		'idclient': cliid,
+		'idnews': dtnewsid
+	};
+
+	postData('/home/set_moti', objsetmoti)
+	.then(
+		data => {
+			console.log(data);
+
+			$(this).children('i').remove();
+			$(this).append(ihtml);
+			$(this).removeClass(removeclass);
+			$(this).addClass(addclass);
+		}
+	).catch(
+		error => {
+			console.error(error);
+		}
+	);
 });
 
 $('#btnselclo').click(function(event) {

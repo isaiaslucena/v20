@@ -671,6 +671,42 @@ class Home_model extends CI_Model {
 		}
 	}
 
+	public function set_aval($data) {
+		$this->db->set('Avaliacao', $data['aval']);
+		$this->db->where('IdEmpresa', $data['idclient']);
+		$this->db->where('IdNoticia', $data['idnews']);
+		$this->db->update('NoticiaPalavraChave');
+
+		$this->db->set('Avaliacao', $data['aval']);
+		$this->db->where('IdEmpresa', $data['idclient']);
+		$this->db->where('IdNoticia', $data['idnews']);
+		$this->db->update('EmpresaNoticia');
+
+		if ($this->db->trans_complete()) {
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
+	public function set_moti($data) {
+		$this->db->set('Motivacao', $data['moti']);
+		$this->db->where('IdEmpresa', $data['idclient']);
+		$this->db->where('IdNoticia', $data['idnews']);
+		$this->db->update('NoticiaPalavraChave');
+
+		$this->db->set('Motivacao', $data['moti']);
+		$this->db->where('IdEmpresa', $data['idclient']);
+		$this->db->where('IdNoticia', $data['idnews']);
+		$this->db->update('EmpresaNoticia');
+
+		if ($this->db->trans_complete()) {
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	public function advsearch($data){
 		$startdate = $data['startdate'];
 		$enddate = $data['enddate'];
