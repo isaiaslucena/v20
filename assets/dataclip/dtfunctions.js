@@ -513,8 +513,7 @@ function set_subject_keywords(cdata, updatesubjects = false, callback) {
 		if (subjectcount != null) {
 			html = '<select class="selectpicker subjectkewords" data-subjectid="'+subjectid+'" '+
 							'data-style="btn btn-sm btn-default" data-size="10" data-width="200px" '+
-							'data-actions-box="true" data-live-search="true" '+
-							'data-selected-text-format="count > 3" '+
+							'data-live-search="true" data-selected-text-format="count > 3" '+
 							'title="'+subjectnm+' ('+subjectcount+')'+'" multiple>';
 		}
 
@@ -702,6 +701,8 @@ function each_news_data(endata, keywordid, clientid) {
 			vftitle = '<a class="tooltipa" data-newsid="'+vid+'" data-keywordid="'+keywordid+'" data-clientid="'+clientid+'">'+vtitle+'</a>';
 		}
 
+		vpchave = '<span data-trid="tr_'+val.Id+'" data-keywordid="'+keywordid+'">'+val.PalavraChave+'</span>';
+
 		vedvalor = Number(val.EdValor).toLocaleString("pt-BR", {minimumFractionDigits: 2});
 		vedvalor = 'R$ '+vedvalor;
 
@@ -762,16 +763,18 @@ function each_news_data(endata, keywordid, clientid) {
 								'</div>';
 
 		var tablenodes = tablenews.rows().nodes();
-		// console.log(tablenodes);
-		if($(tablenodes).filter('tr#tr_'+val.Id).length == 1) {
-			// console.log('the news with ID '+val.Id+' is already on table...');
+		if ($(tablenodes).filter('tr#tr_'+val.Id).length == 1) {
 			rowindex = tablenews.row('#tr_'+val.Id).index();
-			olddata = tablenews.cell(rowindex,4).data();
-			newdata = olddata+', '+val.PalavraChave;
-			newnode = tablenews.cell(rowindex,4).data(newdata).draw(false).node();
-			$(newnode).animate({'color': 'red'}, 'slow', function() {
-				$(newnode).animate({'color': 'black' }, 'slow');
-			})
+			// olddata = tablenews.cell(rowindex,4).data();
+			// newdata = olddata+', '+val.PalavraChave;
+			// newnode = tablenews.cell(rowindex,4).data(newdata).draw(false).node();
+
+			newnode = tablenews.cell(rowindex,4).node();
+			$(newnode).append(', '+vpchave);
+
+			modrownode = tablenews.row('#tr_'+val.Id).node();
+			$(modrownode).attr('data-multiplekw', true);
+
 		} else {
 			var rowNode = tablenews.row.add(
 				[
@@ -779,18 +782,17 @@ function each_news_data(endata, keywordid, clientid) {
 					val.TipoVeiculo,
 					val.Veiculo,
 					val.Editoria,
-					val.PalavraChave,
+					vpchave,
 					vftitle,
 					vedvalor,
 					vaudiencia,
 					avmobtns
 				]
 			).draw(false).node();
+			// $(rowNode).attr('data-keywordid', keywordid);
 		}
 
 		$(rowNode).attr('id', 'tr_'+val.Id);
-		// $(rowNode).attr('data-clientid', clientid);
-		$(rowNode).attr('data-keywordid', keywordid);
 	});
 };
 
@@ -806,16 +808,17 @@ function add_advsearch_news_data(newsdata, clientid) {
 
 function remove_keyword_news(keywordid) {
 	$('.dataTables_processing').show();
-	drows = tablenews.rows('tr[data-keywordid='+keywordid+']');
+
 	$('#selpckr_2').html('<option val=""></option>');
-	tvarr = [];
 	$('#selpckr_3').html('<option val=""></option>');
-	varr = [];
 	$('#selpckr_4').html('<option val=""></option>');
-	earr = [];
 	$('#selpckr_5').html('<option val=""></option>');
-	pcarr = [];
-	drows.remove().draw();
+	tvarr = [], varr = [], earr = [], pcarr = [];
+
+	drows = tablenews.columns(4).node();
+	console.log(drows);
+	// drows.remove().draw();
+
 	$('.dataTables_processing').hide();
 };
 
