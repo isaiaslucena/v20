@@ -770,7 +770,7 @@ function each_news_data(endata, keywordid, clientid) {
 			// newnode = tablenews.cell(rowindex,4).data(newdata).draw(false).node();
 
 			newnode = tablenews.cell(rowindex,4).node();
-			$(newnode).append(', '+vpchave);
+			$(newnode).append('<span>, </span>'+vpchave);
 
 			modrownode = tablenews.row('#tr_'+val.Id).node();
 			$(modrownode).attr('data-multiplekw', true);
@@ -815,8 +815,36 @@ function remove_keyword_news(keywordid) {
 	$('#selpckr_5').html('<option val=""></option>');
 	tvarr = [], varr = [], earr = [], pcarr = [];
 
-	drows = tablenews.columns(4).node();
-	console.log(drows);
+	// tablenews.rows().every(function(index){
+	// 	nnod = this.cell(index,4).nodes();
+	// 	nnodkw = $(nnod).attr('data-keywordid');
+	// 	nnodtr = $(nnod).attr('data-trid');
+	// 	if (nnodkw == keywordid) {
+	// 		tablenews.row(nnodtr).remove().draw();
+	// 	}
+	// });
+
+	tbnodes = tablenews.rows().column(4).nodes();
+	tbnodes.map(function(val, index) {
+		ckws = $(val).children();
+		if (ckws.length > 1) {
+			console.log('#'+trid+' has more then one keyword. Removing the keyword only...');
+			ckws.map(function(cval, index) {
+				ckwid = ckws.attr('data-keywordid');
+				if (ckwid == keywordid) {
+					console.log('removing keyword with id '+ckwid+'...');
+					$(cval).remove();
+				}
+			});
+		} else {
+			ckwid = ckws.attr('data-keywordid');
+			trid = ckws.attr('data-trid');
+			console.log('#'+trid+' has only one keyword. Removing entire row...');
+			tablenews.row('#'+trid).remove().draw();
+		}
+	});
+
+	// console.log(drows);
 	// drows.remove().draw();
 
 	$('.dataTables_processing').hide();
@@ -1507,7 +1535,7 @@ function set_subjects(subjdata) {
 		$('#adssubject').append(html);
 	});
 	$('#adssubject').selectpicker('refresh');
-	console.log('Done.');
+	// console.log('Done.');
 };
 
 function get_keywordsfromsubject(subjectid, callback) {

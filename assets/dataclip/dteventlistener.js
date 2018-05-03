@@ -468,15 +468,15 @@ document.getElementById('btnclose').addEventListener('click', function(){
 	document.getElementById('mediactni').scrollTop = 0;
 });
 
-$(document).on('click', '.bs-select-all', function(event) {
-	console.log('Clicked on Select All');
-	console.log(event);
-});
+// $(document).on('click', '.bs-select-all', function(event) {
+// 	console.log('Clicked on Select All');
+// 	console.log(event);
+// });
 
-$(document).on('click', '.bs-deselect-all', function(event) {
-	console.log('Clicked on Deselect All');
-	console.log(event);
-});
+// $(document).on('click', '.bs-deselect-all', function(event) {
+// 	console.log('Clicked on Deselect All');
+// 	console.log(event);
+// });
 
 $(document).on('changed.bs.select', '#sublist select', function(e, clickedIndex, newValue, oldValue) {
 	keywid = $(this).find('option').eq(clickedIndex).attr('data-keywordid');
