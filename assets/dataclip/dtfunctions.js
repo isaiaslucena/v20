@@ -770,7 +770,7 @@ function each_news_data(endata, keywordid, clientid) {
 			// newnode = tablenews.cell(rowindex,4).data(newdata).draw(false).node();
 
 			newnode = tablenews.cell(rowindex,4).node();
-			$(newnode).append('<span>, </span>'+vpchave);
+			$(newnode).append('<span data-kwseparator="true">, </span>'+vpchave);
 
 			modrownode = tablenews.row('#tr_'+val.Id).node();
 			$(modrownode).attr('data-multiplekw', true);
@@ -815,37 +815,32 @@ function remove_keyword_news(keywordid) {
 	$('#selpckr_5').html('<option val=""></option>');
 	tvarr = [], varr = [], earr = [], pcarr = [];
 
-	// tablenews.rows().every(function(index){
-	// 	nnod = this.cell(index,4).nodes();
-	// 	nnodkw = $(nnod).attr('data-keywordid');
-	// 	nnodtr = $(nnod).attr('data-trid');
-	// 	if (nnodkw == keywordid) {
-	// 		tablenews.row(nnodtr).remove().draw();
-	// 	}
-	// });
-
 	tbnodes = tablenews.rows().column(4).nodes();
 	tbnodes.map(function(val, index) {
-		ckws = $(val).children();
+		ckws = $(val).children('span[data-keywordid]');
 		if (ckws.length > 1) {
-			console.log('#'+trid+' has more then one keyword. Removing the keyword only...');
+			trid = ckws.attr('data-trid');
 			ckws.map(function(cval, index) {
-				ckwid = ckws.attr('data-keywordid');
+				ckwid = $(index).attr('data-keywordid');
+				// console.log('keyword id '+ckwid);
 				if (ckwid == keywordid) {
-					console.log('removing keyword with id '+ckwid+'...');
-					$(cval).remove();
+					// console.log('Removing keyword with id '+ckwid+'...');
+					$(index).detach();
 				}
 			});
+			ckws = $(val).children('span[data-keywordid]');
+			if (ckws.length == 1) {
+				$(val).children('span[data-kwseparator]').detach();
+			}
+			tablenews.rows().column(4).draw(false);
 		} else {
 			ckwid = ckws.attr('data-keywordid');
 			trid = ckws.attr('data-trid');
-			console.log('#'+trid+' has only one keyword. Removing entire row...');
-			tablenews.row('#'+trid).remove().draw();
+			if (ckwid == keywordid) {
+				tablenews.row('#'+trid).remove().draw(false);
+			}
 		}
 	});
-
-	// console.log(drows);
-	// drows.remove().draw();
 
 	$('.dataTables_processing').hide();
 };
