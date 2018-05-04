@@ -150,6 +150,14 @@
 		}
 	});
 
+	new $.fn.dataTable.Buttons(tablenews, {
+		buttons: [
+			'copy', 'excel', 'csv', 'pdf'
+		]
+	});
+
+	// tablenews.buttons().container().appendTo('#divbtnsnews');
+
 	$('#adsdatepicker').datepicker({
 		format: "dd/mm/yyyy",
 		language: 'pt-BR',

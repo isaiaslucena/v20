@@ -765,16 +765,11 @@ function each_news_data(endata, keywordid, clientid) {
 		var tablenodes = tablenews.rows().nodes();
 		if ($(tablenodes).filter('tr#tr_'+val.Id).length == 1) {
 			rowindex = tablenews.row('#tr_'+val.Id).index();
-			// olddata = tablenews.cell(rowindex,4).data();
-			// newdata = olddata+', '+val.PalavraChave;
-			// newnode = tablenews.cell(rowindex,4).data(newdata).draw(false).node();
-
 			newnode = tablenews.cell(rowindex,4).node();
 			$(newnode).append('<span data-kwseparator="true">, </span>'+vpchave);
 
 			modrownode = tablenews.row('#tr_'+val.Id).node();
 			$(modrownode).attr('data-multiplekw', true);
-
 		} else {
 			var rowNode = tablenews.row.add(
 				[
@@ -822,16 +817,15 @@ function remove_keyword_news(keywordid) {
 			trid = ckws.attr('data-trid');
 			ckws.map(function(cval, index) {
 				ckwid = $(index).attr('data-keywordid');
-				// console.log('keyword id '+ckwid);
 				if (ckwid == keywordid) {
-					// console.log('Removing keyword with id '+ckwid+'...');
+					if (cval == 0) {
+						$(index).next('span[data-kwseparator]').detach();
+					} else {
+						$(index).prev('span[data-kwseparator]').detach();
+					}
 					$(index).detach();
 				}
 			});
-			ckws = $(val).children('span[data-keywordid]');
-			if (ckws.length == 1) {
-				$(val).children('span[data-kwseparator]').detach();
-			}
 			tablenews.rows().column(4).draw(false);
 		} else {
 			ckwid = ckws.attr('data-keywordid');

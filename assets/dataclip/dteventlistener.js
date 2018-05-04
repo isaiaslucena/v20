@@ -317,6 +317,11 @@ $('#tablenews').on(
 	}
 );
 
+$('#btneexcel').click(function(event) {
+	 // $(this).trigger('click.dtb');
+	 tablenews.button(1).trigger();
+});
+
 $(document).on('click', '.tooltipa', function(event) {
 	var titlec = $(this);
 	var titletrid = titlec.parent().parent().attr('id');

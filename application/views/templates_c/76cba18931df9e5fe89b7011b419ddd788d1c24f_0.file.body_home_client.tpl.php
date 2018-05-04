@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-27 14:44:58
+/* Smarty version 3.1.30, created on 2018-05-04 12:10:39
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae3619ae272d6_46786056',
+  'unifunc' => 'content_5aec77ef2a0ad2_84338598',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1524850950,
+      1 => 1525446635,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5ae3619ae272d6_46786056 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aec77ef2a0ad2_84338598 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14624580355ae3619ae06cb0_48236698', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13355002445aec77ef282647_17112281', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_14624580355ae3619ae06cb0_48236698 extends Smarty_Internal_Block
+class Block_13355002445aec77ef282647_17112281 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -230,7 +230,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			<div class="row">
 					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
-							<div class="panel-body">
+							<div id="divbtnsnews" class="panel-body">
 								<div id="btnsgroupnews" class="btn-group btn-group-justified center-block">
 									<div class="btn-group">
 										<button id="btnasearch" class="btn btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
@@ -248,7 +248,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 										<button id="btnepdf" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
 									</div>
 									<div class="btn-group">
-										<button id="btneexcel" class="btn btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
+										<button id="btneexcel" class="btn btn-primary" type="button" tabindex="0" aria-controls="tablenews">
+											<i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span>
+										</button>
 									</div>
 									<div class="btn-group">
 										<button id="btnforward" class="btn btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
@@ -283,8 +285,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<th class="text-center">Editoria</th>
 											<th class="text-center">Palavra-Chave</th>
 											<th class="text-center">Título</th>
-											<th class="text-center">Valor</th>
-											<th class="text-center">Audiência</th>
+											<th class="text-left">Valor</th>
+											<th class="text-left">Audiência</th>
 											<th class="text-center">Aval/Motiv</th>
 										</tr>
 									</thead>
@@ -302,6 +304,41 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 											<th class="text-center">Aval/Motiv</th>
 										</tr>
 									</tfoot>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12 element">
+					<div class="hpanel">
+						<div class="panel-body">
+							<div id="divtableexport" class="table-responsive">
+								<table id="tableexport" cellpadding="0.5" cellspacing="1" class="table table-bordered table-striped table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">ID</th>
+											<th class="text-center">Data</th>
+											<th class="text-center">Hora</th>
+											<th class="text-center">Título</th>
+											<th class="text-center">URL</th>
+											<th class="text-center">URL Sistema</th>
+											<th class="text-center">Tipo de Veículo</th>
+											<th class="text-center">Veículo</th>
+											<th class="text-center">Editoria</th>
+											<th class="text-center">Assunto</th>
+											<th class="text-center">Palavra-Chave</th>
+											<th class="text-center">Tier</th>
+											<th class="text-left">Valor</th>
+											<th class="text-left">Audiência</th>
+											<th class="text-center">Avaliação</th>
+											<th class="text-center">Motivação</th>
+										</tr>
+									</thead>
+									<tbody class="text-center"></tbody>
 								</table>
 							</div>
 						</div>

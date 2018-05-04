@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-27 16:00:49
+/* Smarty version 3.1.30, created on 2018-05-04 14:19:48
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae373613bb686_57204910',
+  'unifunc' => 'content_5aec9634409a33_55796548',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1524855646,
+      1 => 1525450932,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5ae373613bb686_57204910 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aec9634409a33_55796548 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12114921025ae373613b0d69_32666051', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20448324095aec96343f9085_83777775', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_12114921025ae373613b0d69_32666051 extends Smarty_Internal_Block
+class Block_20448324095aec96343f9085_83777775 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -193,6 +193,14 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			}
 		}
 	});
+
+	new $.fn.dataTable.Buttons(tablenews, {
+		buttons: [
+			'copy', 'excel', 'csv', 'pdf'
+		]
+	});
+
+	// tablenews.buttons().container().appendTo('#divbtnsnews');
 
 	$('#adsdatepicker').datepicker({
 		format: "dd/mm/yyyy",

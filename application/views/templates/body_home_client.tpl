@@ -193,7 +193,7 @@
 			<div class="row">
 					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
-							<div class="panel-body">
+							<div id="divbtnsnews" class="panel-body">
 								<div id="btnsgroupnews" class="btn-group btn-group-justified center-block">
 									<div class="btn-group">
 										<button id="btnasearch" class="btn btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
@@ -211,7 +211,9 @@
 										<button id="btnepdf" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
 									</div>
 									<div class="btn-group">
-										<button id="btneexcel" class="btn btn-primary" type="button"><i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span></button>
+										<button id="btneexcel" class="btn btn-primary" type="button" tabindex="0" aria-controls="tablenews">
+											<i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span>
+										</button>
 									</div>
 									<div class="btn-group">
 										<button id="btnforward" class="btn btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
@@ -246,8 +248,8 @@
 											<th class="text-center">Editoria</th>
 											<th class="text-center">Palavra-Chave</th>
 											<th class="text-center">Título</th>
-											<th class="text-center">Valor</th>
-											<th class="text-center">Audiência</th>
+											<th class="text-left">Valor</th>
+											<th class="text-left">Audiência</th>
 											<th class="text-center">Aval/Motiv</th>
 										</tr>
 									</thead>
@@ -265,6 +267,41 @@
 											<th class="text-center">Aval/Motiv</th>
 										</tr>
 									</tfoot>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{* Export News Table *}
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12 element">
+					<div class="hpanel">
+						<div class="panel-body">
+							<div id="divtableexport" class="table-responsive">
+								<table id="tableexport" cellpadding="0.5" cellspacing="1" class="table table-bordered table-striped table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">ID</th>
+											<th class="text-center">Data</th>
+											<th class="text-center">Hora</th>
+											<th class="text-center">Título</th>
+											<th class="text-center">URL</th>
+											<th class="text-center">URL Sistema</th>
+											<th class="text-center">Tipo de Veículo</th>
+											<th class="text-center">Veículo</th>
+											<th class="text-center">Editoria</th>
+											<th class="text-center">Assunto</th>
+											<th class="text-center">Palavra-Chave</th>
+											<th class="text-center">Tier</th>
+											<th class="text-left">Valor</th>
+											<th class="text-left">Audiência</th>
+											<th class="text-center">Avaliação</th>
+											<th class="text-center">Motivação</th>
+										</tr>
+									</thead>
+									<tbody class="text-center"></tbody>
 								</table>
 							</div>
 						</div>
