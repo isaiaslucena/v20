@@ -318,8 +318,16 @@ $('#tablenews').on(
 );
 
 $('#btneexcel').click(function(event) {
-	 // $(this).trigger('click.dtb');
-	 tablenews.button(1).trigger();
+	tbnrows = tablenews.rows().nodes();
+	idsnots = tbnrows.map(function(index, elem) {
+		return $(index).attr('id').replace('tr_','');
+	});
+
+	console.log(idsnots);
+
+	// add_data_export();
+
+	// tableexport.button(1).trigger();
 });
 
 $(document).on('click', '.tooltipa', function(event) {

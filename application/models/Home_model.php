@@ -707,7 +707,7 @@ class Home_model extends CI_Model {
 		}
 	}
 
-	public function advsearch($data){
+	public function advsearch($data) {
 		$startdate = $data['startdate'];
 		$enddate = $data['enddate'];
 		$starttime = $data['starttime'];
@@ -821,6 +821,10 @@ class Home_model extends CI_Model {
 			$fulldata['data'] = $this->db->query($sqlquery)->result_array();
 		}
 		return $fulldata;
+	}
+
+	public function excel_export() {
+		echo 'teste';
 	}
 }
 

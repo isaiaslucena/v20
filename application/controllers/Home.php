@@ -445,6 +445,19 @@ class Home extends CI_Controller {
 		// print json_encode($datan, JSON_PRETTY_PRINT);
 	}
 
+	public function excel_export(){
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"),true));
+
+			$dataexp = $this->home_model->excel_export();
+
+			header('Content-Type: application/json, charset=utf-8');
+			print json_encode($dataexp, JSON_PRETTY_PRINT);
+		} else {
+			header("HTTP/1.1 405 Method Not Allowed");
+		}
+	}
+
 	public function set_aval() {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"),true));

@@ -1710,6 +1710,10 @@ function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 	});
 };
 
+function add_data_export(data) {
+	
+}
+
 function postData(url, data) {
 	// Default options are marked with *
 	return fetch(url, {

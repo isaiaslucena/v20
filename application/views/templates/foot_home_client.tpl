@@ -15,7 +15,7 @@
 	var clientselb = (clientsel == 'true');
 
 	{literal}
-	var rfdata, dtworker, dtrefreshworker, cid, cliid, tablenews, tablenewsfn, cname, firsttabn,
+	var rfdata, dtworker, dtrefreshworker, cid, cliid, tablenews, tableexport, tablenewsfn, cname, firsttabn,
 	sectabn, subjectid, subjectnm, keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
 	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
@@ -150,9 +150,16 @@
 		}
 	});
 
-	new $.fn.dataTable.Buttons(tablenews, {
+	tableexport = $('#tableexport').DataTable({
+		'destroy': true,
+		'autoWidth': true,
+		'rowId': 'IdNoticia',
+		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
+	});
+
+	new $.fn.dataTable.Buttons(tableexport, {
 		buttons: [
-			'copy', 'excel', 'csv', 'pdf'
+			'copy', 'excel', 'csv'
 		]
 	});
 
