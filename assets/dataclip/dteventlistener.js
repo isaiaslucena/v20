@@ -306,26 +306,53 @@ $('#tablenews').on(
 		// var trc = tablenews.row(this).node();
 		$(this).parent().toggleClass('selected');
 		trselclass = $(this).parent().hasClass('selected');
-		trselid = $(this).parent().attr('id');
+		trselid = $(this).parent().attr('id').replace('tr_','');
 		if (trselclass) {
 			trselected.push(trselid);
 		} else {
 			trselidx = trselected.indexOf(trselid);
 			trselected.splice(trselidx, 1);
 		}
-		console.log(trselected);
+		// console.log(trselected);
 	}
 );
 
 $('#btneexcel').click(function(event) {
-	tbnrows = tablenews.rows().nodes();
-	idsnots = tbnrows.map(function(index, elem) {
-		return $(index).attr('id').replace('tr_','');
+	idsnots = [];
+	idskws = [];
+
+	if (trselected.length > 0) {
+		tbnrows = trselected;
+	} else {
+		tbnrows = [];
+		tbnrowsnodes = tablenews.rows().nodes();
+		tbnrowsnodes.map(function(index, elem) {
+			tbnrows.push($(index).attr('id'));
+		});
+	}
+
+	tbnrows.map(function(index, elem) {
+		idsnots.push(parseInt(index.replace('tr_','')));
+		rowindex = tablenews.row('#tr_'+elem.Id).index();
+		cellnode = tablenews.cell(rowindex,4).node();
+		ckws = $(cellnode).children('span[data-keywordid]');
+		ckws.map(function(index, elem) {
+			attelem = $(elem).attr('data-keywordid');
+			if (idskws.indexOf(parseInt(attelem)) === -1) {
+				idskws.push(parseInt(attelem));
+			}
+		});
 	});
 
-	console.log(idsnots);
+	exportdata = {
+		'idemp': cliid,
+		'idsnot': idsnots,
+		'idskw': idskws
+	}
 
-	// add_data_export();
+	console.log(exportdata);
+
+	add_data_export(exportdata);
 
 	// tableexport.button(1).trigger();
 });

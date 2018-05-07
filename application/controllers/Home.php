@@ -449,7 +449,7 @@ class Home extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"),true));
 
-			$dataexp = $this->home_model->excel_export();
+			$dataexp = $this->home_model->excel_export($postdata);
 
 			header('Content-Type: application/json, charset=utf-8');
 			print json_encode($dataexp, JSON_PRETTY_PRINT);

@@ -1711,7 +1711,7 @@ function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 };
 
 function add_data_export(data) {
-	
+	console.log(postData('/home/excel_export', data));
 }
 
 function postData(url, data) {

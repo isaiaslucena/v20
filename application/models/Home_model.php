@@ -823,8 +823,41 @@ class Home_model extends CI_Model {
 		return $fulldata;
 	}
 
-	public function excel_export() {
-		echo 'teste';
+	public function excel_export($edata) {
+		$idemp = $edata['idemp'];
+		$idsnot = implode(",", $edata['idsnot']);
+		$idskw = implode(",", $edata['idskw']);
+
+		$sqlquery =	"SELECT
+								nt.Id as IdNoticia, nt.Data, nt.Hora, nt.Titulo, nt.URL,
+								CONCAT('http://v20.intranet.dataclip.com.br/home/news/',nt.Id,'/',ntp.IdEmpresa) as URL_Sistema,
+								tve.Nome as TipodeVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
+								ass.Nome as Assunto,
+								GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
+								ve.TiragemSemana as Tier,
+								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
+								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Equivalencia,
+								CASE WHEN ntp.Avaliacao = 1 THEN 'Negativo' WHEN ntp.Avaliacao = 2 THEN 'Neutro' WHEN ntp.Avaliacao = 3 THEN 'Positivo' END AS Avaliacao,
+								CASE WHEN ntp.Motivacao = 1 THEN 'Espontanea' WHEN ntp.Motivacao = 2 THEN 'Provocada' END AS Motivacao
+								FROM Noticias nt
+								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+								INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+								LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+								WHERE
+								ntp.idEmpresa = $idemp AND
+								nt.Id IN ($idsnot) AND
+								ntp.idPalavraChave IN ($idskw)
+								GROUP BY nt.Id
+								ORDER BY nt.Id ASC";
+
+		return $this->db->query($sqlquery)->result_array();
 	}
 }
 
