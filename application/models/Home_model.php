@@ -281,8 +281,9 @@ class Home_model extends CI_Model {
 								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
 								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
 								WHERE
-								ntp.idPalavraChave = $keywordid AND ent.IdEmpresa = $clientid AND
-								nt.Data BETWEEN '$startdate' AND '$enddate'
+								nt.Data BETWEEN '$startdate' AND '$enddate' AND
+								ent.IdEmpresa = $clientid AND
+								ntp.idPalavraChave = $keywordid
 								ORDER BY nt.Data DESC";
 		return $this->db->query($sqlquery)->result_array();
 	}
@@ -738,7 +739,9 @@ class Home_model extends CI_Model {
 								nt.idVeiculo, ve.Nome as Veiculo,
 								nt.idEditoria, ed.Nome as Editoria,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
-								GROUP_CONCAT(DISTINCT pc.Nome ORDER BY pc.Nome SEPARATOR ', ') as PalavraChave,
+								-- GROUP_CONCAT(DISTINCT pc.Nome ORDER BY pc.Nome SEPARATOR ', ') as PalavraChave,
+								pc.Id as idPalavraChave,
+								pc.Nome as PalavraChave,
 								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
 								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
 								npc.Avaliacao, npc.Motivacao
@@ -805,10 +808,15 @@ class Home_model extends CI_Model {
 			$countquery .= "AND npc.Avaliacao IN ($avaliacao) ";
 		}
 
-		// $offset = $offset + 10;
-		// $sqlquery .= "LIMIT 10, 10;";
-		$sqlquery .= "GROUP BY nt.Id";
-		$countquery .= "GROUP BY nt.Id";
+
+		// $sqlquery .= "GROUP BY nt.Id ";
+		// $countquery .= "GROUP BY nt.Id ";
+
+		// $sqlquery .= "GROUP BY npc.Id ";
+		// $countquery .= "GROUP BY npc.Id ";
+
+		$sqlsquery = "ORDER BY nt.Id ASC";
+		$countsquery = "ORDER BY nt.Id ASC";
 
 		$countdata = $this->db->query($countquery)->row('quant');
 		$fulldata['recordsTotal'] = $countdata;
@@ -824,6 +832,8 @@ class Home_model extends CI_Model {
 	}
 
 	public function excel_export($edata) {
+		$startdate = $edata['startdate'];
+		$enddate = $edata['enddate'];
 		$idemp = $edata['idemp'];
 		$idsnot = implode(",", $edata['idsnot']);
 		$idskw = implode(",", $edata['idskw']);
@@ -851,9 +861,10 @@ class Home_model extends CI_Model {
 								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
 								LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
 								WHERE
+								-- nt.Data BETWEEN '$startdate' AND '$enddate' AND
 								ntp.idEmpresa = $idemp AND
-								nt.Id IN ($idsnot) AND
-								ntp.idPalavraChave IN ($idskw)
+								ntp.idPalavraChave IN ($idskw) AND
+								nt.Id IN ($idsnot)
 								GROUP BY nt.Id
 								ORDER BY nt.Id ASC";
 

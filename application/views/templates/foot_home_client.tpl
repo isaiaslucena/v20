@@ -160,8 +160,32 @@
 		'buttons': {
 			'buttons': [
 				{
-					'action': function(dt) {
-						console.log('action excel');
+					'title': 'ExportarExcel',
+					'extend': 'excelHtml5',
+					// 'action': function(dt) {
+					// 	console.log(dt);
+					// },
+					'customize': function(xlsx) {
+						console.log(xlsx);
+						var sheet = xlsx.xl.worksheets['sheet1.xml'];
+
+						//bold at colunm "C"
+						// $('row c[r^="C"]', sheet).attr('s','2');
+						// $('row c[r^="C"]', sheet).attr('s','2');
+
+						// console.log($('row c[r="2"]', sheet));
+
+						//background row 2
+						$('row [r="2"]', sheet).attr('s', '20');
+
+						//line on all rows
+						$('row', sheet).each(function(index, elem) {
+							console.log($(elem));
+							// $('row c[r*="10"]', sheet).attr( 's', '25' );
+							$(elem).attr( 's', '25' );
+						});
+
+
 					}
 				}
 			]

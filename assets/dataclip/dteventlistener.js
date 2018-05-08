@@ -313,7 +313,7 @@ $('#tablenews').on(
 			trselidx = trselected.indexOf(trselid);
 			trselected.splice(trselidx, 1);
 		}
-		// console.log(trselected);
+		console.log(trselected);
 	}
 );
 
@@ -326,31 +326,37 @@ $('#btneexcel').click(function(event) {
 	} else {
 		tbnrows = [];
 		tbnrowsnodes = tablenews.rows().nodes();
-		tbnrowsnodes.map(function(index, elem) {
-			tbnrows.push($(index).attr('id'));
+		tbnrowsnodes.map(function(tbnrindex, tbnrelem) {
+			tbnrows.push($(tbnrindex).attr('id'));
 		});
 	}
 
-	tbnrows.map(function(index, elem) {
-		idsnots.push(parseInt(index.replace('tr_','')));
-		rowindex = tablenews.row('#tr_'+elem.Id).index();
+	tbnrows.map(function(tbnindex, tbnelem) {
+		tbnidnot = parseInt(tbnindex.replace('tr_',''));
+		idsnots.push(tbnidnot);
+		rowindex = tablenews.row('#tr_'+tbnidnot).index();
 		cellnode = tablenews.cell(rowindex,4).node();
 		ckws = $(cellnode).children('span[data-keywordid]');
-		ckws.map(function(index, elem) {
-			attelem = $(elem).attr('data-keywordid');
-			if (idskws.indexOf(parseInt(attelem)) === -1) {
+		ckws.map(function(ckwindex, ckwelem) {
+			attelem = parseInt($(ckwelem).attr('data-keywordid'));
+			if (idskws.indexOf(attelem) === -1) {
 				idskws.push(parseInt(attelem));
 			}
 		});
 	});
 
+	startdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+	enddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+
 	exportdata = {
+		'startdate': startdate,
+		'enddate': enddate,
 		'idemp': cliid,
-		'idsnot': idsnots,
-		'idskw': idskws
+		'idsnot': idsnots.sort(),
+		'idskw': idskws.sort()
 	}
 
-	// console.log(exportdata);
+	console.log(exportdata);
 
 	add_data_export(exportdata, function(e){
 		tableexport.button(0).trigger();

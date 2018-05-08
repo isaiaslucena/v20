@@ -794,7 +794,13 @@ function each_news_data(endata, keywordid, clientid) {
 function add_advsearch_news_data(newsdata, clientid) {
 	tablenews.clear().draw();
 
-	each_news_data(newsdata.data, 0, clientid);
+	$.map(newsdata.data, function(item, index) {
+		// console.log(item);
+		nwskwid = item.idPalavraChave;
+		itemarr = [];
+		itemarr.push(item);
+		each_news_data(itemarr, nwskwid, clientid);
+	});
 
 	cadsbtn.ladda('stop');
 	$('#advancedsearch').modal('hide');
@@ -1716,6 +1722,8 @@ function add_data_export(data, callback) {
 	.then(redata => {
 		console.log(redata);
 
+		// countred = redata.length;
+		// count = 0;
 		redata.map(function(index, elem) {
 			residnoticia = index.IdNoticia;
 			resdata = index.Data;
@@ -1754,8 +1762,11 @@ function add_data_export(data, callback) {
 					resmotivacao
 				]
 			).draw(false).node();
-		});
 
+			// if (count.length == countred) {
+			// }
+			// count += 1;
+		});
 		callback();
 	})
 	.catch(error => console.error(error))
