@@ -61,7 +61,7 @@
 		'responsive': true,
 		'scrollX': false,
 		'processing': true,
-		'rowId': 'id',
+		'rowId': 'Id',
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
 		'initComplete': function(settings) {
 			this.api().columns(1).every(function(coln) {
@@ -151,17 +151,31 @@
 	});
 
 	tableexport = $('#tableexport').DataTable({
+		'order': [
+			[0, 'asc']
+		],
 		'destroy': true,
 		'autoWidth': true,
-		'rowId': 'IdNoticia',
-		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
+		'rowId': 'Id',
+		'buttons': {
+			'buttons': [
+				{
+					'action': function(dt) {
+						console.log('action excel');
+					}
+				}
+			]
+		},
+		'processing': true,
+		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
 	});
 
-	new $.fn.dataTable.Buttons(tableexport, {
-		buttons: [
-			'copy', 'excel', 'csv'
-		]
-	});
+	// new $.fn.dataTable.Buttons(tableexport, {
+	// 	buttons: [
+	// 		'copy', 'excel', 'csv'
+	// 	],
+	// 	processing: true
+	// });
 
 	// tablenews.buttons().container().appendTo('#divbtnsnews');
 

@@ -829,14 +829,14 @@ class Home_model extends CI_Model {
 		$idskw = implode(",", $edata['idskw']);
 
 		$sqlquery =	"SELECT
-								nt.Id as IdNoticia, nt.Data, nt.Hora, nt.Titulo, nt.URL,
+								nt.Id, nt.Id as IdNoticia, nt.Data, nt.Hora, nt.Titulo, nt.URL as URL_Externo,
 								CONCAT('http://v20.intranet.dataclip.com.br/home/news/',nt.Id,'/',ntp.IdEmpresa) as URL_Sistema,
-								tve.Nome as TipodeVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
+								tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
 								ass.Nome as Assunto,
 								GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
 								ve.TiragemSemana as Tier,
 								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
-								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Equivalencia,
+								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
 								CASE WHEN ntp.Avaliacao = 1 THEN 'Negativo' WHEN ntp.Avaliacao = 2 THEN 'Neutro' WHEN ntp.Avaliacao = 3 THEN 'Positivo' END AS Avaliacao,
 								CASE WHEN ntp.Motivacao = 1 THEN 'Espontanea' WHEN ntp.Motivacao = 2 THEN 'Provocada' END AS Motivacao
 								FROM Noticias nt

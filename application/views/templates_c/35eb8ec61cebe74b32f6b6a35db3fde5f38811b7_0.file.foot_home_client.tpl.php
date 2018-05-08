@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-07 11:56:25
+/* Smarty version 3.1.30, created on 2018-05-07 17:49:11
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af06919c6ada5_86303884',
+  'unifunc' => 'content_5af0bbc7a46b45_36504358',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1525704980,
+      1 => 1525726146,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5af06919c6ada5_86303884 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af0bbc7a46b45_36504358 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11881997295af06919c51dc8_43566389', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9355711795af0bbc7a37922_53501153', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_11881997295af06919c51dc8_43566389 extends Smarty_Internal_Block
+class Block_9355711795af0bbc7a37922_53501153 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -105,7 +105,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		'responsive': true,
 		'scrollX': false,
 		'processing': true,
-		'rowId': 'id',
+		'rowId': 'Id',
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
 		'initComplete': function(settings) {
 			this.api().columns(1).every(function(coln) {
@@ -195,17 +195,31 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	});
 
 	tableexport = $('#tableexport').DataTable({
+		'order': [
+			[0, 'asc']
+		],
 		'destroy': true,
 		'autoWidth': true,
-		'rowId': 'IdNoticia',
-		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
+		'rowId': 'Id',
+		'buttons': {
+			'buttons': [
+				{
+					'action': function(dt) {
+						console.log('action excel');
+					}
+				}
+			]
+		},
+		'processing': true,
+		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
 	});
 
-	new $.fn.dataTable.Buttons(tableexport, {
-		buttons: [
-			'copy', 'excel', 'csv'
-		]
-	});
+	// new $.fn.dataTable.Buttons(tableexport, {
+	// 	buttons: [
+	// 		'copy', 'excel', 'csv'
+	// 	],
+	// 	processing: true
+	// });
 
 	// tablenews.buttons().container().appendTo('#divbtnsnews');
 

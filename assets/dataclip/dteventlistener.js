@@ -350,11 +350,11 @@ $('#btneexcel').click(function(event) {
 		'idskw': idskws
 	}
 
-	console.log(exportdata);
+	// console.log(exportdata);
 
-	add_data_export(exportdata);
-
-	// tableexport.button(1).trigger();
+	add_data_export(exportdata, function(e){
+		tableexport.button(0).trigger();
+	});
 });
 
 $(document).on('click', '.tooltipa', function(event) {

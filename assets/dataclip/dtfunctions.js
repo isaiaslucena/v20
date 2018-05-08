@@ -1710,8 +1710,55 @@ function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 	});
 };
 
-function add_data_export(data) {
-	console.log(postData('/home/excel_export', data));
+function add_data_export(data, callback) {
+	tableexport.clear().draw();
+	postData('/home/excel_export', data)
+	.then(redata => {
+		console.log(redata);
+
+		redata.map(function(index, elem) {
+			residnoticia = index.IdNoticia;
+			resdata = index.Data;
+			reshora = index.Hora;
+			restititulo = index.Titulo;
+			resurl = index.URL_Externo;
+			resurlsistema = index.URL_Sistema;
+			restveiculo = index.TipoVeiculo;
+			resveiculo = index.Veiculo;
+			reseditoria = index.Editoria;
+			resassunto = index.Assunto;
+			respchave = index.PalavraChave;
+			restier = index.Tier;
+			resvalor = index.Valor;
+			resaudiencia = index.Audiencia;
+			resavaliacao = index.Avaliacao;
+			resmotivacao = index.Motivacao;
+
+			var rowNode = tableexport.row.add(
+				[
+					residnoticia,
+					resdata,
+					reshora,
+					restititulo,
+					resurl,
+					resurlsistema,
+					restveiculo,
+					resveiculo,
+					reseditoria,
+					resassunto,
+					respchave,
+					restier,
+					resvalor,
+					resaudiencia,
+					resavaliacao,
+					resmotivacao
+				]
+			).draw(false).node();
+		});
+
+		callback();
+	})
+	.catch(error => console.error(error))
 }
 
 function postData(url, data) {
