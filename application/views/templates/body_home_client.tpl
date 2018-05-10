@@ -558,21 +558,24 @@
 			<div class="modal-dialog" style="margin-top: 15px">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
-						<h5>Meu Clipping</h5>
+						<h4>Meu Clipping</h4>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body center-block">
 						<div class="row">
 							<div class="col-lg-12">
-								<div id="create">
-									XXX Noticias Selecionadas 
-									<button class="btn btn-sm btn-primary"><i class="fa fa-plus-o"></i> Criar</button>
+								<div id="mclippcreate">
+									<span id="mclippcnews"></span>
+									 <button id="mclippbtncreate" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Criar</button>
 								</div>
 							</div>
 						</div>
-
+						<br>
 						<div class="row">
 							<div class="col-lg-6">
-								<div id="mclipplist" class="list-group"></div>
+								<div id="mclippwait" class="center-block">
+									<img src="/assets/imgs/loading.gif" width="40">
+								</div>
+								<div id="mclipplist" class="list-group" style="display: none;"></div>
 							</div>
 						</div>
 					</div>

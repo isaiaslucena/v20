@@ -293,6 +293,11 @@ $('#showsinglenews').on('hide.bs.modal', function(event) {
 	}
 });
 
+$('#myclipping').on('hide.bs.modal', function(event) {
+	$('#mclippwait').css('display', 'block');
+	$('#mclipplist').css('display', 'none');
+});
+
 $('#tablenews').on(
 	'click',
 	'tbody > tr > td:nth-child(2),'+
@@ -316,32 +321,7 @@ $('#tablenews').on(
 );
 
 $('#btneexcel').click(function(event) {
-	idsnots = [];
-	idskws = [];
-
-	if (trselected.length > 0) {
-		tbnrows = trselected;
-	} else {
-		tbnrows = [];
-		tbnrowsnodes = tablenews.rows().nodes();
-		tbnrowsnodes.map(function(tbnrindex, tbnrelem) {
-			tbnrows.push($(tbnrindex).attr('id'));
-		});
-	}
-
-	tbnrows.map(function(tbnindex, tbnelem) {
-		tbnidnot = parseInt(tbnindex.replace('tr_',''));
-		idsnots.push(tbnidnot);
-		rowindex = tablenews.row('#tr_'+tbnidnot).index();
-		cellnode = tablenews.cell(rowindex,4).node();
-		ckws = $(cellnode).children('span[data-keywordid]');
-		ckws.map(function(ckwindex, ckwelem) {
-			attelem = parseInt($(ckwelem).attr('data-keywordid'));
-			if (idskws.indexOf(attelem) === -1) {
-				idskws.push(parseInt(attelem));
-			}
-		});
-	});
+	select_news();
 
 	startdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	enddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
@@ -350,11 +330,11 @@ $('#btneexcel').click(function(event) {
 		'startdate': startdate,
 		'enddate': enddate,
 		'idemp': cliid,
-		'idsnot': idsnots.sort(),
-		'idskw': idskws.sort()
+		'idsnot': idsnots,
+		'idskw': idskws
 	}
 
-	// console.log(exportdata);
+	console.log(exportdata);
 
 	add_data_export(exportdata, function(e){
 		tableexport.button(0).trigger();
@@ -387,6 +367,17 @@ $('#btnepdf').click(function(event) {
 });
 
 $('#btnmyclipp').click(function(event) {
+	$('#myclipping').modal('show');
+
+	select_news();
+	notsarrc = idsnots.length;
+	if (notsarrc == 1) {
+		ctext = notsarrc+' notícia selecionada';
+	} else {
+		ctext = notsarrc+' notícias selecionadas';
+	}
+	$('#mclippcnews').text(ctext);
+
 	fetch('/home/get_mclipp/4240/'+cliid)
 	.then(function(response) {
 		return response.json();
@@ -398,13 +389,15 @@ $('#btnmyclipp').click(function(event) {
 		resjson.map(function(index, elem) {
 			html =	'<a type="button" class="list-group-item">'+
 								index.Nome+
-								'<button class="btn btn-warning mclippbtned" type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
-								'<button class="btn btn-danger mclippbtnex" type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
+								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
+								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
 							'</a>';
 			$('#mclipplist').append(html);
-		});
 
-		$('#myclipping').modal('show');
+			$('#mclippwait').fadeOut('fast', function() {
+				$('#mclipplist').fadeIn('fast');
+			});
+		});
 	});
 });
 

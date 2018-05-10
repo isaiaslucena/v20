@@ -1716,6 +1716,38 @@ function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 	});
 };
 
+function select_news() {
+	idsnots = [];
+	idskws = [];
+
+	if (trselected.length > 0) {
+		tbnrows = trselected;
+	} else {
+		tbnrows = [];
+		tbnrowsnodes = tablenews.rows().nodes();
+		tbnrowsnodes.map(function(tbnrindex, tbnrelem) {
+			tbnrows.push($(tbnrindex).attr('id'));
+		});
+	}
+
+	tbnrows.map(function(tbnindex, tbnelem) {
+		tbnidnot = parseInt(tbnindex.replace('tr_',''));
+		idsnots.push(tbnidnot);
+		rowindex = tablenews.row('#tr_'+tbnidnot).index();
+		cellnode = tablenews.cell(rowindex,4).node();
+		ckws = $(cellnode).children('span[data-keywordid]');
+		ckws.map(function(ckwindex, ckwelem) {
+			attelem = parseInt($(ckwelem).attr('data-keywordid'));
+			if (idskws.indexOf(attelem) === -1) {
+				idskws.push(parseInt(attelem));
+			}
+		});
+	});
+
+	idsnots.sort();
+	idskws.sort();
+};
+
 function add_data_export(data, callback) {
 	tableexport.clear().draw();
 	postData('/home/excel_export', data)

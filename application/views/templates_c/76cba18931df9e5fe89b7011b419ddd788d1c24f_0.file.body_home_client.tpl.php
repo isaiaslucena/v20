@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-09 18:11:12
+/* Smarty version 3.1.30, created on 2018-05-10 11:54:10
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af363f095cb02_70487381',
+  'unifunc' => 'content_5af45d12355237_67900186',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1525900253,
+      1 => 1525964047,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5af363f095cb02_70487381 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af45d12355237_67900186 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_616508385af363f0931fc9_75445906', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5171883665af45d12332986_54173091', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_616508385af363f0931fc9_75445906 extends Smarty_Internal_Block
+class Block_5171883665af45d12332986_54173091 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -595,21 +595,24 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			<div class="modal-dialog" style="margin-top: 15px">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
-						<h5>Meu Clipping</h5>
+						<h4>Meu Clipping</h4>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body center-block">
 						<div class="row">
 							<div class="col-lg-12">
-								<div id="create">
-									XXX Noticias Selecionadas 
-									<button class="btn btn-sm btn-primary"><i class="fa fa-plus-o"></i> Criar</button>
+								<div id="mclippcreate">
+									<span id="mclippcnews"></span>
+									 <button id="mclippbtncreate" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Criar</button>
 								</div>
 							</div>
 						</div>
-
+						<br>
 						<div class="row">
 							<div class="col-lg-6">
-								<div id="mclipplist" class="list-group"></div>
+								<div id="mclippwait" class="center-block">
+									<img src="/assets/imgs/loading.gif" width="40">
+								</div>
+								<div id="mclipplist" class="list-group" style="display: none;"></div>
 							</div>
 						</div>
 					</div>

@@ -24,7 +24,8 @@
 	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
-	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [];
+	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [],
+	idsnots = [], idskws = [];
 
 	if (window.Worker) {
 		dtworker = new Worker('/assets/dataclip/dtworker.js');
