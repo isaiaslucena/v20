@@ -589,5 +589,25 @@ class Home extends CI_Controller {
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
 		}
 	}
+
+	public function get_mclipp($iduser, $idclient) {
+		$data = $this->home_model->get_mclipp($iduser, $idclient);
+
+		header('Content-Type: application/json');
+		print json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function create_mclipp(){
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
+
+			var_dump($postdata);
+
+			// $createdata = $this->home_model->create_mclipp($postdata);
+
+			// header('Content-Type: application/json, charset=utf-8');
+			// print json_encode($searchdata, JSON_PRETTY_PRINT);
+		}
+	}
 }
 ?>

@@ -715,31 +715,31 @@ class Home_model extends CI_Model {
 		$endtime = $data['endtime'];
 		$idempresa = $data['idempresa'];
 
-		$countquery =	"SELECT
-								COUNT(nt.Id)
-								FROM Noticias nt
-								INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
-								INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
-								INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
-								INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
-								INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
-								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-								LEFT JOIN dados_estados est ON ve.idEstado = est.id
-								LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
-								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
-								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-								INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
-								INNER JOIN Empresa em ON ent.idEmpresa = em.Id
-								WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
-								AND npc.idEmpresa = $idempresa ";
+		$countquery =	"SELECT DISTINCT
+									COUNT(nt.Id) as quant
+									FROM Noticias nt
+									INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
+									INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
+									INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
+									INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
+									INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									LEFT JOIN dados_estados est ON ve.idEstado = est.id
+									LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
+									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+									INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+									INNER JOIN Empresa em ON ent.idEmpresa = em.Id
+									WHERE nt.Data BETWEEN '$startdate' AND '$enddate' AND
+									npc.Liberada = 1 AND
+									npc.idEmpresa = $idempresa ";
 
-		$sqlquery =	"SELECT
+		$sqlquery =	"SELECT DISTINCT
 								nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
 								tve.Id as IdTipoVeiculo, tve.Nome as TipoVeiculo,
 								nt.idVeiculo, ve.Nome as Veiculo,
 								nt.idEditoria, ed.Nome as Editoria,
 								ass.Id as IdAssunto, ass.Nome as Assunto,
-								-- GROUP_CONCAT(DISTINCT pc.Nome ORDER BY pc.Nome SEPARATOR ', ') as PalavraChave,
 								pc.Id as idPalavraChave,
 								pc.Nome as PalavraChave,
 								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
@@ -758,8 +758,9 @@ class Home_model extends CI_Model {
 								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
 								INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
 								INNER JOIN Empresa em ON ent.idEmpresa = em.Id
-								WHERE nt.Data BETWEEN '$startdate' AND '$enddate'
-								AND npc.idEmpresa = $idempresa ";
+								WHERE nt.Data BETWEEN '$startdate' AND '$enddate' AND
+								npc.Liberada = 1 AND
+								npc.idEmpresa = $idempresa ";
 
 		if (count($data['subjectsid']) >= 1) {
 			$idsassunto = implode(',', $data['subjectsid']);
@@ -812,23 +813,24 @@ class Home_model extends CI_Model {
 		// $sqlquery .= "GROUP BY nt.Id ";
 		// $countquery .= "GROUP BY nt.Id ";
 
-		// $sqlquery .= "GROUP BY npc.Id ";
-		// $countquery .= "GROUP BY npc.Id ";
+		// $sqlquery .= "GROUP BY pc.Id ";
+		// $countquery .= "GROUP BY pc.Id ";
 
-		$sqlsquery = "ORDER BY nt.Id ASC";
-		$countsquery = "ORDER BY nt.Id ASC";
+		$sqlquery .= "ORDER BY nt.Id ASC";
+		// $countquery .= "ORDER BY nt.Id ASC";
 
-		$countdata = $this->db->query($countquery)->row('quant');
-		$fulldata['recordsTotal'] = $countdata;
-		$fulldata['recordsFiltered'] = $countdata;
-		$fulldata['query'] = $sqlquery;
+		// $countdata = $this->db->query($countquery)->row('quant');
+		// $fulldata['recordsTotal'] = $countdata;
+		// $fulldata['recordsFiltered'] = $countdata;
+		// $fulldata['query'] = $sqlquery;
 
-		if ($countdata <= 10) {
-			$fulldata['data'] = $this->db->query($sqlquery)->result_array();
-		} else if ($countdata > 10) {
-			$fulldata['data'] = $this->db->query($sqlquery)->result_array();
-		}
-		return $fulldata;
+		// if ($countdata <= 10) {
+			// $fulldata['data'] = $this->db->query($sqlquery)->result_array();
+		// } else if ($countdata > 10) {
+			// $fulldata['data'] = $this->db->query($sqlquery)->result_array();
+		// }
+		// return $fulldata;
+		return $this->db->query($sqlquery)->result_array();
 	}
 
 	public function excel_export($edata) {
@@ -867,6 +869,12 @@ class Home_model extends CI_Model {
 								nt.Id IN ($idsnot)
 								GROUP BY nt.Id
 								ORDER BY nt.Id ASC";
+
+		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function get_mclipp($iduser, $idclient) {
+		$sqlquery = "SELECT * FROM Selecoes WHERE idUsuario = $iduser AND idEmpresa = $idclient";
 
 		return $this->db->query($sqlquery)->result_array();
 	}

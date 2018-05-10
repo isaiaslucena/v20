@@ -194,29 +194,27 @@
 					<div class="col-sm-12 col-md-12 col-lg-12 element">
 						<div class="hpanel">
 							<div id="divbtnsnews" class="panel-body">
-								<div id="btnsgroupnews" class="btn-group btn-group-justified center-block">
-									<div class="btn-group">
-										<button id="btnasearch" class="btn btn-primary" type="button"><i class="fa fa-search-plus"></i> <span class="bold">Pesquisa avançada</span></button>
+								<div id="btnsgroupnews" class="btn-group btn-group-justified center-block" role="group" aria-label="...">
+									<div class="btn-group" role="group">
+										<button id="btnasearch" class="btn btn-primary" type="button"><i class="fa fa-search-plus"></i> Pesquisa avançada</button>
 									</div>
-									<div class="btn-group">
-										<button id="btnmyclipp" class="btn btn-primary" type="button"><i class="fa fa-thumb-tack"></i> <span class="bold">Meu Cliping</span></button>
+									<div class="btn-group" role="group">
+										<button id="btnmyclipp" class="btn btn-primary" type="button"><i class="fa fa-thumb-tack"></i> Meu Clipping</button>
 									</div>
-									<div class="btn-group">
-										<button id="btncharts" class="btn btn-primary" type="button"><i class="fa fa-line-chart"></i> <span class="bold">Estatísticas</span></button>
+									<div class="btn-group" role="group">
+										<button id="btncharts" class="btn btn-primary" type="button"><i class="fa fa-line-chart"></i> Estatísticas</button>
 									</div>
-									<div class="btn-group">
-										<a id="btnnpapper" class="btn btn-primary" type="button"><i class="fa fa-newspaper-o"></i> <span class="bold">Banca</span></a>
+									<div class="btn-group" role="group">
+										<a id="btnnpapper" class="btn btn-primary" type="button"><i class="fa fa-newspaper-o"></i> Banca</a>
 									</div>
-									<div class="btn-group">
-										<button id="btnepdf" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> <span class="bold">PDF</span></button>
+									<div class="btn-group" role="group">
+										<button id="btnepdf" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o"></i> PDF</button>
 									</div>
-									<div class="btn-group">
-										<button id="btneexcel" class="btn btn-primary" type="button" tabindex="0" aria-controls="tablenews">
-											<i class="fa fa-file-excel-o"></i> <span class="bold">Excel</span>
-										</button>
+									<div class="btn-group" role="group">
+										<button id="btneexcel" class="btn btn-primary" type="button"><i class="fa fa-file-excel-o"></i> Excel</button>
 									</div>
-									<div class="btn-group">
-										<button id="btnforward" class="btn btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> <span class="bold">Encaminhar</span></button>
+									<div class="btn-group" role="group">
+										<button id="btnforward" class="btn btn-primary" type="button"><i class="fa fa-arrow-circle-right"></i> Encaminhar</button>
 									</div>
 								</div>
 							</div>
@@ -551,6 +549,35 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar </button>
 						<button id="adsbtn" type="button" class="ladda-button btn btn-primary" data-style="zoom-in">Pesquisar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myclipping" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="margin-top: 15px">
+				<div class="modal-content">
+					<div class="modal-header text-center" style="padding: 15px">
+						<h5>Meu Clipping</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div id="create">
+									XXX Noticias Selecionadas 
+									<button class="btn btn-sm btn-primary"><i class="fa fa-plus-o"></i> Criar</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6">
+								<div id="mclipplist" class="list-group"></div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-sm btn-primary" data-dismiss="modal">Fechar</button>
 					</div>
 				</div>
 			</div>

@@ -794,7 +794,7 @@ function each_news_data(endata, keywordid, clientid) {
 function add_advsearch_news_data(newsdata, clientid) {
 	tablenews.clear().draw();
 
-	$.map(newsdata.data, function(item, index) {
+	$.map(newsdata, function(item, index) {
 		// console.log(item);
 		nwskwid = item.idPalavraChave;
 		itemarr = [];
@@ -1720,7 +1720,7 @@ function add_data_export(data, callback) {
 	tableexport.clear().draw();
 	postData('/home/excel_export', data)
 	.then(redata => {
-		console.log(redata);
+		// console.log(redata);
 
 		// countred = redata.length;
 		// count = 0;

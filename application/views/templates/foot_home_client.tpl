@@ -176,11 +176,11 @@
 						// console.log($('row c[r="2"]', sheet));
 
 						//background row 2
-						$('row [r="2"]', sheet).attr('s', '20');
+						$('row r[r="2"]', sheet).attr('s', '20');
 
 						//line on all rows
 						$('row', sheet).each(function(index, elem) {
-							console.log($(elem));
+							// console.log($(elem));
 							// $('row c[r*="10"]', sheet).attr( 's', '25' );
 							$(elem).attr( 's', '25' );
 						});

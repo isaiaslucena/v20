@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-08 15:27:26
+/* Smarty version 3.1.30, created on 2018-05-08 16:43:00
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af1ec0ee6c208_30133736',
+  'unifunc' => 'content_5af1fdc4e62c07_66578269',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1525803877,
+      1 => 1525808375,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5af1ec0ee6c208_30133736 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af1fdc4e62c07_66578269 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14202403815af1ec0ee54c55_99476341', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5211183625af1fdc4de91a6_65652494', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_14202403815af1ec0ee54c55_99476341 extends Smarty_Internal_Block
+class Block_5211183625af1fdc4de91a6_65652494 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -220,11 +220,11 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 						// console.log($('row c[r="2"]', sheet));
 
 						//background row 2
-						$('row [r="2"]', sheet).attr('s', '20');
+						$('row r[r="2"]', sheet).attr('s', '20');
 
 						//line on all rows
 						$('row', sheet).each(function(index, elem) {
-							console.log($(elem));
+							// console.log($(elem));
 							// $('row c[r*="10"]', sheet).attr( 's', '25' );
 							$(elem).attr( 's', '25' );
 						});

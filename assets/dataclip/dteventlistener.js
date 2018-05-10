@@ -219,10 +219,8 @@ $('.modal').on('hide.bs.modal', function(event) {
 });
 
 $('#advancedsearch').on('shown.bs.modal', function(event){
-	var adssubjectarr = [], adskeywordarr = [],
-	adstveiculoarr = [], adsveiculoarr = [],
-	adseditoriaarr = [], adsstatesarr = [],
-	adsveiculossitesarr = [];
+	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
+	adseditoriaarr = [], adsstatesarr = [], adsveiculossitesarr = [];
 });
 
 $('#advancedsearch').on('hidden.bs.modal', function(event){
@@ -356,10 +354,57 @@ $('#btneexcel').click(function(event) {
 		'idskw': idskws.sort()
 	}
 
-	console.log(exportdata);
+	// console.log(exportdata);
 
 	add_data_export(exportdata, function(e){
 		tableexport.button(0).trigger();
+	});
+});
+
+$('#btnepdf').click(function(event) {
+	var docDef = {
+		content: [
+			// if you don't need styles, you can use a simple string to define a paragraph
+			'This is a standard paragraph, using default style',
+
+			// using a { text: '...' } object lets you set styling properties
+			{ text: 'This paragraph will have a bigger font', fontSize: 15 },
+
+			// if you set pass an array instead of a string, you'll be able
+			// to style any fragment individually
+			{
+				text: [
+					'This paragraph is defined as an array of elements to make it possible to ',
+					{ text: 'restyle part of it and make it bigger ', fontSize: 15 },
+					'than the rest.'
+				]
+			}
+		]
+	};
+
+	// pdfMake.createPdf(docDefinition).open();
+	pdfMake.createPdf(docDef).download('testName.pdf');
+});
+
+$('#btnmyclipp').click(function(event) {
+	fetch('/home/get_mclipp/4240/'+cliid)
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(resjson) {
+		console.log(resjson);
+
+		$('#mclipplist').html(null);
+		resjson.map(function(index, elem) {
+			html =	'<a type="button" class="list-group-item">'+
+								index.Nome+
+								'<button class="btn btn-warning mclippbtned" type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
+								'<button class="btn btn-danger mclippbtnex" type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
+							'</a>';
+			$('#mclipplist').append(html);
+		});
+
+		$('#myclipping').modal('show');
 	});
 });
 
