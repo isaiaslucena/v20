@@ -41,6 +41,7 @@
 	var todaydate_br = day+'/'+month+'/'+year;
 	var cdatebtn = $('#dpbtn').ladda();
 	var cadsbtn = $('#adsbtn').ladda();
+	var btncmclipp = $('#mclippbtncreate').ladda();
 
 	tablenews = $('#tablenews').DataTable({
 		'destroy': true,
@@ -194,15 +195,6 @@
 		'processing': true,
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
 	});
-
-	// new $.fn.dataTable.Buttons(tableexport, {
-	// 	buttons: [
-	// 		'copy', 'excel', 'csv'
-	// 	],
-	// 	processing: true
-	// });
-
-	// tablenews.buttons().container().appendTo('#divbtnsnews');
 
 	$('#adsdatepicker').datepicker({
 		format: "dd/mm/yyyy",

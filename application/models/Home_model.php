@@ -874,9 +874,34 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_mclipp($iduser, $idclient) {
-		$sqlquery = "SELECT * FROM Selecoes WHERE idUsuario = $iduser AND idEmpresa = $idclient";
+		$sqlquery = "SELECT * FROM Selecoes WHERE idUsuario = $iduser AND idEmpresa = $idclient ORDER BY ID ASC";
 
 		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function create_mclipp_selecoes($data) {
+		$today = date('Y-m-d');
+		$insert_selecoes = array(
+			'idUsuario' => $data['idUsuario'],
+			'Data' => $today,
+			'Nome' => $data['Nome'],
+			'idEmpresa' => $data['idEmpresa'],
+			'AgrupadoPor2' => 1,
+			'AgrupadoPor3' => 4,
+			'AgrupadoPor1' => 5,
+			'AgrupadoPor' => null,
+			'Locked' => 0,
+			'Observacao' => '',
+			'Sinopse' => '',
+			'Noticias' => $data['QNoticias']
+		);
+		$this->db->insert('Selecoes', $insert_selecoes);
+
+		return $this->db->insert_id();
+	}
+
+	public function create_mclipp_selecoesnoticias($data) {
+		$this->db->insert_batch('SelecoesNoticias', $data);
 	}
 }
 

@@ -50,15 +50,8 @@ cdatebtn.click(function(event) {
 });
 
 cadsbtn.click(function(event) {
-	cadsbtn.ladda('start');
-
-	$('#sublist').slideUp('fast');
-
-	$('.dataTables_processing').show();
-
 	vstartdate = $('#adsstartdate').val();
 	venddate = $('#adsenddate').val();
-
 	if (vstartdate.length == 0) {
 		$('#adsstartdate.tooltipinput').tooltip('show');
 		cadsbtn.ladda('stop');
@@ -66,7 +59,6 @@ cadsbtn.click(function(event) {
 	} else {
 		$('#adsstartdate.tooltipinput').tooltip('hide');
 	}
-
 	if (venddate.length == 0) {
 		$('#adsenddate.tooltipinput').tooltip('show');
 		cadsbtn.ladda('stop');
@@ -74,6 +66,10 @@ cadsbtn.click(function(event) {
 	} else {
 		$('#adsenddate.tooltipinput').tooltip('hide');
 	}
+
+	cadsbtn.ladda('start');
+	$('#sublist').slideUp('fast');
+	$('.dataTables_processing').show();
 
 	adsstartdate = $('#adsstartdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	adsenddate = $('#adsenddate').data('datepicker').getFormattedDate('yyyy-mm-dd');
@@ -113,10 +109,6 @@ cadsbtn.click(function(event) {
 			console.log(data);
 
 			add_advsearch_news_data(data, cliid);
-
-			// cadsbtn.ladda('stop');
-			// $('#advancedsearch').modal('hide');
-			// $('input').iCheck('uncheck');
 		}
 	).catch(
 		error => {
@@ -296,6 +288,9 @@ $('#showsinglenews').on('hide.bs.modal', function(event) {
 $('#myclipping').on('hide.bs.modal', function(event) {
 	$('#mclippwait').css('display', 'block');
 	$('#mclipplist').css('display', 'none');
+	$('#mclippbtncreate').addClass('disabled');
+	$('#mclippbtncreate').attr('disabled', true);
+	$('#mclippiname').val(null);
 });
 
 $('#tablenews').on(
@@ -334,7 +329,7 @@ $('#btneexcel').click(function(event) {
 		'idskw': idskws
 	}
 
-	console.log(exportdata);
+	// console.log(exportdata);
 
 	add_data_export(exportdata, function(e){
 		tableexport.button(0).trigger();
@@ -389,6 +384,7 @@ $('#btnmyclipp').click(function(event) {
 		resjson.map(function(index, elem) {
 			html =	'<a type="button" class="list-group-item">'+
 								index.Nome+
+								'<button class="btn btn-xs btn-primary mclippbtnex" style="float: right; type="button" title="Selecionar" data-selid="'+index.ID+'"><i class="fa fa-arrow-right"></i></button>'+
 								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
 								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
 							'</a>';
@@ -399,6 +395,56 @@ $('#btnmyclipp').click(function(event) {
 			});
 		});
 	});
+});
+
+$('#mclippiname').keydown(function(event) {
+	itext = $(this).val();
+	if (itext.length >= 2) {
+		$('#mclippbtncreate').removeClass('disabled');
+		$('#mclippbtncreate').removeAttr('disabled');
+	} else {
+		$('#mclippbtncreate').addClass('disabled');
+		$('#mclippbtncreate').attr('disabled', true);
+	}
+});
+
+btncmclipp.click(function(event) {
+	btncmclipp.ladda('start');
+	if ($(this).hasClass('disabled') == false) {
+		selname = $('#mclippiname').val();
+
+		selecoesdata = {
+			'iduser': 4240,
+			'name': selname,
+			'idsnoticias': idsnots,
+			'idclient': cliid
+		}
+
+		console.log(selecoesdata);
+
+		postData('/home/create_mclipp', selecoesdata)
+		.then(redata => {
+			console.log(redata);
+
+			html =	'<a type="button" class="list-group-item" style="display: none">'+
+								selname+
+								'<button class="btn btn-xs btn-primary mclippbtnex" style="float: right; type="button" title="Selecionar" data-selid="'+redata.idSelecao+'"><i class="fa fa-arrow-right"></i></button>'+
+								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+redata.idSelecao+'"><i class="fa fa-pencil"></i></button>'+
+								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+redata.idSelecao+'"><i class="fa fa-trash-o"></i></button>'+
+							'</a>';
+			$('#mclipplist').append(html);
+
+			inserteda = $('#mclipplist').children('a');
+			lastrg = inserteda.length - 1;
+			$(inserteda[lastrg]).fadeIn('fast');
+
+			$('#mclippiname').val(null);
+			btncmclipp.ladda('stop');
+			$('#mclippbtncreate').addClass('disabled');
+			$('#mclippbtncreate').attr('disabled', true);
+		})
+		.catch(error => console.error(error));
+	}
 });
 
 $(document).on('click', '.tooltipa', function(event) {
@@ -551,16 +597,6 @@ document.getElementById('btnclose').addEventListener('click', function(){
 	$('#modal-texti').slimScroll({ scrollTo: '0px' });
 	document.getElementById('mediactni').scrollTop = 0;
 });
-
-// $(document).on('click', '.bs-select-all', function(event) {
-// 	console.log('Clicked on Select All');
-// 	console.log(event);
-// });
-
-// $(document).on('click', '.bs-deselect-all', function(event) {
-// 	console.log('Clicked on Deselect All');
-// 	console.log(event);
-// });
 
 $(document).on('changed.bs.select', '#sublist select', function(e, clickedIndex, newValue, oldValue) {
 	keywid = $(this).find('option').eq(clickedIndex).attr('data-keywordid');

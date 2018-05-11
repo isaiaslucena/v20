@@ -555,27 +555,35 @@
 		</div>
 
 		<div class="modal fade" id="myclipping" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog" style="margin-top: 15px">
+			<div class="modal-dialog modal-sm" style="margin-top: 15px">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<h4>Meu Clipping</h4>
 					</div>
-					<div class="modal-body center-block">
+					<div class="modal-body">
 						<div class="row">
 							<div class="col-lg-12">
 								<div id="mclippcreate">
-									<span id="mclippcnews"></span>
-									 <button id="mclippbtncreate" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Criar</button>
+									<dt id="mclippcnews"></dt>
+									<div class="input-group">
+										<input id="mclippiname" type="text" class="form-control input-sm tooltipinput" placeholder="Nome" aria-label="Nome"
+										data-toggle="tooltip" data-placement="top" data-original-title="Preenchimento obrigatório!" autocomplete="off">
+										<div class="input-group-btn">
+											<button id="mclippbtncreate" class="ladda-button btn btn-sm btn-primary disabled" disabled data-style="zoom-in">
+												Criar
+											</button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-lg-6">
-								<div id="mclippwait" class="center-block">
+							<div class="col-lg-12">
+								<div id="mclippwait" class="center-block text-center">
 									<img src="/assets/imgs/loading.gif" width="40">
 								</div>
-								<div id="mclipplist" class="list-group" style="display: none;"></div>
+								<div id="mclipplist" class="list-group" style="display: none; max-height: 450px; overflow-y: auto;"></div>
 							</div>
 						</div>
 					</div>

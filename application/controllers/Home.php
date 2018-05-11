@@ -602,12 +602,35 @@ class Home extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
-			var_dump($postdata);
+			// var_dump($postdata);
 
-			// $createdata = $this->home_model->create_mclipp($postdata);
+			$quatnots = count($postdata['idsnoticias']);
+			$insert_selecoes = array(
+				'idUsuario' => $postdata['iduser'],
+				'Nome' =>	$postdata['name'],
+				'idEmpresa' => $postdata['idclient'],
+				'QNoticias' => $quatnots
+			);
+			$insertedid = $this->home_model->create_mclipp_selecoes($insert_selecoes);
 
-			// header('Content-Type: application/json, charset=utf-8');
-			// print json_encode($searchdata, JSON_PRETTY_PRINT);
+			$selecoesnoticias = array();
+
+			$today = date('Y-m-d');
+			foreach ($postdata['idsnoticias'] as $cidnoticia) {
+				$selnoticia = array(
+					'idselecao' => $insertedid,
+					'idNoticia' => $cidnoticia,
+					'Ordem' => 0,
+					'Data' => $today,
+					'idUsuario' => $postdata['iduser']
+				);
+				array_push($selecoesnoticias, $selnoticia);
+			}
+			$this->home_model->create_mclipp_selecoesnoticias($selecoesnoticias);
+
+			$response['idSelecao'] = $insertedid;
+			header('Content-Type: application/json, charset=utf-8');
+			print json_encode($response, JSON_PRETTY_PRINT);
 		}
 	}
 }

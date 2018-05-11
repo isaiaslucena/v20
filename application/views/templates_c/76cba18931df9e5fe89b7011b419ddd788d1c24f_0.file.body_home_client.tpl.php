@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 11:54:10
+/* Smarty version 3.1.30, created on 2018-05-10 19:58:28
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af45d12355237_67900186',
+  'unifunc' => 'content_5af4ce94d17fc8_40074648',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1525964047,
+      1 => 1525993001,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5af45d12355237_67900186 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af4ce94d17fc8_40074648 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5171883665af45d12332986_54173091', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21370214415af4ce94cf7cc1_83062232', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_5171883665af45d12332986_54173091 extends Smarty_Internal_Block
+class Block_21370214415af4ce94cf7cc1_83062232 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -592,27 +592,35 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		</div>
 
 		<div class="modal fade" id="myclipping" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog" style="margin-top: 15px">
+			<div class="modal-dialog modal-sm" style="margin-top: 15px">
 				<div class="modal-content">
 					<div class="modal-header text-center" style="padding: 15px">
 						<h4>Meu Clipping</h4>
 					</div>
-					<div class="modal-body center-block">
+					<div class="modal-body">
 						<div class="row">
 							<div class="col-lg-12">
 								<div id="mclippcreate">
-									<span id="mclippcnews"></span>
-									 <button id="mclippbtncreate" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Criar</button>
+									<dt id="mclippcnews"></dt>
+									<div class="input-group">
+										<input id="mclippiname" type="text" class="form-control input-sm tooltipinput" placeholder="Nome" aria-label="Nome"
+										data-toggle="tooltip" data-placement="top" data-original-title="Preenchimento obrigatório!" autocomplete="off">
+										<div class="input-group-btn">
+											<button id="mclippbtncreate" class="ladda-button btn btn-sm btn-primary disabled" disabled data-style="zoom-in">
+												Criar
+											</button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-lg-6">
-								<div id="mclippwait" class="center-block">
+							<div class="col-lg-12">
+								<div id="mclippwait" class="center-block text-center">
 									<img src="/assets/imgs/loading.gif" width="40">
 								</div>
-								<div id="mclipplist" class="list-group" style="display: none;"></div>
+								<div id="mclipplist" class="list-group" style="display: none; max-height: 450px; overflow-y: auto;"></div>
 							</div>
 						</div>
 					</div>

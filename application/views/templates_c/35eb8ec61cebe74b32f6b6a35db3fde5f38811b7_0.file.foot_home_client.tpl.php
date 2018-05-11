@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 11:29:27
+/* Smarty version 3.1.30, created on 2018-05-10 19:13:04
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af457472d7590_87218018',
+  'unifunc' => 'content_5af4c3f078dd40_71790619',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1525962540,
+      1 => 1525990375,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5af457472d7590_87218018 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af4c3f078dd40_71790619 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13802506625af457472c4f02_00474552', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12946210305af4c3f077ac62_23314843', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_13802506625af457472c4f02_00474552 extends Smarty_Internal_Block
+class Block_12946210305af4c3f077ac62_23314843 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -85,6 +85,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	var todaydate_br = day+'/'+month+'/'+year;
 	var cdatebtn = $('#dpbtn').ladda();
 	var cadsbtn = $('#adsbtn').ladda();
+	var btncmclipp = $('#mclippbtncreate').ladda();
 
 	tablenews = $('#tablenews').DataTable({
 		'destroy': true,
@@ -238,15 +239,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		'processing': true,
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
 	});
-
-	// new $.fn.dataTable.Buttons(tableexport, {
-	// 	buttons: [
-	// 		'copy', 'excel', 'csv'
-	// 	],
-	// 	processing: true
-	// });
-
-	// tablenews.buttons().container().appendTo('#divbtnsnews');
 
 	$('#adsdatepicker').datepicker({
 		format: "dd/mm/yyyy",
