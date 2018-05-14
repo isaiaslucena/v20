@@ -583,7 +583,7 @@
 								<div id="mclippwait" class="center-block text-center">
 									<img src="/assets/imgs/loading.gif" width="40">
 								</div>
-								<div id="mclipplist" class="list-group" style="display: none; max-height: 450px; overflow-y: auto;"></div>
+								<div id="mclipplist" class="list-group" style="display: none; max-height: 350px; overflow-y: auto;"></div>
 							</div>
 						</div>
 					</div>

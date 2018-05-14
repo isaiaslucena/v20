@@ -1748,6 +1748,31 @@ function select_news() {
 	idskws.sort();
 };
 
+function get_mclipp(iduser, idclient) {
+	fetch('/home/get_mclipp/'+iduser+'/'+idclient)
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(resjson) {
+		console.log(resjson);
+
+		$('#mclipplist').html(null);
+		resjson.map(function(index, elem) {
+			html =	'<a type="button" class="list-group-item">'+
+								index.Nome+
+								'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+index.ID+'"><i class="fa fa-arrow-right"></i></button>'+
+								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
+								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
+							'</a>';
+			$('#mclipplist').append(html);
+
+			$('#mclippwait').fadeOut('fast', function() {
+				$('#mclipplist').fadeIn('fast');
+			});
+		});
+	});
+};
+
 function add_data_export(data, callback) {
 	tableexport.clear().draw();
 	postData('/home/excel_export', data)
@@ -1802,22 +1827,20 @@ function add_data_export(data, callback) {
 		callback();
 	})
 	.catch(error => console.error(error))
-}
+};
 
 function postData(url, data) {
-	// Default options are marked with *
 	return fetch(url, {
-		body: JSON.stringify(data), // must match 'Content-Type' header
-		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-		credentials: 'same-origin', // include, same-origin, *omit
+		body: JSON.stringify(data),
+		cache: 'no-cache',
+		credentials: 'same-origin',
 		headers: {
-			'user-agent': 'Mozilla/4.0 MDN Example',
 			'content-type': 'application/json'
 		},
-		method: 'POST', // *GET, POST, PUT, DELETE, etc.
-		mode: 'cors', // no-cors, cors, *same-origin
-		redirect: 'follow', // *manual, follow, error
-		referrer: 'no-referrer', // *client, no-referrer
+		method: 'POST',
+		mode: 'cors',
+		redirect: 'follow',
+		referrer: 'no-referrer',
 	})
-	.then(response => response.json()) // parses response to JSON
+	.then(response => response.json())
 };

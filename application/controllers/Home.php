@@ -633,5 +633,22 @@ class Home extends CI_Controller {
 			print json_encode($response, JSON_PRETTY_PRINT);
 		}
 	}
+
+	public function edit_mclipp() {
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
+
+			if (empty($postdata['Nome']) or is_null($postdata['Nome']) or $postdata['Nome'] == 'undefined' or $postdata['Nome'] == 'NaN') {
+				header("HTTP/1.1 500 Internal Server Error");
+				header('Content-Type: application/json');
+				print json_encode(false);
+			} else {
+				$this->home_model->edit_mclipp_selecoes($postdata);
+
+				header('Content-Type: application/json');
+				print json_encode(true);
+			}
+		}
+	}
 }
 ?>

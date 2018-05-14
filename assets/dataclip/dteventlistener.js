@@ -285,6 +285,10 @@ $('#showsinglenews').on('hide.bs.modal', function(event) {
 	}
 });
 
+$('#myclipping').on('shown.bs.modal', function(event) {
+	$(document).off('focusin.modal');
+});
+
 $('#myclipping').on('hide.bs.modal', function(event) {
 	$('#mclippwait').css('display', 'block');
 	$('#mclipplist').css('display', 'none');
@@ -371,30 +375,10 @@ $('#btnmyclipp').click(function(event) {
 	} else {
 		ctext = notsarrc+' notícias selecionadas';
 	}
+
 	$('#mclippcnews').text(ctext);
 
-	fetch('/home/get_mclipp/4240/'+cliid)
-	.then(function(response) {
-		return response.json();
-	})
-	.then(function(resjson) {
-		console.log(resjson);
-
-		$('#mclipplist').html(null);
-		resjson.map(function(index, elem) {
-			html =	'<a type="button" class="list-group-item">'+
-								index.Nome+
-								'<button class="btn btn-xs btn-primary mclippbtnex" style="float: right; type="button" title="Selecionar" data-selid="'+index.ID+'"><i class="fa fa-arrow-right"></i></button>'+
-								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
-								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
-							'</a>';
-			$('#mclipplist').append(html);
-
-			$('#mclippwait').fadeOut('fast', function() {
-				$('#mclipplist').fadeIn('fast');
-			});
-		});
-	});
+	get_mclipp(4240, cliid);
 });
 
 $('#mclippiname').keydown(function(event) {
@@ -420,7 +404,7 @@ btncmclipp.click(function(event) {
 			'idclient': cliid
 		}
 
-		console.log(selecoesdata);
+		// console.log(selecoesdata);
 
 		postData('/home/create_mclipp', selecoesdata)
 		.then(redata => {
@@ -428,14 +412,14 @@ btncmclipp.click(function(event) {
 
 			html =	'<a type="button" class="list-group-item" style="display: none">'+
 								selname+
-								'<button class="btn btn-xs btn-primary mclippbtnex" style="float: right; type="button" title="Selecionar" data-selid="'+redata.idSelecao+'"><i class="fa fa-arrow-right"></i></button>'+
+								'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+redata.idSelecao+'"><i class="fa fa-arrow-right"></i></button>'+
 								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+redata.idSelecao+'"><i class="fa fa-pencil"></i></button>'+
 								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+redata.idSelecao+'"><i class="fa fa-trash-o"></i></button>'+
 							'</a>';
-			$('#mclipplist').append(html);
+			$('#mclipplist').prepend(html);
 
 			inserteda = $('#mclipplist').children('a');
-			lastrg = inserteda.length - 1;
+			lastrg = 0;
 			$(inserteda[lastrg]).fadeIn('fast');
 
 			$('#mclippiname').val(null);
@@ -445,6 +429,55 @@ btncmclipp.click(function(event) {
 		})
 		.catch(error => console.error(error));
 	}
+});
+
+$(document).on('click', '.mclippbtnse', function(event) {
+	idselecao = $(this).attr('data-selid');
+	console.log('selected id: '+idselecao);
+});
+
+$(document).on('click', '.mclippbtned', function(event) {
+	idsel = $(this).attr('data-selid');
+	seloldname = $(this).parent().text();
+
+	swal({
+		title: 'Insira o novo nome da seleção "'+seloldname+'":',
+		input: 'text',
+		showCancelButton: true,
+		confirmButtonText: 'Alterar',
+		showLoaderOnConfirm: true,
+		preConfirm: (selnome) => {
+			dataselecao = {
+				'idSelecao': idsel,
+				'Nome': selnome
+			};
+
+			return postData('/home/edit_mclipp', dataselecao)
+				.then(redata => {return redata})
+				.catch(error => {
+					swal.showValidationError(
+						`Erro: ${error}`
+					)
+				});
+		},
+		allowOutsideClick: false
+	}).then((result) => {
+		if (result.value) {
+			$('#mclippwait').css('display', 'block');
+			$('#mclipplist').css('display', 'none');
+
+			get_mclipp(4240, cliid);
+
+			swal({
+				title: "Alterado!",
+				type: "success",
+				allowEscapeKey: false,
+				allowOutsideClick: false,
+				showCancelButton: false,
+				showConfirmButton: true
+			});
+		}
+	})
 });
 
 $(document).on('click', '.tooltipa', function(event) {

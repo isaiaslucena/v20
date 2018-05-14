@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 19:58:28
+/* Smarty version 3.1.30, created on 2018-05-14 10:19:28
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af4ce94d17fc8_40074648',
+  'unifunc' => 'content_5af98ce001b948_03979509',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1525993001,
+      1 => 1526303965,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5af4ce94d17fc8_40074648 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af98ce001b948_03979509 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21370214415af4ce94cf7cc1_83062232', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9300732705af98cdff280f7_29982136', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_21370214415af4ce94cf7cc1_83062232 extends Smarty_Internal_Block
+class Block_9300732705af98cdff280f7_29982136 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -620,7 +620,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<div id="mclippwait" class="center-block text-center">
 									<img src="/assets/imgs/loading.gif" width="40">
 								</div>
-								<div id="mclipplist" class="list-group" style="display: none; max-height: 450px; overflow-y: auto;"></div>
+								<div id="mclipplist" class="list-group" style="display: none; max-height: 350px; overflow-y: auto;"></div>
 							</div>
 						</div>
 					</div>
