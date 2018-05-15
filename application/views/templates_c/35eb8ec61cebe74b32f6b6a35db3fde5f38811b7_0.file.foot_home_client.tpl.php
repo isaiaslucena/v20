@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 19:13:04
+/* Smarty version 3.1.30, created on 2018-05-14 17:22:05
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af4c3f078dd40_71790619',
+  'unifunc' => 'content_5af9efeded3206_49220023',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1525990375,
+      1 => 1526329321,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5af4c3f078dd40_71790619 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af9efeded3206_49220023 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12946210305af4c3f077ac62_23314843', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20395111815af9efedec0206_45035189', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_12946210305af4c3f077ac62_23314843 extends Smarty_Internal_Block
+class Block_20395111815af9efedec0206_45035189 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -88,7 +88,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	var btncmclipp = $('#mclippbtncreate').ladda();
 
 	tablenews = $('#tablenews').DataTable({
-		'destroy': true,
+		'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
+		'destroy': false,
 		'autoWidth': false,
 		'order': [
 			[0, 'desc']
@@ -196,6 +197,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		}
 	});
 
+	$(document).ready(function() {
+		$('#tbntoolbarbtns').html('<b>Custom tool bar! Text/images etc.</b>');
+	});
+
 	tableexport = $('#tableexport').DataTable({
 		'order': [
 			[0, 'asc']
@@ -230,8 +235,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 							// $('row c[r*="10"]', sheet).attr( 's', '25' );
 							$(elem).attr( 's', '25' );
 						});
-
-
 					}
 				}
 			]

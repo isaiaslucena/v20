@@ -44,7 +44,8 @@
 	var btncmclipp = $('#mclippbtncreate').ladda();
 
 	tablenews = $('#tablenews').DataTable({
-		'destroy': true,
+		'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
+		'destroy': false,
 		'autoWidth': false,
 		'order': [
 			[0, 'desc']
@@ -152,6 +153,10 @@
 		}
 	});
 
+	$(document).ready(function() {
+		$('#tbntoolbarbtns').html('<b>Custom tool bar! Text/images etc.</b>');
+	});
+
 	tableexport = $('#tableexport').DataTable({
 		'order': [
 			[0, 'asc']
@@ -186,8 +191,6 @@
 							// $('row c[r*="10"]', sheet).attr( 's', '25' );
 							$(elem).attr( 's', '25' );
 						});
-
-
 					}
 				}
 			]
