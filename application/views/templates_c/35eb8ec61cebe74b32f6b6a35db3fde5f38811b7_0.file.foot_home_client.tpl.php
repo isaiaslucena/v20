@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-14 17:22:05
+/* Smarty version 3.1.30, created on 2018-05-15 15:59:47
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af9efeded3206_49220023',
+  'unifunc' => 'content_5afb2e23b73589_49578673',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1526329321,
+      1 => 1526410785,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5af9efeded3206_49220023 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5afb2e23b73589_49578673 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20395111815af9efedec0206_45035189', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11665192835afb2e23b5f434_16360520', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_20395111815af9efedec0206_45035189 extends Smarty_Internal_Block
+class Block_11665192835afb2e23b5f434_16360520 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -197,9 +197,14 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		}
 	});
 
-	$(document).ready(function() {
-		$('#tbntoolbarbtns').html('<b>Custom tool bar! Text/images etc.</b>');
-	});
+	// $(document).ready(function() {
+		btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
+									'<button id="tbnbtnsela" type="button" class="btn btn-sm btn-default">Selecionar Todos</button>'+
+									'<button id="tbnbtndesa" type="button" class="btn btn-sm btn-default">Desmarcar Todos</button>'+
+									'<button id="tbnbtnsava" type="button" class="btn btn-sm btn-default">Salvar Alterações</button>'+
+								'</div>';
+		$('#tbntoolbarbtns').html(btnshtml);
+	// });
 
 	tableexport = $('#tableexport').DataTable({
 		'order': [
@@ -454,7 +459,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	}
 
 	if (clientselid == 0) {
-		cliid = cid;
+		console.log('no client selected!');
 	} else {
 		cliid = clientselid;
 	}

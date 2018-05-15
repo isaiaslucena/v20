@@ -7,6 +7,7 @@ $('#selclient').change(function(event) {
 	salertloading(isTouchDevice());
 
 	cid = $(this).children(':selected').attr('data-clientid');
+	cliid = cid;
 	cname = event.target.value;
 	console.log('Client ID: '+cid);
 	console.log('Client Name: '+cname);
@@ -23,6 +24,14 @@ $('#bannerheader').on('load', function() {
 	// console.log('Image loaded in DOM!');
 	// bannerurl = $(this).attr('src');
 	setcolors();
+});
+
+$('#tbnbtnsela').click(function(event) {
+	tablenews.rows().select();
+});
+
+$('#tbnbtndesa').click(function(event) {
+	tablenews.rows().deselect();
 });
 
 cdatebtn.click(function(event) {
@@ -433,6 +442,7 @@ btncmclipp.click(function(event) {
 
 $(document).on('click', '.mclippbtnse', function(event) {
 	idselecao = $(this).attr('data-selid');
+	selname = $(this).parent().text();
 	console.log('selected id: '+idselecao);
 });
 
@@ -478,6 +488,11 @@ $(document).on('click', '.mclippbtned', function(event) {
 			});
 		}
 	})
+});
+
+$(document).on('click', '.mclippbtnex', function(event) {
+	idsel = $(this).attr('data-selid');
+	selname = $(this).parent().text();
 });
 
 $(document).on('click', '.tooltipa', function(event) {

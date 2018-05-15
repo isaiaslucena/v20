@@ -153,9 +153,14 @@
 		}
 	});
 
-	$(document).ready(function() {
-		$('#tbntoolbarbtns').html('<b>Custom tool bar! Text/images etc.</b>');
-	});
+	// $(document).ready(function() {
+		btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
+									'<button id="tbnbtnsela" type="button" class="btn btn-sm btn-default">Selecionar Todos</button>'+
+									'<button id="tbnbtndesa" type="button" class="btn btn-sm btn-default">Desmarcar Todos</button>'+
+									'<button id="tbnbtnsava" type="button" class="btn btn-sm btn-default">Salvar Alterações</button>'+
+								'</div>';
+		$('#tbntoolbarbtns').html(btnshtml);
+	// });
 
 	tableexport = $('#tableexport').DataTable({
 		'order': [
@@ -410,7 +415,7 @@
 	}
 
 	if (clientselid == 0) {
-		cliid = cid;
+		console.log('no client selected!');
 	} else {
 		cliid = clientselid;
 	}
