@@ -153,14 +153,37 @@
 		}
 	});
 
-	// $(document).ready(function() {
+	$(document).ready(function() {
 		btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
-									'<button id="tbnbtnsela" type="button" class="btn btn-sm btn-default">Selecionar Todos</button>'+
-									'<button id="tbnbtndesa" type="button" class="btn btn-sm btn-default">Desmarcar Todos</button>'+
-									'<button id="tbnbtnsava" type="button" class="btn btn-sm btn-default">Salvar Alterações</button>'+
+									'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
+									'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
+									'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
 								'</div>';
 		$('#tbntoolbarbtns').html(btnshtml);
-	// });
+
+		$('#tbnbtnsela').click(function(event) {
+			tablenews.rows().select();
+
+			tablenews.rows().every(function(rowIdx, tableLoop, rowLoop) {
+				rownode = this.node();
+				trselid = $(rownode).attr('id').replace('tr_','');
+
+				if (trselected.indexOf(trselid) === -1) {
+					trselected.push(trselid);
+				}
+			});
+
+			console.log(trselected);
+		});
+
+		$('#tbnbtndesa').click(function(event) {
+			tablenews.rows().deselect();
+
+			trselected = [];
+
+			console.log(trselected);
+		});
+	});
 
 	tableexport = $('#tableexport').DataTable({
 		'order': [

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-15 15:59:47
+/* Smarty version 3.1.30, created on 2018-05-15 16:17:32
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5afb2e23b73589_49578673',
+  'unifunc' => 'content_5afb324c8e1df0_21104452',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1526410785,
+      1 => 1526411849,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5afb2e23b73589_49578673 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5afb324c8e1df0_21104452 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11665192835afb2e23b5f434_16360520', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21304242795afb324c8cb176_62340238', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_11665192835afb2e23b5f434_16360520 extends Smarty_Internal_Block
+class Block_21304242795afb324c8cb176_62340238 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -197,14 +197,37 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 		}
 	});
 
-	// $(document).ready(function() {
+	$(document).ready(function() {
 		btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
-									'<button id="tbnbtnsela" type="button" class="btn btn-sm btn-default">Selecionar Todos</button>'+
-									'<button id="tbnbtndesa" type="button" class="btn btn-sm btn-default">Desmarcar Todos</button>'+
-									'<button id="tbnbtnsava" type="button" class="btn btn-sm btn-default">Salvar Alterações</button>'+
+									'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
+									'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
+									'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
 								'</div>';
 		$('#tbntoolbarbtns').html(btnshtml);
-	// });
+
+		$('#tbnbtnsela').click(function(event) {
+			tablenews.rows().select();
+
+			tablenews.rows().every(function(rowIdx, tableLoop, rowLoop) {
+				rownode = this.node();
+				trselid = $(rownode).attr('id').replace('tr_','');
+
+				if (trselected.indexOf(trselid) === -1) {
+					trselected.push(trselid);
+				}
+			});
+
+			console.log(trselected);
+		});
+
+		$('#tbnbtndesa').click(function(event) {
+			tablenews.rows().deselect();
+
+			trselected = [];
+
+			console.log(trselected);
+		});
+	});
 
 	tableexport = $('#tableexport').DataTable({
 		'order': [
