@@ -875,7 +875,6 @@ class Home_model extends CI_Model {
 
 	public function get_mclipp($iduser, $idclient) {
 		$sqlquery = "SELECT * FROM Selecoes WHERE idUsuario = $iduser AND idEmpresa = $idclient ORDER BY ID DESC";
-
 		return $this->db->query($sqlquery)->result_array();
 	}
 
@@ -912,6 +911,38 @@ class Home_model extends CI_Model {
 
 	public function del_mclipp_selecoes($data) {
 		//teste
+	}
+
+	public function get_mclipp_news($idmclipp) {
+		$sqlquery = "SELECT * FROM SelecoesNoticias WHERE idSelecao = $idmclipp";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function get_news_by_ids($idmclipp, $idclient) {
+		$sqlquery =	"SELECT
+								nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
+								tve.Id as IdTipoVeiculo, tve.Nome as TipoVeiculo,
+								nt.idVeiculo, ve.Nome as Veiculo,
+								nt.idEditoria, ed.Nome as Editoria,
+								ntp.idPalavraChave, plc.Nome as PalavraChave,
+								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
+								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
+								ntp.Avaliacao, ntp.Motivacao
+								FROM Noticias nt
+								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+								INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+								WHERE
+								nt.id IN (SELECT idNoticia FROM SelecoesNoticias WHERE idSelecao = $idmclipp) AND
+								ntp.idEmpresa = $idclient
+								ORDER BY nt.Id ASC";
+		return $this->db->query($sqlquery)->result_array();
 	}
 }
 

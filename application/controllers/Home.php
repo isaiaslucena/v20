@@ -650,5 +650,12 @@ class Home extends CI_Controller {
 			}
 		}
 	}
+
+	public function get_mclipp_news($idmclipp, $idclient) {
+		$mcplippnews['data'] = $this->home_model->get_news_by_ids($idmclipp, $idclient);
+
+		header('Content-Type: application/json');
+		print json_encode($mcplippnews, JSON_PRETTY_PRINT);
+	}
 }
 ?>

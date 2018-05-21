@@ -1773,6 +1773,30 @@ function get_mclipp(iduser, idclient) {
 	});
 };
 
+function get_mclipp_news(idmcplipp, idclient) {
+	tablenews.clear().draw();
+	$('.dataTables_processing').show();
+
+	fetch('/home/get_mclipp_news/'+idmcplipp+'/'+idclient)
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(resjson) {
+		// console.log(resjson);
+
+		$.map(resjson.data, function(item, index) {
+			nwskwid = item.idPalavraChave;
+			itemarr = [];
+			itemarr.push(item);
+			each_news_data(itemarr, nwskwid, idclient);
+		});
+
+		$('.dataTables_processing').hide();
+
+		$('#myclipping').modal('hide');
+	});
+}
+
 function add_data_export(data, callback) {
 	tableexport.clear().draw();
 	postData('/home/excel_export', data)

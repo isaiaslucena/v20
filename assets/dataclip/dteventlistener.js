@@ -443,7 +443,8 @@ btncmclipp.click(function(event) {
 $(document).on('click', '.mclippbtnse', function(event) {
 	idselecao = $(this).attr('data-selid');
 	selname = $(this).parent().text();
-	console.log('selected id: '+idselecao);
+
+	get_mclipp_news(idselecao, cliid);
 });
 
 $(document).on('click', '.mclippbtned', function(event) {
