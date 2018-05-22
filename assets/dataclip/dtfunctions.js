@@ -1775,6 +1775,8 @@ function get_mclipp(iduser, idclient) {
 
 function get_mclipp_news(idmcplipp, idclient) {
 	tablenews.clear().draw();
+
+	$('#myclipping').modal('hide');
 	$('.dataTables_processing').show();
 
 	fetch('/home/get_mclipp_news/'+idmcplipp+'/'+idclient)
@@ -1792,10 +1794,8 @@ function get_mclipp_news(idmcplipp, idclient) {
 		});
 
 		$('.dataTables_processing').hide();
-
-		$('#myclipping').modal('hide');
 	});
-}
+};
 
 function add_data_export(data, callback) {
 	tableexport.clear().draw();
