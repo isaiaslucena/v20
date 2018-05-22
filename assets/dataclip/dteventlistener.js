@@ -92,40 +92,174 @@ cadsbtn.click(function(event) {
 
 	adstext = $('#adstext').val();
 
-	var adssearchdata = {
-		'idempresa': cliid,
-		'startdate': adsstartdate,
-		'enddate': adsenddate,
-		'starttime': adsstarttime,
-		'endtime': adsendtime,
-		'subjectsid': adssubjectarr,
-		'keywordsid': adskeywordarr,
-		'tveiculosid': adstveiculoarr,
-		'veiculosid': adsveiculoarr,
-		'editoriasid': adseditoriaarr,
-		'estadosid': adsstatesarr,
-		'texto': adstext,
-		'destaque': adsdestaque,
-		'motivacao': adsmotivacaoarr,
-		'avaliacao': adsavaliacaoarr
-	};
+	// var adssearchdata = {
+	// 	'idempresa': cliid,
+	// 	'startdate': adsstartdate,
+	// 	'enddate': adsenddate,
+	// 	'starttime': adsstarttime,
+	// 	'endtime': adsendtime,
+	// 	'subjectsid': adssubjectarr,
+	// 	'keywordsid': adskeywordarr,
+	// 	'tveiculosid': adstveiculoarr,
+	// 	'veiculosid': adsveiculoarr,
+	// 	'editoriasid': adseditoriaarr,
+	// 	'estadosid': adsstatesarr,
+	// 	'texto': adstext,
+	// 	'destaque': adsdestaque,
+	// 	'motivacao': adsmotivacaoarr,
+	// 	'avaliacao': adsavaliacaoarr
+	// };
 
-	// console.log(adssearchdata);
+	// postData('/home/advsearch', adssearchdata)
+	// .then(
+	// 	data => {
+	// 		console.log(data);
 
-	postData('/home/advsearch', adssearchdata)
-	.then(
-		data => {
-			console.log(data);
+	// 		add_advsearch_news_data(data, cliid);
+	// 	}
+	// ).catch(
+	// 	error => {
+	// 		console.error(error);
 
-			add_advsearch_news_data(data, cliid);
+	// 		cadsbtn.ladda('stop');
+	// 	}
+	// );
+
+	tablenews.destroy();
+
+	tablenews = $('#tablenews').DataTable({
+		'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
+		'destroy': true,
+		'autoWidth': false,
+		'order': [
+			[0, 'desc']
+		],
+		'columnDefs': [
+			{'searchable': false, 'width': '2%', 'responsivePriority': 0, 'targets': 0},
+			{'searchable': true, 'width': '2%', 'responsivePriority': 50, 'targets': 1},
+			{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
+			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
+			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
+			{'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
+			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
+			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
+			{'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
+		],
+		'responsive': true,
+		'scrollX': false,
+		'processing': true,
+		'serverSide': true,
+		'ajax': {
+			'url': '/home/advsearch_form',
+			'type': 'POST',
+			'data': function(d) {
+				d.idempresa = cliid;
+				d.startdate = adsstartdate;
+				d.enddate = adsenddate;
+				d.starttime = adsstarttime;
+				d.endtime = adsendtime;
+				d.subjectsid = adssubjectarr;
+				d.keywordsid = adskeywordarr;
+				d.tveiculosid = adstveiculoarr;
+				d.veiculosid = adsveiculoarr;
+				d.editoriasid = adseditoriaarr;
+				d.estadosid = adsstatesarr;
+				d.texto = adstext;
+				d.destaque = adsdestaque;
+				d.motivacao = adsmotivacaoarr;
+			}
+		},
+		'rowId': 'Id',
+		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
+		'initComplete': function(settings) {
+			this.api().columns(1).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+			this.api().columns(2).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+			this.api().columns(3).every(function(coln) {
+				var column = this;
+				var seltitle = $(column.header()).text();
+				var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				.appendTo($(column.footer()))
+				.on('change', function() {
+					var val = $.fn.dataTable.util.escapeRegex($(this).val());
+					column.search( val ? '^'+val+'$' : '', true, false).draw();
+				});
+			});
+
+			$('.filter.selectpicker').selectpicker('refresh');
+		},
+		'drawCallback': function(settings) {
+			this.api().column(1).data().each(function(tvcurrent, i) {
+				if (tvarr.indexOf(tvcurrent) == -1) {
+					tvarr.push(tvcurrent);
+					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_2');
+				}
+			})
+
+			this.api().column(2).data().each(function (vcurrent, i) {
+				if (varr.indexOf(vcurrent) == -1) {
+					varr.push(vcurrent);
+					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_3');
+				}
+			})
+
+			this.api().column(3).data().each(function (ecurrent, i) {
+				if (earr.indexOf(ecurrent) == -1) {
+					earr.push(ecurrent);
+					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
+					$(ihtml).appendTo('#selpckr_4');
+				}
+			})
+
+			$('.filter.selectpicker').selectpicker('refresh');
+			if(isTouchDevice() === false) {
+				$('.tooltipa').tooltip();
+			}
 		}
-	).catch(
-		error => {
-			console.error(error);
+	});
 
-			cadsbtn.ladda('stop');
-		}
-	);
+	// tablenews.ajax.url({
+	// 	'url': '/home/advsearch_form',
+	// 	'type': 'POST',
+	// 	'data': function(d) {
+	// 		d.idempresa = cliid;
+	// 		d.startdate = adsstartdate;
+	// 		d.enddate = adsenddate;
+	// 		d.starttime = adsstarttime;
+	// 		d.endtime = adsendtime;
+	// 		d.subjectsid = adssubjectarr;
+	// 		d.keywordsid = adskeywordarr;
+	// 		d.tveiculosid = adstveiculoarr;
+	// 		d.veiculosid = adsveiculoarr;
+	// 		d.editoriasid = adseditoriaarr;
+	// 		d.estadosid = adsstatesarr;
+	// 		d.texto = adstext;
+	// 		d.destaque = adsdestaque;
+	// 		d.motivacao = adsmotivacaoarr;
+	// 		d.avaliacao = adsavaliacaoarr;
+	// 	}
+	// }).load();
+
+	// tablenews.ajax.url('/home/advsearch_form').load();
 });
 
 $('input').on('itemAdded', function(event) {
@@ -906,6 +1040,31 @@ $('#btndown').click(function(event) {
 				);
 			break;
 	}
+});
+
+$(document).ready(function() {
+	$('#tbnbtnsela').click(function(event) {
+		tablenews.rows().select();
+
+		tablenews.rows().every(function(rowIdx, tableLoop, rowLoop) {
+			rownode = this.node();
+			trselid = $(rownode).attr('id').replace('tr_','');
+
+			if (trselected.indexOf(trselid) === -1) {
+				trselected.push(trselid);
+			}
+		});
+
+		console.log(trselected);
+	});
+
+	$('#tbnbtndesa').click(function(event) {
+		tablenews.rows().deselect();
+
+		trselected = [];
+
+		console.log(trselected);
+	});
 });
 
 dtworker.onmessage = function(event) {

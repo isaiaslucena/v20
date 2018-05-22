@@ -43,117 +43,121 @@
 	var cadsbtn = $('#adsbtn').ladda();
 	var btncmclipp = $('#mclippbtncreate').ladda();
 
-	tablenews = $('#tablenews').DataTable({
-		'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
-		'destroy': false,
-		'autoWidth': false,
-		'order': [
-			[0, 'desc']
-		],
-		'columnDefs': [
-			{'searchable': false, 'width': '2%', 'responsivePriority': 0, 'targets': 0},
-			{'searchable': true, 'width': '2%', 'responsivePriority': 50, 'targets': 1},
-			{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
-			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
-			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
-			{'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
-			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
-			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
-			{'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
-		],
-		'responsive': true,
-		'scrollX': false,
-		'processing': true,
-		'rowId': 'Id',
-		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
-		'initComplete': function(settings) {
-			this.api().columns(1).every(function(coln) {
-				var column = this;
-				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				.appendTo($(column.footer()))
-				.on('change', function() {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
-				});
-			});
-
-			this.api().columns(2).every(function(coln) {
-				var column = this;
-				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				.appendTo($(column.footer()))
-				.on('change', function() {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
-				});
-			});
-
-			this.api().columns(3).every(function(coln) {
-				var column = this;
-				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				.appendTo($(column.footer()))
-				.on('change', function() {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
-				});
-			});
-
-			// this.api().columns(4).every(function(coln) {
-			// 	var column = this;
-			// 	var seltitle = $(column.header()).text();
-			// 	var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-			// 	.appendTo($(column.footer()))
-			// 	.on('change', function() {
-			// 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
-			// 		column.search( val ? '^'+val+'$' : '', true, false).draw();
-			// 	});
-			// });
-
-			$('.filter.selectpicker').selectpicker('refresh');
-		},
-		'drawCallback': function(settings) {
-			this.api().column(1).data().each(function(tvcurrent, i) {
-				if (tvarr.indexOf(tvcurrent) == -1) {
-					tvarr.push(tvcurrent);
-					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_2');
-				}
-			})
-
-			this.api().column(2).data().each(function (vcurrent, i) {
-				if (varr.indexOf(vcurrent) == -1) {
-					varr.push(vcurrent);
-					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_3');
-				}
-			})
-
-			this.api().column(3).data().each(function (ecurrent, i) {
-				if (earr.indexOf(ecurrent) == -1) {
-					earr.push(ecurrent);
-					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_4');
-				}
-			})
-
-			// this.api().column(4).data().each(function (pccurrent, i) {
-			// 	if (pcarr.indexOf(pccurrent) == -1) {
-			// 		pcarr.push(pccurrent);
-			// 		ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
-			// 		$(ihtml).appendTo('#selpckr_5');
-			// 	}
-			// })
-
-			$('.filter.selectpicker').selectpicker('refresh');
-			if(isTouchDevice() === false) {
-				$('.tooltipa').tooltip();
-			}
-		}
-	});
-
 	$(document).ready(function() {
+		tablenews = $('#tablenews')
+		.on('page.dt', function(e){
+			console.log(e);
+		})
+		.DataTable({
+			'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
+			'destroy': true,
+			'autoWidth': false,
+			'order': [
+				[0, 'desc']
+			],
+			'columnDefs': [
+				{'searchable': false, 'width': '2%', 'responsivePriority': 0, 'targets': 0},
+				{'searchable': true, 'width': '2%', 'responsivePriority': 50, 'targets': 1},
+				{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
+				{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
+				{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
+				{'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
+				{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
+				{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
+				{'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
+			],
+			'responsive': true,
+			'scrollX': false,
+			'processing': true,
+			'rowId': 'Id',
+			'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
+			'initComplete': function(settings) {
+				this.api().columns(1).every(function(coln) {
+					var column = this;
+					var seltitle = $(column.header()).text();
+					var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+					.appendTo($(column.footer()))
+					.on('change', function() {
+						var val = $.fn.dataTable.util.escapeRegex($(this).val());
+						column.search( val ? '^'+val+'$' : '', true, false).draw();
+					});
+				});
+
+				this.api().columns(2).every(function(coln) {
+					var column = this;
+					var seltitle = $(column.header()).text();
+					var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+					.appendTo($(column.footer()))
+					.on('change', function() {
+						var val = $.fn.dataTable.util.escapeRegex($(this).val());
+						column.search( val ? '^'+val+'$' : '', true, false).draw();
+					});
+				});
+
+				this.api().columns(3).every(function(coln) {
+					var column = this;
+					var seltitle = $(column.header()).text();
+					var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+					.appendTo($(column.footer()))
+					.on('change', function() {
+						var val = $.fn.dataTable.util.escapeRegex($(this).val());
+						column.search( val ? '^'+val+'$' : '', true, false).draw();
+					});
+				});
+
+				// this.api().columns(4).every(function(coln) {
+				// 	var column = this;
+				// 	var seltitle = $(column.header()).text();
+				// 	var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+				// 	.appendTo($(column.footer()))
+				// 	.on('change', function() {
+				// 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
+				// 		column.search( val ? '^'+val+'$' : '', true, false).draw();
+				// 	});
+				// });
+
+				$('.filter.selectpicker').selectpicker('refresh');
+			},
+			'drawCallback': function(settings) {
+				this.api().column(1).data().each(function(tvcurrent, i) {
+					if (tvarr.indexOf(tvcurrent) == -1) {
+						tvarr.push(tvcurrent);
+						ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
+						$(ihtml).appendTo('#selpckr_2');
+					}
+				})
+
+				this.api().column(2).data().each(function (vcurrent, i) {
+					if (varr.indexOf(vcurrent) == -1) {
+						varr.push(vcurrent);
+						ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
+						$(ihtml).appendTo('#selpckr_3');
+					}
+				})
+
+				this.api().column(3).data().each(function (ecurrent, i) {
+					if (earr.indexOf(ecurrent) == -1) {
+						earr.push(ecurrent);
+						ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
+						$(ihtml).appendTo('#selpckr_4');
+					}
+				})
+
+				// this.api().column(4).data().each(function (pccurrent, i) {
+				// 	if (pcarr.indexOf(pccurrent) == -1) {
+				// 		pcarr.push(pccurrent);
+				// 		ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
+				// 		$(ihtml).appendTo('#selpckr_5');
+				// 	}
+				// })
+
+				$('.filter.selectpicker').selectpicker('refresh');
+				if(isTouchDevice() === false) {
+					$('.tooltipa').tooltip();
+				}
+			}
+		});
+
 		btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
 									'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
 									'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
@@ -161,70 +165,48 @@
 								'</div>';
 		$('#tbntoolbarbtns').html(btnshtml);
 
-		$('#tbnbtnsela').click(function(event) {
-			tablenews.rows().select();
+		tableexport = $('#tableexport').DataTable({
+			'order': [
+				[0, 'asc']
+			],
+			'destroy': true,
+			'autoWidth': true,
+			'rowId': 'Id',
+			'buttons': {
+				'buttons': [
+					{
+						'title': 'ExportarExcel',
+						'extend': 'excelHtml5',
+						// 'action': function(dt) {
+						// 	console.log(dt);
+						// },
+						'customize': function(xlsx) {
+							console.log(xlsx);
+							var sheet = xlsx.xl.worksheets['sheet1.xml'];
 
-			tablenews.rows().every(function(rowIdx, tableLoop, rowLoop) {
-				rownode = this.node();
-				trselid = $(rownode).attr('id').replace('tr_','');
+							//bold at colunm "C"
+							// $('row c[r^="C"]', sheet).attr('s','2');
+							// $('row c[r^="C"]', sheet).attr('s','2');
 
-				if (trselected.indexOf(trselid) === -1) {
-					trselected.push(trselid);
-				}
-			});
+							// console.log($('row c[r="2"]', sheet));
 
-			console.log(trselected);
-		});
+							//background row 2
+							$('row r[r="2"]', sheet).attr('s', '20');
 
-		$('#tbnbtndesa').click(function(event) {
-			tablenews.rows().deselect();
-
-			trselected = [];
-
-			console.log(trselected);
-		});
-	});
-
-	tableexport = $('#tableexport').DataTable({
-		'order': [
-			[0, 'asc']
-		],
-		'destroy': true,
-		'autoWidth': true,
-		'rowId': 'Id',
-		'buttons': {
-			'buttons': [
-				{
-					'title': 'ExportarExcel',
-					'extend': 'excelHtml5',
-					// 'action': function(dt) {
-					// 	console.log(dt);
-					// },
-					'customize': function(xlsx) {
-						console.log(xlsx);
-						var sheet = xlsx.xl.worksheets['sheet1.xml'];
-
-						//bold at colunm "C"
-						// $('row c[r^="C"]', sheet).attr('s','2');
-						// $('row c[r^="C"]', sheet).attr('s','2');
-
-						// console.log($('row c[r="2"]', sheet));
-
-						//background row 2
-						$('row r[r="2"]', sheet).attr('s', '20');
-
-						//line on all rows
-						$('row', sheet).each(function(index, elem) {
-							// console.log($(elem));
-							// $('row c[r*="10"]', sheet).attr( 's', '25' );
-							$(elem).attr( 's', '25' );
-						});
+							//line on all rows
+							$('row', sheet).each(function(index, elem) {
+								// console.log($(elem));
+								// $('row c[r*="10"]', sheet).attr( 's', '25' );
+								$(elem).attr( 's', '25' );
+							});
+						}
 					}
-				}
-			]
-		},
-		'processing': true,
-		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
+				]
+			},
+			'processing': true,
+			'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
+		});
+
 	});
 
 	$('#adsdatepicker').datepicker({

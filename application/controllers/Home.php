@@ -567,7 +567,7 @@ class Home extends CI_Controller {
 		}
 	}
 
-	public function advsearch_nonjson(){
+	public function advsearch_form(){
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata['idempresa'] = $this->input->post('idempresa');
 			$postdata['startdate'] = $this->input->post('startdate');
@@ -580,15 +580,70 @@ class Home extends CI_Controller {
 			$postdata['veiculosid'] = $this->input->post('veiculosid');
 			$postdata['editoriasid'] = $this->input->post('editoriasid');
 			$postdata['estadosid'] = $this->input->post('estadosid');
+			$postdata['texto'] = $this->input->post('texto');
 			$postdata['destaque'] = $this->input->post('destaque');
 			$postdata['motivacao'] = $this->input->post('motivacao');
 			$postdata['avaliacao'] = $this->input->post('avaliacao');
 
-			$searchdata = $this->home_model->advsearch($postdata);
+			$searchdata = $this->utf8_encoder($this->home_model->advsearch_dt($postdata));
+
+			$dataarr = array();
+
+			// $currdata['Id'],
+			// $currdata['Titulo'],
+			// $currdata['Noticia'],
+			// $currdata['URL'],
+			// $currdata['Data'],
+			// $currdata['Hora'],
+			// $currdata['IdTipoVeiculo'],
+			// $currdata['TipoVeiculo'],
+			// $currdata['idVeiculo'],
+			// $currdata['Veiculo'],
+			// $currdata['idEditoria'],
+			// $currdata['Editoria'],
+			// $currdata['IdAssunto'],
+			// $currdata['Assunto'],
+			// $currdata['idPalavraChave'],
+			// $currdata['PalavraChave'],
+			// $currdata['EdValor'],
+			// $currdata['EdAudiencia'],
+			// $currdata['Avaliacao'],
+			// $currdata['Motivacao']
+
+			foreach ($searchdata['mdata'] as $currdata) {
+				$currarr = array(
+					$currdata['Data'].' '.$currdata['Hora'],
+					$currdata['TipoVeiculo'],
+					$currdata['Veiculo'],
+					$currdata['Editoria'],
+					$currdata['PalavraChave'],
+					$currdata['Titulo'],
+					$currdata['EdValor'],
+					$currdata['EdAudiencia'],
+					$currdata['Avaliacao'].' '.$currdata['Motivacao']
+				);
+
+				array_push($dataarr, $currarr);
+			}
+
+			$searchdata['data'] = $dataarr;
 
 			header('Content-Type: application/json');
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
 		}
+	}
+
+	public function tableinit() {
+		$searchdata['data'] = array();
+
+		header('Content-Type: application/json');
+		print json_encode($searchdata, JSON_PRETTY_PRINT);
+	}
+
+	public function advsearch_dt() {
+		var_dump($this->input->get('draw', TRUE));
+
+		// var_dump(expression);
 	}
 
 	public function get_mclipp($iduser, $idclient) {

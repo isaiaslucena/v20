@@ -809,15 +809,14 @@ class Home_model extends CI_Model {
 			$countquery .= "AND npc.Avaliacao IN ($avaliacao) ";
 		}
 
-
-		// $sqlquery .= "GROUP BY nt.Id ";
 		// $countquery .= "GROUP BY nt.Id ";
+		// $sqlquery .= "GROUP BY nt.Id ";
 
-		// $sqlquery .= "GROUP BY pc.Id ";
 		// $countquery .= "GROUP BY pc.Id ";
+		// $sqlquery .= "GROUP BY pc.Id ";
 
+		$countquery .= "ORDER BY nt.Id ASC";
 		$sqlquery .= "ORDER BY nt.Id ASC";
-		// $countquery .= "ORDER BY nt.Id ASC";
 
 		// $countdata = $this->db->query($countquery)->row('quant');
 		// $fulldata['recordsTotal'] = $countdata;
@@ -831,6 +830,130 @@ class Home_model extends CI_Model {
 		// }
 		// return $fulldata;
 		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function advsearch_dt($data) {
+		$startdate = $data['startdate'];
+		$enddate = $data['enddate'];
+		$starttime = $data['starttime'];
+		$endtime = $data['endtime'];
+		$idempresa = $data['idempresa'];
+
+		$countquery =	"SELECT DISTINCT
+									COUNT(nt.Id) as quant
+									FROM Noticias nt
+									INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
+									INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
+									INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
+									INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
+									INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									LEFT JOIN dados_estados est ON ve.idEstado = est.id
+									LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
+									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+									INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+									INNER JOIN Empresa em ON ent.idEmpresa = em.Id
+									WHERE nt.Data BETWEEN '$startdate' AND '$enddate' AND
+									npc.Liberada = 1 AND
+									npc.idEmpresa = $idempresa ";
+
+		$sqlquery =	"SELECT DISTINCT
+								nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
+								tve.Id as IdTipoVeiculo, tve.Nome as TipoVeiculo,
+								nt.idVeiculo, ve.Nome as Veiculo,
+								nt.idEditoria, ed.Nome as Editoria,
+								ass.Id as IdAssunto, ass.Nome as Assunto,
+								pc.Id as idPalavraChave,
+								pc.Nome as PalavraChave,
+								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
+								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
+								npc.Avaliacao, npc.Motivacao
+								FROM Noticias nt
+								INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
+								INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
+								INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
+								INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
+								INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								LEFT JOIN dados_estados est ON ve.idEstado = est.id
+								LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+								INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
+								INNER JOIN Empresa em ON ent.idEmpresa = em.Id
+								WHERE nt.Data BETWEEN '$startdate' AND '$enddate' AND
+								npc.Liberada = 1 AND
+								npc.idEmpresa = $idempresa ";
+
+		if (!is_null($data['subjectsid'])) {
+			$idsassunto = implode(',', $data['subjectsid']);
+			$sqlquery .= "AND npc.idAssunto IN ($idsassunto) ";
+			$countquery .= "AND npc.idAssunto IN ($idsassunto) ";
+		}
+		if (!is_null($data['keywordsid'])) {
+			$idspchave = implode(',', $data['keywordsid']);
+			$sqlquery .= "AND npc.idPalavraChave IN ($idspchave) ";
+			$countquery .= "AND npc.idPalavraChave IN ($idspchave) ";
+		}
+		if (!is_null($data['tveiculosid'])) {
+			$idstveiculo = implode(',', $data['tveiculosid']);
+			$sqlquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
+			$countquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
+		}
+		if (!is_null($data['veiculosid'])) {
+			var_dump('IdVeiculos Maior ou igual que 1');
+			$idsveiculo = implode(',', $data['veiculosid']);
+			$sqlquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
+			$countquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
+		}
+		if (!is_null($data['editoriasid'])) {
+			$idseditoria = implode(',', $data['editoriasid']);
+			$sqlquery .= "AND npc.idEditoria IN ($idseditoria) ";
+			$countquery .= "AND npc.idEditoria IN ($idseditoria) ";
+		}
+		if (!is_null($data['estadosid'])) {
+			$idsestados = implode(',', $data['estadosid']);
+			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
+			$countquery .= "AND ve.idEstado IN ($idsestados) ";
+		}
+		if (!empty($data['destaque'])) {
+			$destaque = $data['destaque'];
+			$sqlquery .= "AND npc.Destaque = $destaque ";
+			$countquery .= "AND npc.Destaque = $destaque ";
+		}
+		if (!is_null($data['motivacao'])) {
+			$motivacao = implode(',', $data['motivacao']);
+			$sqlquery .= "AND npc.Motivacao IN ($motivacao) ";
+			$countquery .= "AND npc.Motivacao IN ($motivacao) ";
+		}
+		if (!is_null($data['avaliacao'])) {
+			$avaliacao = implode(',', $data['avaliacao']);
+			$sqlquery .= "AND npc.Avaliacao IN ($avaliacao) ";
+			$countquery .= "AND npc.Avaliacao IN ($avaliacao) ";
+		}
+
+		// $countquery .= "GROUP BY nt.Id ";
+		// $sqlquery .= "GROUP BY nt.Id ";
+
+		// $countquery .= "GROUP BY pc.Id ";
+		// $sqlquery .= "GROUP BY pc.Id ";
+
+		$countquery .= "ORDER BY nt.Id ASC";
+		$sqlquery .= "ORDER BY nt.Id ASC";
+
+		$countdata = $this->db->query($countquery)->row('quant');
+		$fulldata['recordsTotal'] = $countdata;
+		$fulldata['recordsFiltered'] = $countdata;
+		$fulldata['query'] = $sqlquery;
+
+		// if ($countdata <= 10) {
+			// $fulldata['data'] = $this->db->query($sqlquery)->result_array();
+		// } else if ($countdata > 10) {
+			$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
+		// }
+		return $fulldata;
+		// return $this->db->query($sqlquery)->result_array();
 	}
 
 	public function excel_export($edata) {
