@@ -125,6 +125,7 @@ cadsbtn.click(function(event) {
 	// 	}
 	// );
 
+	tablenews.clear().draw();
 	tablenews.destroy();
 
 	tablenews = $('#tablenews').DataTable({
@@ -169,73 +170,11 @@ cadsbtn.click(function(event) {
 				d.motivacao = adsmotivacaoarr;
 			}
 		},
-		'rowId': 'Id',
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
-		'initComplete': function(settings) {
-			this.api().columns(1).every(function(coln) {
-				var column = this;
-				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				.appendTo($(column.footer()))
-				.on('change', function() {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
-				});
-			});
-			this.api().columns(2).every(function(coln) {
-				var column = this;
-				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				.appendTo($(column.footer()))
-				.on('change', function() {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
-				});
-			});
-			this.api().columns(3).every(function(coln) {
-				var column = this;
-				var seltitle = $(column.header()).text();
-				var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				.appendTo($(column.footer()))
-				.on('change', function() {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
-				});
-			});
-
-			$('.filter.selectpicker').selectpicker('refresh');
-		},
-		'drawCallback': function(settings) {
-			this.api().column(1).data().each(function(tvcurrent, i) {
-				if (tvarr.indexOf(tvcurrent) == -1) {
-					tvarr.push(tvcurrent);
-					ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_2');
-				}
-			})
-
-			this.api().column(2).data().each(function (vcurrent, i) {
-				if (varr.indexOf(vcurrent) == -1) {
-					varr.push(vcurrent);
-					ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_3');
-				}
-			})
-
-			this.api().column(3).data().each(function (ecurrent, i) {
-				if (earr.indexOf(ecurrent) == -1) {
-					earr.push(ecurrent);
-					ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
-					$(ihtml).appendTo('#selpckr_4');
-				}
-			})
-
-			$('.filter.selectpicker').selectpicker('refresh');
-			if(isTouchDevice() === false) {
-				$('.tooltipa').tooltip();
-			}
-		}
 	});
+
+	cadsbtn.ladda('stop');
+	$('#advancedsearch').modal('hide');
 
 	// tablenews.ajax.url({
 	// 	'url': '/home/advsearch_form',

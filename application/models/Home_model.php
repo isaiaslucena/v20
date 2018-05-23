@@ -839,78 +839,75 @@ class Home_model extends CI_Model {
 		$endtime = $data['endtime'];
 		$idempresa = $data['idempresa'];
 
-		$countquery =	"SELECT DISTINCT
-									COUNT(nt.Id) as quant
+		$countquery =	"SELECT COUNT(*) AS quant FROM
+									(SELECT nt.Id
 									FROM Noticias nt
-									INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
-									INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
-									INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
-									INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
-									INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
-									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-									LEFT JOIN dados_estados est ON ve.idEstado = est.id
-									LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
-									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+									INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+									INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
 									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-									INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
-									INNER JOIN Empresa em ON ent.idEmpresa = em.Id
-									WHERE nt.Data BETWEEN '$startdate' AND '$enddate' AND
-									npc.Liberada = 1 AND
-									npc.idEmpresa = $idempresa ";
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+									INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+									LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+									WHERE
+									nt.Data BETWEEN '$startdate' AND '$enddate' AND
+									ntp.Liberada = 1 AND
+									ntp.idEmpresa = $idempresa ";
 
-		$sqlquery =	"SELECT DISTINCT
-								nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
-								tve.Id as IdTipoVeiculo, tve.Nome as TipoVeiculo,
-								nt.idVeiculo, ve.Nome as Veiculo,
-								nt.idEditoria, ed.Nome as Editoria,
-								ass.Id as IdAssunto, ass.Nome as Assunto,
-								pc.Id as idPalavraChave,
-								pc.Nome as PalavraChave,
-								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
-								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
-								npc.Avaliacao, npc.Motivacao
+		$sqlquery =	"SELECT
+								nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,
+								tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
+								ass.Nome as Assunto,
+								GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
+								ve.TiragemSemana as Tier,
+								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
+								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
+								CASE WHEN ntp.Avaliacao = 1 THEN 'Negativo' WHEN ntp.Avaliacao = 2 THEN 'Neutro' WHEN ntp.Avaliacao = 3 THEN 'Positivo' END AS Avaliacao,
+								CASE WHEN ntp.Motivacao = 1 THEN 'Espontanea' WHEN ntp.Motivacao = 2 THEN 'Provocada' END AS Motivacao
 								FROM Noticias nt
-								INNER JOIN NoticiaPalavraChave npc ON nt.Id = npc.idNoticia
-								INNER JOIN PalavraChave pc ON npc.idPalavraChave = pc.Id
-								INNER JOIN Assunto ass ON npc.idAssunto = ass.Id
-								INNER JOIN Editorias ed ON npc.idEditoria = ed.Id
-								INNER JOIN Veiculo ve ON ed.idVeiculo = ve.Id
-								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-								LEFT JOIN dados_estados est ON ve.idEstado = est.id
-								LEFT JOIN dados_cidades cid on ve.idCidade = cid.id
-								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+								INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
 								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-								INNER JOIN EmpresaNoticia ent ON nt.Id = ent.idNoticia
-								INNER JOIN Empresa em ON ent.idEmpresa = em.Id
-								WHERE nt.Data BETWEEN '$startdate' AND '$enddate' AND
-								npc.Liberada = 1 AND
-								npc.idEmpresa = $idempresa ";
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+								LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+								WHERE
+								nt.Data BETWEEN '$startdate' AND '$enddate' AND
+								ntp.Liberada = 1 AND
+								ntp.idEmpresa = $idempresa ";
 
 		if (!is_null($data['subjectsid'])) {
 			$idsassunto = implode(',', $data['subjectsid']);
-			$sqlquery .= "AND npc.idAssunto IN ($idsassunto) ";
-			$countquery .= "AND npc.idAssunto IN ($idsassunto) ";
+			$sqlquery .= "AND ntp.idAssunto IN ($idsassunto) ";
+			$countquery .= "AND ntp.idAssunto IN ($idsassunto) ";
 		}
 		if (!is_null($data['keywordsid'])) {
 			$idspchave = implode(',', $data['keywordsid']);
-			$sqlquery .= "AND npc.idPalavraChave IN ($idspchave) ";
-			$countquery .= "AND npc.idPalavraChave IN ($idspchave) ";
+			$sqlquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
+			$countquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
 		}
 		if (!is_null($data['tveiculosid'])) {
 			$idstveiculo = implode(',', $data['tveiculosid']);
-			$sqlquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
-			$countquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
+			$sqlquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
+			$countquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
 		}
 		if (!is_null($data['veiculosid'])) {
 			var_dump('IdVeiculos Maior ou igual que 1');
 			$idsveiculo = implode(',', $data['veiculosid']);
-			$sqlquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
-			$countquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
+			$sqlquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
+			$countquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
 		}
 		if (!is_null($data['editoriasid'])) {
 			$idseditoria = implode(',', $data['editoriasid']);
-			$sqlquery .= "AND npc.idEditoria IN ($idseditoria) ";
-			$countquery .= "AND npc.idEditoria IN ($idseditoria) ";
+			$sqlquery .= "AND ntp.idEditoria IN ($idseditoria) ";
+			$countquery .= "AND ntp.idEditoria IN ($idseditoria) ";
 		}
 		if (!is_null($data['estadosid'])) {
 			$idsestados = implode(',', $data['estadosid']);
@@ -919,41 +916,38 @@ class Home_model extends CI_Model {
 		}
 		if (!empty($data['destaque'])) {
 			$destaque = $data['destaque'];
-			$sqlquery .= "AND npc.Destaque = $destaque ";
-			$countquery .= "AND npc.Destaque = $destaque ";
+			$sqlquery .= "AND ntp.Destaque = $destaque ";
+			$countquery .= "AND ntp.Destaque = $destaque ";
 		}
 		if (!is_null($data['motivacao'])) {
 			$motivacao = implode(',', $data['motivacao']);
-			$sqlquery .= "AND npc.Motivacao IN ($motivacao) ";
-			$countquery .= "AND npc.Motivacao IN ($motivacao) ";
+			$sqlquery .= "AND ntp.Motivacao IN ($motivacao) ";
+			$countquery .= "AND ntp.Motivacao IN ($motivacao) ";
 		}
 		if (!is_null($data['avaliacao'])) {
 			$avaliacao = implode(',', $data['avaliacao']);
-			$sqlquery .= "AND npc.Avaliacao IN ($avaliacao) ";
-			$countquery .= "AND npc.Avaliacao IN ($avaliacao) ";
+			$sqlquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
+			$countquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
 		}
 
-		// $countquery .= "GROUP BY nt.Id ";
-		// $sqlquery .= "GROUP BY nt.Id ";
+		$countquery .= "GROUP BY nt.Id) AS X ";
+		$sqlquery .= "GROUP BY nt.Id ";
 
 		// $countquery .= "GROUP BY pc.Id ";
 		// $sqlquery .= "GROUP BY pc.Id ";
 
-		$countquery .= "ORDER BY nt.Id ASC";
-		$sqlquery .= "ORDER BY nt.Id ASC";
+		// $countquery .= "ORDER BY nt.Id ASC";
+		$sqlquery .= "ORDER BY nt.Id ASC ";
+
+		$sqlquery .= "LIMIT ".$data['limit']." OFFSET ".$data['offset'];
 
 		$countdata = $this->db->query($countquery)->row('quant');
 		$fulldata['recordsTotal'] = $countdata;
 		$fulldata['recordsFiltered'] = $countdata;
 		$fulldata['query'] = $sqlquery;
 
-		// if ($countdata <= 10) {
-			// $fulldata['data'] = $this->db->query($sqlquery)->result_array();
-		// } else if ($countdata > 10) {
-			$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
-		// }
+		$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
 		return $fulldata;
-		// return $this->db->query($sqlquery)->result_array();
 	}
 
 	public function excel_export($edata) {

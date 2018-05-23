@@ -585,31 +585,34 @@ class Home extends CI_Controller {
 			$postdata['motivacao'] = $this->input->post('motivacao');
 			$postdata['avaliacao'] = $this->input->post('avaliacao');
 
+			$postdata['offset'] = $this->input->post('start');
+			$postdata['limit'] = $this->input->post('length');
+			$postdata['draw'] = $this->input->post('draw');
+
 			$searchdata = $this->utf8_encoder($this->home_model->advsearch_dt($postdata));
 
-			$dataarr = array();
-
-			// $currdata['Id'],
-			// $currdata['Titulo'],
-			// $currdata['Noticia'],
-			// $currdata['URL'],
-			// $currdata['Data'],
-			// $currdata['Hora'],
-			// $currdata['IdTipoVeiculo'],
-			// $currdata['TipoVeiculo'],
-			// $currdata['idVeiculo'],
-			// $currdata['Veiculo'],
-			// $currdata['idEditoria'],
-			// $currdata['Editoria'],
-			// $currdata['IdAssunto'],
-			// $currdata['Assunto'],
-			// $currdata['idPalavraChave'],
-			// $currdata['PalavraChave'],
-			// $currdata['EdValor'],
-			// $currdata['EdAudiencia'],
-			// $currdata['Avaliacao'],
+			// $currdata['Id']
+			// $currdata['Titulo']
+			// $currdata['Noticia']
+			// $currdata['URL']
+			// $currdata['Data']
+			// $currdata['Hora']
+			// $currdata['IdTipoVeiculo']
+			// $currdata['TipoVeiculo']
+			// $currdata['idVeiculo']
+			// $currdata['Veiculo']
+			// $currdata['idEditoria']
+			// $currdata['Editoria']
+			// $currdata['IdAssunto']
+			// $currdata['Assunto']
+			// $currdata['idPalavraChave']
+			// $currdata['PalavraChave']
+			// $currdata['EdValor']
+			// $currdata['EdAudiencia']
+			// $currdata['Avaliacao']
 			// $currdata['Motivacao']
 
+			$dataarr = array();
 			foreach ($searchdata['mdata'] as $currdata) {
 				$currarr = array(
 					$currdata['Data'].' '.$currdata['Hora'],
@@ -618,15 +621,15 @@ class Home extends CI_Controller {
 					$currdata['Editoria'],
 					$currdata['PalavraChave'],
 					$currdata['Titulo'],
-					$currdata['EdValor'],
-					$currdata['EdAudiencia'],
+					$currdata['Valor'],
+					$currdata['Audiencia'],
 					$currdata['Avaliacao'].' '.$currdata['Motivacao']
 				);
-
 				array_push($dataarr, $currarr);
 			}
 
 			$searchdata['data'] = $dataarr;
+			$searchdata['draw'] = $postdata['draw'];
 
 			header('Content-Type: application/json');
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
