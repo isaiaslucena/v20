@@ -560,7 +560,7 @@ class Home extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
-			$searchdata = $this->utf8_encoder($this->home_model->advsearch($postdata));
+			$searchdata = $this->utf8_encoder($this->home_model->advsearch_dt_json($postdata));
 
 			header('Content-Type: application/json, charset=utf-8');
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
@@ -585,11 +585,11 @@ class Home extends CI_Controller {
 			$postdata['motivacao'] = $this->input->post('motivacao');
 			$postdata['avaliacao'] = $this->input->post('avaliacao');
 
-			$postdata['offset'] = $this->input->post('start');
-			$postdata['limit'] = $this->input->post('length');
-			$postdata['draw'] = $this->input->post('draw');
+			$postdata['offset'] = intval($this->input->post('start'));
+			$postdata['limit'] = intval($this->input->post('length'));
+			$postdata['draw'] = intval($this->input->post('draw'));
 
-			$searchdata = $this->utf8_encoder($this->home_model->advsearch_dt($postdata));
+			$searchdata = $this->utf8_encoder($this->home_model->advsearch_dt_form($postdata));
 
 			// $currdata['Id']
 			// $currdata['Titulo']
@@ -627,6 +627,8 @@ class Home extends CI_Controller {
 				);
 				array_push($dataarr, $currarr);
 			}
+
+			unset($searchdata['mdata']);
 
 			$searchdata['data'] = $dataarr;
 			$searchdata['draw'] = $postdata['draw'];

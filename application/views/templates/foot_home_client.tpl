@@ -17,7 +17,7 @@
 	{literal}
 	var rfdata, dtworker, dtrefreshworker, cid, cliid, tablenews, tableexport, tablenewsfn, cname, firsttabn,
 	sectabn, subjectid, subjectnm, keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
-	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle,
+	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle, adssearchdata,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
 	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
@@ -46,7 +46,7 @@
 	$(document).ready(function() {
 		tablenews = $('#tablenews')
 		.on('page.dt', function(e){
-			console.log(e);
+			// console.log(e);
 		})
 		.DataTable({
 			'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
@@ -206,7 +206,6 @@
 			'processing': true,
 			'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
 		});
-
 	});
 
 	$('#adsdatepicker').datepicker({

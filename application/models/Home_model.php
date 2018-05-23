@@ -778,7 +778,6 @@ class Home_model extends CI_Model {
 			$countquery .= "AND npc.idTipoVeiculo IN ($idstveiculo) ";
 		}
 		if (count($data['veiculosid']) >= 1) {
-			var_dump('IdVeiculos Maior ou igual que 1');
 			$idsveiculo = implode(',', $data['veiculosid']);
 			$sqlquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
 			$countquery .= "AND npc.idVeiculo IN ($idsveiculo) ";
@@ -832,7 +831,124 @@ class Home_model extends CI_Model {
 		return $this->db->query($sqlquery)->result_array();
 	}
 
-	public function advsearch_dt($data) {
+	public function advsearch_dt_json($data) {
+		$startdate = $data['startdate'];
+		$enddate = $data['enddate'];
+		$starttime = $data['starttime'];
+		$endtime = $data['endtime'];
+		$idempresa = $data['idempresa'];
+
+		$countquery =	"SELECT COUNT(*) AS quant FROM
+									(SELECT nt.Id
+									FROM Noticias nt
+									INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+									INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+									INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+									INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+									LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+									WHERE
+									nt.Data BETWEEN '$startdate' AND '$enddate' AND
+									ntp.Liberada = 1 AND
+									ntp.idEmpresa = $idempresa ";
+
+		$sqlquery =	"SELECT
+								nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,
+								tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
+								ass.Nome as Assunto,
+								GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
+								ve.TiragemSemana as Tier,
+								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
+								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
+								CASE WHEN ntp.Avaliacao = 1 THEN 'Negativo' WHEN ntp.Avaliacao = 2 THEN 'Neutro' WHEN ntp.Avaliacao = 3 THEN 'Positivo' END AS Avaliacao,
+								CASE WHEN ntp.Motivacao = 1 THEN 'Espontanea' WHEN ntp.Motivacao = 2 THEN 'Provocada' END AS Motivacao
+								FROM Noticias nt
+								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+								INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+								LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+								WHERE
+								nt.Data BETWEEN '$startdate' AND '$enddate' AND
+								ntp.Liberada = 1 AND
+								ntp.idEmpresa = $idempresa ";
+
+		if (count($data['subjectsid']) >= 1) {
+			$idsassunto = implode(',', $data['subjectsid']);
+			$sqlquery .= "AND ntp.idAssunto IN ($idsassunto) ";
+			$countquery .= "AND ntp.idAssunto IN ($idsassunto) ";
+		}
+		if (count($data['keywordsid']) >= 1) {
+			$idspchave = implode(',', $data['keywordsid']);
+			$sqlquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
+			$countquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
+		}
+		if (count($data['tveiculosid']) >= 1) {
+			$idstveiculo = implode(',', $data['tveiculosid']);
+			$sqlquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
+			$countquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
+		}
+		if (count($data['veiculosid']) >= 1) {
+			$idsveiculo = implode(',', $data['veiculosid']);
+			$sqlquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
+			$countquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
+		}
+		if (count($data['editoriasid']) >= 1) {
+			$idseditoria = implode(',', $data['editoriasid']);
+			$sqlquery .= "AND ntp.idEditoria IN ($idseditoria) ";
+			$countquery .= "AND ntp.idEditoria IN ($idseditoria) ";
+		}
+		if (count($data['estadosid']) >= 1) {
+			$idsestados = implode(',', $data['estadosid']);
+			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
+			$countquery .= "AND ve.idEstado IN ($idsestados) ";
+		}
+		if (!is_null($data['destaque'])) {
+			$destaque = $data['destaque'];
+			$sqlquery .= "AND ntp.Destaque = $destaque ";
+			$countquery .= "AND ntp.Destaque = $destaque ";
+		}
+		if (count($data['motivacao']) >= 1) {
+			$motivacao = implode(',', $data['motivacao']);
+			$sqlquery .= "AND ntp.Motivacao IN ($motivacao) ";
+			$countquery .= "AND ntp.Motivacao IN ($motivacao) ";
+		}
+		if (count($data['avaliacao']) >= 1) {
+			$avaliacao = implode(',', $data['avaliacao']);
+			$sqlquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
+			$countquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
+		}
+
+		$countquery .= "GROUP BY nt.Id) AS X ";
+		$sqlquery .= "GROUP BY nt.Id ";
+
+		// $countquery .= "GROUP BY pc.Id ";
+		// $sqlquery .= "GROUP BY pc.Id ";
+
+		// $countquery .= "ORDER BY nt.Id ASC";
+		$sqlquery .= "ORDER BY nt.Id ASC ";
+
+		$sqlquery .= "LIMIT ".$data['limit']." OFFSET ".$data['offset'];
+
+		$countdata = intval($this->db->query($countquery)->row('quant'));
+		$fulldata['recordsTotal'] = $countdata;
+		$fulldata['recordsFiltered'] = $countdata;
+		// $fulldata['query'] = $sqlquery;
+
+		$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
+		return $fulldata;
+	}
+
+	public function advsearch_dt_form($data) {
 		$startdate = $data['startdate'];
 		$enddate = $data['enddate'];
 		$starttime = $data['starttime'];
@@ -899,7 +1015,6 @@ class Home_model extends CI_Model {
 			$countquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
 		}
 		if (!is_null($data['veiculosid'])) {
-			var_dump('IdVeiculos Maior ou igual que 1');
 			$idsveiculo = implode(',', $data['veiculosid']);
 			$sqlquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
 			$countquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
@@ -941,10 +1056,10 @@ class Home_model extends CI_Model {
 
 		$sqlquery .= "LIMIT ".$data['limit']." OFFSET ".$data['offset'];
 
-		$countdata = $this->db->query($countquery)->row('quant');
+		$countdata = intval($this->db->query($countquery)->row('quant'));
 		$fulldata['recordsTotal'] = $countdata;
 		$fulldata['recordsFiltered'] = $countdata;
-		$fulldata['query'] = $sqlquery;
+		// $fulldata['query'] = $sqlquery;
 
 		$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
 		return $fulldata;

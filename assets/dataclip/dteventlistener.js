@@ -92,23 +92,23 @@ cadsbtn.click(function(event) {
 
 	adstext = $('#adstext').val();
 
-	// var adssearchdata = {
-	// 	'idempresa': cliid,
-	// 	'startdate': adsstartdate,
-	// 	'enddate': adsenddate,
-	// 	'starttime': adsstarttime,
-	// 	'endtime': adsendtime,
-	// 	'subjectsid': adssubjectarr,
-	// 	'keywordsid': adskeywordarr,
-	// 	'tveiculosid': adstveiculoarr,
-	// 	'veiculosid': adsveiculoarr,
-	// 	'editoriasid': adseditoriaarr,
-	// 	'estadosid': adsstatesarr,
-	// 	'texto': adstext,
-	// 	'destaque': adsdestaque,
-	// 	'motivacao': adsmotivacaoarr,
-	// 	'avaliacao': adsavaliacaoarr
-	// };
+	adssearchdata = {
+		'idempresa': cliid,
+		'startdate': adsstartdate,
+		'enddate': adsenddate,
+		'starttime': adsstarttime,
+		'endtime': adsendtime,
+		'subjectsid': adssubjectarr,
+		'keywordsid': adskeywordarr,
+		'tveiculosid': adstveiculoarr,
+		'veiculosid': adsveiculoarr,
+		'editoriasid': adseditoriaarr,
+		'estadosid': adsstatesarr,
+		'texto': adstext,
+		'destaque': adsdestaque,
+		'motivacao': adsmotivacaoarr,
+		'avaliacao': adsavaliacaoarr
+	};
 
 	// postData('/home/advsearch', adssearchdata)
 	// .then(
@@ -151,8 +151,9 @@ cadsbtn.click(function(event) {
 		'processing': true,
 		'serverSide': true,
 		'ajax': {
-			'url': '/home/advsearch_form',
+			'url': '/home/advsearch',
 			'type': 'POST',
+	    'contentType': 'application/json',
 			'data': function(d) {
 				d.idempresa = cliid;
 				d.startdate = adsstartdate;
@@ -168,6 +169,9 @@ cadsbtn.click(function(event) {
 				d.texto = adstext;
 				d.destaque = adsdestaque;
 				d.motivacao = adsmotivacaoarr;
+				d.avaliacao = adsavaliacaoarr;
+
+				return JSON.stringify(d);
 			}
 		},
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
@@ -292,10 +296,10 @@ $('.modal').on('hide.bs.modal', function(event) {
 	$('html').css('overflow-y', 'auto');
 });
 
-$('#advancedsearch').on('shown.bs.modal', function(event){
-	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
-	adseditoriaarr = [], adsstatesarr = [], adsveiculossitesarr = [];
-});
+// $('#advancedsearch').on('shown.bs.modal', function(event){
+// 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
+// 	adseditoriaarr = [], adsstatesarr = [], adsveiculossitesarr = [];
+// });
 
 $('#advancedsearch').on('hidden.bs.modal', function(event){
 	$('#adssubject').selectpicker('deselectAll');

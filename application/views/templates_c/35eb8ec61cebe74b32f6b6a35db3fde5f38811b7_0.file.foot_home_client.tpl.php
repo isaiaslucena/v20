@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-22 15:58:49
+/* Smarty version 3.1.30, created on 2018-05-23 13:34:05
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b046869e06bc3_11513045',
+  'unifunc' => 'content_5b0597fdf3f244_52331260',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1527015318,
+      1 => 1527093240,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5b046869e06bc3_11513045 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0597fdf3f244_52331260 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10797007315b046869df0939_54421731', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17865913875b0597fdf29198_47007999', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_10797007315b046869df0939_54421731 extends Smarty_Internal_Block
+class Block_17865913875b0597fdf29198_47007999 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -61,7 +61,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	
 	var rfdata, dtworker, dtrefreshworker, cid, cliid, tablenews, tableexport, tablenewsfn, cname, firsttabn,
 	sectabn, subjectid, subjectnm, keywordid, keywordnm, keywordtb, keywordgf, subjectskeywords,
-	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle,
+	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle, adssearchdata,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
 	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
@@ -90,7 +90,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	$(document).ready(function() {
 		tablenews = $('#tablenews')
 		.on('page.dt', function(e){
-			console.log(e);
+			// console.log(e);
 		})
 		.DataTable({
 			'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
@@ -250,7 +250,6 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 			'processing': true,
 			'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'}
 		});
-
 	});
 
 	$('#adsdatepicker').datepicker({
