@@ -155,21 +155,23 @@ cadsbtn.click(function(event) {
 			'type': 'POST',
 	    'contentType': 'application/json',
 			'data': function(d) {
-				d.idempresa = cliid;
-				d.startdate = adsstartdate;
-				d.enddate = adsenddate;
-				d.starttime = adsstarttime;
-				d.endtime = adsendtime;
-				d.subjectsid = adssubjectarr;
-				d.keywordsid = adskeywordarr;
-				d.tveiculosid = adstveiculoarr;
-				d.veiculosid = adsveiculoarr;
-				d.editoriasid = adseditoriaarr;
-				d.estadosid = adsstatesarr;
-				d.texto = adstext;
-				d.destaque = adsdestaque;
-				d.motivacao = adsmotivacaoarr;
-				d.avaliacao = adsavaliacaoarr;
+				// d.idempresa = cliid;
+				// d.startdate = adsstartdate;
+				// d.enddate = adsenddate;
+				// d.starttime = adsstarttime;
+				// d.endtime = adsendtime;
+				// d.subjectsid = adssubjectarr;
+				// d.keywordsid = adskeywordarr;
+				// d.tveiculosid = adstveiculoarr;
+				// d.veiculosid = adsveiculoarr;
+				// d.editoriasid = adseditoriaarr;
+				// d.estadosid = adsstatesarr;
+				// d.texto = adstext;
+				// d.destaque = adsdestaque;
+				// d.motivacao = adsmotivacaoarr;
+				// d.avaliacao = adsavaliacaoarr;
+
+				d.extra_search = adssearchdata;
 
 				return JSON.stringify(d);
 			}

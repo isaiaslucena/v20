@@ -46,7 +46,7 @@
 	$(document).ready(function() {
 		tablenews = $('#tablenews')
 		.on('page.dt', function(e){
-			// console.log(e);
+			console.log(e);
 		})
 		.DataTable({
 			'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',

@@ -562,6 +562,27 @@ class Home extends CI_Controller {
 
 			$searchdata = $this->utf8_encoder($this->home_model->advsearch_dt_json($postdata));
 
+			$dataarr = array();
+			foreach ($searchdata['mdata'] as $currdata) {
+				$currarr = array(
+					$currdata['Data'].' '.$currdata['Hora'],
+					$currdata['TipoVeiculo'],
+					$currdata['Veiculo'],
+					$currdata['Editoria'],
+					$currdata['PalavraChave'],
+					$currdata['Titulo'],
+					$currdata['Valor'],
+					$currdata['Audiencia'],
+					$currdata['Avaliacao'].' '.$currdata['Motivacao']
+				);
+				array_push($dataarr, $currarr);
+			}
+
+			unset($searchdata['mdata']);
+
+			$searchdata['data'] = $dataarr;
+			$searchdata['draw'] = $postdata['draw'];
+
 			header('Content-Type: application/json, charset=utf-8');
 			print json_encode($searchdata, JSON_PRETTY_PRINT);
 		}

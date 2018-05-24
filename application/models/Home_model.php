@@ -832,11 +832,11 @@ class Home_model extends CI_Model {
 	}
 
 	public function advsearch_dt_json($data) {
-		$startdate = $data['startdate'];
-		$enddate = $data['enddate'];
-		$starttime = $data['starttime'];
-		$endtime = $data['endtime'];
-		$idempresa = $data['idempresa'];
+		$startdate = $data['extra_search']['startdate'];
+		$enddate = $data['extra_search']['enddate'];
+		$starttime = $data['extra_search']['starttime'];
+		$endtime = $data['extra_search']['endtime'];
+		$idempresa = $data['extra_search']['idempresa'];
 
 		$countquery =	"SELECT COUNT(*) AS quant FROM
 									(SELECT nt.Id
@@ -882,48 +882,48 @@ class Home_model extends CI_Model {
 								ntp.Liberada = 1 AND
 								ntp.idEmpresa = $idempresa ";
 
-		if (count($data['subjectsid']) >= 1) {
-			$idsassunto = implode(',', $data['subjectsid']);
+		if (count($data['extra_search']['subjectsid']) >= 1) {
+			$idsassunto = implode(',', $data['extra_search']['subjectsid']);
 			$sqlquery .= "AND ntp.idAssunto IN ($idsassunto) ";
 			$countquery .= "AND ntp.idAssunto IN ($idsassunto) ";
 		}
-		if (count($data['keywordsid']) >= 1) {
-			$idspchave = implode(',', $data['keywordsid']);
+		if (count($data['extra_search']['keywordsid']) >= 1) {
+			$idspchave = implode(',', $data['extra_search']['keywordsid']);
 			$sqlquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
 			$countquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
 		}
-		if (count($data['tveiculosid']) >= 1) {
-			$idstveiculo = implode(',', $data['tveiculosid']);
+		if (count($data['extra_search']['tveiculosid']) >= 1) {
+			$idstveiculo = implode(',', $data['extra_search']['tveiculosid']);
 			$sqlquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
 			$countquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
 		}
-		if (count($data['veiculosid']) >= 1) {
-			$idsveiculo = implode(',', $data['veiculosid']);
+		if (count($data['extra_search']['veiculosid']) >= 1) {
+			$idsveiculo = implode(',', $data['extra_search']['veiculosid']);
 			$sqlquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
 			$countquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
 		}
-		if (count($data['editoriasid']) >= 1) {
-			$idseditoria = implode(',', $data['editoriasid']);
+		if (count($data['extra_search']['editoriasid']) >= 1) {
+			$idseditoria = implode(',', $data['extra_search']['editoriasid']);
 			$sqlquery .= "AND ntp.idEditoria IN ($idseditoria) ";
 			$countquery .= "AND ntp.idEditoria IN ($idseditoria) ";
 		}
-		if (count($data['estadosid']) >= 1) {
-			$idsestados = implode(',', $data['estadosid']);
+		if (count($data['extra_search']['estadosid']) >= 1) {
+			$idsestados = implode(',', $data['extra_search']['estadosid']);
 			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
 			$countquery .= "AND ve.idEstado IN ($idsestados) ";
 		}
-		if (!is_null($data['destaque'])) {
-			$destaque = $data['destaque'];
+		if (!is_null($data['extra_search']['destaque'])) {
+			$destaque = $data['extra_search']['destaque'];
 			$sqlquery .= "AND ntp.Destaque = $destaque ";
 			$countquery .= "AND ntp.Destaque = $destaque ";
 		}
-		if (count($data['motivacao']) >= 1) {
-			$motivacao = implode(',', $data['motivacao']);
+		if (count($data['extra_search']['motivacao']) >= 1) {
+			$motivacao = implode(',', $data['extra_search']['motivacao']);
 			$sqlquery .= "AND ntp.Motivacao IN ($motivacao) ";
 			$countquery .= "AND ntp.Motivacao IN ($motivacao) ";
 		}
-		if (count($data['avaliacao']) >= 1) {
-			$avaliacao = implode(',', $data['avaliacao']);
+		if (count($data['extra_search']['avaliacao']) >= 1) {
+			$avaliacao = implode(',', $data['extra_search']['avaliacao']);
 			$sqlquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
 			$countquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
 		}
@@ -937,7 +937,7 @@ class Home_model extends CI_Model {
 		// $countquery .= "ORDER BY nt.Id ASC";
 		$sqlquery .= "ORDER BY nt.Id ASC ";
 
-		$sqlquery .= "LIMIT ".$data['limit']." OFFSET ".$data['offset'];
+		$sqlquery .= "LIMIT ".$data['length']." OFFSET ".$data['start'];
 
 		$countdata = intval($this->db->query($countquery)->row('quant'));
 		$fulldata['recordsTotal'] = $countdata;
