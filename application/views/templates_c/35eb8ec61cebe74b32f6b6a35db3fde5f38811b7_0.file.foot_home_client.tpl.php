@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 18:30:29
+/* Smarty version 3.1.30, created on 2018-05-24 15:42:05
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b05dd75d00303_21032411',
+  'unifunc' => 'content_5b07077d381080_87619100',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1527111027,
+      1 => 1527185648,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5b05dd75d00303_21032411 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b07077d381080_87619100 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2810597685b05dd75cecd22_87998878', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4313658405b07077d359ec8_21924111', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_2810597685b05dd75cecd22_87998878 extends Smarty_Internal_Block
+class Block_4313658405b07077d359ec8_21924111 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -65,7 +65,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
 	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
-	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false;
+	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false, vadvsearch = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [],
@@ -90,7 +90,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	$(document).ready(function() {
 		tablenews = $('#tablenews')
 		.on('page.dt', function(e){
-			console.log(e);
+			// console.log(e);
 		})
 		.DataTable({
 			'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',

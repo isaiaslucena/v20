@@ -21,7 +21,7 @@
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
 	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
-	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false;
+	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false, vadvsearch = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [],
@@ -46,7 +46,7 @@
 	$(document).ready(function() {
 		tablenews = $('#tablenews')
 		.on('page.dt', function(e){
-			console.log(e);
+			// console.log(e);
 		})
 		.DataTable({
 			'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',

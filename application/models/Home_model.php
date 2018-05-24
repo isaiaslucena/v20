@@ -882,33 +882,33 @@ class Home_model extends CI_Model {
 								ntp.Liberada = 1 AND
 								ntp.idEmpresa = $idempresa ";
 
-		if (count($data['extra_search']['subjectsid']) >= 1) {
-			$idsassunto = implode(',', $data['extra_search']['subjectsid']);
+		if (!empty($data['extra_search']['subjectsid'])) {
+			$idsassunto = $data['extra_search']['subjectsid'];
 			$sqlquery .= "AND ntp.idAssunto IN ($idsassunto) ";
 			$countquery .= "AND ntp.idAssunto IN ($idsassunto) ";
 		}
-		if (count($data['extra_search']['keywordsid']) >= 1) {
-			$idspchave = implode(',', $data['extra_search']['keywordsid']);
+		if (!empty($data['extra_search']['keywordsid'])) {
+			$idspchave = $data['extra_search']['keywordsid'];
 			$sqlquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
 			$countquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
 		}
-		if (count($data['extra_search']['tveiculosid']) >= 1) {
-			$idstveiculo = implode(',', $data['extra_search']['tveiculosid']);
+		if (!empty($data['extra_search']['tveiculosid'])) {
+			$idstveiculo = $data['extra_search']['tveiculosid'];
 			$sqlquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
 			$countquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
 		}
-		if (count($data['extra_search']['veiculosid']) >= 1) {
-			$idsveiculo = implode(',', $data['extra_search']['veiculosid']);
+		if (!empty($data['extra_search']['veiculosid'])) {
+			$idsveiculo = $data['extra_search']['veiculosid'];
 			$sqlquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
 			$countquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
 		}
-		if (count($data['extra_search']['editoriasid']) >= 1) {
-			$idseditoria = implode(',', $data['extra_search']['editoriasid']);
+		if (!empty($data['extra_search']['editoriasid'])) {
+			$idseditoria = $data['extra_search']['editoriasid'];
 			$sqlquery .= "AND ntp.idEditoria IN ($idseditoria) ";
 			$countquery .= "AND ntp.idEditoria IN ($idseditoria) ";
 		}
-		if (count($data['extra_search']['estadosid']) >= 1) {
-			$idsestados = implode(',', $data['extra_search']['estadosid']);
+		if (!empty($data['extra_search']['estadosid'])) {
+			$idsestados = $data['extra_search']['estadosid'];
 			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
 			$countquery .= "AND ve.idEstado IN ($idsestados) ";
 		}
@@ -917,13 +917,13 @@ class Home_model extends CI_Model {
 			$sqlquery .= "AND ntp.Destaque = $destaque ";
 			$countquery .= "AND ntp.Destaque = $destaque ";
 		}
-		if (count($data['extra_search']['motivacao']) >= 1) {
-			$motivacao = implode(',', $data['extra_search']['motivacao']);
+		if (!empty($data['extra_search']['motivacao'])) {
+			$motivacao = $data['extra_search']['motivacao'];
 			$sqlquery .= "AND ntp.Motivacao IN ($motivacao) ";
 			$countquery .= "AND ntp.Motivacao IN ($motivacao) ";
 		}
-		if (count($data['extra_search']['avaliacao']) >= 1) {
-			$avaliacao = implode(',', $data['extra_search']['avaliacao']);
+		if (!empty($data['extra_search']['avaliacao'])) {
+			$avaliacao = $data['extra_search']['avaliacao'];
 			$sqlquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
 			$countquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
 		}
@@ -1066,41 +1066,45 @@ class Home_model extends CI_Model {
 	}
 
 	public function excel_export($edata) {
-		$startdate = $edata['startdate'];
-		$enddate = $edata['enddate'];
-		$idemp = $edata['idemp'];
-		$idsnot = implode(",", $edata['idsnot']);
-		$idskw = implode(",", $edata['idskw']);
+		if ($edata['vadvsearch']) {
+			# code...
+		} else {
+			$startdate = $edata['startdate'];
+			$enddate = $edata['enddate'];
+			$idemp = $edata['idemp'];
+			$idsnot = implode(",", $edata['idsnot']);
+			$idskw = implode(",", $edata['idskw']);
 
-		$sqlquery =	"SELECT
-								nt.Id, nt.Id as IdNoticia, nt.Data, nt.Hora, nt.Titulo, nt.URL as URL_Externo,
-								CONCAT('http://v20.intranet.dataclip.com.br/home/news/',nt.Id,'/',ntp.IdEmpresa) as URL_Sistema,
-								tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
-								ass.Nome as Assunto,
-								GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
-								ve.TiragemSemana as Tier,
-								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
-								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
-								CASE WHEN ntp.Avaliacao = 1 THEN 'Negativo' WHEN ntp.Avaliacao = 2 THEN 'Neutro' WHEN ntp.Avaliacao = 3 THEN 'Positivo' END AS Avaliacao,
-								CASE WHEN ntp.Motivacao = 1 THEN 'Espontanea' WHEN ntp.Motivacao = 2 THEN 'Provocada' END AS Motivacao
-								FROM Noticias nt
-								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
-								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
-								INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
-								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-								INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
-								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
-								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
-								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
-								LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
-								WHERE
-								-- nt.Data BETWEEN '$startdate' AND '$enddate' AND
-								ntp.idEmpresa = $idemp AND
-								ntp.idPalavraChave IN ($idskw) AND
-								nt.Id IN ($idsnot)
-								GROUP BY nt.Id
-								ORDER BY nt.Id ASC";
+			$sqlquery =	"SELECT
+									nt.Id, nt.Id as IdNoticia, nt.Data, nt.Hora, nt.Titulo, nt.URL as URL_Externo,
+									CONCAT('http://v20.intranet.dataclip.com.br/home/news/',nt.Id,'/',ntp.IdEmpresa) as URL_Sistema,
+									tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
+									GROUP_CONCAT(DISTINCT ass.Nome ORDER BY ass.Nome SEPARATOR ', ') as Assunto,
+									GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
+									ve.TiragemSemana as Tier,
+									FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
+									CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
+									CASE WHEN ntp.Avaliacao = 1 THEN 'Negativo' WHEN ntp.Avaliacao = 2 THEN 'Neutro' WHEN ntp.Avaliacao = 3 THEN 'Positivo' END AS Avaliacao,
+									CASE WHEN ntp.Motivacao = 1 THEN 'Espontanea' WHEN ntp.Motivacao = 2 THEN 'Provocada' END AS Motivacao
+									FROM Noticias nt
+									INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+									INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+									INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+									LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+									INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+									INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+									LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+									INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+									INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+									LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+									WHERE
+									-- nt.Data BETWEEN '$startdate' AND '$enddate' AND
+									ntp.idEmpresa = $idemp AND
+									ntp.idPalavraChave IN ($idskw) AND
+									nt.Id IN ($idsnot)
+									GROUP BY nt.Id
+									ORDER BY nt.Id ASC";
+		}
 
 		return $this->db->query($sqlquery)->result_array();
 	}

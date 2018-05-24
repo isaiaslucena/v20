@@ -565,15 +565,16 @@ class Home extends CI_Controller {
 			$dataarr = array();
 			foreach ($searchdata['mdata'] as $currdata) {
 				$currarr = array(
-					$currdata['Data'].' '.$currdata['Hora'],
-					$currdata['TipoVeiculo'],
-					$currdata['Veiculo'],
-					$currdata['Editoria'],
-					$currdata['PalavraChave'],
-					$currdata['Titulo'],
-					$currdata['Valor'],
-					$currdata['Audiencia'],
-					$currdata['Avaliacao'].' '.$currdata['Motivacao']
+					'DT_RowId' => 'tr_'.$currdata['Id'],
+					'datetime' => $currdata['Data'].' '.$currdata['Hora'],
+					'TipoVeiculo' => $currdata['TipoVeiculo'],
+					'Veiculo' => $currdata['Veiculo'],
+					'Editoria' => $currdata['Editoria'],
+					'PalavraChave' => $currdata['PalavraChave'],
+					'Titulo' => $currdata['Titulo'],
+					'Valor' => $currdata['Valor'],
+					'Audiencia' => $currdata['Audiencia'],
+					'AvalMotiv' => $currdata['Avaliacao'].' '.$currdata['Motivacao']
 				);
 				array_push($dataarr, $currarr);
 			}

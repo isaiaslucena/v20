@@ -98,16 +98,16 @@ cadsbtn.click(function(event) {
 		'enddate': adsenddate,
 		'starttime': adsstarttime,
 		'endtime': adsendtime,
-		'subjectsid': adssubjectarr,
-		'keywordsid': adskeywordarr,
-		'tveiculosid': adstveiculoarr,
-		'veiculosid': adsveiculoarr,
-		'editoriasid': adseditoriaarr,
-		'estadosid': adsstatesarr,
+		'subjectsid': adssubjectarr.toString(),
+		'keywordsid': adskeywordarr.toString(),
+		'tveiculosid': adstveiculoarr.toString(),
+		'veiculosid': adsveiculoarr.toString(),
+		'editoriasid': adseditoriaarr.toString(),
+		'estadosid': adsstatesarr.toString(),
 		'texto': adstext,
 		'destaque': adsdestaque,
-		'motivacao': adsmotivacaoarr,
-		'avaliacao': adsavaliacaoarr
+		'motivacao': adsmotivacaoarr.toString(),
+		'avaliacao': adsavaliacaoarr.toString()
 	};
 
 	// postData('/home/advsearch', adssearchdata)
@@ -124,6 +124,8 @@ cadsbtn.click(function(event) {
 	// 		cadsbtn.ladda('stop');
 	// 	}
 	// );
+
+	vadvsearch = true;
 
 	tablenews.clear().draw();
 	tablenews.destroy();
@@ -146,6 +148,17 @@ cadsbtn.click(function(event) {
 			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
 			{'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
 		],
+		'columns': [
+			{'data': 'datetime'},
+			{'data': 'TipoVeiculo'},
+			{'data': 'Veiculo'},
+			{'data': 'Editoria'},
+			{'data': 'PalavraChave'},
+			{'data': 'Titulo'},
+			{'data': 'Valor'},
+			{'data': 'Audiencia'},
+			{'data': 'AvalMotiv'}
+		],
 		'responsive': true,
 		'scrollX': false,
 		'processing': true,
@@ -155,22 +168,6 @@ cadsbtn.click(function(event) {
 			'type': 'POST',
 	    'contentType': 'application/json',
 			'data': function(d) {
-				// d.idempresa = cliid;
-				// d.startdate = adsstartdate;
-				// d.enddate = adsenddate;
-				// d.starttime = adsstarttime;
-				// d.endtime = adsendtime;
-				// d.subjectsid = adssubjectarr;
-				// d.keywordsid = adskeywordarr;
-				// d.tveiculosid = adstveiculoarr;
-				// d.veiculosid = adsveiculoarr;
-				// d.editoriasid = adseditoriaarr;
-				// d.estadosid = adsstatesarr;
-				// d.texto = adstext;
-				// d.destaque = adsdestaque;
-				// d.motivacao = adsmotivacaoarr;
-				// d.avaliacao = adsavaliacaoarr;
-
 				d.extra_search = adssearchdata;
 
 				return JSON.stringify(d);
@@ -298,10 +295,10 @@ $('.modal').on('hide.bs.modal', function(event) {
 	$('html').css('overflow-y', 'auto');
 });
 
-// $('#advancedsearch').on('shown.bs.modal', function(event){
-// 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
-// 	adseditoriaarr = [], adsstatesarr = [], adsveiculossitesarr = [];
-// });
+$('#advancedsearch').on('shown.bs.modal', function(event){
+	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [],
+	adseditoriaarr = [], adsstatesarr = [], adsveiculossitesarr = [];
+});
 
 $('#advancedsearch').on('hidden.bs.modal', function(event){
 	$('#adssubject').selectpicker('deselectAll');
@@ -408,20 +405,24 @@ $('#tablenews').on(
 );
 
 $('#btneexcel').click(function(event) {
-	select_news();
+	if (vadvsearch) {
+		exportdata = adssearchdata;
+	} else {
+		select_news();
 
-	startdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
-	enddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+		startdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+		enddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
-	exportdata = {
-		'startdate': startdate,
-		'enddate': enddate,
-		'idemp': cliid,
-		'idsnot': idsnots,
-		'idskw': idskws
+		exportdata = {
+			'startdate': startdate,
+			'enddate': enddate,
+			'idemp': cliid,
+			'idsnot': idsnots,
+			'idskw': idskws
+		}
 	}
 
-	// console.log(exportdata);
+	exportdata.vadvsearch = vadvsearch;
 
 	add_data_export(exportdata, function(e){
 		tableexport.button(0).trigger();
@@ -749,7 +750,7 @@ $(document).on('changed.bs.select', '#sublist select', function(e, clickedIndex,
 });
 
 $('#adssubject').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
-	var subjid = $(this).find('option').eq(clickedIndex).attr('data-subjectid');
+	var subjid = parseInt($(this).find('option').eq(clickedIndex).attr('data-subjectid'));
 	var subsname = $(this).find('option').eq(clickedIndex).text();
 
 	if (newValue) {
@@ -782,7 +783,7 @@ $('#adssubject').on('changed.bs.select', function(e, clickedIndex, newValue, old
 });
 
 $('#adskeyword').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
-	var keywid = $(this).find('option').eq(clickedIndex).attr('data-keywordid');
+	var keywid = parseInt($(this).find('option').eq(clickedIndex).attr('data-keywordid'));
 	var keywname = $(this).find('option').eq(clickedIndex).text();
 
 	if (newValue) {
@@ -797,7 +798,7 @@ $('#adskeyword').on('changed.bs.select', function(e, clickedIndex, newValue, old
 });
 
 $('#adstveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
-	var tveid = $(this).find('option').eq(clickedIndex).attr('data-tveiculoid');
+	var tveid = parseInt($(this).find('option').eq(clickedIndex).attr('data-tveiculoid'));
 	var tvesname = $(this).find('option').eq(clickedIndex).text();
 
 	if (newValue) {
@@ -840,7 +841,7 @@ $('#adstveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, ol
 });
 
 $('#adsveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
-	var veid = $(this).find('option').eq(clickedIndex).attr('data-veiculoid');
+	var veid = parseInt($(this).find('option').eq(clickedIndex).attr('data-veiculoid'));
 	var vesname = $(this).find('option').eq(clickedIndex).text();
 
 	if (newValue) {
@@ -873,7 +874,7 @@ $('#adsveiculo').on('changed.bs.select', function(e, clickedIndex, newValue, old
 });
 
 $('#adseditoria').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
-	var edid = $(this).find('option').eq(clickedIndex).attr('data-editoriaid');
+	var edid = parseInt($(this).find('option').eq(clickedIndex).attr('data-editoriaid'));
 	var vedsname = $(this).find('option').eq(clickedIndex).text();
 
 	if (newValue) {
@@ -888,7 +889,7 @@ $('#adseditoria').on('changed.bs.select', function(e, clickedIndex, newValue, ol
 });
 
 $('#adsstates').on('changed.bs.select', function(e, clickedIndex, newValue, oldValue) {
-	var stateid = $(this).find('option').eq(clickedIndex).attr('data-stateid');
+	var stateid = parseInt($(this).find('option').eq(clickedIndex).attr('data-stateid'));
 	var statename = $(this).find('option').eq(clickedIndex).text();
 
 	if (newValue) {
