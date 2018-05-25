@@ -864,8 +864,7 @@ class Home_model extends CI_Model {
 								ve.TiragemSemana as Tier,
 								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
 								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
-								CASE WHEN ntp.Avaliacao = 1 THEN 'Negativo' WHEN ntp.Avaliacao = 2 THEN 'Neutro' WHEN ntp.Avaliacao = 3 THEN 'Positivo' END AS Avaliacao,
-								CASE WHEN ntp.Motivacao = 1 THEN 'Espontanea' WHEN ntp.Motivacao = 2 THEN 'Provocada' END AS Motivacao
+								ntp.Avaliacao, ntp.Motivacao
 								FROM Noticias nt
 								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
 								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id

@@ -562,19 +562,97 @@ class Home extends CI_Controller {
 
 			$searchdata = $this->utf8_encoder($this->home_model->advsearch_dt_json($postdata));
 
+			$currdidclient = $postdata['extra_search']['idempresa'];
 			$dataarr = array();
 			foreach ($searchdata['mdata'] as $currdata) {
+				$vavaneg = false;
+				$vavaneu = false;
+				$vavapos = false;
+				$vavanenh = false;
+				$vmotesp = false;
+				$vmotprov = false;
+				$vmotnenh = false;
+
+				$currdid = $currdata['Id'];
+
+				$currddata = trim($currdata['Data']);
+				$currdhora = trim($currdata['Hora']);
+				$currddatetime = $currddata." ".$currdhora;
+
+				$strtlen = strlen($currdata['Titulo']);
+				if ($strtlen > 50) {
+					$strtitulo = substr($currdata['Titulo'], 0, 47)."...";
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$currdata['Titulo'].'">'.$strtitulo.'</a>';
+				} else if ($strtlen == 1) {
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'">Sem Título</a>';
+				} else {
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'">'.$currdata['Titulo'].'</a>';
+				}
+
+				$currdavaliacao = $currdata['Avaliacao'];
+				switch($currdavaliacao) {
+					case '1':
+						$vavaneg = true;
+						break;
+					case '2':
+						$vavaneu = true;
+						break;
+					case '3':
+						$vavapos = true;
+						break;
+					default:
+						$vavanenh = true;
+						break;
+				}
+				$currdmotivacao = $currdata['Motivacao'];
+				switch($currdmotivacao) {
+					case '1':
+						$vmotesp = true;
+						break;
+					case '2':
+						$vmotprov = true;
+						break;
+					default:
+						$vmotnenh = true;
+						break;
+				}
+				$currdbtn =	'<div id="btngpa_'.$currdid.'" data-toggle="buttons" class="btn-group">'.
+											'<label class="btn btn-xs rdaval '.($vavaneg ? 'active btn-danger' : 'btn-default').'" title="Negativo" data-aval="1" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="avaliacao1" name="Aval">'.
+												'<i class="fa fa-frown-o"></i>'.
+											'</label>'.
+											'<label class="btn btn-xs rdaval '.($vavaneu ? 'active btn-warning' : 'btn-default').'" title="Neutro" data-aval="2" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="avaliacao2" name="Aval">'.
+												'<i class="fa fa-meh-o"></i>'.
+											'</label>'.
+											'<label class="btn btn-xs rdaval '.($vavapos ? 'active btn-success' : 'btn-default').'" title="Positivo" data-aval="3" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="avaliacao3" name="Aval">'.
+												'<i class="fa fa-smile-o"></i>'.
+											'</label>'.
+										'</div>'.
+										'<br>'.
+										'<div id="btngpm_'.$currdid.'" data-toggle="buttons" class="btn-group">'.
+											'<label class="btn btn-xs rdmoti '.($vmotesp ? 'active btn-success' : 'btn-default').'" title="Espontânea" data-moti="1" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="motivacao1" name="Moti">'.
+												'<i class="fa fa-users"></i>'.
+											'</label>'.
+											'<label class="btn btn-xs rdmoti '.($vmotprov ? 'active btn-warning' : 'btn-default').'" title="Provocada" data-moti="2" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="motivacao2" name="Moti">'.
+												'<i class="fa fa-handshake-o">'.
+											'</label>'.
+										'</div>';
+
 				$currarr = array(
-					'DT_RowId' => 'tr_'.$currdata['Id'],
-					'datetime' => $currdata['Data'].' '.$currdata['Hora'],
+					'DT_RowId' => 'tr_'.$currdid,
+					'datetime' => $currddatetime,
 					'TipoVeiculo' => $currdata['TipoVeiculo'],
 					'Veiculo' => $currdata['Veiculo'],
 					'Editoria' => $currdata['Editoria'],
 					'PalavraChave' => $currdata['PalavraChave'],
-					'Titulo' => $currdata['Titulo'],
+					'Titulo' => $currdtitulo,
 					'Valor' => $currdata['Valor'],
 					'Audiencia' => $currdata['Audiencia'],
-					'AvalMotiv' => $currdata['Avaliacao'].' '.$currdata['Motivacao']
+					'AvalMotiv' => $currdbtn
 				);
 				array_push($dataarr, $currarr);
 			}

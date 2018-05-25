@@ -179,29 +179,9 @@ cadsbtn.click(function(event) {
 	cadsbtn.ladda('stop');
 	$('#advancedsearch').modal('hide');
 
-	// tablenews.ajax.url({
-	// 	'url': '/home/advsearch_form',
-	// 	'type': 'POST',
-	// 	'data': function(d) {
-	// 		d.idempresa = cliid;
-	// 		d.startdate = adsstartdate;
-	// 		d.enddate = adsenddate;
-	// 		d.starttime = adsstarttime;
-	// 		d.endtime = adsendtime;
-	// 		d.subjectsid = adssubjectarr;
-	// 		d.keywordsid = adskeywordarr;
-	// 		d.tveiculosid = adstveiculoarr;
-	// 		d.veiculosid = adsveiculoarr;
-	// 		d.editoriasid = adseditoriaarr;
-	// 		d.estadosid = adsstatesarr;
-	// 		d.texto = adstext;
-	// 		d.destaque = adsdestaque;
-	// 		d.motivacao = adsmotivacaoarr;
-	// 		d.avaliacao = adsavaliacaoarr;
-	// 	}
-	// }).load();
-
-	// tablenews.ajax.url('/home/advsearch_form').load();
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
 });
 
 $('input').on('itemAdded', function(event) {

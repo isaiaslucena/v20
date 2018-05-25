@@ -1799,12 +1799,11 @@ function get_mclipp_news(idmcplipp, idclient) {
 
 function add_data_export(data, callback) {
 	tableexport.clear().draw();
+
 	postData('/home/excel_export', data)
 	.then(redata => {
 		// console.log(redata);
 
-		// countred = redata.length;
-		// count = 0;
 		redata.map(function(index, elem) {
 			residnoticia = index.IdNoticia;
 			resdata = index.Data;
@@ -1823,31 +1822,26 @@ function add_data_export(data, callback) {
 			resavaliacao = index.Avaliacao;
 			resmotivacao = index.Motivacao;
 
-			var rowNode = tableexport.row.add(
-				[
-					residnoticia,
-					resdata,
-					reshora,
-					restititulo,
-					resurl,
-					resurlsistema,
-					restveiculo,
-					resveiculo,
-					reseditoria,
-					resassunto,
-					respchave,
-					restier,
-					resvalor,
-					resaudiencia,
-					resavaliacao,
-					resmotivacao
-				]
-			).draw(false).node();
-
-			// if (count.length == countred) {
-			// }
-			// count += 1;
+			var rowNode = tableexport.row.add([
+				residnoticia,
+				resdata,
+				reshora,
+				restititulo,
+				resurl,
+				resurlsistema,
+				restveiculo,
+				resveiculo,
+				reseditoria,
+				resassunto,
+				respchave,
+				restier,
+				resvalor,
+				resaudiencia,
+				resavaliacao,
+				resmotivacao
+			]).draw(false).node();
 		});
+
 		callback();
 	})
 	.catch(error => console.error(error))
