@@ -941,7 +941,7 @@ class Home_model extends CI_Model {
 		$countdata = intval($this->db->query($countquery)->row('quant'));
 		$fulldata['recordsTotal'] = $countdata;
 		$fulldata['recordsFiltered'] = $countdata;
-		// $fulldata['query'] = $sqlquery;
+		$fulldata['query'] = $sqlquery;
 
 		$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
 		return $fulldata;

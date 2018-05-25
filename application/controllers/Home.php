@@ -657,7 +657,7 @@ class Home extends CI_Controller {
 				array_push($dataarr, $currarr);
 			}
 
-			unset($searchdata['mdata']);
+			// unset($searchdata['mdata']);
 
 			$searchdata['data'] = $dataarr;
 			$searchdata['draw'] = $postdata['draw'];

@@ -105,17 +105,6 @@
 					});
 				});
 
-				// this.api().columns(4).every(function(coln) {
-				// 	var column = this;
-				// 	var seltitle = $(column.header()).text();
-				// 	var select = $('<select id="selpckr_5" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
-				// 	.appendTo($(column.footer()))
-				// 	.on('change', function() {
-				// 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
-				// 		column.search( val ? '^'+val+'$' : '', true, false).draw();
-				// 	});
-				// });
-
 				$('.filter.selectpicker').selectpicker('refresh');
 			},
 			'drawCallback': function(settings) {
@@ -125,7 +114,7 @@
 						ihtml = '<option val="'+tvcurrent+'">'+tvcurrent+'</option>'
 						$(ihtml).appendTo('#selpckr_2');
 					}
-				})
+				});
 
 				this.api().column(2).data().each(function (vcurrent, i) {
 					if (varr.indexOf(vcurrent) == -1) {
@@ -133,7 +122,7 @@
 						ihtml = '<option val="'+vcurrent+'">'+vcurrent+'</option>'
 						$(ihtml).appendTo('#selpckr_3');
 					}
-				})
+				});
 
 				this.api().column(3).data().each(function (ecurrent, i) {
 					if (earr.indexOf(ecurrent) == -1) {
@@ -141,15 +130,7 @@
 						ihtml = '<option val="'+ecurrent+'">'+ecurrent+'</option>'
 						$(ihtml).appendTo('#selpckr_4');
 					}
-				})
-
-				// this.api().column(4).data().each(function (pccurrent, i) {
-				// 	if (pcarr.indexOf(pccurrent) == -1) {
-				// 		pcarr.push(pccurrent);
-				// 		ihtml = '<option val="'+pccurrent+'"">'+pccurrent+'</option>'
-				// 		$(ihtml).appendTo('#selpckr_5');
-				// 	}
-				// })
+				});
 
 				$('.filter.selectpicker').selectpicker('refresh');
 				if(isTouchDevice() === false) {

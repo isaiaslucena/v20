@@ -45,7 +45,12 @@ function salertloadingdone(mobile) {
 };
 
 function isTouchDevice() {
-	return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+	wscreenwidth = window.screen.width;
+	if ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch && wscreenwidth <= 1200) {
+		return true;
+	} else {
+		return false;
+	}
 };
 
 function get_client_info(clientid, setselpicker) {

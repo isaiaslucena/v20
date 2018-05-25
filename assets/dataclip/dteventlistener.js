@@ -77,8 +77,6 @@ cadsbtn.click(function(event) {
 	}
 
 	cadsbtn.ladda('start');
-	$('#sublist').slideUp('fast');
-	$('.dataTables_processing').show();
 
 	adsstartdate = $('#adsstartdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	adsenddate = $('#adsenddate').data('datepicker').getFormattedDate('yyyy-mm-dd');
@@ -137,27 +135,16 @@ cadsbtn.click(function(event) {
 		'order': [
 			[0, 'desc']
 		],
-		'columnDefs': [
-			{'searchable': false, 'width': '2%', 'responsivePriority': 0, 'targets': 0},
-			{'searchable': true, 'width': '2%', 'responsivePriority': 50, 'targets': 1},
-			{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
-			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
-			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
-			{'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
-			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
-			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
-			{'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
-		],
 		'columns': [
-			{'data': 'datetime'},
-			{'data': 'TipoVeiculo'},
-			{'data': 'Veiculo'},
-			{'data': 'Editoria'},
-			{'data': 'PalavraChave'},
-			{'data': 'Titulo'},
-			{'data': 'Valor'},
-			{'data': 'Audiencia'},
-			{'data': 'AvalMotiv'}
+			{'data': 'datetime', 'searchable': false, 'width': '2%', 'responsivePriority': 0, 'targets': 0},
+			{'data': 'TipoVeiculo', 'searchable': true, 'width': '2%', 'responsivePriority': 50, 'targets': 1},
+			{'data': 'Veiculo', 'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
+			{'data': 'Editoria', 'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
+			{'data': 'PalavraChave', 'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
+			{'data': 'Titulo', 'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
+			{'data': 'Valor', 'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
+			{'data': 'Audiencia', 'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
+			{'data': 'AvalMotiv', 'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
 		],
 		'responsive': true,
 		'scrollX': false,
@@ -173,14 +160,52 @@ cadsbtn.click(function(event) {
 				return JSON.stringify(d);
 			}
 		},
+		'initComplete': function(settings) {
+			// this.api().columns(1).every(function(coln) {
+			// 	var column = this;
+			// 	var seltitle = $(column.header()).text();
+			// 	var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+			// 	.appendTo($(column.footer()))
+			// 	.on('change', function() {
+			// 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
+			// 		column.search( val ? '^'+val+'$' : '', true, false).draw();
+			// 	});
+			// });
+
+			// this.api().columns(2).every(function(coln) {
+			// 	var column = this;
+			// 	var seltitle = $(column.header()).text();
+			// 	var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+			// 	.appendTo($(column.footer()))
+			// 	.on('change', function() {
+			// 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
+			// 		column.search( val ? '^'+val+'$' : '', true, false).draw();
+			// 	});
+			// });
+
+			// this.api().columns(3).every(function(coln) {
+			// 	var column = this;
+			// 	var seltitle = $(column.header()).text();
+			// 	var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
+			// 	.appendTo($(column.footer()))
+			// 	.on('change', function() {
+			// 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
+			// 		column.search( val ? '^'+val+'$' : '', true, false).draw();
+			// 	});
+			// });
+
+			$('.filter.selectpicker').selectpicker('refresh');
+
+			$('#sublist').slideUp('fast');
+			cadsbtn.ladda('stop');
+			$('#advancedsearch').modal('hide');
+		},
+		'drawCallback': function(settings) {
+			if(isTouchDevice() === false) {
+				$('.tooltipa').tooltip();
+			}
+		},
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
-	});
-
-	cadsbtn.ladda('stop');
-	$('#advancedsearch').modal('hide');
-
-	$(function () {
-		$('[data-toggle="tooltip"]').tooltip();
 	});
 });
 
@@ -289,7 +314,7 @@ $('#advancedsearch').on('hidden.bs.modal', function(event){
 
 	$('#adstveiculo').selectpicker('deselectAll');
 
-	$('#adsveiculosites').slideUp('fast');
+	// $('#adsveiculosites').slideUp('fast');
 	$('#adsveiculosites').tagsinput('removeAll');
 
 	$('#adsveiculo').selectpicker('deselectAll');
