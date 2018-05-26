@@ -316,6 +316,7 @@ $('#advancedsearch').on('hidden.bs.modal', function(event){
 
 	// $('#adsveiculosites').slideUp('fast');
 	$('#adsveiculosites').tagsinput('removeAll');
+	$('#adsveiculosites').val(null);
 
 	$('#adsveiculo').selectpicker('deselectAll');
 	$('#adsveiculo').children('option').remove();
@@ -718,6 +719,7 @@ $('#btnselclo').click(function(event) {
 	$('#mediactni').scrollTop(0);
 
 	btnsctrid = $(this).attr('data-trid');
+	trselected.push(btnsctrid);
 
 	if ($('#'+btnsctrid).hasClass('selected') == false) {
 		$('#'+btnsctrid).addClass('selected');
