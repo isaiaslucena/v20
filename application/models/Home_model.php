@@ -934,14 +934,14 @@ class Home_model extends CI_Model {
 		// $sqlquery .= "GROUP BY pc.Id ";
 
 		// $countquery .= "ORDER BY nt.Id ASC";
-		$sqlquery .= "ORDER BY nt.Id ASC ";
+		$sqlquery .= "ORDER BY ntp.DataP ASC ";
 
 		$sqlquery .= "LIMIT ".$data['length']." OFFSET ".$data['start'];
 
 		$countdata = intval($this->db->query($countquery)->row('quant'));
 		$fulldata['recordsTotal'] = $countdata;
 		$fulldata['recordsFiltered'] = $countdata;
-		$fulldata['query'] = $sqlquery;
+		// $fulldata['query'] = $sqlquery;
 
 		$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
 		return $fulldata;

@@ -78,6 +78,13 @@ cadsbtn.click(function(event) {
 
 	cadsbtn.ladda('start');
 
+	subkeywordsarr = [];
+	tvarr = [], varr = [], earr = [], pcarr = [];
+	$('#selpckr_2').html('<option val=""></option>');
+	$('#selpckr_3').html('<option val=""></option>');
+	$('#selpckr_4').html('<option val=""></option>');
+	$('#selpckr_5').html('<option val=""></option>');
+
 	adsstartdate = $('#adsstartdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	adsenddate = $('#adsenddate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	adsstarttime = $('#adsstarttime').val();
@@ -107,21 +114,6 @@ cadsbtn.click(function(event) {
 		'motivacao': adsmotivacaoarr.toString(),
 		'avaliacao': adsavaliacaoarr.toString()
 	};
-
-	// postData('/home/advsearch', adssearchdata)
-	// .then(
-	// 	data => {
-	// 		console.log(data);
-
-	// 		add_advsearch_news_data(data, cliid);
-	// 	}
-	// ).catch(
-	// 	error => {
-	// 		console.error(error);
-
-	// 		cadsbtn.ladda('stop');
-	// 	}
-	// );
 
 	vadvsearch = true;
 
@@ -201,12 +193,61 @@ cadsbtn.click(function(event) {
 			$('#advancedsearch').modal('hide');
 		},
 		'drawCallback': function(settings) {
+			this.api().column(1).data().each(function(tvcurrent, i) {
+				if ($(tvcurrent).hasClass('tooltipa')) {
+					tvcurrentstr = $(tvcurrent).attr('data-original-title');
+				} else {
+					tvcurrentstr = tvcurrent;
+				}
+
+				if (tvarr.indexOf(tvcurrentstr) == -1) {
+					tvarr.push(tvcurrentstr);
+					ihtml = '<option val="'+tvcurrentstr+'">'+tvcurrentstr+'</option>'
+					$(ihtml).appendTo('#selpckr_2');
+				}
+			});
+
+			this.api().column(2).data().each(function (vcurrent, i) {
+				if ($(vcurrent).hasClass('tooltipa')) {
+					vcurrentstr = $(vcurrent).attr('data-original-title');
+				} else {
+					vcurrentstr = vcurrent;
+				}
+
+				if (varr.indexOf(vcurrentstr) == -1) {
+					varr.push(vcurrentstr);
+					ihtml = '<option val="'+vcurrentstr+'">'+vcurrentstr+'</option>'
+					$(ihtml).appendTo('#selpckr_3');
+				}
+			});
+
+			this.api().column(3).data().each(function (ecurrent, i) {
+				if ($(ecurrent).hasClass('tooltipa')) {
+					ecurrentstr = $(ecurrent).attr('data-original-title');
+				} else {
+					ecurrentstr = ecurrent;
+				}
+
+				if (earr.indexOf(ecurrentstr) == -1) {
+					earr.push(ecurrentstr);
+					ihtml = '<option val="'+ecurrentstr+'">'+ecurrentstr+'</option>'
+					$(ihtml).appendTo('#selpckr_4');
+				}
+			});
+
 			if(isTouchDevice() === false) {
-				$('.tooltipa').tooltip();
+				$('.tooltipa').tooltip({'container': 'body'});
 			}
 		},
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
 	});
+
+	btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
+								'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
+								'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
+								'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
+							'</div>';
+	$('#tbntoolbarbtns').html(btnshtml);
 });
 
 $('input').on('itemAdded', function(event) {

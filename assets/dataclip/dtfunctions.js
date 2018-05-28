@@ -1067,7 +1067,7 @@ function set_single_news_dtw(tndata, titletrid){
 		} else {
 			$('#btndown').attr('data-downtype', 'image');
 			$('#mediactni').html(
-				'<div class="imggrad"><span>Exibir tudo</span></div>'+
+				'<div class="imggrad" style="overflow-x: hidden;"><span>Exibir tudo</span></div>'+
 				'<img id="mediaelimg" class="img-responsive" src="'+multclipimgurl+'/'+snewsimg+'">'
 			);
 
@@ -1103,7 +1103,7 @@ function set_single_news_dtw(tndata, titletrid){
 		$('#mediactnti').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 		$('#datemediactni').text(snewsfdatetime);
 		$('#mediactni').html(
-			'<div class="imggrad"><span>Exibir tudo</span></div>'+
+			'<div class="imggrad" style="overflow-x: hidden;"><span>Exibir tudo</span></div>'+
 			'<img id="mediaelimg" class="img-responsive" src="'+snewsurl+'">'
 		);
 
