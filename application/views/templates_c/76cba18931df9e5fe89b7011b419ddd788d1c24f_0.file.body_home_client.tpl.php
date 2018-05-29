@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-14 10:19:28
+/* Smarty version 3.1.30, created on 2018-05-28 17:55:15
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af98ce001b948_03979509',
+  'unifunc' => 'content_5b0c6cb34264c1_79350812',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1526303965,
+      1 => 1527540909,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5af98ce001b948_03979509 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0c6cb34264c1_79350812 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9300732705af98cdff280f7_29982136', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1172104255b0c6cb33f2140_75897530', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_9300732705af98cdff280f7_29982136 extends Smarty_Internal_Block
+class Block_1172104255b0c6cb33f2140_75897530 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -365,6 +365,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 					</div>
 					<div class="modal-body">
+						<h6 id="modalcsingid" class="font-trans pull-right"></h6>
+
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
@@ -398,6 +400,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 
 						<br>
+
 						<div id="modalwsinglenews" class="row center-block text-center">
 							<div class="col-sm-12 col-md-12 col-lg-12">
 								<img src="/assets/imgs/loading.gif" alt="Carregando" width="60">

@@ -975,6 +975,7 @@ function set_single_news_dtw(tndata, titletrid){
 			break;
 	}
 
+	$('#modalcsingid').text(snewsid);
 	$('#modaltitleve').html('<strong>Veículo:</strong> '+snewsve);
 	$('#modaltitleed').html('<strong>Editoria:</strong> '+snewsed);
 	$('#modaltitlevm').html('<strong>Motivação:</strong> '+snewsmotstr);
@@ -1175,6 +1176,7 @@ function set_single_news_dtw(tndata, titletrid){
 		} else {
 			$('#modalcsinglenewsv').fadeIn('fast');
 		}
+		$('#modalcsingid').fadeIn('fast');
 		$('#btnsgroupsnews').fadeIn('fast');
 	});
 };

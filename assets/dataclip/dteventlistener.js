@@ -237,6 +237,7 @@ cadsbtn.click(function(event) {
 
 			if(isTouchDevice() === false) {
 				$('.tooltipa').tooltip({'container': 'body'});
+				$('.tooltipb').tooltip({'container': 'body'});
 			}
 		},
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
@@ -383,6 +384,7 @@ $('#advancedsearch').on('hidden.bs.modal', function(event){
 
 $('#showsinglenews').on('hide.bs.modal', function(event) {
 	$('#mediactni').css('display', 'none');
+	$('#modalcsingid').css('display', 'none');
 	$('#modalcsinglenewsi').css('display', 'none');
 	$('#modalcsinglenewsv').css('display', 'none');
 	$('#modaltitlerow').css('display', 'none');

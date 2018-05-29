@@ -590,9 +590,6 @@ class Home extends CI_Controller {
 			$searchdata['mdata'] = $this->remove_quotes($searchdata['mdata']);
 			// $searchdata = $this->linebreak_to_br($searchdata);
 
-			// var_dump($searchdata);
-			// die();
-
 			$currdidclient = $postdata['extra_search']['idempresa'];
 			$dataarr = array();
 			foreach ($searchdata['mdata'] as $currdata) {
@@ -612,8 +609,8 @@ class Home extends CI_Controller {
 
 				$strtgtveiculo = strip_tags($currdata['TipoVeiculo']);
 				$strtvlen = strlen($strtgtveiculo);
-				if ($strtvlen > 10) {
-					$strtveiculo = substr($strtgtveiculo, 0, 7)."...";
+				if ($strtvlen > 15) {
+					$strtveiculo = substr($strtgtveiculo, 0, 12)."...";
 					$currdtveiculo = "<a class=\"tooltipb\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"".$strtgtveiculo."\">".$strtveiculo."</a>";
 				} else {
 					$currdtveiculo = $strtgtveiculo;
@@ -724,7 +721,6 @@ class Home extends CI_Controller {
 
 			header('Content-Type: application/json, charset=utf-8');
 			print json_encode($this->utf8_encoder($searchdata));
-			// print json_encode($searchdata);
 		}
 	}
 

@@ -328,6 +328,8 @@
 						</div>
 					</div>
 					<div class="modal-body">
+						<h6 id="modalcsingid" class="font-trans pull-right"></h6>
+
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
@@ -361,6 +363,7 @@
 						</div>
 
 						<br>
+
 						<div id="modalwsinglenews" class="row center-block text-center">
 							<div class="col-sm-12 col-md-12 col-lg-12">
 								<img src="/assets/imgs/loading.gif" alt="Carregando" width="60">
