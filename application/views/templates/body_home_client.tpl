@@ -328,8 +328,6 @@
 						</div>
 					</div>
 					<div class="modal-body">
-						<h6 id="modalcsingid" class="font-trans pull-right"></h6>
-
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
@@ -370,31 +368,33 @@
 								<h3 id="waitmsg">Carregando...</h3>
 							</div>
 						</div>
+
+						<h6 id="modalcsingid" class="font-trans pull-right"></h6>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
-							<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block" style="display: none;">
-								<div class="btn-group">
-									<a id="btndown" class="btn btn-sm w-xs btn-default">Baixar</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
-								</div>
+						<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block" style="display: none;">
+							<div class="btn-group">
+								<a id="btndown" class="btn btn-sm w-xs btn-default">Baixar</a>
 							</div>
+							<div class="btn-group">
+								<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-28 17:55:15
+/* Smarty version 3.1.30, created on 2018-05-30 16:25:06
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0c6cb34264c1_79350812',
+  'unifunc' => 'content_5b0efa9291aa64_12513889',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1527540909,
+      1 => 1527708303,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5b0c6cb34264c1_79350812 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0efa9291aa64_12513889 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1172104255b0c6cb33f2140_75897530', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21314471905b0efa928f6665_98922509', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_1172104255b0c6cb33f2140_75897530 extends Smarty_Internal_Block
+class Block_21314471905b0efa928f6665_98922509 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -365,8 +365,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 					</div>
 					<div class="modal-body">
-						<h6 id="modalcsingid" class="font-trans pull-right"></h6>
-
 						<div id="modalcsinglenewsi" class="row" style="display: none">
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
@@ -407,31 +405,32 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<h3 id="waitmsg">Carregando...</h3>
 							</div>
 						</div>
+						<h6 id="modalcsingid" class="font-trans pull-right"></h6>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
-							<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block" style="display: none;">
-								<div class="btn-group">
-									<a id="btndown" class="btn btn-sm w-xs btn-default">Baixar</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
-								</div>
-								<div class="btn-group">
-									<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
-								</div>
+						<div id="btnsgroupsnews" class="btn-group btn-group-justified center-block" style="display: none;">
+							<div class="btn-group">
+								<a id="btndown" class="btn btn-sm w-xs btn-default">Baixar</a>
 							</div>
+							<div class="btn-group">
+								<a id="btnexpand" class="btn btn-sm w-xs btn-default">Expandir</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnwapp" class="btn btn-sm w-xs btn-default">Enviar por WhatsApp</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnmail" class="btn btn-sm w-xs btn-default">Enviar por e-mail</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnurl" class="btn btn-sm w-xs btn-default" target="_blank">Abrir página</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnclose" class="btn btn-sm w-xs btn-default" data-dismiss="modal">Fechar</a>
+							</div>
+							<div class="btn-group">
+								<a id="btnselclo" class="btn btn-sm w-xs btn-primary">Fechar e selecionar</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
