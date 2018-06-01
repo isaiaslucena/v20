@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-30 16:25:06
+/* Smarty version 3.1.30, created on 2018-05-31 18:00:57
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0efa9291aa64_12513889',
+  'unifunc' => 'content_5b1062894fc824_63199441',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1527708303,
+      1 => 1527708433,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5b0efa9291aa64_12513889 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1062894fc824_63199441 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21314471905b0efa928f6665_98922509', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18028247155b1062894d0f59_09393472', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_21314471905b0efa928f6665_98922509 extends Smarty_Internal_Block
+class Block_18028247155b1062894d0f59_09393472 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -405,6 +405,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								<h3 id="waitmsg">Carregando...</h3>
 							</div>
 						</div>
+
 						<h6 id="modalcsingid" class="font-trans pull-right"></h6>
 					</div>
 					<div id="modasnfooter" class="modal-footer">
