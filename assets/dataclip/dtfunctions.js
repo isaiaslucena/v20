@@ -40,7 +40,7 @@ function salertloadingdone(mobile) {
 		allowOutsideClick: false,
 		showCancelButton: false,
 		showConfirmButton: false,
-		timer: 1500
+		timer: 1200
 	});
 };
 
@@ -1763,19 +1763,24 @@ function get_mclipp(iduser, idclient) {
 	.then(function(resjson) {
 		console.log(resjson);
 
-		$('#mclipplist').html(null);
-		resjson.map(function(index, elem) {
-			html =	'<a type="button" class="list-group-item">'+
-								index.Nome+
-								'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+index.ID+'"><i class="fa fa-arrow-right"></i></button>'+
-								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
-								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
-							'</a>';
-			$('#mclipplist').append(html);
-
-			$('#mclippwait').fadeOut('fast', function() {
-				$('#mclipplist').fadeIn('fast');
+		reslenght = resjson.length;
+		if (reslenght == 0) {
+			$('#mclipplist').text('Nenhum!');
+		} else {
+			$('#mclipplist').html(null);
+			resjson.map(function(index, elem) {
+				html =	'<a type="button" class="list-group-item">'+
+									index.Nome+
+									'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+index.ID+'"><i class="fa fa-arrow-right"></i></button>'+
+									'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
+									'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
+								'</a>';
+				$('#mclipplist').append(html);
 			});
+		}
+
+		$('#mclippwait').fadeOut('fast', function() {
+			$('#mclipplist').fadeIn('fast');
 		});
 	});
 };
