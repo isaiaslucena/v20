@@ -967,9 +967,7 @@ $('.cdrefreshitem').click(function(event) {
 $('#btnexpand').click(function(event) {
 	$('#mediactni').animate({'height': '100%'}, 'fast');
 	$('#showsinglenews > .modal-dialog.modal-lg').animate({'width': '98%'}, 'fast');
-	$('#modal-texti').slimScroll({
-		height: 'auto',
-	});
+	$('#modal-texti').slimScroll({'height': 'auto'});
 });
 
 $('#btndown').click(function(event) {
@@ -1023,17 +1021,18 @@ $('#btndown').click(function(event) {
 				'<img src="'+canvasdataURL+'" style="width: 30%"/>'+
 				'<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>'+
 				'<script type="text/javascript" charset="utf-8">'+
-				'$("img").click(function(event) {'+
-						'if ($(this).hasClass("expanded")) {'+
-							'$(this).removeClass("expanded");'+
-							'$(this).animate({"width": "30%"}, "fast");'+
-						'} else {'+
-							'$(this).addClass("expanded");'+
-							'$(this).animate({"width": "100%"}, "fast");'+
-						'}'+
-				'	});'+
+				'$("img").click(function(event) {\n'+
+						'if ($(this).hasClass("expanded")) {\n'+
+							'$(this).removeClass("expanded");\n'+
+							'$(this).animate({"width": "30%"}, "fast");\n'+
+						'} else {\n'+
+							'$(this).addClass("expanded");\n'+
+							'$(this).animate({"width": "100%"}, "fast");\n'+
+						'}\n'+
+				'	});\n'+
 				'</script>'
 				);
+			windowo.document.close();
 			break;
 	}
 });
