@@ -1154,14 +1154,38 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_news_by_ids($idmclipp, $idclient) {
-		$sqlquery =	"SELECT
-								nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
-								tve.Id as IdTipoVeiculo, tve.Nome as TipoVeiculo,
-								nt.idVeiculo, ve.Nome as Veiculo,
-								nt.idEditoria, ed.Nome as Editoria,
-								ntp.idPalavraChave, plc.Nome as PalavraChave,
-								CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
-								CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
+		// $sqlquery =	"SELECT
+		// 						nt.Id, nt.Titulo, nt.Noticia, nt.URL, nt.Data, nt.Hora,
+		// 						tve.Id as IdTipoVeiculo, tve.Nome as TipoVeiculo,
+		// 						nt.idVeiculo, ve.Nome as Veiculo,
+		// 						nt.idEditoria, ed.Nome as Editoria,
+		// 						ntp.idPalavraChave, plc.Nome as PalavraChave,
+		// 						CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END as EdValor,
+		// 						CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END as EdAudiencia,
+		// 						ntp.Avaliacao, ntp.Motivacao
+		// 						FROM Noticias nt
+		// 						INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+		// 						INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+		// 						INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+		// 						LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+		// 						INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+		// 						INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+		// 						LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+		// 						INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+		// 						INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+		// 						WHERE
+		// 						nt.id IN (SELECT idNoticia FROM SelecoesNoticias WHERE idSelecao = $idmclipp) AND
+		// 						ntp.idEmpresa = $idclient
+		// 						ORDER BY nt.Id ASC";
+
+		$sqlquery = "SELECT
+								nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,
+								tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
+								ass.Nome as Assunto,
+								GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
+								ve.TiragemSemana as Tier,
+								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
+								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
 								ntp.Avaliacao, ntp.Motivacao
 								FROM Noticias nt
 								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
@@ -1173,10 +1197,13 @@ class Home_model extends CI_Model {
 								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
 								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
 								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+								LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
 								WHERE
-								nt.id IN (SELECT idNoticia FROM SelecoesNoticias WHERE idSelecao = $idmclipp) AND
+								nt.Id IN (SELECT idNoticia FROM SelecoesNoticias WHERE idSelecao = $idmclipp) AND
+								ntp.Liberada = 1 AND
 								ntp.idEmpresa = $idclient
-								ORDER BY nt.Id ASC";
+								GROUP BY nt.Id
+								ORDER BY ntp.DataP ASC";
 		return $this->db->query($sqlquery)->result_array();
 	}
 }
