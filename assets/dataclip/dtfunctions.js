@@ -72,10 +72,10 @@ function set_tablenews(tbnclear){
 			{'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
 			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
 			{'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
-			{'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
-			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
+			{'searchable': true, 'width': '53%', 'responsivePriority': 2, 'targets': 5},
+			{'searchable': false, 'width': '10%', 'responsivePriority': 50, 'targets': 6},
 			{'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
-			{'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
+			{'searchable': false, 'width': '10%', 'responsivePriority': 50, 'targets': 8}
 		],
 		'responsive': true,
 		'scrollX': false,
@@ -117,6 +117,13 @@ function set_tablenews(tbnclear){
 			});
 
 			$('.filter.selectpicker').selectpicker('refresh');
+
+			btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
+										'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
+										'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
+										'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
+									'</div>';
+			$('#tbntoolbarbtns').html(btnshtml);
 		},
 		'drawCallback': function(settings) {
 			this.api().column(1).data().each(function(tvcurrent, i) {

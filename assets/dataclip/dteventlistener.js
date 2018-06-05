@@ -133,10 +133,10 @@ cadsbtn.click(function(event) {
 			{'data': 'Veiculo', 'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
 			{'data': 'Editoria', 'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
 			{'data': 'PalavraChave', 'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
-			{'data': 'Titulo', 'searchable': true, 'width': '50%', 'responsivePriority': 2, 'targets': 5},
-			{'data': 'Valor', 'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 6},
+			{'data': 'Titulo', 'searchable': true, 'width': '53%', 'responsivePriority': 2, 'targets': 5},
+			{'data': 'Valor', 'searchable': false, 'width': '10%', 'responsivePriority': 50, 'targets': 6},
 			{'data': 'Audiencia', 'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
-			{'data': 'AvalMotiv', 'searchable': false, 'width': '15%', 'responsivePriority': 50, 'targets': 8}
+			{'data': 'AvalMotiv', 'searchable': false, 'width': '10%', 'responsivePriority': 50, 'targets': 8}
 		],
 		'responsive': true,
 		'scrollX': false,
@@ -187,6 +187,13 @@ cadsbtn.click(function(event) {
 			// });
 
 			$('.filter.selectpicker').selectpicker('refresh');
+
+			btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
+										'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
+										'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
+										'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
+									'</div>';
+			$('#tbntoolbarbtns').html(btnshtml);
 
 			$('#sublist').slideUp('fast');
 			cadsbtn.ladda('stop');
@@ -382,7 +389,7 @@ $('#advancedsearch').on('hidden.bs.modal', function(event){
 	$('.i-checks').iCheck('uncheck');
 });
 
-$('#showsinglenews').on('hide.bs.modal', function(event) {
+$('#showsinglenews').on('hidden.bs.modal', function(event) {
 	$('#mediactni').css('display', 'none');
 	$('#modalcsingid').css('display', 'none');
 	$('#modalcsinglenewsi').css('display', 'none');
@@ -423,7 +430,7 @@ $('#myclipping').on('shown.bs.modal', function(event) {
 	$(document).off('focusin.modal');
 });
 
-$('#myclipping').on('hide.bs.modal', function(event) {
+$('#myclipping').on('hidden.bs.modal', function(event) {
 	$('#mclippwait').css('display', 'block');
 	$('#mclipplist').css('display', 'none');
 	$('#mclippbtncreate').addClass('disabled');
@@ -1037,29 +1044,27 @@ $('#btndown').click(function(event) {
 	}
 });
 
-$(document).ready(function() {
-	$('#tbnbtnsela').click(function(event) {
-		tablenews.rows().select();
+$(document).on('click', '#tbnbtnsela', function(event) {
+	tablenews.rows().select();
 
-		tablenews.rows().every(function(rowIdx, tableLoop, rowLoop) {
-			rownode = this.node();
-			trselid = $(rownode).attr('id').replace('tr_','');
+	tablenews.rows().every(function(rowIdx, tableLoop, rowLoop) {
+		rownode = this.node();
+		trselid = $(rownode).attr('id').replace('tr_','');
 
-			if (trselected.indexOf(trselid) === -1) {
-				trselected.push(trselid);
-			}
-		});
-
-		console.log(trselected);
+		if (trselected.indexOf(trselid) === -1) {
+			trselected.push(trselid);
+		}
 	});
 
-	$('#tbnbtndesa').click(function(event) {
-		tablenews.rows().deselect();
+	console.log(trselected);
+});
 
-		trselected = [];
+$(document).on('click','#tbnbtndesa', function(event) {
+	tablenews.rows().deselect();
 
-		console.log(trselected);
-	});
+	trselected = [];
+
+	console.log(trselected);
 });
 
 dtworker.onmessage = function(event) {
