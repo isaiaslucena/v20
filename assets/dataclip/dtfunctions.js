@@ -1098,7 +1098,10 @@ function set_single_news_dtw(tndata, titletrid){
 		$('#btnselclo').attr('data-trid', titletrid);
 	}
 
-	multclipimgurl = 'https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/'+snewsdate.replace(/-/g,'\/')+'/'+snewsid;
+	snewsdatestr = tndata.DataP;
+	snewsdatearr = snewsdatestr.split(' ');
+	snewsdatep = snewsdatearr[0];
+	multclipimgurl = 'https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/'+snewsdatep.replace(/-/g,'\/')+'/'+snewsid;
 	rgxvideo = new RegExp('(.mp4)', 'ig');
 	rgxaudio = new RegExp('(.mp3)', 'ig');
 	rgximage = new RegExp('(.jpeg|.jpg|.png|.bmp)', 'ig');
@@ -1109,7 +1112,16 @@ function set_single_news_dtw(tndata, titletrid){
 		$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 		$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 		$('#datemediactnv').text(snewsfdatetime)
-		$('#mediactnv').html('<video id="mediaelvideo" class="img-responsive center-block" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls style="width: 65%"></video>');
+		$('#mediactnv').html(
+			'<div class="embed-responsive embed-responsive-16by9">'+
+				'<video id="mediaelvideo"'+
+					'class="center-block embed-responsive-item"'+
+					'src="'+multclipimgurl+'/'+snewsimg+'"'+
+					'poster="assets/imgs/loading.gif"'+
+					'preload="auto" autoplay controls>'+
+				'</video>'+
+			'<div>'
+		);
 		$('#modal-textv').html(snewscontent);
 	} else if (rgxaudio.test(snewsimg)) {
 		mediatype = 'audio';
@@ -1117,7 +1129,7 @@ function set_single_news_dtw(tndata, titletrid){
 		$('#modaltitlevkv').html('<strong>Palavra-chave:</strong> '+snewspchave);
 		$('#mediactntv').html(snewstitle+'<br><small>'+snewssubtitle+'</small>');
 		$('#datemediactnv').text(snewsfdatetime);
-		$('#mediactnv').html('<audio id="mediaelvideo" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" autobuffer controls></audio>');
+		$('#mediactnv').html('<audio id="mediaelvideo" class="center-block" style="width: 100%" src="'+multclipimgurl+'/'+snewsimg+'" preload="auto" autoplay controls></audio>');
 		$('#modal-textv').html(snewscontent);
 	} else if (rgximage.test(snewsimg)) {
 		mediatype = 'image';

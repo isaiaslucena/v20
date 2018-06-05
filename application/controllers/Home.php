@@ -584,10 +584,10 @@ class Home extends CI_Controller {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
 			$searchdata = $this->home_model->advsearch_dt_json($postdata);
-			$searchdata['mdata'] = $this->htmlchars_decoder($searchdata['mdata']);
-			$searchdata['mdata'] = $this->tags_stripper($searchdata['mdata']);
-			// $searchdata['mdata'] = $this->utf8_encoder($searchdata['mdata']);
-			$searchdata['mdata'] = $this->remove_quotes($searchdata['mdata']);
+			$searchdata = $this->tags_stripper($searchdata);
+			$searchdata = $this->htmlchars_decoder($searchdata);
+			$searchdata = $this->utf8_encoder($searchdata);
+			$searchdata = $this->remove_quotes($searchdata);
 			// $searchdata = $this->linebreak_to_br($searchdata);
 
 			$currdidclient = $postdata['extra_search']['idempresa'];
@@ -611,25 +611,34 @@ class Home extends CI_Controller {
 				$strtvlen = strlen($strtgtveiculo);
 				if ($strtvlen > 15) {
 					$strtveiculo = substr($strtgtveiculo, 0, 12)."...";
-					$currdtveiculo = "<a class=\"tooltipb\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"".$strtgtveiculo."\">".$strtveiculo."</a>";
+					$currdtveiculo = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgtveiculo.'">'.$strtveiculo.'</a>';
 				} else {
-					$currdtveiculo = $strtgtveiculo;
+					$currdtveiculo = '<a class="tooltipbn" data-original-title="'.$strtgtveiculo.'">'.$strtgtveiculo.'</a>';
 				}
 
 				$strtgveiculo = strip_tags($currdata['Veiculo']);
 				$strvlen = strlen($strtgveiculo);
 				if ($strvlen > 10) {
 					$strveiculo = substr($strtgveiculo, 0, 7)."...";
-					$currdveiculo = "<a class=\"tooltipb\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"".$strtgveiculo."\">".$strveiculo."</a>";
+					$currdveiculo = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgveiculo.'">'.$strveiculo.'</a>';
 				} else {
-					$currdveiculo = $strtgveiculo;
+					$currdveiculo = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgveiculo.'">'.$strtgveiculo.'</a>';
+				}
+
+				$strtgeditoria = strip_tags($currdata['Editoria']);
+				$strvlen = strlen($strtgeditoria);
+				if ($strvlen > 10) {
+					$streditoria = substr($strtgeditoria, 0, 7)."...";
+					$currdeditoria = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgeditoria.'">'.$streditoria.'</a>';
+				} else {
+					$currdeditoria = '<a class="tooltipbn" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgeditoria.'">'.$strtgeditoria.'</a>';
 				}
 
 				$strtgpchave = strip_tags($currdata['PalavraChave']);
 				$strplen = strlen($strtgpchave);
 				if ($strplen > 10) {
 					$strpchave = substr($strtgpchave, 0, 7)."...";
-					$currdpchave = "<a class=\"tooltipb\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"".$strtgpchave."\">".$strpchave."</a>";
+					$currdpchave = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgpchave.'">'.$strpchave.'</a>';
 				} else {
 					$currdpchave = $strtgpchave;
 				}
@@ -638,11 +647,11 @@ class Home extends CI_Controller {
 				$strtlen = strlen($strtgtitulo);
 				if ($strtlen > 50) {
 					$strtitulo = substr($strtgtitulo, 0, 47)."...";
-					$currdtitulo = "<a class=\"tooltipa\" data-newsid=\"".$currdid."\" data-clientid=\"".$currdidclient."\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"".$strtgtitulo."\">".$strtitulo."</a>";
-				} else if ($strtlen == 1) {
-					$currdtitulo = "<a class=\"tooltipa\" data-newsid=\"".$currdid."\" data-clientid=\"".$currdidclient."\">Sem Título</a>";
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgtitulo.'">'.$strtitulo.'</a>';
+				} else if (empty($strtlen)) {
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'">Sem Título</a>';
 				} else {
-					$currdtitulo = "<a class=\"tooltipa\" data-newsid=\"".$currdid."\" data-clientid=\"".$currdidclient."\">".$strtgtitulo."</a>";
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'">'.$strtgtitulo.'</a>';
 				}
 
 				$currdavaliacao = $currdata['Avaliacao'];
@@ -703,7 +712,7 @@ class Home extends CI_Controller {
 					'datetime' => $currddatetime,
 					'TipoVeiculo' => $currdtveiculo,
 					'Veiculo' => $currdveiculo,
-					'Editoria' => $currdata['Editoria'],
+					'Editoria' => $currdeditoria,
 					'PalavraChave' => $currdpchave,
 					'Titulo' => $currdtitulo,
 					'Valor' => $currdata['Valor'],

@@ -201,12 +201,8 @@ cadsbtn.click(function(event) {
 		},
 		'drawCallback': function(settings) {
 			this.api().column(1).data().each(function(tvcurrent, i) {
-				if ($(tvcurrent).hasClass('tooltipa')) {
-					tvcurrentstr = $(tvcurrent).attr('data-original-title');
-				} else {
-					tvcurrentstr = tvcurrent;
-				}
-
+				console.log($(tvcurrent));
+				tvcurrentstr = $(tvcurrent).attr('data-original-title');
 				if (tvarr.indexOf(tvcurrentstr) == -1) {
 					tvarr.push(tvcurrentstr);
 					ihtml = '<option val="'+tvcurrentstr+'">'+tvcurrentstr+'</option>'
@@ -215,12 +211,7 @@ cadsbtn.click(function(event) {
 			});
 
 			this.api().column(2).data().each(function (vcurrent, i) {
-				if ($(vcurrent).hasClass('tooltipa')) {
-					vcurrentstr = $(vcurrent).attr('data-original-title');
-				} else {
-					vcurrentstr = vcurrent;
-				}
-
+				vcurrentstr = $(vcurrent).attr('data-original-title');
 				if (varr.indexOf(vcurrentstr) == -1) {
 					varr.push(vcurrentstr);
 					ihtml = '<option val="'+vcurrentstr+'">'+vcurrentstr+'</option>'
@@ -229,12 +220,7 @@ cadsbtn.click(function(event) {
 			});
 
 			this.api().column(3).data().each(function (ecurrent, i) {
-				if ($(ecurrent).hasClass('tooltipa')) {
 					ecurrentstr = $(ecurrent).attr('data-original-title');
-				} else {
-					ecurrentstr = ecurrent;
-				}
-
 				if (earr.indexOf(ecurrentstr) == -1) {
 					earr.push(ecurrentstr);
 					ihtml = '<option val="'+ecurrentstr+'">'+ecurrentstr+'</option>'
@@ -1017,28 +1003,33 @@ $('#btndown').click(function(event) {
 
 			canvasel = document.getElementById('mediacanvas');
 			canvasdataURL = canvasel.toDataURL('image/png');
-			cvdowndataURL = canvasel.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-			// canvasdataURL = canvasel.toDataURL('image/png').replace('image/png', 'application/stream');
-
-			// imgwred = (imgw * 25) / 100;
-			// imghred = (imgh * 25) / 100;
+			// cvdowndataURL = canvasel.toDataURL('image/png').replace('image/png', 'image/octet-stream');
 
 			windowo = window.open();
 			windowo.document.write(
+				'<head><title>Baixar...</title><head>'+
+				'<body>'+
 				'<img src="'+canvasdataURL+'" style="width: 30%"/>'+
 				'<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>'+
 				'<script type="text/javascript" charset="utf-8">'+
-				'$("img").click(function(event) {\n'+
-						'if ($(this).hasClass("expanded")) {\n'+
-							'$(this).removeClass("expanded");\n'+
-							'$(this).animate({"width": "30%"}, "fast");\n'+
-						'} else {\n'+
-							'$(this).addClass("expanded");\n'+
-							'$(this).animate({"width": "100%"}, "fast");\n'+
-						'}\n'+
+				'$(document).ready(function() {\n'+
+				'	setTimeout(function() {\n'+
+				'		$("img").animate({"width": "100%"}, 500);'+
+				'		$("img").addClass("expanded");\n'+
+				'	}, 10);\n'+
+				'	$("img").click(function(event) {\n'+
+				'		if ($(this).hasClass("expanded")) {\n'+
+				'			$(this).removeClass("expanded");\n'+
+				'			$(this).animate({"width": "30%"}, "fast");\n'+
+				'		} else {\n'+
+				'			$(this).addClass("expanded");\n'+
+				'			$(this).animate({"width": "100%"}, "fast");\n'+
+				'		}\n'+
 				'	});\n'+
-				'</script>'
-				);
+				'});\n'+
+				'</script>'+
+				'</body>'
+			);
 			windowo.document.close();
 			break;
 	}

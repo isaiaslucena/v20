@@ -231,7 +231,8 @@ class Home_model extends CI_Model {
 	}
 
 	public function get_single_news($newsid, $idclient) {
-		$sqlquery =	"SELECT nt.*, tve.id IdTipoVeiculo, tve.Nome as TipoVeiculo,
+		$sqlquery =	"SELECT nt.*, npc.DataP,
+								tve.id IdTipoVeiculo, tve.Nome as TipoVeiculo,
 								ve.Nome as Veiculo, ed.Nome as Editoria,
 								nti.Id as IdImagem, nti.Imagem, nti.url as ImagemURL,
 								nti.MarcarX1, nti.MarcarX2, nti.MarcarY1, nti.MarcarY2, nti.MarcarW, nti.MarcarH,
@@ -934,7 +935,7 @@ class Home_model extends CI_Model {
 		// $sqlquery .= "GROUP BY pc.Id ";
 
 		// $countquery .= "ORDER BY nt.Id ASC";
-		$sqlquery .= "ORDER BY ntp.DataP ASC ";
+		$sqlquery .= "ORDER BY nt.Data ASC ";
 
 		$sqlquery .= "LIMIT ".$data['length']." OFFSET ".$data['start'];
 
@@ -1203,7 +1204,7 @@ class Home_model extends CI_Model {
 								ntp.Liberada = 1 AND
 								ntp.idEmpresa = $idclient
 								GROUP BY nt.Id
-								ORDER BY ntp.DataP ASC";
+								ORDER BY nt.Data ASC";
 		return $this->db->query($sqlquery)->result_array();
 	}
 }
