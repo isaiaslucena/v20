@@ -7,6 +7,8 @@ function salertloading(mobile) {
 		swalwidth = '32em';
 	}
 
+	$('body').css('cursor', 'progress');
+
 	swal({
 		onOpen: () => {
 			swal.showLoading()
@@ -31,6 +33,8 @@ function salertloadingdone(mobile) {
 	} else {
 		swalwidth = '32em';
 	}
+
+	$('body').css('cursor', 'default');
 
 	swal({
 		title: "Pronto!",
@@ -1903,9 +1907,8 @@ function get_mclipp(iduser, idclient) {
 };
 
 function get_mclipp_news(idmcplipp, idclient) {
-	tablenews.clear().draw();
+	set_tablenews(true);
 
-	$('#myclipping').modal('hide');
 	$('.dataTables_processing').show();
 
 	fetch('/home/get_mclipp_news/'+idmcplipp+'/'+idclient)
@@ -1922,6 +1925,7 @@ function get_mclipp_news(idmcplipp, idclient) {
 			each_news_data(itemarr, nwskwid, idclient);
 		});
 
+		$('#myclipping').modal('hide');
 		$('.dataTables_processing').hide();
 	});
 };

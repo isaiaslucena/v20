@@ -327,9 +327,8 @@ span.twitter-typeahead {
 	font-size: 1.6rem !important;
 }
 
-
 .tooltipbn{
-	cursor: normal;
+	cursor: default;
 }
 
 video::-internal-media-controls-download-button { display:none; }
