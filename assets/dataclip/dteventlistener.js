@@ -201,7 +201,6 @@ cadsbtn.click(function(event) {
 		},
 		'drawCallback': function(settings) {
 			this.api().column(1).data().each(function(tvcurrent, i) {
-				console.log($(tvcurrent));
 				tvcurrentstr = $(tvcurrent).attr('data-original-title');
 				if (tvarr.indexOf(tvcurrentstr) == -1) {
 					tvarr.push(tvcurrentstr);
@@ -235,13 +234,6 @@ cadsbtn.click(function(event) {
 		},
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
 	});
-
-	btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
-								'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
-								'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
-								'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
-							'</div>';
-	$('#tbntoolbarbtns').html(btnshtml);
 });
 
 $('input').on('itemAdded', function(event) {
