@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-04 15:55:37
+/* Smarty version 3.1.30, created on 2018-06-12 12:31:34
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b158b296a6ea5_21106844',
+  'unifunc' => 'content_5b1fe756a68070_73446956',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1528137565,
+      1 => 1528817491,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5b158b296a6ea5_21106844 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1fe756a68070_73446956 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9517990995b158b29695dc3_89399313', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4593344135b1fe756a5ac09_57130597', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_9517990995b158b29695dc3_89399313 extends Smarty_Internal_Block
+class Block_4593344135b1fe756a5ac09_57130597 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -88,7 +88,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	var btncmclipp = $('#mclippbtncreate').ladda();
 
 	$(document).ready(function() {
-		set_tablenews(false);
+		set_tablenews(false, false);
 
 		tableexport = $('#tableexport').DataTable({
 			'order': [

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-31 18:00:57
+/* Smarty version 3.1.30, created on 2018-06-12 12:05:13
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1062894fc824_63199441',
+  'unifunc' => 'content_5b1fe129a8d334_99522286',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1527708433,
+      1 => 1528815910,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5b1062894fc824_63199441 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1fe129a8d334_99522286 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18028247155b1062894d0f59_09393472', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21028725285b1fe129a68ff9_82502350', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_18028247155b1062894d0f59_09393472 extends Smarty_Internal_Block
+class Block_21028725285b1fe129a68ff9_82502350 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -260,7 +260,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			</div>
 
 			
-			<div class="row">
+			<div id="sublistrow" class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12 element">
 					<div class="hpanel">
 						<div id="sublist" class="panel-body center-block text-center"></div>

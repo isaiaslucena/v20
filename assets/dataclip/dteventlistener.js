@@ -35,6 +35,8 @@ $('#tbnbtndesa').click(function(event) {
 });
 
 cdatebtn.click(function(event) {
+	vadvsearch = false;
+
 	salertloading(isTouchDevice());
 	cdatebtn.ladda('start');
 
@@ -55,7 +57,7 @@ cdatebtn.click(function(event) {
 		add_keyword_news(keywid, cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
 	});
 
-	$('#sublist').slideDown('fast');
+	$('#sublistrow').slideDown('fast');
 });
 
 cadsbtn.click(function(event) {
@@ -188,14 +190,9 @@ cadsbtn.click(function(event) {
 
 			$('.filter.selectpicker').selectpicker('refresh');
 
-			btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
-										'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
-										'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
-										'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
-									'</div>';
-			$('#tbntoolbarbtns').html(btnshtml);
+			create_table_btns();
 
-			$('#sublist').slideUp('fast');
+			$('#sublistrow').slideUp('fast');
 			cadsbtn.ladda('stop');
 			$('#advancedsearch').modal('hide');
 		},
@@ -527,17 +524,22 @@ btncmclipp.click(function(event) {
 			'idclient': cliid
 		}
 
-		// console.log(selecoesdata);
-
 		postData('/home/create_mclipp', selecoesdata)
 		.then(redata => {
-			console.log(redata);
-
 			html =	'<a type="button" class="list-group-item" style="display: none">'+
 								selname+
-								'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+redata.idSelecao+'"><i class="fa fa-arrow-right"></i></button>'+
-								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+redata.idSelecao+'"><i class="fa fa-pencil"></i></button>'+
-								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+redata.idSelecao+'"><i class="fa fa-trash-o"></i></button>'+
+								'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+redata.idSelecao+'">'+
+									'<i class="fa fa-circle-o-notch fa-spin" style="display: none"></i>'+
+									'<i class="fa fa-arrow-right"></i>'+
+								'</button>'+
+								'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+redata.idSelecao+'">'+
+									'<i class="fa fa-circle-o-notch fa-spin" style="display: none"></i>'+
+									'<i class="fa fa-pencil"></i>'+
+								'</button>'+
+								'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+redata.idSelecao+'" data-selnm="'+selname+'">'+
+									'<i class="fa fa-circle-o-notch fa-spin" style="display: none"></i>'+
+									'<i class="fa fa-trash-o"></i>'+
+								'</button>'+
 							'</a>';
 			$('#mclipplist').prepend(html);
 
@@ -558,7 +560,13 @@ $(document).on('click', '.mclippbtnse', function(event) {
 	idselecao = $(this).attr('data-selid');
 	selname = $(this).parent().text();
 
-	get_mclipp_news(idselecao, cliid);
+	ichilds = $(this).children('i');
+
+	ichilds.last().fadeOut('fast', function() {
+		ichilds.first().fadeIn('fast', function() {
+			get_mclipp_news(idselecao, cliid);
+		});
+	});
 });
 
 $(document).on('click', '.mclippbtned', function(event) {

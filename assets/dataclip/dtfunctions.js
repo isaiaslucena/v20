@@ -57,14 +57,14 @@ function isTouchDevice() {
 	}
 };
 
-function set_tablenews(tbnclear){
+function set_tablenews(tbnclear, tbnbtnmclipp) {
 	if (tbnclear) {
 		tablenews.clear().draw();
 		tablenews.destroy();
 	}
 
 	tablenews = $('#tablenews').DataTable({
-		'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
+		'dom': '<"row"<"col-sm-3"l><"col-sm-6"<"#tbntoolbarbtns">><"col-sm-3"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
 		'destroy': true,
 		'autoWidth': false,
 		'order': [
@@ -90,44 +90,44 @@ function set_tablenews(tbnclear){
 			this.api().columns(1).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
+				$(column.footer()).html(null);
 				var select = $('<select id="selpckr_2" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
+					column.search(val ? '^'+val+'$' : '', true, false).draw();
 				});
 			});
 
 			this.api().columns(2).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
+				$(column.footer()).html(null);
 				var select = $('<select id="selpckr_3" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
+					column.search(val ? '^'+val+'$' : '', true, false).draw();
 				});
 			});
 
 			this.api().columns(3).every(function(coln) {
 				var column = this;
 				var seltitle = $(column.header()).text();
+				$(column.footer()).html(null);
 				var select = $('<select id="selpckr_4" class="filter selectpicker dropup" data-dropupAuto="false" data-windowPadding="1" data-size="6" data-width="fit" data-style="btn-default btn-xs" data-container="body" title="'+seltitle+'"><option val=""></option></select>')
 				.appendTo($(column.footer()))
 				.on('change', function() {
 					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					column.search( val ? '^'+val+'$' : '', true, false).draw();
+					column.search(val ? '^'+val+'$' : '', true, false).draw();
 				});
 			});
 
 			$('.filter.selectpicker').selectpicker('refresh');
 
-			btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
-										'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
-										'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
-										'<button id="tbnbtnsava" type="button" class="btn btn-xs btn-default disabled" disabled>Salvar Alterações</button>'+
-									'</div>';
-			$('#tbntoolbarbtns').html(btnshtml);
+			create_table_btns();
+
+			tbnbtnmclipp ? mclipp_btns(true) : mclipp_btns(false);
 		},
 		'drawCallback': function(settings) {
 			this.api().column(1).data().each(function(tvcurrent, i) {
@@ -160,6 +160,42 @@ function set_tablenews(tbnclear){
 			}
 		}
 	});
+};
+
+function create_table_btns() {
+	btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
+								'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
+								'<button id="tbnbtndesa" type="button" class="btn btn-xs btn-default">Desmarcar Todos</button>'+
+							'</div>'+
+							'<div id="tbnbtnselgp" class="btn-group pull-right" role="group" aria-label="..." style="display: none">'+
+								'<button id="tbnbtnselname" type="button" class="btn btn-xs btn-primary disabled" disabled>Nome da seleção</button>'+
+								'<button id="tbnbtnselsave" type="button" class="btn btn-xs btn-success disabled" disabled>Salvar Alterações</button>'+
+							'</div>';
+	$('#tbntoolbarbtns').html($(btnshtml));
+}
+
+function mclipp_btns(show) {
+	if (show) {
+		// $('#tbnbtnselsave').removeAttr('disabled');
+		// $('#tbnbtnselsave').removeClass('disabled');
+		$('#tbnbtnselname').text(selname);
+		$('#tbnbtnselgp').fadeIn('fast');
+	} else {
+		// $('#tbnbtnselsave').attr('disabled', true);
+		// $('#tbnbtnselsave').addClass('disabled');
+		$('#tbnbtnselgp').fadeOut('fast');
+		$('#tbnbtnselname').text('Nome da Selecao');
+	}
+}
+
+
+
+function set_tablenews_serverside(tbnclear) {
+	//set functions
+	//set functions
+	//set functions
+	//set functions
+	//set functions
 };
 
 function get_client_info(clientid, setselpicker) {
@@ -533,7 +569,7 @@ function get_subject_keywords(clientid, startdate, enddate, updatesubjects = fal
 
 			if (updatesubjects) {
 				$('#sublist .selectpicker').selectpicker('destroy');
-				$('#sublist').html('');
+				$('#sublist').html(null);
 			}
 
 			$.each(subjectskeywords, function(index, sval) {
@@ -607,7 +643,7 @@ function set_subject_keywords(cdata, updatesubjects = false, callback) {
 
 	if (updatesubjects) {
 		$('#sublist .selectpicker').selectpicker('destroy');
-		$('#sublist').html('');
+		$('#sublist').html(null);
 	}
 
 	$.each(subjectskeywords, function(index, sval) {
@@ -1882,8 +1918,6 @@ function get_mclipp(iduser, idclient) {
 		return response.json();
 	})
 	.then(function(resjson) {
-		// console.log(resjson);
-
 		reslenght = resjson.length;
 		if (reslenght == 0) {
 			// $('#mclipplist').text('Nenhuma seleção...');
@@ -1892,9 +1926,18 @@ function get_mclipp(iduser, idclient) {
 			resjson.map(function(index, elem) {
 				html =	'<a type="button" class="list-group-item">'+
 									index.Nome+
-									'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+index.ID+'"><i class="fa fa-arrow-right"></i></button>'+
-									'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'"><i class="fa fa-pencil"></i></button>'+
-									'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'"><i class="fa fa-trash-o"></i></button>'+
+									'<button class="btn btn-xs btn-primary mclippbtnse" style="float: right; type="button" title="Selecionar" data-selid="'+index.ID+'">'+
+										'<i class="fa fa-circle-o-notch fa-spin" style="display: none"></i>'+
+										'<i class="fa fa-arrow-right"></i>'+
+									'</button>'+
+									'<button class="btn btn-xs btn-warning mclippbtned" style="float: right; type="button" title="Editar" data-selid="'+index.ID+'">'+
+										'<i class="fa fa-circle-o-notch fa-spin" style="display: none"></i>'+
+										'<i class="fa fa-pencil"></i>'+
+									'</button>'+
+									'<button class="btn btn-xs btn-danger mclippbtnex" style="float: right; type="button" title="Excluir" data-selid="'+index.ID+'">'+
+										'<i class="fa fa-circle-o-notch fa-spin" style="display: none"></i>'+
+										'<i class="fa fa-trash-o"></i>'+
+									'</button>'+
 								'</a>';
 				$('#mclipplist').append(html);
 			});
@@ -1907,7 +1950,7 @@ function get_mclipp(iduser, idclient) {
 };
 
 function get_mclipp_news(idmcplipp, idclient) {
-	set_tablenews(true);
+	set_tablenews(true, true);
 
 	$('.dataTables_processing').show();
 
@@ -1916,8 +1959,6 @@ function get_mclipp_news(idmcplipp, idclient) {
 		return response.json();
 	})
 	.then(function(resjson) {
-		// console.log(resjson);
-
 		$.map(resjson.data, function(item, index) {
 			nwskwid = item.idPalavraChave;
 			itemarr = [];
@@ -1925,6 +1966,7 @@ function get_mclipp_news(idmcplipp, idclient) {
 			each_news_data(itemarr, nwskwid, idclient);
 		});
 
+		$('#sublistrow').slideUp('fast');
 		$('#myclipping').modal('hide');
 		$('.dataTables_processing').hide();
 	});

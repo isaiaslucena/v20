@@ -44,7 +44,7 @@
 	var btncmclipp = $('#mclippbtncreate').ladda();
 
 	$(document).ready(function() {
-		set_tablenews(false);
+		set_tablenews(false, false);
 
 		tableexport = $('#tableexport').DataTable({
 			'order': [

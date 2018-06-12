@@ -579,7 +579,7 @@ class Home extends CI_Controller {
 		$this->load->view('imgs_values');
 	}
 
-	public function advsearch(){
+	public function advsearch() {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 

@@ -223,7 +223,7 @@
 			</div>
 
 			{* Subjects and Keywords *}
-			<div class="row">
+			<div id="sublistrow" class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12 element">
 					<div class="hpanel">
 						<div id="sublist" class="panel-body center-block text-center"></div>

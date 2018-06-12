@@ -1,6 +1,6 @@
 //dtworker
 
-console.log('dtworker loaded!');
+// console.log('dtworker loaded!');
 
 self.onmessage = function(e) {
 	vfunction = e.data.vfunction;
