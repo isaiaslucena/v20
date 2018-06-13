@@ -49,15 +49,18 @@ cdatebtn.click(function(event) {
 	fdpstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 	fdpenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
 
-	count_vtype(cliid, fdpstartdate, fdpenddate);
-	count_rating(cliid, fdpstartdate, fdpenddate);
-	count_states(cliid, fdpstartdate, fdpenddate);
-	count_client(cliid, fdpstartdate, fdpenddate);
-	get_subject_keywords(cliid, fdpstartdate, fdpenddate, true, function(keywid){
-		add_keyword_news(keywid, cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
-	});
+	// count_vtype(cliid, fdpstartdate, fdpenddate);
+	// count_rating(cliid, fdpstartdate, fdpenddate);
+	// count_states(cliid, fdpstartdate, fdpenddate);
+	// count_client(cliid, fdpstartdate, fdpenddate);
+	// get_subject_keywords(cliid, fdpstartdate, fdpenddate, true, function(keywid){
+	// 	add_keyword_news(keywid, cliid, fdpstartdate, fdpenddate, true, 'selecteddate');
+	// });
+
+	load_data('datebtn', cliid, fdpstartdate, fdpenddate);
 
 	$('#sublistrow').slideDown('fast');
+	cdatebtn.ladda('stop');
 });
 
 cadsbtn.click(function(event) {

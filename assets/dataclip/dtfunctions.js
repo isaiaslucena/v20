@@ -172,23 +172,17 @@ function create_table_btns() {
 								'<button id="tbnbtnselsave" type="button" class="btn btn-xs btn-success disabled" disabled>Salvar Alterações</button>'+
 							'</div>';
 	$('#tbntoolbarbtns').html($(btnshtml));
-}
+};
 
 function mclipp_btns(show) {
 	if (show) {
-		// $('#tbnbtnselsave').removeAttr('disabled');
-		// $('#tbnbtnselsave').removeClass('disabled');
 		$('#tbnbtnselname').text(selname);
 		$('#tbnbtnselgp').fadeIn('fast');
 	} else {
-		// $('#tbnbtnselsave').attr('disabled', true);
-		// $('#tbnbtnselsave').addClass('disabled');
 		$('#tbnbtnselgp').fadeOut('fast');
 		$('#tbnbtnselname').text('Nome da Selecao');
 	}
-}
-
-
+};
 
 function set_tablenews_serverside(tbnclear) {
 	//set functions
@@ -1813,6 +1807,12 @@ function load_data(ptype, ldclientid, ldstartdate, ldenddate) {
 	} else {
 		var fstartdate = ldstartdate;
 		var fenddate = ldenddate;
+	}
+
+	if (ptype == 'startpage') {
+		set_tablenews(false, false);
+	} else {
+		set_tablenews(true, false);
 	}
 
 	dtworker.postMessage({
