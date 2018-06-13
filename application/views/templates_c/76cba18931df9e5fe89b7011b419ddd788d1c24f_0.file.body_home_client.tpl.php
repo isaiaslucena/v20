@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 12:05:13
+/* Smarty version 3.1.30, created on 2018-06-13 09:45:37
   from "/app/application/views/templates/body_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1fe129a8d334_99522286',
+  'unifunc' => 'content_5b2111f1298c44_47524822',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '76cba18931df9e5fe89b7011b419ddd788d1c24f' => 
     array (
       0 => '/app/application/views/templates/body_home_client.tpl',
-      1 => 1528815910,
+      1 => 1528893928,
       2 => 'file',
     ),
   ),
@@ -21,18 +21,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ),false)) {
-function content_5b1fe129a8d334_99522286 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2111f1298c44_47524822 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21028725285b1fe129a68ff9_82502350', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_875467285b2111f1272c29_20702483', 'body');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_21028725285b1fe129a68ff9_82502350 extends Smarty_Internal_Block
+class Block_875467285b2111f1272c29_20702483 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -369,7 +369,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							<div id="mediaimgload" class="col-sm-4 col-md-4 col-lg-4 center-block text-center" style="padding-top: 5%">
 								<img src="/assets/imgs/loading.gif" width="40"><br>
 							</div>
-							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 400px; overflow-y: auto; overflow-x: hidden; display: none">
+							<div id="mediactni" class="col-sm-4 col-md-4 col-lg-4" style="max-height: 400px; overflow-y: hidden; overflow-x: hidden; display: none">
 							</div>
 							<div class="col-sm-8 col-md-8 col-lg-8">
 								<h5 id="datemediactni" class="text-muted"></h5>
