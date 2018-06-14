@@ -883,5 +883,11 @@ class Home extends CI_Controller {
 		header('Content-Type: application/json');
 		print json_encode($mcplippnews, JSON_PRETTY_PRINT);
 	}
+
+	public function get_version() {
+		$versions['last'] = '2';
+		header('Content-Type: application/json, charset=utf-8');
+		print json_encode($versions);
+	}
 }
 ?>
