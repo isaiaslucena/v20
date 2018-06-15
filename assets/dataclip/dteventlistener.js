@@ -1019,14 +1019,17 @@ $('#btndown').click(function(event) {
 				'	setTimeout(function() {\n'+
 				'		$("img").animate({"width": "100%"}, 500);'+
 				'		$("img").addClass("expanded");\n'+
+				'		$("img").css("cursor", "zoom-out");\n'+
 				'	}, 10);\n'+
 				'	$("img").click(function(event) {\n'+
 				'		if ($(this).hasClass("expanded")) {\n'+
 				'			$(this).removeClass("expanded");\n'+
 				'			$(this).animate({"width": "30%"}, "fast");\n'+
+				'			$("img").css("cursor", "zoom-in");\n'+
 				'		} else {\n'+
 				'			$(this).addClass("expanded");\n'+
 				'			$(this).animate({"width": "100%"}, "fast");\n'+
+				'			$("img").css("cursor", "zoom-out");\n'+
 				'		}\n'+
 				'	});\n'+
 				'});\n'+
