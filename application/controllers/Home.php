@@ -584,11 +584,12 @@ class Home extends CI_Controller {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
 			$searchdata = $this->home_model->advsearch_dt_json($postdata);
-			$searchdata = $this->tags_stripper($searchdata);
-			$searchdata = $this->htmlchars_decoder($searchdata);
+			// $searchdata = $this->tags_stripper($searchdata);
+			// $searchdata = $this->htmlchars_decoder($searchdata);
 			$searchdata = $this->utf8_encoder($searchdata);
-			$searchdata = $this->remove_quotes($searchdata);
+			// $searchdata = $this->remove_quotes($searchdata);
 			// $searchdata = $this->linebreak_to_br($searchdata);
+
 
 			$currdidclient = $postdata['extra_search']['idempresa'];
 			$dataarr = array();
@@ -728,8 +729,34 @@ class Home extends CI_Controller {
 			$searchdata['data'] = $dataarr;
 			$searchdata['draw'] = $postdata['draw'];
 
+			if (!function_exists('json_last_error_msg')){
+				function json_last_error_msg() {
+					switch (json_last_error()) {
+						default:
+						return;
+						case JSON_ERROR_DEPTH:
+							$error = 'Maximum stack depth exceeded';
+							break;
+						case JSON_ERROR_STATE_MISMATCH:
+							$error = 'Underflow or the modes mismatch';
+							break;
+						case JSON_ERROR_CTRL_CHAR:
+							$error = 'Unexpected control character found';
+							break;
+						case JSON_ERROR_SYNTAX:
+							$error = 'Syntax error, malformed JSON';
+							break;
+						case JSON_ERROR_UTF8:
+							$error = 'Malformed UTF-8 characters, possibly incorrectly encoded';
+							break;
+					}
+					throw new Exception($error);
+				}
+			}
+
 			header('Content-Type: application/json, charset=utf-8');
-			print json_encode($this->utf8_encoder($searchdata));
+			print json_encode($searchdata);
+			print json_last_error_msg();
 		}
 	}
 
@@ -882,6 +909,21 @@ class Home extends CI_Controller {
 
 		header('Content-Type: application/json');
 		print json_encode($mcplippnews, JSON_PRETTY_PRINT);
+	}
+
+	public function compare_mclipp_news($data) {
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
+
+			$comparedata = $this->home_model->compare_mclipp_news($postdata);
+			$comparedata = $this->tags_stripper($searchdata);
+			$comparedata = $this->htmlchars_decoder($searchdata);
+			$comparedata = $this->utf8_encoder($searchdata);
+			$comparedata = $this->remove_quotes($searchdata);
+
+			header('Content-Type: application/json, charset=utf-8');
+			print json_encode($comparedata);
+		}
 	}
 
 	public function get_version() {
