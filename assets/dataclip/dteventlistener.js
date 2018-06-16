@@ -1010,7 +1010,7 @@ $('#btndown').click(function(event) {
 
 			windowo = window.open();
 			windowo.document.write(
-				'<head><title>Baixar...</title><head>'+
+				'<head><title>Impresso</title><head>'+
 				'<body>'+
 				'<img src="'+canvasdataURL+'" style="width: 30%"/>'+
 				'<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>'+

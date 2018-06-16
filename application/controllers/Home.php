@@ -584,10 +584,10 @@ class Home extends CI_Controller {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
 			$searchdata = $this->home_model->advsearch_dt_json($postdata);
-			// $searchdata = $this->tags_stripper($searchdata);
-			// $searchdata = $this->htmlchars_decoder($searchdata);
+			$searchdata = $this->tags_stripper($searchdata);
+			$searchdata = $this->htmlchars_decoder($searchdata);
 			$searchdata = $this->utf8_encoder($searchdata);
-			// $searchdata = $this->remove_quotes($searchdata);
+			$searchdata = $this->remove_quotes($searchdata);
 			// $searchdata = $this->linebreak_to_br($searchdata);
 
 
@@ -755,8 +755,8 @@ class Home extends CI_Controller {
 			}
 
 			header('Content-Type: application/json, charset=utf-8');
-			print json_encode($searchdata);
-			print json_last_error_msg();
+			print json_encode($this->utf8_encoder($searchdata));
+			// print json_last_error_msg();
 		}
 	}
 
@@ -922,7 +922,7 @@ class Home extends CI_Controller {
 			$comparedata = $this->remove_quotes($searchdata);
 
 			header('Content-Type: application/json, charset=utf-8');
-			print json_encode($comparedata);
+			print json_encode($this->utf8_encoder($comparedata));
 		}
 	}
 
