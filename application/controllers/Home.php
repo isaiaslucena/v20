@@ -915,6 +915,8 @@ class Home extends CI_Controller {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
+
+
 			$comparedata = $this->home_model->compare_mclipp_news($postdata);
 			$comparedata = $this->tags_stripper($searchdata);
 			$comparedata = $this->htmlchars_decoder($searchdata);
