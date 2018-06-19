@@ -562,9 +562,7 @@ btncmclipp.click(function(event) {
 $(document).on('click', '.mclippbtnse', function(event) {
 	idselecao = $(this).attr('data-selid');
 	selname = $(this).parent().text();
-
 	ichilds = $(this).children('i');
-
 	ichilds.last().fadeOut('fast', function() {
 		ichilds.first().fadeIn('fast', function() {
 			get_mclipp_news(idselecao, cliid);
@@ -573,6 +571,21 @@ $(document).on('click', '.mclippbtnse', function(event) {
 });
 
 $(document).on('click', '.mclippbtned', function(event) {
+	idselecao = $(this).attr('data-selid');
+	selname = $(this).parent().text();
+	ichilds = $(this).children('i');
+	ichilds.last().fadeOut('fast', function() {
+		ichilds.first().fadeIn('fast', function() {
+			if (vadvsearch) {
+				set_tablenews_mclipp(adssearchdata, idselecao, true);
+			} else {
+				get_mclipp_news(idselecao, cliid);
+			}
+		});
+	});
+});
+
+$(document).on('click', '.mclippbtnedname', function(event) {
 	idsel = $(this).attr('data-selid');
 	seloldname = $(this).parent().text();
 

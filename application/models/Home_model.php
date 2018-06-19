@@ -942,9 +942,11 @@ class Home_model extends CI_Model {
 		$countdata = intval($this->db->query($countquery)->row('quant'));
 		$fulldata['recordsTotal'] = $countdata;
 		$fulldata['recordsFiltered'] = $countdata;
-		// $fulldata['query'] = $sqlquery;
+		$fulldata['query'] = $sqlquery;
 
-		$fulldata['mdata'] = $this->db->query($sqlquery)->result_array();
+		$exequery = $this->db->query($sqlquery);
+		$fulldata['mdata'] = $exequery->result_array();
+
 		return $fulldata;
 	}
 
@@ -1222,6 +1224,128 @@ class Home_model extends CI_Model {
 							LIMIT $limit OFFSET $offset";
 
 		return $this->db->query($sqlquery)->result_array();
+	}
+
+	public function get_mcnews_advsearch($data) {
+		$startdate = $data['advanced_search']['startdate'];
+		$enddate = $data['advanced_search']['enddate'];
+		$starttime = $data['advanced_search']['starttime'];
+		$endtime = $data['advanced_search']['endtime'];
+		$idempresa = $data['advanced_search']['idempresa'];
+		$idselecao = $data['mclipp_id'];
+		$limit = $data['length'];
+		$offset = $data['start'];
+
+		// $countquery =	"SELECT COUNT(*) AS quant FROM
+		// 							(SELECT nt.Id
+		// 							FROM Noticias nt
+		// 							INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+		// 							INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+		// 							INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+		// 							LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+		// 							INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+		// 							INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+		// 							LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+		// 							INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+		// 							INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+		// 							LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+		// 							WHERE
+		// 							nt.Data BETWEEN '$startdate' AND '$enddate' AND
+		// 							ntp.Liberada = 1 AND
+		// 							ntp.idEmpresa = $idempresa ";
+
+		$sqlquery =	"SELECT
+								nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,
+								tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
+								ass.Nome as Assunto,
+								GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,
+								ve.TiragemSemana as Tier,
+								FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,
+								CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,
+								ntp.Avaliacao, ntp.Motivacao
+								FROM Noticias nt
+								INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+								INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
+								INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
+								LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
+								INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
+								INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
+								LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
+								INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
+								INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
+								LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
+								WHERE
+								nt.Data BETWEEN '$startdate' AND '$enddate' AND
+								ntp.Liberada = 1 AND
+								ntp.idEmpresa = $idempresa";
+
+		if (!empty($data['advanced_search']['subjectsid'])) {
+			$idsassunto = $data['advanced_search']['subjectsid'];
+			$sqlquery .= "AND ntp.idAssunto IN ($idsassunto) ";
+			$countquery .= "AND ntp.idAssunto IN ($idsassunto) ";
+		}
+		if (!empty($data['advanced_search']['keywordsid'])) {
+			$idspchave = $data['advanced_search']['keywordsid'];
+			$sqlquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
+			$countquery .= "AND ntp.idPalavraChave IN ($idspchave) ";
+		}
+		if (!empty($data['advanced_search']['tveiculosid'])) {
+			$idstveiculo = $data['advanced_search']['tveiculosid'];
+			$sqlquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
+			$countquery .= "AND ntp.idTipoVeiculo IN ($idstveiculo) ";
+		}
+		if (!empty($data['advanced_search']['veiculosid'])) {
+			$idsveiculo = $data['advanced_search']['veiculosid'];
+			$sqlquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
+			$countquery .= "AND ntp.idVeiculo IN ($idsveiculo) ";
+		}
+		if (!empty($data['advanced_search']['editoriasid'])) {
+			$idseditoria = $data['advanced_search']['editoriasid'];
+			$sqlquery .= "AND ntp.idEditoria IN ($idseditoria) ";
+			$countquery .= "AND ntp.idEditoria IN ($idseditoria) ";
+		}
+		if (!empty($data['advanced_search']['estadosid'])) {
+			$idsestados = $data['advanced_search']['estadosid'];
+			$sqlquery .= "AND ve.idEstado IN ($idsestados) ";
+			$countquery .= "AND ve.idEstado IN ($idsestados) ";
+		}
+		if (!is_null($data['advanced_search']['destaque'])) {
+			$destaque = $data['advanced_search']['destaque'];
+			$sqlquery .= "AND ntp.Destaque = $destaque ";
+			$countquery .= "AND ntp.Destaque = $destaque ";
+		}
+		if (!empty($data['advanced_search']['motivacao'])) {
+			$motivacao = $data['advanced_search']['motivacao'];
+			$sqlquery .= "AND ntp.Motivacao IN ($motivacao) ";
+			$countquery .= "AND ntp.Motivacao IN ($motivacao) ";
+		}
+		if (!empty($data['advanced_search']['avaliacao'])) {
+			$avaliacao = $data['advanced_search']['avaliacao'];
+			$sqlquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
+			$countquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
+		}
+
+		// $countquery .= "GROUP BY nt.Id) AS X ";
+
+		$sqlquery .= "GROUP BY nt.Id ";
+		$sqlquery .= "ORDER BY nt.Data ASC";
+
+		$comparequery =	"SELECT * FROM (".$sqlquery.") NTS
+										LEFT JOIN (SELECT idNoticia, idSelecao FROM SelecoesNoticias WHERE idSelecao = ".$idselecao.") SEL ON NTS.Id = SEL.idNoticia
+										ORDER BY NTS.Data
+										LIMIT ".$limit." OFFSET ".$offset;
+
+		// $countdata = intval($this->db->query($countquery)->row('quant'));
+		// $fulldata['recordsTotal'] = $countdata;
+		// $fulldata['recordsFiltered'] = $countdata;
+
+		$exequery = $this->db->query($sqlquery);
+		$fulldata['mdata'] = $exequery->result_array();
+
+		$fulldata['recordsTotal'] = $exequery->num_rows();
+		$fulldata['recordsFiltered'] = $exequery->num_rows();
+
+		return $fulldata;
 	}
 }
 ?>

@@ -911,6 +911,160 @@ class Home extends CI_Controller {
 		print json_encode($mcplippnews, JSON_PRETTY_PRINT);
 	}
 
+	public function get_mcnews_advsearch() {
+		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
+
+			$searchdata = $this->home_model->get_mcnews_advsearch($postdata);
+			$searchdata = $this->tags_stripper($searchdata);
+			$searchdata = $this->htmlchars_decoder($searchdata);
+			$searchdata = $this->utf8_encoder($searchdata);
+			$searchdata = $this->remove_quotes($searchdata);
+			// $searchdata = $this->linebreak_to_br($searchdata);
+
+			$currdidclient = $postdata['advanced_search']['idempresa'];
+			$dataarr = array();
+			foreach ($searchdata['mdata'] as $currdata) {
+				$vavaneg = false;
+				$vavaneu = false;
+				$vavapos = false;
+				$vavanenh = false;
+				$vmotesp = false;
+				$vmotprov = false;
+				$vmotnenh = false;
+
+				$currdid = $currdata['Id'];
+
+				$currddata = trim($currdata['Data']);
+				$currdhora = trim($currdata['Hora']);
+				$currddatetime = $currddata." ".$currdhora;
+
+				$strtgtveiculo = strip_tags($currdata['TipoVeiculo']);
+				$strtvlen = strlen($strtgtveiculo);
+				if ($strtvlen > 15) {
+					$strtveiculo = substr($strtgtveiculo, 0, 12)."...";
+					$currdtveiculo = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgtveiculo.'">'.$strtveiculo.'</a>';
+				} else {
+					$currdtveiculo = '<a class="tooltipbn" data-original-title="'.$strtgtveiculo.'">'.$strtgtveiculo.'</a>';
+				}
+
+				$strtgveiculo = strip_tags($currdata['Veiculo']);
+				$strvlen = strlen($strtgveiculo);
+				if ($strvlen > 10) {
+					$strveiculo = substr($strtgveiculo, 0, 7)."...";
+					$currdveiculo = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgveiculo.'">'.$strveiculo.'</a>';
+				} else {
+					$currdveiculo = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgveiculo.'">'.$strtgveiculo.'</a>';
+				}
+
+				$strtgeditoria = strip_tags($currdata['Editoria']);
+				$strvlen = strlen($strtgeditoria);
+				if ($strvlen > 10) {
+					$streditoria = substr($strtgeditoria, 0, 7)."...";
+					$currdeditoria = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgeditoria.'">'.$streditoria.'</a>';
+				} else {
+					$currdeditoria = '<a class="tooltipbn" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgeditoria.'">'.$strtgeditoria.'</a>';
+				}
+
+				$strtgpchave = strip_tags($currdata['PalavraChave']);
+				$strplen = strlen($strtgpchave);
+				if ($strplen > 10) {
+					$strpchave = substr($strtgpchave, 0, 7)."...";
+					$currdpchave = '<a class="tooltipb" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgpchave.'">'.$strpchave.'</a>';
+				} else {
+					$currdpchave = $strtgpchave;
+				}
+
+				$strtgtitulo = strip_tags($currdata['Titulo']);
+				$strtlen = strlen($strtgtitulo);
+				if ($strtlen > 50) {
+					$strtitulo = substr($strtgtitulo, 0, 47)."...";
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'" data-toggle="tooltip" data-placement="top" title="" data-original-title="'.$strtgtitulo.'">'.$strtitulo.'</a>';
+				} else if (empty($strtlen)) {
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'">Sem Título</a>';
+				} else {
+					$currdtitulo = '<a class="tooltipa" data-newsid="'.$currdid.'" data-clientid="'.$currdidclient.'">'.$strtgtitulo.'</a>';
+				}
+
+				$currdavaliacao = $currdata['Avaliacao'];
+				switch($currdavaliacao) {
+					case '1':
+						$vavaneg = true;
+						break;
+					case '2':
+						$vavaneu = true;
+						break;
+					case '3':
+						$vavapos = true;
+						break;
+					default:
+						$vavanenh = true;
+						break;
+				}
+				$currdmotivacao = $currdata['Motivacao'];
+				switch($currdmotivacao) {
+					case '1':
+						$vmotesp = true;
+						break;
+					case '2':
+						$vmotprov = true;
+						break;
+					default:
+						$vmotnenh = true;
+						break;
+				}
+				$currdbtn =	'<div id="btngpa_'.$currdid.'" data-toggle="buttons" class="btn-group">'.
+											'<label class="btn btn-xs rdaval '.($vavaneg ? 'active btn-danger' : 'btn-default').'" title="Negativo" data-aval="1" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="avaliacao1" name="Aval">'.
+												'<i class="fa fa-frown-o"></i>'.
+											'</label>'.
+											'<label class="btn btn-xs rdaval '.($vavaneu ? 'active btn-warning' : 'btn-default').'" title="Neutro" data-aval="2" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="avaliacao2" name="Aval">'.
+												'<i class="fa fa-meh-o"></i>'.
+											'</label>'.
+											'<label class="btn btn-xs rdaval '.($vavapos ? 'active btn-success' : 'btn-default').'" title="Positivo" data-aval="3" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="avaliacao3" name="Aval">'.
+												'<i class="fa fa-smile-o"></i>'.
+											'</label>'.
+										'</div>'.
+										'<br>'.
+										'<div id="btngpm_'.$currdid.'" data-toggle="buttons" class="btn-group">'.
+											'<label class="btn btn-xs rdmoti '.($vmotesp ? 'active btn-success' : 'btn-default').'" title="Espontânea" data-moti="1" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="motivacao1" name="Moti">'.
+												'<i class="fa fa-users"></i>'.
+											'</label>'.
+											'<label class="btn btn-xs rdmoti '.($vmotprov ? 'active btn-warning' : 'btn-default').'" title="Provocada" data-moti="2" data-newsid="'.$currdid.'">'.
+												'<input type="radio" id="motivacao2" name="Moti">'.
+												'<i class="fa fa-handshake-o">'.
+											'</label>'.
+										'</div>';
+
+				$currarr = array(
+					'DT_RowId' => 'tr_'.$currdid,
+					'datetime' => $currddatetime,
+					'TipoVeiculo' => $currdtveiculo,
+					'Veiculo' => $currdveiculo,
+					'Editoria' => $currdeditoria,
+					'PalavraChave' => $currdpchave,
+					'Titulo' => $currdtitulo,
+					'Valor' => $currdata['Valor'],
+					'Audiencia' => $currdata['Audiencia'],
+					'AvalMotiv' => $currdbtn
+				);
+
+				array_push($dataarr, $currarr);
+			}
+
+			unset($searchdata['mdata']);
+
+			$searchdata['data'] = $dataarr;
+			$searchdata['draw'] = $postdata['draw'];
+
+			header('Content-Type: application/json, charset=utf-8');
+			print json_encode($this->utf8_encoder($searchdata));
+		}
+	}
+
 	public function compare_mclipp_news($data) {
 		if ($this->input->method(TRUE) == 'POST') {
 			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));

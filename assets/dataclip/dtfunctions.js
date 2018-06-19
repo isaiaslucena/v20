@@ -162,6 +162,91 @@ function set_tablenews(tbnclear, tbnbtnmclipp) {
 	});
 };
 
+function set_tablenews_mclipp(advsearch, stmcidselecao, tbnbtnmclipp) {
+	tablenews.clear().draw();
+	tablenews.destroy();
+
+	tablenews = $('#tablenews').DataTable({
+		'dom': '<"row"<"col-sm-4"l><"col-sm-4"<"#tbntoolbarbtns">><"col-sm-4"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-6"i><"col-sm-6"p>>',
+		'destroy': true,
+		'autoWidth': false,
+		'order': [
+			[0, 'desc']
+		],
+		'columns': [
+			{'data': 'datetime', 'searchable': false, 'width': '2%', 'responsivePriority': 0, 'targets': 0},
+			{'data': 'TipoVeiculo', 'searchable': true, 'width': '2%', 'responsivePriority': 50, 'targets': 1},
+			{'data': 'Veiculo', 'searchable': true, 'width': '5%', 'responsivePriority': 1, 'targets': 2},
+			{'data': 'Editoria', 'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 3},
+			{'data': 'PalavraChave', 'searchable': true, 'width': '5%', 'responsivePriority': 50, 'targets': 4},
+			{'data': 'Titulo', 'searchable': true, 'width': '53%', 'responsivePriority': 2, 'targets': 5},
+			{'data': 'Valor', 'searchable': false, 'width': '10%', 'responsivePriority': 50, 'targets': 6},
+			{'data': 'Audiencia', 'searchable': false, 'width': '8%', 'responsivePriority': 50, 'targets': 7},
+			{'data': 'AvalMotiv', 'searchable': false, 'width': '10%', 'responsivePriority': 50, 'targets': 8}
+		],
+		'responsive': true,
+		'scrollX': false,
+		'processing': true,
+		'serverSide': true,
+		'ajax': {
+			'url': '/home/get_mcnews_advsearch',
+			'type': 'POST',
+	    'contentType': 'application/json',
+			'data': function(d) {
+				d.advanced_search = advsearch;
+				d.mclipp_id = stmcidselecao;
+
+				return JSON.stringify(d);
+			}
+		},
+		'initComplete': function(settings) {
+			$('.filter.selectpicker').selectpicker('refresh');
+
+			create_table_btns();
+
+			tbnbtnmclipp ? mclipp_btns(true) : mclipp_btns(false);
+
+			$('#sublistrow').slideUp('fast');
+			$('#myclipping').modal('hide');
+			$('.dataTables_processing').hide();
+		},
+		'drawCallback': function(settings) {
+			this.api().column(1).data().each(function(tvcurrent, i) {
+				tvcurrentstr = $(tvcurrent).attr('data-original-title');
+				if (tvarr.indexOf(tvcurrentstr) == -1) {
+					tvarr.push(tvcurrentstr);
+					ihtml = '<option val="'+tvcurrentstr+'">'+tvcurrentstr+'</option>'
+					$(ihtml).appendTo('#selpckr_2');
+				}
+			});
+
+			this.api().column(2).data().each(function (vcurrent, i) {
+				vcurrentstr = $(vcurrent).attr('data-original-title');
+				if (varr.indexOf(vcurrentstr) == -1) {
+					varr.push(vcurrentstr);
+					ihtml = '<option val="'+vcurrentstr+'">'+vcurrentstr+'</option>'
+					$(ihtml).appendTo('#selpckr_3');
+				}
+			});
+
+			this.api().column(3).data().each(function (ecurrent, i) {
+					ecurrentstr = $(ecurrent).attr('data-original-title');
+				if (earr.indexOf(ecurrentstr) == -1) {
+					earr.push(ecurrentstr);
+					ihtml = '<option val="'+ecurrentstr+'">'+ecurrentstr+'</option>'
+					$(ihtml).appendTo('#selpckr_4');
+				}
+			});
+
+			if(isTouchDevice() === false) {
+				$('.tooltipa').tooltip({'container': 'body'});
+				$('.tooltipb').tooltip({'container': 'body'});
+			}
+		},
+		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
+	});
+}
+
 function create_table_btns() {
 	btnshtml =	'<div class="btn-group" role="group" aria-label="...">'+
 								'<button id="tbnbtnsela" type="button" class="btn btn-xs btn-default">Selecionar Todos</button>'+
@@ -1971,6 +2056,10 @@ function get_mclipp_news(idmcplipp, idclient) {
 		$('.dataTables_processing').hide();
 	});
 };
+
+function get_mcnews_advsearch(advsearch, idmclipp) {
+	console.log(advsearch, idmclipp);
+}
 
 function add_data_export(data, callback) {
 	tableexport.clear().draw();
