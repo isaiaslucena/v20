@@ -331,6 +331,14 @@ span.twitter-typeahead {
 	cursor: default;
 }
 
+/*my clipping inserted*/
+table.dataTable tbody tr.selected-mclipp, table.dataTable tbody th.selected-mclipp, table.dataTable tbody td.selected-mclipp {
+	color: white;
+}
+table.dataTable tbody>tr.selected-mclipp, table.dataTable tbody>tr>.selected-mclipp {
+	background-color: #00CC5C;
+}
+
 video::-internal-media-controls-download-button { display:none; }
 video::-webkit-media-controls-enclosure { overflow:hidden; }
 video::-webkit-media-controls-panel { width: calc(100% + 35px); }

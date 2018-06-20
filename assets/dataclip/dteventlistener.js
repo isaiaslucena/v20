@@ -577,9 +577,11 @@ $(document).on('click', '.mclippbtned', function(event) {
 	ichilds.last().fadeOut('fast', function() {
 		ichilds.first().fadeIn('fast', function() {
 			if (vadvsearch) {
-				set_tablenews_mclipp(adssearchdata, idselecao, true);
+				set_tnmc_advsearch(adssearchdata, idselecao, true);
 			} else {
-				get_mclipp_news(idselecao, cliid);
+				mcedstartdate = $('#dpsdate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+				mcedenddate = $('#dpedate').data('datepicker').getFormattedDate('yyyy-mm-dd');
+				set_tnmc_date(mcedstartdate, mcedenddate, idselecao, true);
 			}
 		});
 	});

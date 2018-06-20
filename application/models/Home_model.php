@@ -1236,24 +1236,6 @@ class Home_model extends CI_Model {
 		$limit = $data['length'];
 		$offset = $data['start'];
 
-		// $countquery =	"SELECT COUNT(*) AS quant FROM
-		// 							(SELECT nt.Id
-		// 							FROM Noticias nt
-		// 							INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
-		// 							INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id
-		// 							INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id
-		// 							LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts
-		// 							INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id
-		// 							INNER JOIN Editorias ed ON nt.idEditoria = ed.Id
-		// 							LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia
-		// 							INNER JOIN Assunto ass ON plc.idAssunto = ass.Id
-		// 							INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa
-		// 							LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id
-		// 							WHERE
-		// 							nt.Data BETWEEN '$startdate' AND '$enddate' AND
-		// 							ntp.Liberada = 1 AND
-		// 							ntp.idEmpresa = $idempresa ";
-
 		$sqlquery =	"SELECT
 								nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,
 								tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,
@@ -1325,8 +1307,6 @@ class Home_model extends CI_Model {
 			$countquery .= "AND ntp.Avaliacao IN ($avaliacao) ";
 		}
 
-		// $countquery .= "GROUP BY nt.Id) AS X ";
-
 		$sqlquery .= "GROUP BY nt.Id ";
 		$sqlquery .= "ORDER BY nt.Data ASC";
 
@@ -1335,15 +1315,68 @@ class Home_model extends CI_Model {
 										ORDER BY NTS.Data
 										LIMIT ".$limit." OFFSET ".$offset;
 
-		// $countdata = intval($this->db->query($countquery)->row('quant'));
-		// $fulldata['recordsTotal'] = $countdata;
-		// $fulldata['recordsFiltered'] = $countdata;
+		$countquery =	"SELECT COUNT(Id) as quant FROM (".$sqlquery.") NTS
+										LEFT JOIN (SELECT idNoticia, idSelecao FROM SelecoesNoticias WHERE idSelecao = ".$idselecao.") SEL ON NTS.Id = SEL.idNoticia
+										ORDER BY NTS.Data";
 
-		$exequery = $this->db->query($sqlquery);
+		$countdata = intval($this->db->query($countquery)->row('quant'));
+		$fulldata['recordsTotal'] = $countdata;
+		$fulldata['recordsFiltered'] = $countdata;
+
+		$exequery = $this->db->query($comparequery);
 		$fulldata['mdata'] = $exequery->result_array();
 
-		$fulldata['recordsTotal'] = $exequery->num_rows();
-		$fulldata['recordsFiltered'] = $exequery->num_rows();
+		return $fulldata;
+	}
+
+	public function get_mcnews_date($data) {
+		$startdate = $data['mclipp_startdate'];
+		$enddate = $data['mclipp_startdate'];
+		$idselecao = $data['mclipp_id'];
+		$idempresa = $data['mclipp_idclient'];
+		$limit = $data['length'];
+		$offset = $data['start'];
+
+		$sqlquery =	"SELECT nt.Id, nt.Data, nt.Hora, nt.Titulo, nt.URL,".
+								"tve.Nome as TipoVeiculo, ve.Nome as Veiculo, ed.Nome as Editoria,".
+								"ass.Nome as Assunto,".
+								"GROUP_CONCAT(DISTINCT plc.Nome ORDER BY plc.Nome SEPARATOR ', ') as PalavraChave,".
+								"ve.TiragemSemana as Tier,".
+								"FORMAT(CASE WHEN ntd.det_audiencia > 0 THEN ntd.det_audiencia ELSE (COALESCE(ed.Valor, 0) + 250) * re.aud_mt END,2,'pt_BR') AS Audiencia,".
+								"CONCAT('R$ ', FORMAT(CASE WHEN ntd.det_valor > 0 THEN ntd.det_valor ELSE COALESCE(ed.Valor, 0) + 250 END,2,'pt_BR')) AS Valor,".
+								"ntp.Avaliacao, ntp.Motivacao ".
+								"FROM Noticias nt ".
+								"INNER JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia ".
+								"INNER JOIN PalavraChave plc ON ntp.idPalavraChave = plc.Id ".
+								"INNER JOIN Veiculo ve ON nt.idVeiculo = ve.Id ".
+								"LEFT JOIN Releva re ON ve.TiragemSemana = re.aud_ts ".
+								"INNER JOIN TipoVeiculo tve ON ve.idTipoVeiculo = tve.Id ".
+								"INNER JOIN Editorias ed ON nt.idEditoria = ed.Id ".
+								"LEFT JOIN NoticiaDetalhes ntd ON nt.Id = ntd.det_id_noticia ".
+								"INNER JOIN Assunto ass ON plc.idAssunto = ass.Id ".
+								"INNER JOIN EmpresaNoticia ent ON ent.idNoticia = nt.Id AND ent.IdEmpresa = ass.idEmpresa ".
+								"LEFT JOIN NoticiaImagem nim ON nim.idNoticia = nt.Id ".
+								"WHERE nt.Data BETWEEN '$startdate' AND '$enddate' AND ".
+								"ntp.Liberada = 1 AND ".
+								"ntp.idEmpresa = $idempresa ";
+
+		$sqlquery .= "GROUP BY nt.Id ";
+		$sqlquery .= "ORDER BY nt.Data ASC";
+
+		$comparequery =	"SELECT * FROM (".$sqlquery.") NTS ".
+										"LEFT JOIN (SELECT idNoticia, idSelecao FROM SelecoesNoticias WHERE idSelecao = ".$idselecao.") SEL ON NTS.Id = SEL.idNoticia ".
+										"LIMIT ".$limit." OFFSET ".$offset;
+
+		$countquery =	"SELECT COUNT(Id) as quant FROM (".$sqlquery.") NTS LEFT JOIN (SELECT idNoticia, idSelecao FROM SelecoesNoticias WHERE idSelecao = ".$idselecao.") SEL ON NTS.Id = SEL.idNoticia";
+
+		$countdata = intval($this->db->query($countquery)->row('quant'));
+		$fulldata['recordsTotal'] = $countdata;
+		$fulldata['recordsFiltered'] = $countdata;
+
+		$exequery = $this->db->query($comparequery);
+		$fulldata['mdata'] = $exequery->result_array();
+
+		$fulldata['comparequery'] = $comparequery;
 
 		return $fulldata;
 	}
