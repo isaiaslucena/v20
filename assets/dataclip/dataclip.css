@@ -333,10 +333,10 @@ span.twitter-typeahead {
 
 /*my clipping inserted*/
 table.dataTable tbody tr.selected-mclipp, table.dataTable tbody th.selected-mclipp, table.dataTable tbody td.selected-mclipp {
-	color: white;
+	color: black;
 }
 table.dataTable tbody>tr.selected-mclipp, table.dataTable tbody>tr>.selected-mclipp {
-	background-color: #00CC5C;
+	background-color: #51ff0017;
 }
 
 video::-internal-media-controls-download-button { display:none; }

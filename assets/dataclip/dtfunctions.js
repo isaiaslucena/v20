@@ -331,10 +331,12 @@ function set_tnmc_date(stmcstartdate, stmcenddate, stmcidselecao, tbnbtnmclipp) 
 			}
 		},
 		'rowCallback': function(row, data) {
-			console.log(data);
-			// if (data.idSelecao == null) {
-				// $('td:eq(4)', row).html( '<b>A</b>' );
-			// }
+			// console.log(data);
+			// console.log(row)
+			if (data.idSelecao != null) {
+				// $('tr', row).addClass('selected-mclipp');
+				$(row).addClass('selected-mclipp');
+			}
 		},
 		'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json'},
 	});

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 12:31:34
+/* Smarty version 3.1.30, created on 2018-06-20 11:10:45
   from "/app/application/views/templates/foot_home_client.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1fe756a68070_73446956',
+  'unifunc' => 'content_5b2a6065c31945_81548370',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '35eb8ec61cebe74b32f6b6a35db3fde5f38811b7' => 
     array (
       0 => '/app/application/views/templates/foot_home_client.tpl',
-      1 => 1528817491,
+      1 => 1529502493,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:body_home_client.tpl' => 1,
   ),
 ),false)) {
-function content_5b1fe756a68070_73446956 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2a6065c31945_81548370 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4593344135b1fe756a5ac09_57130597', 'foot');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18285028645b2a6065c20057_23753771', 'foot');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:body_home_client.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'foot'} */
-class Block_4593344135b1fe756a5ac09_57130597 extends Smarty_Internal_Block
+class Block_18285028645b2a6065c20057_23753771 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -64,8 +64,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 	headerlogo, subjecctid, subjectcount, keywordcount, mediatype, idtitle, adssearchdata,
 	imgobj, jcrop_api, snewsx1, snewsy1, snewsx2, snewsy2, snewsmw, snewsmh;
 	var adsdestaque = null;
-	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false,
-	vavaneg = false, vavaneu = false, vavapos = false, vavanenh = false, vadvsearch = false;
+	var jcropdestroy = false, vmotesp = false, vmotprov = false, vmotnenh = false, vavaneg = false,
+	vavaneu = false, vavapos = false, vavanenh = false, vadvsearch = false, vmyclipp = false;
 	var subkeywordsarr = [], tvarr = [], varr = [], earr = [], pcarr = [], trselected = [],
 	adssubjectarr = [], adskeywordarr = [], adstveiculoarr = [], adsveiculoarr = [], adsveiculossitesarr = [],
 	adseditoriaarr = [], adsstatesarr = [], adsmotivacaoarr = [], adsavaliacaoarr = [], arrtest = [],
