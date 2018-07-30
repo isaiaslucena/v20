@@ -6,7 +6,10 @@ class Admin extends CI_Controller {
 		echo "teste index";
 	}
 
-	public function newsletter() {
-		echo "teste newsletter";
+	public function adm_load_to_home() {
+		$wtl = $this->input->get('wtl', TRUE);
+
+		file_exists($wtl.'index.php');
+		// var_dump($wtl);
 	}
 }
