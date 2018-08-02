@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller {
+	$this->load->model('api_model');
+
 	function htmlchars_decoder($array) {
 		array_walk_recursive($array, function(&$item, $key) {
 			$item = htmlspecialchars_decode($item);
@@ -402,6 +404,18 @@ class Api extends CI_Controller {
 			header('Content-Type: application/json, charset=utf-8');
 			print json_encode($msg);
 		}
+	}
+
+	public function save_newsletter_conf() {
+		if ($this->input->method(TRUE) == 'POST') {
+
+		} else {
+			header("HTTP/1.1 403 Forbidden");
+		}
+	}
+
+	public function get_newsletter_conf() {
+		$this->api_model->get_clients();
 	}
 }
 ?>
