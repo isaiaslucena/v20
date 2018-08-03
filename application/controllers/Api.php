@@ -2,8 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller {
-	$this->load->model('api_model');
-
 	function htmlchars_decoder($array) {
 		array_walk_recursive($array, function(&$item, $key) {
 			$item = htmlspecialchars_decode($item);
@@ -408,14 +406,27 @@ class Api extends CI_Controller {
 
 	public function save_newsletter_conf() {
 		if ($this->input->method(TRUE) == 'POST') {
+			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
 
+			$this->load->model('api_model');
+			$resp['resp'] = $this->api_model->save_newsletter_conf($postdata);
+
+			header('Access-Control-Allow-Origin: *');
+			header('Content-Type: application/json');
+			print json_encode($resp);
 		} else {
 			header("HTTP/1.1 403 Forbidden");
 		}
 	}
 
 	public function get_newsletter_conf() {
-		$this->api_model->get_clients();
+		$this->load->model('api_model');
+		$idempresa = $this->input->get('idEmpresa', TRUE);
+		$newsletterconf = $this->api_model->get_newsletter_conf($idempresa);
+
+		header('Access-Control-Allow-Origin: *');
+		header('Content-Type: application/json');
+		print json_encode($newsletterconf);
 	}
 }
 ?>
