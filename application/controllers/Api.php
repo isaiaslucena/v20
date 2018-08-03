@@ -411,8 +411,8 @@ class Api extends CI_Controller {
 			$this->load->model('api_model');
 			$resp['resp'] = $this->api_model->save_newsletter_conf($postdata);
 
-			header('Access-Control-Allow-Origin: *');
 			header('Content-Type: application/json');
+			header('Access-Control-Allow-Origin: *');
 			print json_encode($resp);
 		} else {
 			header("HTTP/1.1 403 Forbidden");
@@ -424,8 +424,8 @@ class Api extends CI_Controller {
 		$idempresa = $this->input->get('idEmpresa', TRUE);
 		$newsletterconf = $this->api_model->get_newsletter_conf($idempresa);
 
-		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
+		header('Access-Control-Allow-Origin: *');
 		print json_encode($newsletterconf);
 	}
 }
