@@ -12,4 +12,8 @@ class Admin extends CI_Controller {
 		file_exists($wtl.'index.php');
 		// var_dump($wtl);
 	}
+
+	public function newsletter() {
+		$this->load->view('newsletter/index');
+	}
 }
