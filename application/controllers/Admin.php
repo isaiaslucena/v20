@@ -13,7 +13,7 @@ class Admin extends CI_Controller {
 		// var_dump($wtl);
 	}
 
-	public function newsletter() {
+	public function newsletter_() {
 		$this->load->view('newsletter/index');
 	}
 }
