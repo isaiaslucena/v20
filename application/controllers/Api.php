@@ -406,14 +406,13 @@ class Api extends CI_Controller {
 
 	public function save_newsletter_conf() {
 		if ($this->input->method(TRUE) == 'POST') {
-			$postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
-
+			// $postdata = ($_POST = json_decode(file_get_contents("php://input"), true));
+			$reqpost = $this->input->post();
 			$this->load->model('api_model');
-			$resp['resp'] = $this->api_model->save_newsletter_conf($postdata);
 
 			header('Content-Type: application/json');
-			header('Access-Control-Allow-Origin: *');
-			print json_encode($resp);
+			// header('Access-Control-Allow-Origin: *');
+			print $this->api_model->save_newsletter_conf($reqpost);
 		} else {
 			header("HTTP/1.1 403 Forbidden");
 		}
@@ -421,12 +420,23 @@ class Api extends CI_Controller {
 
 	public function get_newsletter_conf() {
 		$this->load->model('api_model');
-		$idempresa = $this->input->get('idEmpresa', TRUE);
-		$newsletterconf = $this->api_model->get_newsletter_conf($idempresa);
+		$idempresa = $this->input->get('empresa', TRUE);
+		$recorded = $this->input->get('recorded', TRUE);
 
-		header('Content-Type: application/json');
-		header('Access-Control-Allow-Origin: *');
-		print json_encode($newsletterconf);
+		var_dump($this->input->get('modelid', TRUE));
+		exit();
+
+		if ($recorded === 'on') {
+			# code...
+		} else if ($this->input->get('modelid', TRUE)) {
+
+		}
+
+		// $newsletterconf = $this->api_model->get_newsletter_conf($idempresa);
+
+		// header('Content-Type: application/json');
+		// header('Access-Control-Allow-Origin: *');
+		// print json_encode($newsletterconf);
 	}
 }
 ?>
