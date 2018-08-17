@@ -410,9 +410,10 @@ class Api extends CI_Controller {
 			$reqpost = $this->input->post();
 			$this->load->model('api_model');
 
-			header('Content-Type: application/json');
+			// header('Content-Type: application/json');
 			// header('Access-Control-Allow-Origin: *');
 			print $this->api_model->save_newsletter_conf($reqpost);
+			// var_dump($this->api_model->save_newsletter_conf($reqpost));
 		} else {
 			header("HTTP/1.1 403 Forbidden");
 		}
@@ -422,24 +423,23 @@ class Api extends CI_Controller {
 		$this->load->model('api_model');
 		$data['idempresa'] = $this->input->get('empresa', TRUE);
 		$data['recorded'] = $this->input->get('recorded', TRUE);
-		$data['modelid'] = $this->input->get('modelid', TRUE);
 		$data['model'] = $this->input->get('model', TRUE);
+		$data['modelid'] = $this->input->get('modelid', TRUE);
 
 		$this->load->model('api_model');
-		if ($data['recorded'] === 'on') {
+		if ($data['recorded'] === 'on' && is_null($data['modelid'])) {
 			$dbmodel = $this->api_model->get_newsletter_model_byempresa($data);
 			$dbsubmodel = $this->api_model->get_newsletter_id_bymodel($data['model']);
-
-			header('Content-Type: application/json');
+			// header('Content-Type: application/json');
 			print (is_null($dbmodel)) ? NULL : json_encode(array('model' => $dbmodel, 'submodel' => $dbsubmodel));
 		} else if ($data['modelid']) {
 			$dbmodel = $this->api_model->get_newsletter_model_byid($data['modelid']);
-			header('Content-Type: application/json');
+			// header('Content-Type: application/json');
 			print json_encode(array('model' => $dbmodel));
 		} else {
 			$file = '/app/newsletter/models/'.$data['model'];
-			header('Content-Type: application/json');
-			print (file_exists($file)) ? json_encode(array('model' => array('template' => file_get_contents($file)))) : NULL;
+			// header('Content-Type: application/json');
+			print (file_exists($file)) ? json_encode(array('model' => json_encode(array('template' => file_get_contents($file))))) : NULL;
 		}
 
 		// $newsletterconf = $this->api_model->get_newsletter_conf($idempresa);
