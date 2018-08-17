@@ -420,16 +420,26 @@ class Api extends CI_Controller {
 
 	public function get_newsletter_conf() {
 		$this->load->model('api_model');
-		$idempresa = $this->input->get('empresa', TRUE);
-		$recorded = $this->input->get('recorded', TRUE);
+		$data['idempresa'] = $this->input->get('empresa', TRUE);
+		$data['recorded'] = $this->input->get('recorded', TRUE);
+		$data['modelid'] = $this->input->get('modelid', TRUE);
+		$data['model'] = $this->input->get('model', TRUE);
 
-		var_dump($this->input->get('modelid', TRUE));
-		exit();
+		$this->load->model('api_model');
+		if ($data['recorded'] === 'on') {
+			$dbmodel = $this->api_model->get_newsletter_model_byempresa($data);
+			$dbsubmodel = $this->api_model->get_newsletter_id_bymodel($data['model']);
 
-		if ($recorded === 'on') {
-			# code...
-		} else if ($this->input->get('modelid', TRUE)) {
-
+			header('Content-Type: application/json');
+			print (is_null($dbmodel)) ? NULL : json_encode(array('model' => $dbmodel, 'submodel' => $dbsubmodel));
+		} else if ($data['modelid']) {
+			$dbmodel = $this->api_model->get_newsletter_model_byid($data['modelid']);
+			header('Content-Type: application/json');
+			print json_encode(array('model' => $dbmodel));
+		} else {
+			$file = '/app/newsletter/models/'.$data['model'];
+			header('Content-Type: application/json');
+			print (file_exists($file)) ? json_encode(array('model' => array('template' => file_get_contents($file)))) : NULL;
 		}
 
 		// $newsletterconf = $this->api_model->get_newsletter_conf($idempresa);
