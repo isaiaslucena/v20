@@ -36,9 +36,9 @@ class Api_model extends CI_Model {
 
 	public function save_newsletter_conf($data) {
 		$sqlquery = 'SELECT id FROM v2_newsletter WHERE idEmpresa = '.$data['empresa'].' AND model = "'.$data['model'].'"';
+		$jsonpost = addslashes(json_encode($data));
 		$result = $this->db->query($sqlquery);
 		if ($result->result_id->num_rows > 0) {
-			$jsonpost = addslashes(json_encode($data));
 			$updatequery = 'UPDATE v2_newsletter SET model = "'.$data['model'].'", template = "'.$jsonpost.'" WHERE idEmpresa = '.$data['empresa'].' AND model = "'.$data['model'].'" LIMIT 1';
 			return $this->db->query($updatequery);
 		} else {
