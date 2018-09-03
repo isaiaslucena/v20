@@ -46,4 +46,28 @@ class Api_model extends CI_Model {
 			return $this->db->query($insertquery);
 		}
 	}
+
+	public function get_empresa_news_bydate($idempresa, $startdate, $enddate) {
+		$sqlquery =	"SELECT
+							ass.id AS IdAssunto, ass.Nome AS Assunto,
+							pc.Id AS IdPChave, pc.Nome AS PChave,
+							tve.Id AS IdTVeiculo, tve.Nome AS TVeiculo,
+							ve.Id AS IdVeiculo, ve.Nome AS Veiculo,
+							ed.Id AS IdEditotia, ed.Nome AS Editoria,
+							nt.Id AS IdNoticia, nt.Titulo, nt.Subtitulo, nt.Noticia, nt.Data, nt.Hora, nt.DataHora, nt.DataCriacao,
+							nti.Id AS IdImagem, nti.Imagem
+							FROM Noticias nt
+							JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
+							LEFT JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
+							JOIN Assunto ass ON ntp.idAssunto = ass.Id
+							JOIN PalavraChave pc ON ntp.idPalavraChave = pc.Id
+							JOIN TipoVeiculo tve ON ntp.idTipoVeiculo = tve.Id
+							JOIN Veiculo ve ON ntp.idVeiculo = ve.Id
+							JOIN Editorias ed ON ntp.idEditoria = ed.Id
+							WHERE
+							nt.Data BETWEEN '$startdate' AND '$enddate' AND
+							ntp.idEmpresa = $idempresa
+							ORDER BY ass.Id, pc.Id, nt.Id ASC";
+		return $this->db->query($sqlquery)->result_array();
+	}
 }
