@@ -53,7 +53,7 @@ class Api_model extends CI_Model {
 							pc.Id AS IdPChave, pc.Nome AS PChave,
 							tve.Id AS IdTVeiculo, tve.Nome AS TVeiculo,
 							ve.Id AS IdVeiculo, ve.Nome AS Veiculo,
-							ed.Id AS IdEditotia, ed.Nome AS Editoria,
+							ed.Id AS IdEditoria, ed.Nome AS Editoria,
 							nt.Id AS IdNoticia, nt.Titulo, nt.Subtitulo, nt.Noticia, nt.Data, nt.Hora, nt.DataHora, nt.DataCriacao,
 							nti.Id AS IdImagem, nti.Imagem
 							FROM Noticias nt
@@ -67,7 +67,7 @@ class Api_model extends CI_Model {
 							WHERE
 							nt.Data BETWEEN '$startdate' AND '$enddate' AND
 							ntp.idEmpresa = $idempresa
-							ORDER BY ass.Id, pc.Id, nt.Id ASC";
+							ORDER BY ass.Id, pc.Id, nt.Id ASC LIMIT 200";
 		return $this->db->query($sqlquery)->result_array();
 	}
 }

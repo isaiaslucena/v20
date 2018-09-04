@@ -451,85 +451,120 @@ class Api extends CI_Controller {
 
 	public function get_empresa_news_bydate() {
 		$this->load->model('api_model');
+		$this->load->model('home_model');
+
 		$idempresa = $this->input->get('idempresa', TRUE);
 		$startdate = $this->input->get('startdate', TRUE);
 		$enddate = $this->input->get('enddate', TRUE);
-		$empresa_news = $this->api_model->get_empresa_news_bydate($idempresa, $startdate, $enddate);
 
-		var_dump($empresa_news);
+		$empresa_info = $this->home_model->get_client_info($idempresa);
+		$empresa_news = $this->api_model->get_empresa_news_bydate($idempresa, $startdate, $enddate);
 
 		$empresa_news = $this->htmlchars_decoder($empresa_news);
 		$empresa_news = $this->tags_stripper($empresa_news);
 		$empresa_news = $this->utf8_encoder($empresa_news);
 
-		var_dump($empresa_news);
-		exit();
-
-		$ncidemp = null;
-		$ncidass = null;
-		$ncidpc = null;
+		$newidass = 0;
+		$newidpc = 0;
 		$ncountnews = 0;
-		$ncountemp = -1;
-		$final_news = array();
+		$ncountass = -1;
+		$ncountpc = -1;
+		$final_news = array(
+			'Info' => array(),
+			// 'Assuntos' => array()
+			'Noticias' => array()
+		);
+
+		array_push($final_news['Info'], $empresa_info);
 
 		foreach ($empresa_news as $news) {
-			$nidemp = $news->IdEmpresa;
-			$nemp = $news->Empresa;
-
-			$nidnews = $news->IdNoticia;
-			$ntitle = $news->Titulo;
-			$nsubtitle = $news->Subtitulo;
-			$nnews = $news->Noticia;
-			$ndate = $news->Data;
-			$ntime = $news->Hora;
-
-			$nidass = $news->IdAssunto;
-			$nass = $news->Assunto;
-			$nidPChave = $news->IdPChave;
-			$nPCHave = $news->PChave;
-
-			$nidvtype = $news->IdTipoVeiculo;
-			$nvtype = $news->TipoVeiculo;
-			$nidv = $news->IdVeiculo;
-			$nveh = $news->Veiculo;
-			$nided = $news->IdEditoria;
-			$nedt = $news->Editoria;
-
-			$
-
-			$currnews = array(
-				'IdEmpresa' => $nidemp,
-				'Empresa' => $nemp,
-				'Id' => $nidnews,
-				'Titulo' => $ntitlenews,
-				'Noticia' => $nnews,
-				'IdTipoVeiculo' => $nidvtype,
-				'TipoVeiculo' => $nvtype,
-				'IdVeiculo' => $nidv,
-				'Veiculo' => $nveh,
-				'IdEditoria' => $nided,
-				'Editoria' => $nedt,
-				'Data' => $ndate,
-				'Hora' => $ntime
-			);
-
-			if ($ncidemp != $nidemp) {
-				$ncountemp++;
-				$empresas = array(
-					'IdEmpresa' => $nidemp,
-					'Empresa' => $nemp,
-					'Noticias' => array()
-				);
-				array_push($tprintnews, $empresas);
-				array_push($tprintnews[$ncountemp]['Noticias'], $currnews);
-			} else {
-				array_push($tprintnews[$ncountemp]['Noticias'], $currnews);
-			}
-			$ncidemp = $nidemp;
+			array_push($final_news['Noticias'], $news);
 		}
 
-		header('Content-Type: application/json, charset=utf-8');
-		print json_encode($news);
+		// foreach ($empresa_news as $news) {
+		// 	$nidnews = $news['IdNoticia'];
+		// 	$ntitle = $news['Titulo'];
+		// 	$nsubtitle = $news['Subtitulo'];
+		// 	$nnews = $news['Noticia'];
+		// 	$ndate = $news['Data'];
+		// 	$ntime = $news['Hora'];
+
+		// 	$nidimg = $news['IdImagem'];
+		// 	$nimg = $news['Imagem'];
+
+		// 	$nidass = $news['IdAssunto'];
+		// 	$nass = $news['Assunto'];
+		// 	$nidPChave = $news['IdPChave'];
+		// 	$nPChave = $news['PChave'];
+
+		// 	$nidvtype = $news['IdTVeiculo'];
+		// 	$nvtype = $news['TVeiculo'];
+		// 	$nidv = $news['IdVeiculo'];
+		// 	$nveh = $news['Veiculo'];
+		// 	$nided = $news['IdEditoria'];
+		// 	$nedt = $news['Editoria'];
+
+		// 	$currass = array(
+		// 		'IdAssunto' => $nidass,
+		// 		'Assunto' => $nass,
+		// 		'PalavrasChave' => array()
+		// 	);
+
+		// 	$curpchave = array(
+		// 		'IdPChave' => $nidPChave,
+		// 		'PChave' => $nPChave,
+		// 		'Noticias' => array()
+		// 	);
+
+		// 	$currnews = array(
+		// 		'Id' => $nidnews,
+		// 		'Titulo' => $ntitle,
+		// 		'Noticia' => $nnews,
+		// 		'IdTipoVeiculo' => $nidvtype,
+		// 		'TipoVeiculo' => $nvtype,
+		// 		'IdVeiculo' => $nidv,
+		// 		'Veiculo' => $nveh,
+		// 		'IdEditoria' => $nided,
+		// 		'Editoria' => $nedt,
+		// 		'Data' => $ndate,
+		// 		'Hora' => $ntime,
+		// 		'Imagens' => array()
+		// 	);
+
+		// 	$curimagens = array(
+		// 		'IdImagem' => $nidimg,
+		// 		'Imagem' => $nimg
+		// 	);
+
+		// 	if ($newidass != $nidass) {
+		// 		$ncountass++;
+		// 		array_push($final_news['Assuntos'], $currass);
+
+		// 		if ($newidpc != $nidPChave) {
+		// 			$ncountpc++;
+		// 			array_push($final_news['Assuntos'][$ncountass]['PalavrasChave'], $curpchave);
+		// 			array_push($final_news['Assuntos'][$ncountass]['PalavrasChave'][$ncountpc]['Noticias'], $currnews);
+		// 		} else {
+		// 			array_push($final_news['Assuntos'][$ncountass]['PalavrasChave'][$ncountpc]['Noticias'], $currnews);
+		// 		}
+		// 	} else {
+		// 		if ($newidpc != $nidPChave) {
+		// 			$ncountpc++;
+		// 			array_push($final_news['Assuntos'][$ncountass]['PalavrasChave'], $curpchave);
+		// 			array_push($final_news['Assuntos'][$ncountass]['PalavrasChave'][$ncountpc]['Noticias'], $currnews);
+		// 		} else {
+		// 			array_push($final_news['Assuntos'][$ncountass]['PalavrasChave'][$ncountpc]['Noticias'], $currnews);
+		// 		}
+		// 	}
+		// 	$newidass = $nidass;
+		// 	$newidpc = $nidPChave;
+		// }
+
+
+		// header('Content-Type: application/json, charset=utf-8');
+		// header('Content-Type: text/plain');
+		print json_encode($final_news);
+		// echo 'teste';
 	}
 }
 ?>
