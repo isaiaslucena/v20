@@ -458,6 +458,7 @@ class Api extends CI_Controller {
 		$enddate = $this->input->get('enddate', TRUE);
 
 		$empresa_info = $this->home_model->get_client_info($idempresa);
+		$capas = $this->api_model->get_newscovers(date('Y-m-d'));
 		$empresa_news = $this->api_model->get_empresa_news_bydate($idempresa, $startdate, $enddate);
 
 		$empresa_news = $this->htmlchars_decoder($empresa_news);
@@ -470,10 +471,18 @@ class Api extends CI_Controller {
 		$ncountass = -1;
 		$ncountpc = -1;
 		$final_news = array(
-			'Info' => array(),
+			'Info' => array(
+			),
 			// 'Assuntos' => array()
-			'Noticias' => array()
+			'Noticias' => array(),
 		);
+
+		foreach ($capas as $capa) {
+			// $URLCapas[] = $capa['URLCapas'];
+			$URLCapas[] = $capa;
+		}
+
+		$empresa_info['capas'] = $URLCapas;
 
 		array_push($final_news['Info'], $empresa_info);
 

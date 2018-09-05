@@ -11,9 +11,11 @@ class Home_model extends CI_Model {
 	public function get_client_info($idclient) {
 		// $this->db->cache_on();
 		$querybanner = "SELECT id,nome,banner FROM Empresa WHERE Id = $idclient ORDER BY Nome ASC";
+		$querysinope = "SELECT * FROM Sinopses WHERE idEmpresa = $idclient";
 		$data['id'] = $this->db->query($querybanner)->row('id');
 		$data['name'] = $this->db->query($querybanner)->row('nome');
 		$data['banner'] = "http://www.multclipp.com.br/arquivos/empresa/".$idclient."/banner/".rawurlencode($this->db->query($querybanner)->row('banner'));
+		$data['sinopse'] = $this->db->query($querybanner)->row('Sinopse');
 
 		// $querytv =	"SELECT TOP 1
 		// 						nt.Id,nt.Titulo,nt.Subtitulo, nt.Noticia,nti.Imagem as Video,

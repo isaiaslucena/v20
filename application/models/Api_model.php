@@ -7,6 +7,14 @@ class Api_model extends CI_Model {
 		return $this->db->query($sqlquery)->result_array();
 	}
 
+	public function get_newscovers($seldate) {
+		$sqlquery = "SELECT
+								CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/capas/',REPLACE(CURDATE(),'-','/'),'/',idVeiculo,'_thumb.jpg') AS Thumbnail,
+								CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/capas/',REPLACE(CURDATE(),'-','/'),'/',idVeiculo,'.jpg') AS Capa
+								FROM Capas WHERE Data = '".$seldate."'";
+		return $this->db->query($sqlquery)->result_array();
+	}
+
 	public function get_newsletter_model_byempresa($data) {
 		$sqlquery = 'SELECT template FROM v2_newsletter WHERE model = "'.$data['model'].'" AND idEmpresa = '.$data['idempresa'].' LIMIT 1';
 		$result = $this->db->query($sqlquery);
@@ -16,7 +24,7 @@ class Api_model extends CI_Model {
 			return $result->row()->template;
 		} else {
 			return NULL;
-		};
+		}
 	}
 
 	public function get_newsletter_model_byid($id) {
@@ -55,7 +63,9 @@ class Api_model extends CI_Model {
 							ve.Id AS IdVeiculo, ve.Nome AS Veiculo,
 							ed.Id AS IdEditoria, ed.Nome AS Editoria,
 							nt.Id AS IdNoticia, nt.Titulo, nt.Subtitulo, nt.Noticia, nt.Data, nt.Hora, nt.DataHora, nt.DataCriacao,
-							nti.Id AS IdImagem, nti.Imagem
+							nti.Id AS IdImagem,
+							CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/',REPLACE(nt.DataCriacao,'-','/'),'/',nt.Id,'/',REPLACE(nti.Imagem,'.jpg',''),'_thumb.jpg') as Thumbnail,
+							CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/',REPLACE(nt.DataCriacao,'-','/'),'/',nt.Id,'/',nti.Imagem) as Imagem
 							FROM Noticias nt
 							JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
 							LEFT JOIN NoticiaImagem nti ON nt.Id = nti.idNoticia
