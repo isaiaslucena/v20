@@ -10,7 +10,7 @@ class Api_model extends CI_Model {
 	public function get_newscovers($seldate) {
 		$sqlquery = "SELECT
 								CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/capas/',REPLACE(CURDATE(),'-','/'),'/',idVeiculo,'_thumb.jpg') AS Thumbnail,
-								CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/capas/',REPLACE(CURDATE(),'-','/'),'/',idVeiculo,'.jpg') AS Capa
+								CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/capas/',REPLACE(CURDATE(),'-','/'),'/',idVeiculo,'.jpg') AS Imagem
 								FROM Capas WHERE Data = '".$seldate."'";
 		return $this->db->query($sqlquery)->result_array();
 	}
@@ -63,6 +63,8 @@ class Api_model extends CI_Model {
 							ve.Id AS IdVeiculo, ve.Nome AS Veiculo,
 							ed.Id AS IdEditoria, ed.Nome AS Editoria,
 							nt.Id AS IdNoticia, nt.Titulo, nt.Subtitulo, nt.Noticia, nt.Data, nt.Hora, nt.DataHora, nt.DataCriacao,
+							nt.URL as URLExterno,
+							CONCAT('http://www.multclipp.com.br/verNoticia.aspx?c=0&n=',nt.Id,'&e=',ntp.idEmpresa) AS URL,
 							nti.Id AS IdImagem,
 							CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/',REPLACE(nt.DataCriacao,'-','/'),'/',nt.Id,'/',REPLACE(nti.Imagem,'.jpg',''),'_thumb.jpg') as Thumbnail,
 							CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/',REPLACE(nt.DataCriacao,'-','/'),'/',nt.Id,'/',nti.Imagem) as Imagem
