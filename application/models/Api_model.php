@@ -67,6 +67,7 @@ class Api_model extends CI_Model {
 							CONCAT('http://www.multclipp.com.br/verNoticia.aspx?c=0&n=',nt.Id,'&e=',ntp.idEmpresa) AS URL,
 							nti.Id AS IdImagem,
 							CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/',REPLACE(nt.DataCriacao,'-','/'),'/',nt.Id,'/',REPLACE(nti.Imagem,'.jpg',''),'_thumb.jpg') as Thumbnail,
+							CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/',REPLACE(nt.DataCriacao,'-','/'),'/',nt.Id,'/',REPLACE(nti.Imagem,'.jpg',''),'_pdf.jpg') as ThumbnailBig,
 							CONCAT('https://s3-sa-east-1.amazonaws.com/multclipp/arquivos/noticias/',REPLACE(nt.DataCriacao,'-','/'),'/',nt.Id,'/',nti.Imagem) as Imagem
 							FROM Noticias nt
 							JOIN NoticiaPalavraChave ntp ON nt.Id = ntp.idNoticia
