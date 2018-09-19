@@ -524,6 +524,7 @@ class Home extends CI_Controller {
 
 			// $this->email->from('noticias@multclipp.com.br', 'Noticias', 'noticias@multclipp.com.br');
 			$this->email->from('noticias@dataclip.com.br', 'Noticias', 'noticias@dataclip.com.br');
+			// $this->email->from('nfe@brasilsportfitness.com.br', 'Teste', 'nfe@brasilsportfitness.com.br');
 			$this->email->to($mail_to);
 			// $this->email->cc('another@another-example.com');
 			// $this->email->bcc('them@their-example.com');
