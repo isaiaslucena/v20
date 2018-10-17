@@ -274,6 +274,7 @@ class Api extends CI_Controller {
 				$nurl = $cnews['NoticiaURL'];
 				$nidpchave = $cnews['IdPChave'];
 				$npchave = $cnews['PChave'];
+				$ngrifar = $cnews['Grifar'];
 				$ntermosbusca = $cnews['TermoBusca'];
 				$nidimg = $cnews['IdImagem'];
 				$nimg = $cnews['Imagem'];
@@ -304,6 +305,7 @@ class Api extends CI_Controller {
 				$palavrachave = array(
 					'IdPChave' => $nidpchave,
 					'PChave' => $npchave,
+					'Grifar' => $ngrifar,
 					'TermosBusca' => $ntermosbusca
 				);
 

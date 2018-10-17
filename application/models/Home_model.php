@@ -375,7 +375,7 @@ class Home_model extends CI_Model {
 							ed.Id as IdEditoria, ed.Nome as Editoria,
 							em.Id as IdEmpresa, em.Nome as Empresa,
 							nt.Id as IdNoticia, nt.Titulo as Titulo, nt.Subtitulo as Subtitulo, nt.Noticia, nt.Data, nt.Hora, nt.URL as NoticiaURL,
-							pc.Id as IdPChave, pc.Nome as PChave, pc.TermoBusca,
+							pc.Id as IdPChave, pc.Nome as PChave, pc.Grifar, pc.TermoBusca,
 							nimg.Id as IdImagem, nimg.Imagem, nimg.url as URLImagem
 							FROM Noticias nt
 							JOIN Veiculo ve ON nt.idVeiculo = ve.Id
