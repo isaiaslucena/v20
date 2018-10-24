@@ -163,7 +163,6 @@ function insert_db_info(idimagem, idnoticia, imgwidth, imgheight, imgvalor) {
 	.done(function(data) {
 		console.log("success");
 		console.log(data);
-
 	})
 	.fail(function() {
 		console.log("error");
