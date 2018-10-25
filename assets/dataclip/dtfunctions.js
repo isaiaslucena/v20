@@ -730,6 +730,8 @@ function set_count_client(cldata) {
 	chartbarlinedata.push(arrvalf);
 	chartbarlinedata.push(arraudf);
 
+	console.log(chartbarlinedata);
+
 	chartlinestacked.load({
 		unload: true,
 		columns: chartbarlinedata,
